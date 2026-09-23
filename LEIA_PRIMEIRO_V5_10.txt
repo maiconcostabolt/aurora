@@ -1,0 +1,21 @@
+AURORA PWA V5.10 — TROCA RÁPIDA DE SEGMENTO
+
+O que mudou
+- "Trocar segmento" mostra somente módulos com acesso válido e serviços já configurados.
+- O módulo atual aparece identificado como "Atual".
+- Ao escolher outro módulo, a Aurora abre diretamente os serviços salvos nele.
+- O cadastro da empresa e as seleções dos demais módulos são preservados.
+- Módulos não iniciados, vencidos ou sem serviços configurados não aparecem nesse seletor.
+- "Módulos Aurora" continua sendo o catálogo para iniciar e administrar testes e licenças.
+
+Publicação
+1. Publique este pacote somente no Worker aurora-pwa-teste.
+2. Atualize a Aurora com Ctrl + Shift + R.
+3. Não execute SQL.
+4. Não republique o Aurora Admin.
+
+Teste sugerido
+1. Entre em Painel de configuração > Trocar segmento.
+2. Confirme que aparecem apenas os segmentos já ativados e configurados.
+3. Selecione outro segmento.
+4. Confirme que a Home abre diretamente com os serviços escolhidos anteriormente naquele segmento.

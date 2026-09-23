@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Premium Report Integration Proof</title>
+  <link rel="stylesheet" href="../styles/premium_report.css">
+  <style>
+    body { margin: 0; background: #dfe7ee; }
+    .proof-meta {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 16px 16px 0;
+      font: 13px/1.5 Inter, sans-serif;
+      color: #334155;
+    }
+    .proof-meta code { font-size: 12px; }
+  </style>
+</head>
+<body class="prm-body">
+  <div class="proof-meta">
+    <strong>TESTE 1 — Relatório Premium Vistoria Veicular</strong>
+    <div>Dados reais via ReportEngine + refinement mocks (sem Pexels, sem coords/ISO/EV).</div>
+  </div>
+  <div data-premium-root></div>
+  <script src="../../../../config/report_technical_details.js"></script>
+  <script src="../../../../core/reporting/report_company_identity.js"></script>
+  <script src="../../../../core/reporting/report_engine.js"></script>
+  <script src="../../../../core/reporting/report_preview.js"></script>
+  <script src="../../../../_harness/global_report_standard_mocks.js"></script>
+  <script src="../../../../_harness/cloud_edit_7_photos_mocks.js"></script>
+  <script src="../../../../_harness/report_refinement_mocks.js"></script>
+  <script src="../data/premium_utils.js"></script>
+  <script src="../data/vehicle_inspection_adapter.js"></script>
+  <script src="../components/premium_components.js"></script>
+  <script src="../pages/cover_page.js"></script>
+  <script src="../pages/identification_page.js"></script>
+  <script src="../pages/occurrences_page.js"></script>
+  <script src="../pages/diagnosis_page.js"></script>
+  <script src="../premium_report_renderer.js"></script>
+  <script src="./premium_proof_case.js"></script>
+  <script>
+  (function () {
+    async function waitImages(root) {
+      const images = Array.from(root.querySelectorAll("img"));
+      await Promise.all(images.map((img) => {
+        if (img.complete) return Promise.resolve();
+        return new Promise((resolve) => {
+          img.addEventListener("load", resolve, { once: true });
+          img.addEventListener("error", resolve, { once: true });
+        });
+      }));
+    }
+
+    async function buildProof() {
+      const proof = window.AURORA_PREMIUM_PROOF.buildPremiumProofCase();
+      const renderer = new PremiumReportRenderer({
+        companyProvider: () => proof.built.identity,
+        cssHref: "../styles/premium_report.css"
+      });
+
+      const fragment = renderer.renderDocumentFragment(proof.report);
+      const root = document.querySelector("[data-premium-root]");
+      root.innerHTML = [
+        '<div class="prm-shell print-hidden" data-premium-scaler>',
+        `<div class="a4-scaler">${fragment.html}</div>`,
+        "</div>",
+        `<div class="prm-print-root">${fragment.html}</div>`
+      ].join("");
+
+      await waitImages(root);
+
+      const legacyPreview = new ReportPreview({ engine: proof.engine });
+      const legacyHtml = legacyPreview.renderDocument(proof.report);
+      const legacyOk = typeof legacyHtml === "string" && legacyHtml.includes("aurora-report-cover");
+
+      const audit = window.AURORA_PREMIUM_PROOF.auditRenderedImages(root);
+      const signatureImg = root.querySelector(".prm-signature-block__img");
+
+      window.__AURORA_PREMIUM_PROOF__ = {
+        template: "premium",
+        pageCount: fragment.pageCount,
+        plan: fragment.plan,
+        photoAudit: audit,
+        signature: {
+          present: Boolean(signatureImg && signatureImg.src),
+          srcLength: signatureImg ? String(signatureImg.src || "").length : 0
+        },
+        legacy: {
+          renderOk: legacyOk,
+          htmlLength: legacyHtml ? legacyHtml.length : 0
+        },
+        reportId: proof.report.public_id || proof.report.id
+      };
+
+      const fit = () => {
+        const scaler = document.querySelector("[data-premium-scaler] .a4-scaler");
+        if (!scaler || window.matchMedia("print").matches) return;
+        const page = scaler.querySelector(".a4-page");
+        if (!page) return;
+        const width = page.offsetWidth || 794;
+        const available = Math.max(320, window.innerWidth - 32);
+        const scale = Math.min(1, available / width);
+        scaler.style.transform = "scale(" + scale + ")";
+        scaler.style.transformOrigin = "top center";
+        scaler.parentElement.style.height = (page.offsetHeight * scale) + "px";
+      };
+
+      window.addEventListener("resize", fit);
+      fit();
+    }
+
+    buildProof().catch((error) => {
+      window.__AURORA_PREMIUM_PROOF__ = {
+        error: String(error && error.message ? error.message : error)
+      };
+    });
+  })();
+  </script>
+</body>
+</html>

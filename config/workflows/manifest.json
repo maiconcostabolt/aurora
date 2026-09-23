@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "contract": "aurora.workflow.manifest.v2",
+  "default_workflow": "workshop",
+  "workflows": [
+    {
+      "profile_id": "workshop",
+      "workflow_id": "workflow_workshop",
+      "file": "workshop.json",
+      "version": "2.0.0"
+    },
+    {
+      "profile_id": "electrical",
+      "workflow_id": "workflow_electrical",
+      "file": "electrical.json",
+      "version": "2.0.0"
+    },
+    {
+      "profile_id": "industrial",
+      "workflow_id": "workflow_industrial",
+      "file": "industrial.json",
+      "version": "2.0.0"
+    },
+    {
+      "profile_id": "drone",
+      "workflow_id": "workflow_drone",
+      "file": "drone.json",
+      "version": "2.0.0"
+    },
+    {
+      "profile_id": "car_wash",
+      "workflow_id": "workflow_car_wash",
+      "file": "car_wash.json",
+      "version": "2.0.0"
+    },
+    {
+      "profile_id": "upholstery_cleaning",
+      "workflow_id": "workflow_upholstery_cleaning",
+      "file": "upholstery_cleaning.json",
+      "version": "2.0.0"
+    },
+    {
+      "profile_id": "curtains_blinds",
+      "workflow_id": "workflow_curtains_blinds",
+      "file": "curtains_blinds.json",
+      "version": "2.0.0"
+    },
+    {
+      "profile_id": "repairs_maintenance",
+      "workflow_id": "workflow_repairs_maintenance",
+      "file": "repairs_maintenance.json",
+      "version": "2.0.0"
+    },
+    {
+      "profile_id": "condominiums",
+      "workflow_id": "workflow_condominiums",
+      "file": "condominiums.json",
+      "version": "2.0.0"
+    }
+  ]
+}

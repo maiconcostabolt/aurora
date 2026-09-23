@@ -1,0 +1,19 @@
+AURORA V175 — AI APP BRIDGE
+BASE: V174
+ESCOPO: somente ponte da Aurora AI entre aplicativos internos.
+
+CORRECAO:
+- Se identity.profile=electrical mas active_license_module_code=eletrica_tupy, a Aurora AI nao trata mais Elétrica como se já estivesse visualmente ativa.
+- Ao identificar um serviço Elétrica enquanto Atividades Rotineiras Tupy está renderizado, grava o pedido pendente, troca o aplicativo ativo para electrical e recarrega; depois retoma o MESMO start() validado do card operacional.
+- Se o aplicativo alvo já está realmente ativo, mantém o start() original.
+
+NAO ALTERADO:
+- bootstrap.js
+- cloud_sync.js
+- service_worker.js
+- offline/auth/cold-start
+- relatórios/fotos/sincronização
+- captura/finalização de voz V174
+
+TESTE ALVO:
+Partindo da Home Atividades Rotineiras Tupy, pedir por voz um serviço da Elétrica, por exemplo Instalação elétrica. Esperado: trocar para aplicativo Elétrica e abrir o atendimento pelo handler original do card.

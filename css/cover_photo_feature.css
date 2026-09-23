@@ -1,0 +1,245 @@
+.aurora-cover-photo-panel.avi-card {
+    margin: 0 0 14px;
+}
+
+.aurora-cover-photo-panel__head {
+    display: grid;
+    gap: 4px;
+    margin-bottom: 14px;
+}
+
+.aurora-cover-photo-panel__head h3 {
+    margin: 0;
+    font-size: 21px;
+    font-weight: 800;
+    color: var(--aurora-text);
+}
+
+.aurora-cover-photo-panel__head p {
+    margin: 3px 0 0;
+    color: var(--aurora-muted);
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.aurora-cover-photo-panel__preview {
+    display: grid;
+    justify-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.aurora-cover-photo-panel__frame {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid var(--aurora-border);
+    background: var(--aurora-input-bg);
+}
+
+.aurora-cover-photo-panel__frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: min(42vh, 280px);
+    object-fit: contain;
+    object-position: center center;
+    background: var(--aurora-input-bg);
+}
+
+.aurora-cover-photo-panel__empty {
+    margin: 0;
+    padding: 0;
+    color: var(--aurora-muted);
+    font-size: 13px;
+    line-height: 1.4;
+}
+
+.aurora-cover-photo-panel__actions.aurora-evidence-actions {
+    margin-top: 12px;
+}
+
+.aurora-cover-photo-panel .aurora-evidence-action {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    overflow: hidden;
+    font: inherit;
+    font-weight: 800;
+    text-align: left;
+}
+
+.aurora-cover-photo-panel .aurora-evidence-action .aurora-cover-photo-panel__file {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 0;
+    z-index: 2;
+}
+
+.aurora-cover-photo-panel .aurora-evidence-action.is-danger.is-subtle {
+    grid-column: 1 / -1;
+    min-height: 44px;
+    justify-content: center;
+    border-color: rgba(255, 96, 120, 0.24);
+    color: #d9485f;
+    background: transparent;
+    font-size: 14px;
+}
+
+.aurora-photo-source-sheet .aurora-evidence-actions {
+    margin-top: 14px;
+    grid-template-columns: 1fr;
+}
+
+.aurora-photo-source-sheet .aurora-evidence-action {
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+    overflow: hidden;
+    font: inherit;
+    font-weight: 800;
+    text-align: left;
+}
+
+.aurora-photo-source-sheet .aurora-evidence-action input[type="file"] {
+    position: absolute;
+    inset: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 0;
+    z-index: 2;
+}
+
+.aurora-photo-source-sheet .avi-guided-viewer__actions {
+    margin-top: 10px;
+}
+
+@media (max-width: 620px) {
+    .aurora-cover-photo-panel__head h3 {
+        font-size: 18px;
+    }
+
+    .aurora-cover-photo-panel__actions.aurora-evidence-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .aurora-cover-photo-panel .aurora-evidence-action {
+        min-height: 56px;
+    }
+}
+
+/* R11.15 — capa compacta: um único ponto de entrada e menu contextual. */
+.aurora-cover-photo-panel__actions {
+    margin-top: 12px;
+}
+.aurora-cover-photo-add,
+.aurora-cover-photo-manage {
+    width: 100%;
+    min-height: 68px;
+    border: 1px solid rgba(65, 217, 255, .55);
+    border-radius: 14px;
+    background: rgba(65, 217, 255, .055);
+    color: var(--aurora-text);
+    font: inherit;
+    cursor: pointer;
+}
+.aurora-cover-photo-add {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) 24px;
+    gap: 12px;
+    align-items: center;
+    padding: 12px 14px;
+    text-align: left;
+}
+.aurora-cover-photo-add__icon {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 11px;
+    background: rgba(61, 123, 255, .20);
+}
+.aurora-cover-photo-add__copy { display: grid; gap: 3px; }
+.aurora-cover-photo-add__copy strong { font-size: 15px; }
+.aurora-cover-photo-add__copy small { color: var(--aurora-muted); font-size: 12px; font-weight: 500; }
+.aurora-cover-photo-add__chevron { font-size: 28px; text-align: right; color: var(--aurora-cyan); }
+.aurora-cover-photo-manage {
+    min-height: 46px;
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 800;
+}
+.aurora-cover-photo-add[hidden], .aurora-cover-photo-manage[hidden] { display: none !important; }
+.aurora-cover-photo-panel > .aurora-cover-photo-panel__file { display: none !important; }
+.aurora-cover-photo-chooser[hidden] { display: none !important; }
+.aurora-cover-photo-chooser {
+    margin-top: 10px;
+    padding: 12px;
+    border: 1px solid var(--aurora-border, #29415d);
+    border-radius: 14px;
+    background: var(--aurora-surface, #121d2f);
+}
+.aurora-cover-photo-chooser__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 0 2px 4px;
+}
+.aurora-cover-photo-chooser__head strong { font-size: 15px; }
+.aurora-cover-photo-chooser__close {
+    width: 34px;
+    height: 34px;
+    border: 1px solid var(--aurora-border, #29415d);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--aurora-text, #f4f8ff);
+    font-size: 20px;
+    cursor: pointer;
+}
+.aurora-cover-photo-chooser__options {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+}
+.aurora-cover-photo-sheet__option {
+    width: 100%;
+    min-height: 52px;
+    padding: 10px 13px;
+    border: 1px solid var(--aurora-border, #29415d);
+    border-radius: 12px;
+    background: var(--aurora-input-bg, #17263b);
+    color: var(--aurora-text, #f4f8ff);
+    font: inherit;
+    font-weight: 750;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 28px 1fr 20px;
+    align-items: center;
+    text-align: left;
+    gap: 8px;
+}
+.aurora-cover-photo-sheet__option b { text-align: right; font-size: 22px; color: var(--aurora-muted, #9eb0c8); }
+.aurora-cover-photo-sheet__option.is-danger { color: #ff6078; border-color: rgba(255,96,120,.28); grid-column: 1 / -1; }
+@media (max-width: 620px) {
+    .aurora-cover-photo-chooser__options { grid-template-columns: 1fr; }
+}

@@ -1,0 +1,21 @@
+AURORA V28 — QR DE ATIVO POR USUÁRIO E NAVEGAÇÃO
+Data: 13/09/2026
+Destino: somente PWA de testes
+
+CORREÇÕES
+1. A tela inicial não exibe mais a ficha e o histórico do último equipamento aberto.
+2. O botão inferior Início fecha diretamente qualquer tela de Painéis e equipamentos e retorna à tela inicial em um toque.
+3. Usuário empresarial pode cadastrar um ativo pelo relatório quando o administrador concedeu a permissão Cadastrar.
+4. A criação registra o serviço real do relatório (por exemplo, lighting), sem converter tudo para panel.
+5. Mensagens de falta de permissão foram separadas de falhas reais de conexão.
+
+BANCO DE TESTES
+- aurora_asset_upsert valida autenticação, empresa ativa e permissões can_create/can_edit.
+- Execução anônima revogada; execução autenticada mantida.
+- Teste transacional executado como aurora_usuario@hotmail.com: ativo electrical/lighting criado com sucesso e revertido.
+- Confirmado que nenhum registro do teste controlado permaneceu no banco.
+
+PRESERVADO
+- Aurora AI não foi modificada.
+- Histórico empresarial e distinção visitante/membro autenticado foram preservados.
+- Produção mlcaurora.com não foi alterada.

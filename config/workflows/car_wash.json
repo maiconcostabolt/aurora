@@ -1,0 +1,124 @@
+{
+  "id": "workflow_car_wash",
+  "profile_id": "car_wash",
+  "name": "Fluxo Lavação Automotiva",
+  "version": "2.0.0",
+  "contract": "aurora.workflow.v2",
+  "start": "customer",
+  "finish": "archive",
+  "metadata": {
+    "case_centered": true,
+    "supports_resume": true,
+    "supports_conditional_steps": true
+  },
+  "steps": [
+    {
+      "id": "customer",
+      "order": 1,
+      "title": "Cliente",
+      "screen": "customer",
+      "required": true,
+      "metadata": {
+        "assistant_enabled": true,
+        "allow_back": false,
+        "allow_save_draft": true
+      }
+    },
+    {
+      "id": "asset",
+      "order": 2,
+      "title": "Veículo",
+      "screen": "asset",
+      "required": true,
+      "metadata": {
+        "assistant_enabled": true,
+        "allow_back": true,
+        "allow_save_draft": true
+      }
+    },
+    {
+      "id": "entry",
+      "order": 3,
+      "title": "Condição inicial do veículo",
+      "screen": "intake",
+      "required": true,
+      "metadata": {
+        "assistant_enabled": true,
+        "allow_back": true,
+        "allow_save_draft": true
+      }
+    },
+    {
+      "id": "occurrences",
+      "order": 4,
+      "title": "Registros do atendimento",
+      "screen": "occurrences",
+      "required": true,
+      "metadata": {
+        "assistant_enabled": true,
+        "allow_back": true,
+        "allow_save_draft": true
+      }
+    },
+    {
+      "id": "evidences",
+      "order": 5,
+      "title": "Fotos",
+      "screen": "evidences",
+      "required": false,
+      "metadata": {
+        "assistant_enabled": true,
+        "allow_back": true,
+        "allow_save_draft": true
+      }
+    },
+    {
+      "id": "diagnostic",
+      "order": 6,
+      "title": "Resumo do serviço",
+      "screen": "diagnostic",
+      "required": false,
+      "metadata": {
+        "assistant_enabled": true,
+        "allow_back": true,
+        "allow_save_draft": true
+      }
+    },
+    {
+      "id": "approval",
+      "order": 7,
+      "title": "Finalização",
+      "screen": "approval",
+      "required": false,
+      "metadata": {
+        "assistant_enabled": true,
+        "allow_back": true,
+        "allow_save_draft": true
+      }
+    },
+    {
+      "id": "report",
+      "order": 8,
+      "title": "Relatório",
+      "screen": "report",
+      "required": true,
+      "metadata": {
+        "assistant_enabled": true,
+        "allow_back": true,
+        "allow_save_draft": true
+      }
+    },
+    {
+      "id": "archive",
+      "order": 9,
+      "title": "Encerramento",
+      "screen": "archive",
+      "required": true,
+      "metadata": {
+        "assistant_enabled": true,
+        "allow_back": true,
+        "allow_save_draft": true
+      }
+    }
+  ]
+}

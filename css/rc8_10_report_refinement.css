@@ -1,0 +1,455 @@
+/* AURORA — Report visual refinement (cards, cover, section chips) */
+
+.aurora-report-document {
+    --report-photo-envelope-h-landscape: 172px;
+    --report-photo-envelope-h-portrait: 200px;
+    --report-photo-envelope-h-compact: 140px;
+    --report-photo-envelope-h-dashboard: 150px;
+    --report-photo-radius: 12px;
+}
+
+.aurora-report-section__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 14px;
+    padding: 0 0 10px;
+    border-bottom: 1px solid #e8eef2;
+}
+
+.aurora-report-section__head::before {
+    display: none;
+}
+
+.aurora-report-section__chip {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 28px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(29, 145, 137, .14);
+    color: #15756f;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .06em;
+}
+
+.aurora-report-section__head h2 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+}
+
+.aurora-report-info {
+    padding: 11px 13px;
+    border: 1px solid #e3e9ed;
+    border-radius: 9px;
+    background: #f7f9fb;
+    box-shadow: none;
+}
+
+.aurora-report-brand--cover .aurora-report-brand__name {
+    font-size: clamp(20px, 3.2vw, 24px);
+    letter-spacing: -.02em;
+}
+
+.aurora-report-cover--refined .aurora-report-brand__name {
+    display: block;
+}
+
+.aurora-report-cover--refined .aurora-report-cover__primary-title {
+    display: block;
+    margin: 0;
+    color: #dce8f0;
+    font-size: 18px;
+    line-height: 1.35;
+    font-weight: 650;
+    letter-spacing: -.01em;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+}
+
+.aurora-report-brand--cover .aurora-report-brand__tagline {
+    margin-top: 4px;
+    color: #b8d0de;
+    font-size: clamp(10px, 1.6vw, 12px);
+    letter-spacing: .04em;
+}
+
+.aurora-report-cover--refined .aurora-report-cover__content {
+    margin-top: 22px;
+    max-width: none;
+}
+
+.aurora-report-cover--refined .aurora-report-cover__kicker {
+    display: block;
+    margin-bottom: 10px;
+    color: #64f0e5;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .14em;
+}
+
+/*
+ * Tipografia canonica do H1 da capa — preview, standalone, A4 e PDF.
+ * Sobrescreve regras legadas (.aurora-report-cover h1) e @media print (30pt).
+ */
+.aurora-report-cover--refined h1,
+.aurora-print-page__cover .aurora-report-cover--refined h1 {
+    margin: 0 0 10px;
+    font-size: 21px;
+    line-height: 1.08;
+    max-width: 18ch;
+    letter-spacing: 0;
+}
+
+.aurora-report-cover--refined p:not(.aurora-report-cover__subtitle) {
+    display: none;
+}
+
+.aurora-report-cover--refined .aurora-report-cover__title-size--small,
+.aurora-report-cover--refined .aurora-report-cover__primary-title.aurora-report-cover__title-size--small {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.aurora-report-cover--refined .aurora-report-cover__title-size--normal,
+.aurora-report-cover--refined .aurora-report-cover__primary-title.aurora-report-cover__title-size--normal {
+    font-size: 18px;
+    font-weight: 650;
+}
+
+.aurora-report-cover--refined .aurora-report-cover__title-size--large,
+.aurora-report-cover--refined .aurora-report-cover__primary-title.aurora-report-cover__title-size--large {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.aurora-report-cover--refined .aurora-report-cover__subtitle {
+    display: block;
+    margin: 0;
+    color: #dce8f0;
+    font-size: 18px;
+    line-height: 1.35;
+    font-weight: 650;
+    letter-spacing: -.01em;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+}
+
+.aurora-report-cover--refined .aurora-report-cover__subtitle--small,
+.aurora-report-cover--refined .aurora-report-cover__subtitle.aurora-report-cover__title-size--small {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.aurora-report-cover--refined .aurora-report-cover__subtitle--large,
+.aurora-report-cover--refined .aurora-report-cover__subtitle.aurora-report-cover__title-size--large {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.aurora-report-cover__meta {
+    position: static;
+    right: auto;
+    bottom: auto;
+    display: grid;
+    gap: 4px;
+    text-align: left;
+    color: #c4d6e1;
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.aurora-report-cover__meta-id {
+    color: #64f0e5;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.aurora-report-cover--stacked .aurora-report-cover__photo {
+    margin: 22px 0 0;
+    width: 100%;
+    max-width: min(100%, 520px);
+    border-radius: 12px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, .06);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .08);
+}
+
+.aurora-report-cover--stacked .aurora-report-cover__photo img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: 280px;
+    object-fit: contain;
+    object-position: center center;
+}
+
+.aurora-report-photo-card {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid #dce6ec;
+    border-radius: var(--report-photo-radius);
+    background: #eef3f6;
+    break-inside: avoid;
+}
+
+/* Envelope padronizado — a foto usa contain dentro, nunca crop */
+.aurora-report-photo-card__frame,
+.aurora-report-photo-card__frame.aurora-report-media-frame {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: var(--report-photo-envelope-h-landscape);
+    min-height: var(--report-photo-envelope-h-landscape);
+    max-height: var(--report-photo-envelope-h-landscape);
+    padding: 8px;
+    background: #eef3f6;
+    overflow: hidden;
+}
+
+.aurora-report-photo-card--portrait .aurora-report-photo-card__frame,
+.aurora-report-photo-card--square .aurora-report-photo-card__frame,
+.aurora-report-photo-card--portrait .aurora-report-photo-card__frame.aurora-report-media-frame,
+.aurora-report-photo-card--square .aurora-report-photo-card__frame.aurora-report-media-frame {
+    height: var(--report-photo-envelope-h-portrait);
+    min-height: var(--report-photo-envelope-h-portrait);
+    max-height: var(--report-photo-envelope-h-portrait);
+}
+
+.aurora-report-photo-card__frame .aurora-report-photo-safe,
+.aurora-report-photo-card__frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    object-position: center center;
+}
+
+.aurora-report-photo-card__chip {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    z-index: 1;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(8, 28, 44, .78);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    line-height: 1.2;
+    pointer-events: none;
+}
+
+.aurora-report-photo-card__chip--missing {
+    position: static;
+    margin-top: 8px;
+    align-self: flex-start;
+}
+
+.aurora-vehicle-photo figcaption,
+.aurora-report-photo-card__caption {
+    display: none;
+}
+
+.aurora-vehicle-photo {
+    display: block;
+    grid-template-rows: none;
+    border: 1px solid #dce6ec;
+    border-radius: var(--report-photo-radius);
+    background: #eef3f6;
+    overflow: hidden;
+}
+
+.aurora-vehicle-photo__frame {
+    position: relative;
+    border-radius: var(--report-photo-radius);
+    background: #eef3f6;
+    padding: 8px;
+}
+
+.aurora-vehicle-photo__frame img {
+    object-fit: contain;
+    object-position: center center;
+}
+
+.aurora-vehicle-photo__chip {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    z-index: 1;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(8, 28, 44, .78);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    line-height: 1.2;
+    pointer-events: none;
+}
+
+.aurora-vehicle-photo-grid {
+    align-items: start;
+}
+
+.aurora-vehicle-found-issues .aurora-report-record-card .aurora-report-media-frame,
+.aurora-vehicle-found-issues .aurora-report-record-card .aurora-report-photo-frame,
+.aurora-vehicle-found-issues .aurora-report-record-card .aurora-report-photo-card__frame {
+    height: var(--report-photo-envelope-h-compact);
+    min-height: var(--report-photo-envelope-h-compact);
+    max-height: var(--report-photo-envelope-h-compact);
+    margin-top: 8px;
+    border-radius: 10px;
+}
+
+.aurora-vehicle-complementary-records .aurora-report-record-card .aurora-report-media-frame,
+.aurora-vehicle-complementary-records .aurora-report-record-card .aurora-report-photo-frame,
+.aurora-vehicle-complementary-records .aurora-report-record-card .aurora-report-photo-card__frame {
+    height: var(--report-photo-envelope-h-dashboard);
+    min-height: var(--report-photo-envelope-h-dashboard);
+    max-height: var(--report-photo-envelope-h-dashboard);
+    margin-top: 8px;
+    border-radius: 10px;
+}
+
+.aurora-report-closing-bundle {
+    display: grid;
+    gap: 14px;
+}
+
+.aurora-report-closing-bundle .aurora-report-section {
+    margin-bottom: 0;
+}
+
+.aurora-report-closing-bundle .aurora-report-section--signature {
+    margin-bottom: 0;
+}
+
+.aurora-report-status-row {
+    border-color: #e8eef2;
+}
+
+@media print {
+    .aurora-report-document {
+        --report-photo-envelope-h-landscape: 44mm;
+        --report-photo-envelope-h-portrait: 50mm;
+        --report-photo-envelope-h-compact: 38mm;
+        --report-photo-envelope-h-dashboard: 44mm;
+    }
+
+    .aurora-report-cover--stacked .aurora-report-cover__photo img {
+        max-height: 52mm;
+    }
+
+    .aurora-report-section__chip {
+        background: rgba(29, 145, 137, .18) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .aurora-report-photo-card__chip,
+    .aurora-vehicle-photo__chip {
+        background: rgba(8, 28, 44, .78) !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+
+    .aurora-vehicle-photo-grid {
+        gap: 2.5mm !important;
+        margin-bottom: 3mm !important;
+    }
+
+    .aurora-report-closing-bundle {
+        gap: 2mm !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+
+    .aurora-report-closing-bundle .aurora-report-section--diagnostic,
+    .aurora-report-closing-bundle .aurora-report-section--conclusion,
+    .aurora-report-closing-bundle .aurora-report-section--signature {
+        margin-bottom: 0 !important;
+    }
+
+    .aurora-report-closing-bundle .aurora-report-section--diagnostic {
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+
+    .aurora-report-closing-bundle .aurora-report-section--diagnostic .aurora-report-diagnostic article {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .aurora-report-closing-bundle .aurora-report-section--conclusion {
+        break-before: auto !important;
+        page-break-before: auto !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .aurora-report-closing-bundle .aurora-report-section--signature {
+        break-before: avoid !important;
+        page-break-before: avoid !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .aurora-report-closing-bundle .aurora-report-signature {
+        padding: 2mm 0 !important;
+    }
+
+    .aurora-report-closing-bundle .aurora-report-signature img {
+        max-height: 22mm !important;
+    }
+
+    .aurora-report-section--diagnostic {
+        margin-bottom: 2mm !important;
+    }
+
+    .aurora-report-section--conclusion {
+        margin-bottom: 0 !important;
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .aurora-report-section--conclusion > .aurora-report-section__head {
+        margin-bottom: 1.5mm !important;
+    }
+
+    .aurora-report-finalization--documental {
+        gap: 2mm !important;
+        padding: 2mm 2.5mm !important;
+    }
+
+    .aurora-report-cover--refined h1,
+    .aurora-print-page__cover .aurora-report-cover--refined h1 {
+        margin: 0 0 10px !important;
+        font-size: 21px !important;
+        line-height: 1.08 !important;
+        max-width: 18ch !important;
+        letter-spacing: 0 !important;
+    }
+}
+
+@media (max-width: 700px) {
+    .aurora-vehicle-photo-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

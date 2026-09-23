@@ -1,0 +1,7 @@
+FIX4 — impressão da etiqueta.
+Erro humano anterior: "Não foi possível preparar o QR da etiqueta."
+Causa: o FIX3 tentava localizar/recriar o QR usando elementos/biblioteca opcionais do DOM principal.
+Correção: impressão não procura mais QR no DOM e não depende de window.QRCode.
+O QR da etiqueta é carregado diretamente no documento de impressão a partir da URL pública permanente do equipamento; print() só é chamado depois de onload da imagem.
+Formato 50,8 mm circular e monocromático mantido.
+Nenhuma alteração em bootstrap, Tupy, AI, relatórios, QR público ou Minha Equipe.

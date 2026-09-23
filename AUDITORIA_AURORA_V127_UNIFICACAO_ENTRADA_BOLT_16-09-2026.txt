@@ -1,0 +1,66 @@
+AURORA V127 — UNIFICAÇÃO ENTRADA BOLT / ATIVIDADES ROTINEIRAS
+Data: 16/09/2026
+Base funcional moderna: V124 (derivada da V123 entregue pelo usuário)
+Referência histórica comparada: ZIP do deploy aurora-bolt-tupy enviado pelo usuário em 16/09/2026
+
+OBJETIVO ÚNICO
+Unificar o mecanismo privado Bolt/Tupy já existente com a Aurora atual sem renomear o identificador interno eletrica_tupy e sem alterar o interior da shape.
+
+ACHADOS COMPROVADOS
+1. No deploy antigo funcional e na Aurora atual, config/onboarding.json mantém eletrica_tupy dentro do profile operacional electrical.
+2. O identificador interno da licença/serviço continua eletrica_tupy. BOLT SOLUÇÕES ELÉTRICAS é apresentação visual/agrupador, não um novo profile operacional.
+3. A shape e arquivos centrais de Atividades Rotineiras continuam presentes; o defeito está na decisão de entrada.
+4. V123/V124 já detectava listMyModules.eletrica_tupy can_access=true e escolhia essa licença, mas depois chamava AuroraModuleAccess.resolve(identity), submetendo a decisão novamente ao resolvedor genérico.
+5. O resolvedor genérico consulta o módulo persistido e também aceita equivalência por profile operacional. Como eletrica_tupy opera em electrical, um estado electrical podia voltar a vencer a licença privada.
+6. activate() depende de AURORA_ACCOUNT_USER_ID para formar a chave. V127 usa activateForUser(..., authenticatedUserId) nos pontos críticos do bootstrap, evitando gravação em chave :anonymous durante a janela de inicialização.
+
+CORREÇÃO V127
+- Novo login sem troca manual explícita + licença eletrica_tupy acessível:
+  autoridade = eletrica_tupy.
+- A decisão privada não passa novamente pelo resolve genérico.
+- A licença selecionada é enriquecida como:
+  license_module_code = eletrica_tupy
+  operational_profile = electrical
+  operational_services = [eletrica_tupy]
+- Troca manual em Módulos Aurora continua respeitada pelo marcador explícito de sessão.
+- Logout limpa o marcador de sessão (regra já presente na V124), portanto novo login volta à autoridade Bolt.
+- Não há hardcode do e-mail admin_bolt@hotmail.com.
+
+CENÁRIOS TESTADOS EM MATRIZ DE DECISÃO
+PASSOU — electrical + eletrica_tupy, sem troca explícita => eletrica_tupy / electrical / [eletrica_tupy]
+PASSOU — troca explícita para electrical => electrical
+PASSOU — troca explícita para eletrica_tupy => eletrica_tupy
+PASSOU — conta somente electrical => electrical
+
+TESTES ESTÁTICOS
+PASSOU — node --check js/bootstrap.js
+PASSOU — node --check js/module_access.js
+PASSOU — onboarding antigo e atual mapeiam eletrica_tupy sob electrical
+PASSOU — V127 não contém instrumentação V125/V126
+PASSOU — solução não usa e-mail Bolt hardcoded
+
+CONFIGURAÇÕES RELACIONADAS JÁ PRESERVADAS DA V124
+- COMPANY_ADMIN no switcher usa licenças reais acessíveis; demonstração Drone encerrada não deve entrar como módulo utilizável.
+- Editar serviços do segmento só permanece quando active_license_module_code == electrical.
+- Em eletrica_tupy/Atividades Rotineiras, Editar serviços do segmento é removido.
+
+ÁREAS NÃO ALTERADAS
+- interior da shape eletrica_tupy
+- etapas
+- fotos
+- relatórios
+- impressão V106
+- QR
+- offline
+- Supabase
+- Admin Aurora separado
+
+VALIDAÇÃO HUMANA AINDA NECESSÁRIA EM aurora-pwa-teste
+1. Logout -> login Bolt => abrir diretamente Atividades Rotineiras.
+2. Config -> Módulos Aurora -> Elétrica => abrir Elétrica normal e permanecer nela durante a sessão.
+3. Config -> Módulos Aurora -> BOLT SOLUÇÕES ELÉTRICAS => abrir diretamente Atividades Rotineiras.
+4. Logout estando em Elétrica -> novo login => voltar para Atividades Rotineiras.
+5. Trocar segmento não mostrar Drone encerrado para ADMIN Bolt.
+6. Editar serviços do segmento aparecer em Elétrica e não aparecer em Atividades Rotineiras.
+
+NÃO PUBLICAR EM mlcaurora.com ANTES DA APROVAÇÃO DESSES TESTES.

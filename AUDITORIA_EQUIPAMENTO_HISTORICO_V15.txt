@@ -1,0 +1,25 @@
+AURORA — EQUIPAMENTO + HISTÓRICO V15
+Base: V14 aprovada.
+
+Implementado no piloto Elétrica:
+- card Painéis e equipamentos agora abre FICHA do equipamento, não edição direta;
+- ficha: identificação, status, localização, Nova vistoria, Etiqueta QR, Editar equipamento;
+- histórico local dos relatórios já vinculáveis por TAG/código/nome;
+- Abrir relatório usa o motor oficial AuroraReportFeature.preview;
+- Etiqueta QR usa exatamente o QR permanente já existente;
+- reimpressão permanece permitida sem gerar novo QR;
+- Editar equipamento altera somente cadastro do equipamento;
+- resumo mudou de “Cadastrados” para “Equipamentos”;
+- Nova vistoria registra equipamento selecionado em sessionStorage e inicia Painel elétrico pelo fluxo oficial quando disponível;
+- retorno de edição volta para a ficha.
+
+Preservado:
+- V14 modal QR sobre relatório;
+- V13 impressão única;
+- V12 normalização de nomes;
+- etiqueta aprovada/SVG oficial;
+- Tupy, Vistoria Veicular, Aurora AI e relatório sem alteração estrutural.
+
+Nota piloto:
+- histórico atual associa relatórios existentes por TAG/código/nome.
+- vínculo persistente por asset_registry_id fica para consolidação cloud após validação visual/funcional deste fluxo.

@@ -1,0 +1,45 @@
+html.aurora-public-asset-mode body>*:not(#aurora-public-asset){display:none!important}#aurora-public-asset{position:fixed;inset:0;z-index:2147483647;overflow:auto;background:#07111f;color:#f7f9ff;padding:24px 16px;display:grid;place-items:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif}.apa-card{width:min(620px,100%);background:#111f33;border:1px solid #29405d;border-radius:28px;padding:28px;box-shadow:0 24px 80px #0008}.apa-brand{font-weight:900;letter-spacing:.08em;color:#5de1dc;margin-bottom:24px}.apa-mark{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#123e3b;color:#5de1dc;font-size:30px;font-weight:900;margin-bottom:18px}.apa-mark.is-bad{background:#42222b;color:#ff8292}.apa-kicker{display:block;color:#9fb0c7;font-size:12px;letter-spacing:.09em}.apa-card h1{font-size:clamp(26px,6vw,38px);line-height:1.12;margin:8px 0}.apa-company{color:#5de1dc;font-weight:700}.apa-card dl{margin:24px 0 0}.apa-card dl div{display:grid;grid-template-columns:145px 1fr;gap:12px;padding:14px 0;border-top:1px solid #2a3b52}.apa-card dt{color:#9fb0c7}.apa-card dd{margin:0;font-weight:650}.apa-status{color:#5de1dc}.apa-card footer{margin-top:26px;padding-top:18px;border-top:1px solid #2a3b52;color:#8395ad;font-size:12px}.apa-loader{width:42px;height:42px;border:4px solid #29405d;border-top-color:#5de1dc;border-radius:50%;animation:apa-spin .8s linear infinite}@keyframes apa-spin{to{transform:rotate(360deg)}}@media(max-width:520px){.apa-card{padding:22px;border-radius:22px}.apa-card dl div{grid-template-columns:1fr;gap:4px}}
+.apa-context,.apa-member,.apa-powered{margin-top:18px;padding:18px;border:1px solid #2a3b52;border-radius:18px;background:#0d1a2b}.apa-context>span,.apa-member>span,.apa-powered>span{display:block;color:#8395ad;font-size:11px;letter-spacing:.08em}.apa-context h2,.apa-member h2{margin:6px 0 8px;font-size:18px}.apa-context p,.apa-member p,.apa-powered p{margin:0;color:#b7c3d4;line-height:1.5}.apa-member{border-color:#2c6b70;background:#102b33}.apa-member button{width:100%;margin-top:14px;border:0;border-radius:13px;padding:13px 16px;background:#5de1dc;color:#09202b;font-weight:850;font-size:15px}.apa-powered{text-align:center;margin-top:22px}.apa-powered strong{display:block;color:#5de1dc;font-size:24px;letter-spacing:.08em;margin:7px 0}.apa-powered a{display:inline-block;margin-top:14px;padding:11px 16px;border-radius:12px;border:1px solid #3d7bff;color:#f7f9ff;text-decoration:none;font-weight:750}.apa-powered small{display:block;margin-top:9px;color:#8395ad}
+/* AURORA QR V23 — ficha pública enxuta */
+.apa-tech{margin-top:16px;padding:15px 16px;border:1px solid #2a3b52;border-radius:15px;background:#0d1a2b}.apa-tech>span{display:block;color:#8395ad;font-size:10px;letter-spacing:.09em;margin-bottom:7px}.apa-tech p{margin:0;color:#c5cfdd;line-height:1.45}.apa-team-open{width:100%;margin-top:18px;padding:12px 14px;border:1px solid #35506e;border-radius:13px;background:#102238;color:#dce8f5;font-weight:800;font-size:14px}.apa-powered.apa-powered-compact{margin-top:14px;padding:13px 14px;border-radius:14px}.apa-powered.apa-powered-compact strong{font-size:19px;margin:4px 0}.apa-powered.apa-powered-compact small{margin-top:2px;font-size:11px}.apa-powered.apa-powered-compact p,.apa-powered.apa-powered-compact a{display:none}
+/* V32 — resumo técnico público seguro do último serviço. */
+.apa-service{margin-top:20px;padding:18px;border:1px solid #2a3b52;border-radius:18px;background:#0d1a2b}.apa-service h2{margin:0 0 10px;font-size:18px;color:#f7f9ff}.apa-service dl{margin:0}.apa-service dl div{grid-template-columns:190px 1fr;padding:11px 0}.apa-service-empty{margin:0;color:#9fb0c7;line-height:1.5}@media(max-width:520px){.apa-service{padding:15px}.apa-service dl div{grid-template-columns:1fr;gap:4px}}
+
+.apa-work-progress{margin:0 0 10px;color:#9fb0c5}.apa-work-items{display:grid;gap:8px}.apa-work-items>div{display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start;padding:9px 10px;border-radius:10px;background:rgba(61,123,255,.08)}.apa-work-items b{font-size:18px}.apa-work-items span{line-height:1.4}
+
+/* V86 — ações do ativo elétrico e compartilhamento do QR */
+.aurora-asset-detail-actions{display:flex;flex-wrap:wrap;gap:10px}
+.aurora-asset-detail-actions .is-danger{border-color:rgba(255,105,105,.42);color:#ff9b9b}
+.aurora-asset-qr-modal__actions{display:flex;flex-wrap:wrap;gap:10px}
+
+
+/* AURORA V107 — QR público: rolagem mobile no documento, sem viewport fixo. */
+@media (max-width: 760px) {
+  html.aurora-public-asset-mode,
+  html.aurora-public-asset-mode body {
+    min-height: 100% !important;
+    height: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  html.aurora-public-asset-mode #aurora-public-asset {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    min-height: 100dvh !important;
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    padding: 16px 12px max(28px, env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  html.aurora-public-asset-mode #aurora-public-asset .apa-card {
+    width: min(620px, 100%) !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+}

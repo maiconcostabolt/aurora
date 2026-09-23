@@ -1,0 +1,26 @@
+AURORA V49 — GATE DE AUTORIZAÇÃO ANTES DA HOME
+Data: 14-09-2026
+
+BASE
+- V48 AUTORIZACAO MEMBRO FAIL-CLOSED.
+- Nenhuma alteração de layout da Home, cards, cabeçalho, rodapé de navegação, relatórios, QR, fotos ou Aurora AI.
+
+PROBLEMA CONFIRMADO
+- COMPANY_USER sem ambientes autorizados já era bloqueado ao tentar abrir módulos.
+- Porém a Home elétrica era montada antes da decisão final de autorização.
+- Resultado: usuário via Elétrica e só depois recebia "Módulo indisponível".
+
+CORREÇÃO V49
+- Gate inserido ANTES da criação do AuroraRuntime e ANTES de renderHome().
+- COMPANY_USER + zero ambientes autorizados não monta Home de Elétrica/Oficina/qualquer segmento.
+- Exibe estado neutro "Aguardando autorização".
+- Mensagem confirma entrada na empresa e orienta solicitar autorização ao administrador.
+- Botão "Atualizar acesso" limpa somente cache de autorização/seleção ativa do usuário atual e recarrega para consultar novamente o acesso.
+- Quando o ADMIN conceder um ambiente, o próximo carregamento segue o fluxo normal para o ambiente autorizado.
+
+REGRA GLOBAL
+EMPRESA -> MEMBRO -> AMBIENTES AUTORIZADOS -> HOME.
+Zero ambientes = zero Home de segmento.
+
+BUILD
+AURORA_V49_GATE_AUTORIZACAO_14-09-2026

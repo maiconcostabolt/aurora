@@ -1,0 +1,20 @@
+AURORA V29 — FOTOS NO RELATÓRIO DO HISTÓRICO DO EQUIPAMENTO
+Data: 13/09/2026
+Destino: somente PWA de testes
+
+CAUSA CONFIRMADA
+- O histórico recuperava projeto e registros, mas reconstruía o relatório antes de baixar as evidências empresariais.
+- Os hidratadores locais não possuem as fotos criadas em outro dispositivo/por outro membro.
+- O atendimento Embraco / KBP2323 possui três evidências ativas na nuvem: duas ocorrências e uma capa.
+
+CORREÇÃO
+- Abrir relatório pelo equipamento agora baixa as evidências autenticadas antes de gerar a prévia.
+- Fotos são recolocadas nos grupos técnicos pelo group_id/evidence_id.
+- A capa é restaurada pela evidência de capa ou por source_photo_id.
+- A autorização continua sendo exercida pela RPC do histórico, pelas RLS de metadados e pelas políticas do Storage privado.
+
+PRESERVADO
+- Aurora AI sem alterações.
+- QR e cadastro de ativo da V28 sem alterações.
+- Atendimentos recentes sem alterações.
+- Produção mlcaurora.com não alterada.

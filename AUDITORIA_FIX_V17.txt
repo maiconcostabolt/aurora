@@ -1,0 +1,21 @@
+AURORA EQUIPAMENTO FLUXO V17
+Correção pontual da regressão V16.
+
+CAUSA 1 — Painéis e equipamentos não abria:
+A V16 exportou AuroraAssetsPilot.openAsset, mas a função não ficou definida no arquivo final.
+Isso gerava ReferenceError durante a carga do controlador e impedia a instalação dos listeners.
+
+CORREÇÃO:
+- openAsset definido.
+- detail e showDetail expostos corretamente dentro de ui.
+- nenhuma alteração no banco, relatório, QR persistente ou Tupy.
+
+CAUSA 2 — ícone de informações (i) não abria:
+O listener verificava data-open-assets antes de tratar data-assets-info.
+Como o ícone i é um alvo independente, o evento era descartado.
+
+CORREÇÃO:
+- data-assets-info é tratado primeiro.
+- card Painéis e equipamentos continua com sua abertura normal.
+
+Mantido o fluxo V16 de nova vistoria e navegação.

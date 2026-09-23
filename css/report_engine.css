@@ -1,0 +1,814 @@
+body.aurora-report-open {
+    overflow: hidden;
+}
+
+.aurora-report-preview {
+    position: fixed;
+    inset: 0;
+    z-index: 500;
+    display: none;
+}
+
+.aurora-report-preview.is-open {
+    display: block;
+}
+
+.aurora-report-preview__backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    border: 0;
+    background: rgba(0, 0, 0, .78);
+    backdrop-filter: blur(12px);
+}
+
+.aurora-report-preview__sheet {
+    position: absolute;
+    inset: 14px;
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+    overflow: hidden;
+    border: 1px solid var(--aurora-border);
+    border-radius: 24px;
+    background: #081321;
+    box-shadow: 0 34px 100px rgba(0, 0, 0, .58);
+}
+
+.aurora-report-preview__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--aurora-border);
+    background: rgba(8, 19, 33, .96);
+}
+
+.aurora-report-preview__toolbar strong,
+.aurora-report-preview__toolbar span {
+    display: block;
+}
+
+.aurora-report-preview__toolbar span {
+    margin-top: 3px;
+    color: var(--aurora-muted);
+    font-size: 10px;
+}
+
+.aurora-report-preview__toolbar nav {
+    display: flex;
+    gap: 7px;
+}
+
+.aurora-report-preview__toolbar button {
+    min-height: 40px;
+    padding: 0 14px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 12px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface-2);
+    cursor: pointer;
+    font-weight: 700;
+}
+
+.aurora-report-preview__toolbar button:disabled {
+    opacity: .48;
+    cursor: not-allowed;
+}
+
+.aurora-report-preview__toolbar button.is-primary {
+    border-color: var(--aurora-primary);
+    color: #062421;
+    background: var(--aurora-primary);
+}
+
+.aurora-report-preview__viewport {
+    min-height: 0;
+    padding: 22px;
+    overflow: auto;
+}
+
+.aurora-report-document {
+    width: min(860px, 100%);
+    margin: 0 auto;
+    overflow: hidden;
+    color: #172235;
+    background: #fff;
+    border-radius: 4px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, .44);
+}
+
+.aurora-report-cover {
+    position: relative;
+    min-height: 360px;
+    padding: 42px;
+    color: #fff;
+    background:
+        radial-gradient(circle at 85% 15%, rgba(100, 240, 229, .22), transparent 28%),
+        linear-gradient(145deg, #07111f, #102a45 67%, #173e58);
+}
+
+.aurora-report-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.aurora-report-brand > span,
+.aurora-report-brand__logo {
+    width: 54px;
+    height: 54px;
+    display: grid;
+    place-items: center;
+    border-radius: 16px;
+    object-fit: contain;
+    color: #062421;
+    background: #64f0e5;
+    font-weight: 900;
+    font-size: 22px;
+}
+
+.aurora-report-brand strong,
+.aurora-report-brand small {
+    display: block;
+}
+
+.aurora-report-brand strong {
+    font-size: 18px;
+}
+
+.aurora-report-brand small {
+    margin-top: 3px;
+    color: #a9c5d5;
+}
+
+.aurora-report-cover__content {
+    max-width: 620px;
+    margin-top: 78px;
+}
+
+.aurora-report-cover__kicker {
+    color: #64f0e5;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+}
+
+.aurora-report-cover h1 {
+    margin: 10px 0 14px;
+    font-size: clamp(36px, 7vw, 58px);
+    line-height: 1;
+}
+
+.aurora-report-cover p {
+    max-width: 560px;
+    margin: 0;
+    color: #c6d7e6;
+    line-height: 1.55;
+}
+
+.aurora-report-cover__id {
+    position: absolute;
+    right: 42px;
+    bottom: 36px;
+    text-align: right;
+}
+
+.aurora-report-cover__id strong,
+.aurora-report-cover__id span {
+    display: block;
+}
+
+.aurora-report-cover__id strong {
+    font-size: 17px;
+}
+
+.aurora-report-cover__id span {
+    margin-top: 5px;
+    color: #a9c5d5;
+    font-size: 10px;
+}
+
+.aurora-report-body {
+    padding: 36px 42px;
+}
+
+.aurora-report-executive {
+    margin-bottom: 32px;
+    padding: 18px 20px;
+    border: 1px solid #dbe6ed;
+    border-radius: 14px;
+    background: #f4f8fa;
+}
+
+.aurora-report-executive span,
+.aurora-report-diagnostic span,
+.aurora-report-recommendation span {
+    color: #278a84;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.aurora-report-executive p {
+    margin: 8px 0 0;
+    color: #455366;
+    line-height: 1.6;
+}
+
+.aurora-report-section {
+    margin-bottom: 34px;
+}
+
+.aurora-report-section > h2 {
+    margin: 0 0 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e7edf3;
+    font-size: 18px;
+}
+
+.aurora-report-info-grid,
+.aurora-report-approval {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.aurora-report-info {
+    padding: 14px 15px;
+    border: 1px solid #e4ebf0;
+    border-radius: 12px;
+    background: #f5f8fa;
+}
+
+.aurora-report-info span,
+.aurora-report-info strong {
+    display: block;
+}
+
+.aurora-report-info span {
+    color: #718096;
+    font-size: 10px;
+}
+
+.aurora-report-info strong {
+    margin-top: 5px;
+    font-size: 13px;
+}
+
+.aurora-report-summary,
+.aurora-report-diagnostic article {
+    padding: 17px;
+    border-radius: 12px;
+    background: #f5f8fa;
+}
+
+.aurora-report-summary p,
+.aurora-report-diagnostic p {
+    margin: 0;
+    color: #465365;
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.aurora-report-diagnostic {
+    display: grid;
+    gap: 12px;
+}
+
+.aurora-report-diagnostic p {
+    margin-top: 7px;
+}
+
+.aurora-report-occurrence {
+    margin-bottom: 34px;
+    break-inside: avoid;
+}
+
+.aurora-report-occurrence__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 9px;
+}
+
+.aurora-report-occurrence__header > span {
+    color: #718096;
+    font-size: 10px;
+    font-weight: 900;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.aurora-report-occurrence__header b {
+    padding: 5px 9px;
+    border-radius: 999px;
+    color: #8b5d00;
+    background: #fff0bf;
+    font-size: 10px;
+    text-transform: uppercase;
+}
+
+.aurora-report-occurrence__header b[data-severity*="alta"],
+.aurora-report-occurrence__header b[data-severity*="crítica"] {
+    color: #a72038;
+    background: #ffe0e6;
+}
+
+.aurora-report-occurrence__header b[data-severity*="baixa"] {
+    color: #147259;
+    background: #dff8ef;
+}
+
+.aurora-report-alert {
+    padding: 18px;
+    border-left: 5px solid #e24e63;
+    border-radius: 12px;
+    background: #fff2f4;
+}
+
+.aurora-report-alert h3 {
+    margin: 0 0 6px;
+    font-size: 18px;
+}
+
+.aurora-report-alert small {
+    display: block;
+    margin-bottom: 10px;
+    color: #718096;
+}
+
+.aurora-report-alert > p,
+.aurora-report-recommendation p {
+    margin: 0;
+    color: #465365;
+    font-size: 13px;
+    line-height: 1.65;
+}
+
+.aurora-report-recommendation {
+    margin-top: 14px;
+    padding-top: 13px;
+    border-top: 1px solid #f0cdd4;
+}
+
+.aurora-report-recommendation p {
+    margin-top: 5px;
+}
+
+.aurora-report-photos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--report-media-gap, 12px);
+    margin-top: 14px;
+}
+
+.aurora-report-photos figure,
+.aurora-report-media-item {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid #dfe7ed;
+    border-radius: 12px;
+    background: #fff;
+    break-inside: avoid;
+}
+
+.aurora-report-photo-frame,
+.aurora-report-media-frame {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: var(--report-media-h, 190px);
+    min-height: var(--report-media-h, 190px);
+    max-height: var(--report-media-h, 190px);
+    overflow: hidden;
+    padding: 8px;
+    background: linear-gradient(180deg, #eef3f6, #e8eef2);
+}
+
+.aurora-report-photos img,
+.aurora-report-media-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.aurora-report-photos--single {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.aurora-report-photos--single figure {
+    width: min(68%, var(--report-media-max-single, 480px));
+}
+
+.aurora-report-media--duo,
+.aurora-report-media--quad,
+.aurora-report-media--many,
+.aurora-report-photos.aurora-report-media--duo,
+.aurora-report-photos.aurora-report-media--quad,
+.aurora-report-photos.aurora-report-media--many {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aurora-report-media--trio,
+.aurora-report-photos.aurora-report-media--trio {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aurora-report-media--trio > .aurora-report-media-item:nth-child(3),
+.aurora-report-media--trio > figure:nth-child(3) {
+    grid-column: 1 / -1;
+    width: min(58%, 340px);
+    justify-self: center;
+}
+
+.aurora-report-media-item--portrait .aurora-report-media-frame,
+.aurora-report-media-item--portrait .aurora-report-photo-frame {
+    height: var(--report-media-h-portrait, 240px);
+    min-height: var(--report-media-h-portrait, 240px);
+    max-height: var(--report-media-h-portrait, 240px);
+}
+
+.aurora-report-photos figcaption {
+    display: grid;
+    gap: 4px;
+    padding: 10px 11px;
+    color: #526174;
+    background: #f5f8fa;
+    font-size: 10px;
+}
+
+.aurora-report-photos figcaption strong {
+    color: #172235;
+}
+
+.aurora-report-empty-section {
+    padding: 20px;
+    border: 1px dashed #b7c2cc;
+    border-radius: 12px;
+    color: #718096;
+    text-align: center;
+}
+
+.aurora-report-document__footer {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 18px 42px;
+    color: #718096;
+    background: #eef3f6;
+    font-size: 9px;
+}
+
+.aurora-report-document__footer strong,
+.aurora-report-document__footer span {
+    display: block;
+}
+
+.aurora-report-document__footer span {
+    margin-top: 4px;
+}
+
+.aurora-report-document__footer b {
+    color: #445266;
+}
+
+@media (max-width: 760px) {
+    .aurora-report-preview__sheet {
+        inset: 0;
+        border: 0;
+        border-radius: 0;
+    }
+
+    .aurora-report-preview__toolbar {
+        align-items: flex-start;
+        padding-top: calc(10px + env(safe-area-inset-top, 0px));
+        padding-right: max(10px, env(safe-area-inset-right, 0px));
+        padding-bottom: 10px;
+        padding-left: max(10px, env(safe-area-inset-left, 0px));
+    }
+
+    .aurora-report-preview__toolbar nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+    }
+
+    .aurora-report-preview__toolbar button {
+        min-height: 36px;
+        padding: 0 11px;
+    }
+
+    .aurora-report-preview__viewport {
+        padding: 0 0 env(safe-area-inset-bottom, 0px);
+        background: #fff;
+    }
+
+    .aurora-report-document {
+        box-sizing: border-box;
+        width: 100%;
+        min-width: 0;
+        max-width: 100%;
+        border-radius: 0;
+        box-shadow: none;
+    }
+
+    .aurora-report-document img,
+    .aurora-report-photo-frame img,
+    .aurora-vehicle-photo__frame img {
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        max-height: 100%;
+        object-fit: contain;
+    }
+
+    .aurora-vehicle-photo-grid,
+    .aurora-vehicle-additional-records,
+    .aurora-vehicle-record-pair,
+    .aurora-vehicle-record-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .aurora-vehicle-photo__frame {
+        box-sizing: border-box;
+        width: 100%;
+        height: var(--report-media-h, 190px);
+        min-height: var(--report-media-h, 190px);
+        max-height: var(--report-media-h, 190px);
+        overflow: hidden;
+    }
+
+    .aurora-vehicle-record-card .aurora-report-photo-frame,
+    .aurora-vehicle-record-card .aurora-report-media-frame {
+        box-sizing: border-box;
+        width: 100%;
+        height: var(--report-media-h, 190px);
+        min-height: var(--report-media-h, 190px);
+        max-height: var(--report-media-h, 190px);
+        overflow: hidden;
+    }
+
+    .aurora-report-cover {
+        min-height: 330px;
+        padding: 26px 22px;
+    }
+
+    .aurora-report-cover__content {
+        margin-top: 60px;
+    }
+
+    .aurora-report-cover__id {
+        right: 22px;
+        bottom: 24px;
+    }
+
+    .aurora-report-body {
+        padding: 25px 20px;
+    }
+
+    .aurora-report-info-grid,
+    .aurora-report-approval,
+    .aurora-report-photos {
+        grid-template-columns: 1fr;
+    }
+
+    .aurora-report-document__footer {
+        align-items: flex-start;
+        padding: 16px 20px;
+    }
+}
+
+@media (max-width: 620px) {
+    .aurora-report-preview__toolbar {
+        display: grid;
+        grid-template-columns: minmax(92px, auto) minmax(0, 1fr);
+        gap: 8px;
+    }
+
+    .aurora-report-preview__toolbar nav {
+        min-width: 0;
+        gap: 6px;
+    }
+
+    .aurora-report-preview__toolbar button {
+        min-height: 40px;
+        padding: 0 10px;
+        white-space: nowrap;
+    }
+
+    .aurora-vehicle-additional-records,
+    .aurora-vehicle-record-pair,
+    .aurora-vehicle-record-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 430px) {
+    .aurora-report-preview__toolbar {
+        grid-template-columns: 1fr;
+    }
+
+    .aurora-report-preview__toolbar nav {
+        justify-content: flex-start;
+    }
+}
+
+@media print {
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+
+    body > *:not(.aurora-report-preview) {
+        display: none !important;
+    }
+
+    .aurora-report-preview,
+    .aurora-report-preview__sheet,
+    .aurora-report-preview__viewport {
+        position: static !important;
+        display: block !important;
+        overflow: visible !important;
+        padding: 0 !important;
+        border: 0 !important;
+        background: #fff !important;
+        box-shadow: none !important;
+    }
+
+    .aurora-report-preview__backdrop,
+    .aurora-report-preview__toolbar {
+        display: none !important;
+    }
+
+    .aurora-report-document {
+        width: 100% !important;
+        box-shadow: none !important;
+    }
+
+    .aurora-report-cover {
+        min-height: 250px;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .aurora-report-occurrence,
+    .aurora-report-photos figure {
+        break-inside: avoid;
+    }
+}
+
+
+/* AURORA RC4.2 — Android safe area for report actions */
+html.aurora-android .aurora-report-preview__sheet {
+    top: max(14px, env(safe-area-inset-top, 0px));
+    bottom: max(14px, env(safe-area-inset-bottom, 0px));
+}
+
+html.aurora-android .aurora-report-preview__toolbar {
+    padding-top: calc(12px + env(safe-area-inset-top, 0px));
+}
+
+@media (max-width: 760px) {
+    html.aurora-android .aurora-report-preview__sheet {
+        top: 0;
+        bottom: 0;
+    }
+
+    html.aurora-android .aurora-report-preview__toolbar {
+        padding-top: calc(12px + env(safe-area-inset-top, 0px));
+        padding-left: max(10px, env(safe-area-inset-left, 0px));
+        padding-right: max(10px, env(safe-area-inset-right, 0px));
+    }
+
+    html.aurora-android .aurora-report-preview__viewport {
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+}
+
+@media print {
+    .aurora-report-photos img,
+    .aurora-report-media-frame img {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
+    }
+
+    .aurora-report-photos--single figure {
+        width: 68% !important;
+    }
+
+    .aurora-report-photo-frame,
+    .aurora-report-media-frame {
+        background: #eef3f6 !important;
+    }
+}
+
+/* AURORA RC7 — documento sempre claro e compatível com impressão/PDF */
+.aurora-report-preview,
+.aurora-report-document,
+.aurora-report-body,
+.aurora-report-section,
+.aurora-report-occurrence,
+.aurora-report-photo-frame {
+    color-scheme: light;
+}
+
+@media print {
+    html, body,
+    .aurora-report-preview,
+    .aurora-report-document,
+    .aurora-report-body,
+    .aurora-report-section,
+    .aurora-report-occurrence,
+    .aurora-report-photo-frame,
+    .aurora-report-info,
+    .aurora-report-summary,
+    .aurora-report-diagnostic,
+    .aurora-report-approval {
+        background: #ffffff !important;
+        color: #172235 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+    .aurora-report-cover {
+        background: #102d46 !important;
+        color: #ffffff !important;
+    }
+    .aurora-report-photo-frame img {
+        width: auto !important;
+        height: auto !important;
+        max-width: 100% !important;
+        max-height: 72mm !important;
+        object-fit: contain !important;
+        object-position: center !important;
+    }
+}
+
+
+/* AURORA RC7.1 — impressão sem molduras escuras */
+@media print {
+  .aurora-report-document,
+  .aurora-report-body,
+  .aurora-report-section,
+  .aurora-report-info,
+  .aurora-report-summary,
+  .aurora-report-diagnostic,
+  .aurora-report-diagnostic article,
+  .aurora-report-approval,
+  .aurora-report-occurrence,
+  .aurora-report-alert,
+  .aurora-report-photos figure,
+  .aurora-report-photo-frame,
+  .aurora-report-empty-section,
+  .aurora-report-document__footer {
+    border: 0 !important;
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+  .aurora-report-section > h2 { border: 0 !important; }
+  .aurora-report-info,
+  .aurora-report-summary,
+  .aurora-report-diagnostic article,
+  .aurora-report-approval,
+  .aurora-report-alert,
+  .aurora-report-photo-frame,
+  .aurora-report-document__footer { background: #fff !important; }
+}
+
+.aurora-report-preview__html-frame{
+    display:block;width:100%;min-height:calc(100vh - 86px);height:calc(100vh - 86px);
+    border:0;background:#fff;
+}
+.aurora-report-preview__source{
+    position:absolute!important;left:-100000px!important;top:0!important;
+    width:900px!important;visibility:hidden!important;pointer-events:none!important;
+}
+.aurora-signature-box{margin-top:18px;padding:16px;border:1px solid #334a66;border-radius:14px;background:#132338}
+.aurora-signature-box__toggle{display:flex;align-items:center;gap:10px;font-weight:700}
+.aurora-signature-box__pad{margin-top:14px}
+.aurora-signature-box__pad canvas{display:block;width:100%;height:150px;touch-action:none;background:#fff;border-radius:10px}
+.aurora-signature-box__actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.aurora-signature-box__actions button{border:1px solid #35506e;background:#172a40;color:#eef6ff;border-radius:10px;padding:10px 13px;font-weight:700}
+.aurora-signature-box__status{margin:9px 0 0;color:#61e4df;font-size:12px}
+
+/* V5 — a prévia do relatório é modal e possui navegação própria.
+   O dock do atendimento não deve permanecer sobre a prévia. */
+body.aurora-report-open .aurora-workflow-dock,
+body.aurora-report-open .aurora-footer-nav {
+    display: none !important;
+}

@@ -1,0 +1,28 @@
+AURORA V34 — HERANÇA DO ATIVO EM NOVA VISTORIA
+Data de trabalho: 13/09/2026
+Base: AURORA V33 FLUXO ATIVO + QR MAPEAMENTO PWA TESTE
+
+ESCOPO ÚNICO APROVADO
+Ao iniciar Nova vistoria pela ficha de um equipamento e escolher o serviço, manter o vínculo e reaproveitar os dados permanentes já conhecidos do ativo.
+
+ALTERAÇÃO
+- Mantido fluxo V33: ficha do ativo > Nova vistoria > escolha do serviço.
+- Após escolher o serviço, o novo atendimento recebe os dados permanentes do ativo cadastrado e os dados técnicos reutilizáveis do último atendimento vinculado.
+- Cliente/unidade previamente conhecido também é reaproveitado; se não houver snapshot de cliente, usa a unidade cadastrada no ativo como nome.
+- Mantidos asset_registry_id e QR token no novo atendimento.
+- NÃO copia ocorrências, diagnóstico, fotos, conclusão, orçamento ou resultados da vistoria anterior.
+- Botão Anterior V33 preservado.
+- Fotos aprovadas preservadas.
+- QR V33 preservado.
+
+ARQUIVOS ALTERADOS
+- js/bootstrap.js
+- app.html (somente cache-bust do bootstrap)
+- service_worker.js (somente cache-bust)
+
+VALIDAÇÃO ESTÁTICA
+- node --check js/bootstrap.js: OK
+- node --check js/aurora_assets_pilot.js: OK
+
+SUPABASE
+- Nenhuma alteração necessária nesta rodada.

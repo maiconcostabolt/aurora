@@ -1,0 +1,10 @@
+AURORA V150 — 17/09/2026
+BASE: V149
+ESCOPO ESTRITO:
+1. Configurações Tupy agora usa z-index 260, acima do Perfil e configurações (z-index 200).
+2. Overlay interno de Catálogo/Materiais usa z-index 270.
+3. Restaurado integralmente o bloco mobile de catálogos aprovado/criado na V148: tabela vira cards verticais em <=700px, sem tabela desktop espremida e sem rolagem horizontal.
+4. Nenhuma alteração em RPC, banco, permissões, Minha Equipe, Gestão dos Trabalhos, Nova atividade, relatórios, fotos ou fluxo de autenticação.
+TESTE:
+Perfil > Catálogo de serviços Tupy deve abrir Configurações Tupy SOBRE o Perfil.
+Abrir Catálogo de serviços e Materiais Tupy: no celular, itens devem aparecer em cards responsivos.

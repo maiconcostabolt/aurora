@@ -1,0 +1,29 @@
+AURORA V87 — MINHA EQUIPE · PERMISSÕES DE ATIVOS
+Base: V86.
+
+DIAGNÓSTICO CONFIRMADO NO SUPABASE
+- aurora_usuario01@hotmail.com é COMPANY_USER ativo.
+- Tem módulos electrical e workshop habilitados.
+- Não possuía linha em aurora_asset_member_permissions.
+- A RPC aurora_asset_my_permissions aplica defaults para ausência de linha:
+  visualizar=true, nova vistoria=true, histórico=true,
+  etiqueta QR=false, cadastrar=false, editar=false, desativar=false.
+- A RPC aurora_set_asset_member_permissions já faz UPSERT oficial e seguro pelo ADMIN.
+
+ALTERAÇÃO V87
+- Minha Equipe agora exibe o bloco de permissões mesmo quando o convidado ainda não possui
+  uma linha persistida em aurora_asset_member_permissions.
+- Nesse caso, a tela mostra exatamente os defaults da RPC, sem conceder permissões extras.
+- Ao ADMIN marcar/desmarcar qualquer permissão, o fluxo existente chama
+  aurora_set_asset_member_permissions e cria/atualiza a linha no Supabase.
+- Rótulo can_deactivate exibido como “Excluir / desativar” para refletir a ação atual.
+
+NÃO ALTERADO
+- Nenhuma permissão foi concedida automaticamente.
+- Nenhuma linha de usuário foi inserida manualmente no banco.
+- V86 QR/ações do ativo preservada.
+- Trabalhos a realizar, relatório, Offline, Auth, License Ticket, BOLT, Tupy e outros serviços preservados.
+- Nenhuma DDL, SQL de alteração, Edge Function ou produção MLCAurora.com alterada.
+
+VERSÃO OFICIAL
+AURORA_V87_EQUIPE_PERMISSOES_ATIVOS_16-09-2026

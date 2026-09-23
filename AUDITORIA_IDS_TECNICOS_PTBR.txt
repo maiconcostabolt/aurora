@@ -1,0 +1,8 @@
+AUDITORIA AURORA — IDs técnicos na interface pt-BR
+
+Camada central criada: js/aurora_i18n.js
+Serviços mapeados: 57
+Perfis mapeados: 10
+
+Ocorrências restantes com service_type em contexto potencialmente visual (revisão manual):
+js/cloud_sync.js:2763: <small>${escapeCloud(cloudServiceLabel(project.service_type, project.service_profile))} · ${formatCloudDate(project.updated_at)}</small>

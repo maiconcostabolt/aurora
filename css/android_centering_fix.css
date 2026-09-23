@@ -1,0 +1,67 @@
+/* Aurora Android 1.0.14
+   Mantém integralmente o layout compacto anterior.
+   Este arquivo corrige somente centralização horizontal e área segura de modais. */
+
+html,
+body,
+#app,
+.aurora-shell,
+.aurora-shell__main {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.aurora-shell__content,
+.aurora-home-layer,
+.aurora-workflow-layer,
+.aurora-reports-layer,
+.aurora-module,
+.aurora-form,
+.aurora-dashboard-metrics,
+.aurora-service-grid,
+.aurora-recent-list,
+.aurora-recent-card,
+.aurora-evidence-hub,
+[data-module="evidence"] {
+  box-sizing: border-box;
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (max-width: 760px) {
+  .aurora-shell__content {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    overflow-x: hidden;
+  }
+
+  .aurora-home-layer,
+  .aurora-workflow-layer,
+  .aurora-reports-layer,
+  .aurora-module,
+  .aurora-form,
+  [data-module="evidence"] {
+    width: 100%;
+  }
+}
+
+@media (max-width: 520px) {
+  .aurora-dialog-backdrop {
+    align-items: end;
+    padding: 10px 10px calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .aurora-dialog {
+    width: 100%;
+    max-width: 440px;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}

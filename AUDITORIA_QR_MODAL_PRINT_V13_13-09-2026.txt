@@ -1,0 +1,22 @@
+AURORA — QR MODAL + IMPRESSÃO V13
+Base: V12 aprovada.
+
+CORRIGIDO
+1) Dupla abertura da janela nativa de impressão:
+- havia duas rotas possíveis para print(): carregamento do SVG e timeout de segurança.
+- guard printStarted garante UMA impressão por clique.
+
+2) Etiqueta QR atrás da Prévia do relatório:
+- camada do modal elevada para 2147483646.
+- card interno elevado para 2147483647.
+- abertura pelo relatório reforça a camada superior.
+- modal deve aparecer diretamente SOBRE a prévia, sem fechar o relatório.
+
+PRESERVADO
+- nomes normalizados V12
+- etiqueta V10 aprovada
+- SVG oficial
+- QR centralizado
+- QR permanente
+- validação do relatório independente
+- Tupy, AI e relatório sem alterações.

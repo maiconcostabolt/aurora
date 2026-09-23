@@ -1,0 +1,18 @@
+{
+    "id": "grounding_equipotentialization",
+    "name": "Aterramento e Equipotencialização",
+    "icon": "⏚",
+    "description": "Perfil independente para inspeções de aterramento e equipotencialização.",
+    "asset": {
+        "fields": [
+            "tag",
+            "local",
+            "setor",
+            "identificacao"
+        ]
+    },
+    "report": {
+        "inspection": true,
+        "execution": true
+    }
+}

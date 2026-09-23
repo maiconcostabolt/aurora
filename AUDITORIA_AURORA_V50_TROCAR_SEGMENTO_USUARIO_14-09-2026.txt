@@ -1,0 +1,27 @@
+AURORA V50 — TROCAR SEGMENTO DO USUÁRIO CONVIDADO
+Data: 14-09-2026
+Base: V49 aprovada no gate de autorização.
+
+ESCOPO ÚNICO
+- Reutilizado Perfil e configurações > Trocar segmento.
+- COMPANY_USER vê no seletor somente ambientes efetivamente autorizados pelo ADMIN.
+- A lista autorizada vem do mesmo motor compartilhado loadModulesForUi / aurora_my_company_authorized_modules.
+- Removido, somente para COMPANY_USER, o segundo filtro legado por selected_services_by_module que podia esconder um ambiente já autorizado.
+- ADMIN e contas pessoais preservam o comportamento anterior.
+
+PRESERVADO
+- Gate V49 para zero ambientes.
+- Layout/Home/cards/cabeçalho/navegação.
+- QR, relatórios, fotos, Aurora AI e Minha Equipe.
+- Nenhuma alteração de banco necessária nesta versão.
+
+FLUXO ESPERADO
+1. ADMIN autoriza Elétrica + Oficina para o membro.
+2. Membro entra em Elétrica.
+3. Perfil e configurações > Trocar segmento.
+4. Seletor mostra somente Elétrica e Oficina.
+5. Escolhendo Oficina, Aurora muda para Oficina e recarrega o ambiente.
+6. Ambiente retirado pelo ADMIN deixa de aparecer ao membro.
+
+VERSÃO
+AURORA_V50_TROCAR_SEGMENTO_USUARIO_14-09-2026

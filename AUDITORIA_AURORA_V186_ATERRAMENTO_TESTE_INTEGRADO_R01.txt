@@ -1,0 +1,45 @@
+AURORA V186 — ATERRAMENTO — TESTE INTEGRADO R01
+Data: 18/09/2026
+Base de trabalho: AURORA_V185_ATERRAMENTO_PADRAO_AURORA_EVIDENCIAS.zip (derivada da V183 atual).
+
+OBJETIVO
+Levar para deploy de teste a shape Aterramento e o relatório revisado em HTML até R21, sem alterar startup/auth/offline.
+
+INTEGRADO NESTA RODADA
+- Shape Aterramento permanece com 4 etapas e sem tela de valores/preços.
+- Removido percentual inventado do cabeçalho da shape.
+- Sugestões técnicas ampliadas para edificação, solo, haste/eletrodo, condutor/malha e normas; campos permanecem editáveis.
+- Pontos continuam vinculados ao Evidence Engine Aurora existente.
+- Relatório Aterramento passa a usar tipografia/componentes V183 e identificação em duas colunas (fact sheet).
+- Títulos usam o padrão de seção Aurora existente.
+- Dados técnicos organizados em duas colunas.
+- Pontos de aferição compactos em 2 colunas.
+- Fotos foram removidas de dentro dos cards técnicos e aparecem em seção própria Registro fotográfico, mantendo vínculo por Registro.
+- Registro sem foto não cria bloco fotográfico vazio.
+- Resumo de medição: pontos aferidos, pontos com fotos, média, maior valor e referência geral quando preenchidos.
+- Campos vazios são omitidos sempre que o renderer possui valor condicional.
+- Conclusão permanece texto informado/confirmado pelo responsável técnico.
+
+PROTEGIDO / NÃO ALTERADO NESTA RODADA
+- js/bootstrap.js
+- js/cloud_sync.js
+- service_worker.js
+- startup/cold-start
+- auth/session
+- Aurora AI
+- ADMIN/USER
+- Tupy
+- Vistoria Veicular
+- QR
+- infraestrutura offline/sync
+
+VALIDAÇÃO ESTÁTICA
+- node --check core/reporting/report_preview.js: OK
+- node --check core/shapes/grounding/flow.js: OK
+- ZIP criado para TESTE PWA; não é marco aprovado.
+
+PENDÊNCIA PARA TESTE HUMANO
+- validar comportamento real do Evidence Engine por ponto e persistência/reabertura.
+- validar seleção de foto de capa persistente no fluxo real.
+- validar visual do relatório gerado com fotos reais horizontal/vertical.
+- validar sugestões/múltiplas escolhas conforme uso real; esta build não deve ser congelada antes do teste.

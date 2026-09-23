@@ -1,0 +1,3 @@
+6445bf837bf03ce4b0f1253c9e86c8a8a80ead5c900ac096402bc1eb35a2b2fd  js/bootstrap.js
+8a05dea1a23dc3ba7ebb964379997b10cd532ce6c86ce735b0f0ab1546ad2977  js/cloud_sync.js
+9d5671f9840e3d75a535b19ccdedb3802112e17d1b4ae014f9fafcf6d4fb2c6c  service_worker.js

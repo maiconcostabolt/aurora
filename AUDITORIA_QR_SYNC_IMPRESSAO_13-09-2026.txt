@@ -1,0 +1,19 @@
+AURORA — QR ATIVOS / SINCRONIZAÇÃO + IMPRESSÃO
+Data: 13/09/2026
+
+Causa confirmada da falha de sincronização:
+- aurora_company_members usa role COMPANY_ADMIN.
+- RPC aurora_asset_upsert aceitava apenas admin/owner.
+- Resultado: o ativo local não era gravado em aurora_assets e o QR público não encontrava token.
+
+Correção backend:
+- aurora_asset_upsert agora aceita COMPANY_ADMIN (mantidos ADMIN/OWNER por compatibilidade).
+
+Correção frontend:
+- Ao abrir um ativo existente, tenta sincronizá-lo e substituir token local pelo token permanente do Supabase antes de exibir QR.
+- Impressão não abre mais uma aba vazia. Usa iframe interno dedicado, layout 80 x 80 mm e chama o diálogo nativo de impressão do navegador/sistema.
+
+Preservado:
+- Ativos somente na Elétrica piloto.
+- Minha Equipe e fluxo estabilizado.
+- QR público somente leitura.

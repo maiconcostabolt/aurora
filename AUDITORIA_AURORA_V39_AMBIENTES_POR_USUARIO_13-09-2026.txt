@@ -1,0 +1,56 @@
+AURORA V39 — AMBIENTES POR USUÁRIO
+Data: 13-09-2026
+Base: V38 aprovada
+
+ESCOPO APROVADO
+- Adicionar em Minha Equipe os ambientes/segmentos permitidos por usuário convidado.
+- Corrigir QR autenticado para respeitar o ambiente do ativo e a autorização do membro.
+- Não liberar automaticamente todos os ambientes da empresa para o convidado.
+- Preservar ADMIN com acesso aos ambientes licenciados da empresa.
+- Atividades Rotineiras/Elétrica Tupy e Vistoria Veicular permanecem fora desta expansão.
+
+BANCO / SUPABASE
+- Criada aurora_company_member_modules: autorização por company_id + user_id + module_code.
+- RLS habilitado e acesso direto anon/authenticated revogado; alterações passam por RPC autenticada.
+- Membros COMPANY_USER já existentes receberam somente electrical=true como compatibilidade com o fluxo anterior.
+- RPC aurora_member_my_modules: retorna apenas ambientes permitidos do membro; ADMIN recebe módulos ativos da empresa.
+- RPC aurora_admin_member_module_access: ADMIN consulta matriz de ambientes dos usuários.
+- RPC aurora_set_member_module_access: ADMIN concede/revoga um ambiente de um membro.
+- aurora_assets_my_list agora filtra ativos pelo ambiente permitido para COMPANY_USER.
+- aurora_asset_member_context_v2 agora retorna module_code e somente autoriza membro quando o ambiente do ativo está liberado.
+
+PWA
+- Minha Equipe ganhou bloco "Ambientes permitidos" por usuário, com toggles dos módulos disponíveis.
+- module_access.js filtra o seletor de segmentos do COMPANY_USER pelos ambientes autorizados.
+- aurora_asset_public.js usa o contexto autenticado do QR. Usuário sem autorização não é redirecionado para outro ambiente; permanece na identificação pública.
+- QR autorizado carrega aurora_asset_module para abrir o ambiente correto do ativo.
+- aurora_assets_pilot.js troca para o ambiente autorizado do ativo antes de abrir seu cadastro, sem cair por padrão em Elétrica.
+
+VERSIONAMENTO
+- Perfil e configurações: AURORA_V39_AMBIENTES_POR_USUARIO_13-09-2026
+- Cache PWA: aurora-v39-ambientes-por-usuario-20260913-1
+
+VALIDAÇÕES
+- node --check: company_team.js OK
+- node --check: module_access.js OK
+- node --check: aurora_asset_public.js OK
+- node --check: aurora_assets_pilot.js OK
+- Migration Supabase aplicada com sucesso.
+- RPCs V39 verificadas no banco após migration.
+
+ARQUIVOS ALTERADOS
+- js/company_team.js
+- js/module_access.js
+- js/aurora_asset_public.js
+- js/aurora_assets_pilot.js
+- config/runtime_config.js
+- app.html
+- service_worker.js
+
+ÁREAS NÃO ALTERADAS
+- Relatório e fotos aprovados
+- Aurora AI
+- Fluxo de convite/aceite
+- Home visual fora do necessário para autorização
+- Atividades Rotineiras / Elétrica Tupy
+- Vistoria Veicular

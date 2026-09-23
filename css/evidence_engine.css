@@ -1,0 +1,995 @@
+.aurora-evidence-hub {
+    margin-top: 0;
+    padding: 16px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 18px;
+    background: var(--aurora-surface);
+}
+
+.aurora-evidence-hub__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+}
+
+.aurora-evidence-hub__header span {
+    color: var(--aurora-primary);
+    font-size: 9px;
+    letter-spacing: .10em;
+    text-transform: uppercase;
+}
+
+.aurora-evidence-hub__header h2 {
+    margin: 0 0 6px;
+    font-size: 22px;
+}
+
+.aurora-evidence-hub__header p {
+    margin: 0;
+    color: var(--aurora-muted);
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.aurora-evidence-hub__counter {
+    min-width: 66px;
+    padding: 10px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 13px;
+    background: var(--aurora-surface-2);
+    text-align: center;
+}
+
+.aurora-evidence-hub__counter strong,
+.aurora-evidence-hub__counter span {
+    display: block;
+}
+
+.aurora-evidence-hub__counter strong {
+    color: var(--aurora-primary);
+    font-size: 22px;
+}
+
+.aurora-evidence-hub__counter span {
+    margin-top: 2px;
+    color: var(--aurora-muted);
+    font-size: 8px;
+}
+
+.aurora-evidence-actions {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 9px;
+    margin-top: 14px;
+}
+
+.aurora-evidence-action {
+    min-height: 76px;
+    display: grid;
+    grid-template-columns:
+        auto 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 13px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 14px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface-2);
+    cursor: pointer;
+}
+
+.aurora-evidence-action.is-primary {
+    border-color: rgba(100,240,229,.34);
+    background: rgba(100,240,229,.07);
+}
+
+.aurora-evidence-action input {
+    display: none;
+}
+
+.aurora-evidence-action > span {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--aurora-border);
+    border-radius: 12px;
+    background: var(--aurora-surface);
+    font-size: 20px;
+}
+
+.aurora-evidence-types {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 12px;
+    padding: 10px 11px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 12px;
+    background: var(--aurora-surface-2);
+}
+
+.aurora-evidence-types span {
+    color: var(--aurora-muted);
+    font-size: 10px;
+}
+
+.aurora-evidence-types select {
+    min-height: 38px;
+    padding: 0 9px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 9px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface);
+}
+
+.aurora-evidence-gallery {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    margin-top: 13px;
+}
+
+.aurora-evidence-card {
+    overflow: hidden;
+    border: 1px solid var(--aurora-border);
+    border-radius: 15px;
+    background: var(--aurora-surface-2);
+}
+
+.aurora-evidence-card__image {
+    position: relative;
+    overflow: hidden;
+    background: #020812;
+}
+
+.aurora-evidence-card__image img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    display: block;
+    object-fit: cover;
+}
+
+.aurora-evidence-card__image > span {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    min-width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    color: #062421;
+    background: var(--aurora-primary);
+    font-size: 10px;
+    font-weight: 800;
+}
+
+.aurora-evidence-card__body {
+    display: grid;
+    gap: 8px;
+    padding: 10px;
+}
+
+.aurora-evidence-card input,
+.aurora-evidence-card select,
+.aurora-evidence-card textarea {
+    width: 100%;
+    border: 1px solid var(--aurora-border);
+    border-radius: 9px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface);
+}
+
+.aurora-evidence-card input,
+.aurora-evidence-card select {
+    min-height: 38px;
+    padding: 0 9px;
+}
+
+.aurora-evidence-card textarea {
+    min-height: 68px;
+    padding: 9px;
+    resize: vertical;
+}
+
+.aurora-evidence-card__meta {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 8px;
+}
+
+.aurora-evidence-card__meta > span {
+    color: var(--aurora-muted);
+    font-size: 8px;
+}
+
+.aurora-evidence-card__actions {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.aurora-evidence-card__actions button {
+    min-height: 38px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 9px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface);
+    cursor: pointer;
+}
+
+.aurora-evidence-card__actions button.is-danger {
+    color: #ffb2bd;
+    border-color: rgba(255,96,120,.26);
+    background: rgba(255,96,120,.05);
+}
+
+.aurora-evidence-empty {
+    grid-column: 1 / -1;
+    min-height: 190px;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 7px;
+    padding: 18px;
+    border: 1px dashed var(--aurora-border);
+    border-radius: 14px;
+    color: var(--aurora-muted);
+    text-align: center;
+}
+
+.aurora-evidence-empty > span {
+    font-size: 30px;
+}
+
+.aurora-evidence-empty strong {
+    color: var(--aurora-text);
+}
+
+.aurora-evidence-empty p {
+    margin: 0;
+    font-size: 10px;
+}
+
+/* Editor */
+body.aurora-photo-editor-open {
+    overflow: hidden;
+}
+
+.aurora-photo-editor {
+    position: fixed;
+    inset: 0;
+    z-index: 700;
+    display: none;
+}
+
+.aurora-photo-editor.is-open {
+    display: block;
+}
+
+.aurora-photo-editor__backdrop {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    border: 0;
+    background: rgba(0,0,0,.78);
+    backdrop-filter: blur(12px);
+}
+
+.aurora-photo-editor__sheet {
+    position: absolute;
+    inset: 18px;
+    display: grid;
+    grid-template-rows:
+        auto auto minmax(0, 1fr) auto;
+    overflow: hidden;
+    border: 1px solid var(--aurora-border);
+    border-radius: 22px;
+    background: #07111f;
+    box-shadow: 0 30px 90px rgba(0,0,0,.58);
+}
+
+.aurora-photo-editor__sheet > header,
+.aurora-photo-editor__sheet > footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border-bottom: 1px solid var(--aurora-border);
+    background: var(--aurora-surface);
+}
+
+.aurora-photo-editor__sheet > footer {
+    justify-content: flex-end;
+    border-top: 1px solid var(--aurora-border);
+    border-bottom: 0;
+}
+
+.aurora-photo-editor__sheet header strong,
+.aurora-photo-editor__sheet header span {
+    display: block;
+}
+
+.aurora-photo-editor__sheet header span {
+    margin-top: 3px;
+    color: var(--aurora-muted);
+    font-size: 9px;
+}
+
+.aurora-photo-editor__sheet header button,
+.aurora-photo-editor__sheet footer button {
+    min-height: 40px;
+    padding: 0 12px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 10px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface-2);
+    cursor: pointer;
+}
+
+.aurora-photo-editor__sheet footer button.is-primary {
+    border-color: var(--aurora-primary);
+    color: #062421;
+    background: var(--aurora-primary);
+    font-weight: 800;
+}
+
+.aurora-photo-editor__tools {
+    display: flex;
+    gap: 7px;
+    padding: 9px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--aurora-border);
+    background: var(--aurora-surface-2);
+}
+
+.aurora-photo-editor__tools button {
+    min-height: 38px;
+    flex: 0 0 auto;
+    padding: 0 10px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 9px;
+    color: var(--aurora-muted);
+    background: var(--aurora-surface);
+    cursor: pointer;
+}
+
+.aurora-photo-editor__tools button.is-active {
+    border-color: var(--aurora-primary);
+    color: #062421;
+    background: var(--aurora-primary);
+}
+
+.aurora-photo-editor__stage {
+    min-height: 0;
+    display: grid;
+    place-items: center;
+    padding: 12px;
+    overflow: auto;
+    background:
+        linear-gradient(45deg,#0d1725 25%,transparent 25%),
+        linear-gradient(-45deg,#0d1725 25%,transparent 25%),
+        linear-gradient(45deg,transparent 75%,#0d1725 75%),
+        linear-gradient(-45deg,transparent 75%,#0d1725 75%),
+        #07111f;
+    background-size: 22px 22px;
+    background-position:
+        0 0,
+        0 11px,
+        11px -11px,
+        -11px 0;
+}
+
+.aurora-photo-editor canvas {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    background: #000000;
+    touch-action: none;
+}
+
+@media (max-width: 760px) {
+    .aurora-evidence-gallery {
+        grid-template-columns: 1fr;
+    }
+
+    .aurora-photo-editor__sheet {
+        inset: 0;
+        border: 0;
+        border-radius: 0;
+    }
+
+    .aurora-photo-editor__sheet > footer {
+        padding-bottom:
+            calc(
+                12px +
+                env(safe-area-inset-bottom)
+            );
+    }
+
+    .aurora-evidence-card__meta {
+        grid-template-columns: 1fr;
+    }
+}
+
+.aurora-add-evidence-group {
+    width: 100%;
+    min-height: 48px;
+    margin-top: 14px;
+    border: 1px solid var(--aurora-primary);
+    border-radius: 12px;
+    color: #062421;
+    background: var(--aurora-primary);
+    cursor: pointer;
+    font-weight: 800;
+}
+
+.aurora-evidence-group-list {
+    display: grid;
+    gap: 14px;
+    margin-top: 14px;
+}
+
+.aurora-evidence-group {
+    padding: 14px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 17px;
+    background: var(--aurora-surface-2);
+}
+
+.aurora-evidence-group__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.aurora-evidence-group__header span,
+.aurora-evidence-group__header h3,
+.aurora-evidence-group__header small {
+    display: block;
+}
+
+.aurora-evidence-group__header span {
+    color: var(--aurora-primary);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+}
+
+.aurora-evidence-group__header h3 {
+    margin: 4px 0;
+}
+
+.aurora-evidence-group__header small {
+    color: var(--aurora-muted);
+}
+
+.aurora-evidence-group__header button,
+.aurora-evidence-photo__body button {
+    min-height: 38px;
+    padding: 0 10px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 9px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface);
+    cursor: pointer;
+}
+
+.aurora-evidence-group__header button.is-danger,
+.aurora-evidence-photo__body button.is-danger {
+    color: #ffb2bd;
+    border-color: rgba(255,96,120,.28);
+    background: rgba(255,96,120,.05);
+}
+
+.aurora-evidence-group__form {
+    display: grid;
+    grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+    gap: 9px;
+    margin-top: 13px;
+}
+
+.aurora-evidence-group__form label {
+    display: grid;
+    gap: 5px;
+    color: var(--aurora-muted);
+    font-size: 9px;
+}
+
+.aurora-evidence-group__form label.is-wide {
+    grid-column: 1 / -1;
+}
+
+.aurora-evidence-group__form input,
+.aurora-evidence-group__form select,
+.aurora-evidence-group__form textarea {
+    width: 100%;
+    min-height: 42px;
+    padding: 9px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 10px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface);
+}
+
+.aurora-evidence-group__form textarea {
+    min-height: 75px;
+    resize: vertical;
+}
+
+.aurora-evidence-group__photo-actions {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.aurora-evidence-group__photo-actions label {
+    min-height: 44px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--aurora-border);
+    border-radius: 10px;
+    background: var(--aurora-surface);
+    cursor: pointer;
+}
+
+.aurora-evidence-group__photo-actions label:first-child {
+    border-color: rgba(100,240,229,.28);
+}
+
+.aurora-evidence-group__photo-actions input {
+    display: none;
+}
+
+.aurora-evidence-photo-grid {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 9px;
+    margin-top: 10px;
+}
+
+.aurora-evidence-photo {
+    overflow: hidden;
+    border: 1px solid var(--aurora-border);
+    border-radius: 13px;
+    background: var(--aurora-surface);
+}
+
+.aurora-evidence-photo__image {
+    position: relative;
+    background: #020812;
+}
+
+.aurora-evidence-photo__image img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    display: block;
+    object-fit: cover;
+}
+
+.aurora-evidence-photo__image span {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    min-width: 26px;
+    height: 26px;
+    display: grid;
+    place-items: center;
+    border-radius: 999px;
+    color: #062421;
+    background: var(--aurora-primary);
+    font-size: 9px;
+    font-weight: 800;
+}
+
+.aurora-evidence-photo__body {
+    display: grid;
+    gap: 7px;
+    padding: 9px;
+}
+
+.aurora-evidence-photo__body input,
+.aurora-evidence-photo__body select,
+.aurora-evidence-photo__body textarea {
+    width: 100%;
+    min-height: 38px;
+    padding: 8px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 9px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface-2);
+}
+
+.aurora-evidence-photo__body textarea {
+    min-height: 62px;
+}
+
+.aurora-evidence-photo__body > div {
+    display: grid;
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+    gap: 7px;
+}
+
+.aurora-evidence-photo.is-cover-photo {
+    border-color: rgba(255, 196, 92, .42);
+    box-shadow: 0 0 0 1px rgba(255, 196, 92, .12);
+}
+
+.aurora-evidence-photo__cover-badge {
+    position: absolute;
+    top: 7px;
+    right: 7px;
+    left: auto;
+    min-width: auto;
+    height: auto;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: rgba(255, 196, 92, .92);
+    color: #1a1200;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+}
+
+.aurora-evidence-photo__body button.is-subtle {
+    width: 100%;
+    margin-top: 2px;
+    color: var(--aurora-muted);
+    background: transparent;
+}
+
+.aurora-evidence-photo__body button.is-subtle.is-cover-active {
+    color: #ffd27a;
+    border-color: rgba(255, 196, 92, .28);
+    background: rgba(255, 196, 92, .06);
+}
+
+.aurora-evidence-photo-empty {
+    grid-column: 1 / -1;
+    padding: 20px;
+    border: 1px dashed var(--aurora-border);
+    border-radius: 11px;
+    color: var(--aurora-muted);
+    text-align: center;
+}
+
+/* Editor refinado */
+.aurora-photo-editor__adjustments {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 9px;
+    overflow-x: auto;
+    border-bottom: 1px solid var(--aurora-border);
+    background: #0c1727;
+}
+
+.aurora-photo-editor__adjustments button,
+.aurora-photo-editor__adjustments label {
+    min-height: 38px;
+    flex: 0 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 9px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 9px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface);
+}
+
+.aurora-photo-editor__adjustments button {
+    cursor: pointer;
+}
+
+.aurora-photo-editor__adjustments label span {
+    color: var(--aurora-muted);
+    font-size: 9px;
+}
+
+.aurora-photo-editor__adjustments input[type="color"] {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.aurora-photo-editor__adjustments input[type="range"] {
+    width: 105px;
+}
+
+.aurora-photo-editor__sheet {
+    grid-template-rows:
+        auto auto auto minmax(0, 1fr) auto;
+}
+
+.aurora-photo-editor__sheet > footer > span {
+    color: var(--aurora-muted);
+    font-size: 9px;
+}
+
+.aurora-photo-editor__sheet > footer > div {
+    display: flex;
+    gap: 7px;
+}
+
+@media (max-width: 760px) {
+    .aurora-evidence-group__form,
+    .aurora-evidence-photo-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .aurora-evidence-group__header {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .aurora-evidence-group__header button {
+        width: 100%;
+    }
+
+    .aurora-photo-editor__sheet > footer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .aurora-photo-editor__sheet > footer > div {
+        display: grid;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* ==========================================================
+   PATCH 08.003 — EVIDÊNCIA COLAPSÁVEL E UI SEM DUPLICAÇÃO
+   Cole no FINAL de css\evidence_engine.css
+   ========================================================== */
+
+.aurora-evidence-legacy-hidden {
+    display: none !important;
+}
+
+.aurora-evidence-hub {
+    margin-top: 0;
+}
+
+.aurora-evidence-group-list {
+    margin-top: 14px;
+}
+
+.aurora-add-evidence-group {
+    margin-top: 12px;
+}
+
+.aurora-evidence-summary {
+    display: grid;
+    grid-template-columns:
+        minmax(0, 1fr) auto;
+    gap: 7px;
+    align-items: stretch;
+    border: 1px solid var(--aurora-border);
+    border-radius: 14px;
+    background: var(--aurora-surface-2);
+    overflow: hidden;
+}
+
+.aurora-evidence-summary__main {
+    width: 100%;
+    min-height: 72px;
+    display: grid;
+    grid-template-columns:
+        auto minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 11px;
+    padding: 11px;
+    border: 0;
+    color: var(--aurora-text);
+    background: transparent;
+    cursor: pointer;
+    text-align: left;
+}
+
+.aurora-evidence-summary__number {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid rgba(100,240,229,.28);
+    border-radius: 12px;
+    color: #062421;
+    background: var(--aurora-primary);
+    font-weight: 900;
+}
+
+.aurora-evidence-summary__content {
+    min-width: 0;
+}
+
+.aurora-evidence-summary__content strong,
+.aurora-evidence-summary__content small {
+    display: block;
+}
+
+.aurora-evidence-summary__content small {
+    margin-top: 4px;
+    color: var(--aurora-muted);
+    font-size: 9px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.aurora-evidence-summary__arrow {
+    color: var(--aurora-primary);
+    font-size: 22px;
+}
+
+.aurora-evidence-summary__delete {
+    width: 42px;
+    border: 0;
+    border-left: 1px solid var(--aurora-border);
+    color: #ffb2bd;
+    background: rgba(255,96,120,.05);
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.aurora-evidence-group__footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--aurora-border);
+}
+
+.aurora-evidence-group__footer button {
+    min-height: 42px;
+    padding: 0 14px;
+    border: 1px solid var(--aurora-border);
+    border-radius: 10px;
+    color: var(--aurora-text);
+    background: var(--aurora-surface);
+    cursor: pointer;
+}
+
+.aurora-evidence-group__footer button.is-primary {
+    border-color: var(--aurora-primary);
+    color: #062421;
+    background: var(--aurora-primary);
+    font-weight: 800;
+}
+
+/* ==========================================================
+   RC8.13 — PADRAO DE MOVIMENTO AURORA / EVIDENCIAS V1
+   Transicoes curtas explicam entrada, salvamento e retorno.
+   ========================================================== */
+.aurora-evidence-hub [data-evidence-group-list],
+.aurora-evidence-hub .aurora-add-evidence-group {
+    transition:
+        opacity 120ms ease,
+        transform 120ms ease;
+}
+
+.aurora-evidence-hub.is-view-leaving [data-evidence-group-list],
+.aurora-evidence-hub.is-view-leaving .aurora-add-evidence-group {
+    opacity: 0;
+    transform: translateY(4px);
+    pointer-events: none;
+}
+
+.aurora-evidence-hub.is-view-entering [data-evidence-group-list],
+.aurora-evidence-hub.is-view-entering .aurora-add-evidence-group {
+    opacity: 0;
+    transform: translateY(7px);
+}
+
+.aurora-evidence-group.is-open {
+    animation: aurora-evidence-focus-enter 230ms cubic-bezier(.2,.72,.22,1) both;
+}
+
+.aurora-evidence-group__footer button.is-primary {
+    transition:
+        background-color 160ms ease,
+        border-color 160ms ease,
+        color 160ms ease,
+        transform 100ms ease,
+        opacity 160ms ease;
+}
+
+.aurora-evidence-group__footer button.is-primary:active:not(:disabled) {
+    transform: scale(.98);
+}
+
+.aurora-evidence-group__footer button.is-primary:disabled {
+    cursor: wait;
+}
+
+.aurora-evidence-group__footer button.is-primary.is-saving {
+    opacity: .72;
+}
+
+.aurora-evidence-group__footer button.is-primary.is-saved {
+    border-color: #64f0e5;
+    color: #062421;
+    background: #64f0e5;
+    box-shadow: 0 0 0 3px rgba(100,240,229,.10);
+}
+
+@keyframes aurora-evidence-focus-enter {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(.995);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aurora-evidence-hub [data-evidence-group-list],
+    .aurora-evidence-hub .aurora-add-evidence-group,
+    .aurora-evidence-group.is-open,
+    .aurora-evidence-group__footer button.is-primary {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+@media (max-width: 760px) {
+    .aurora-evidence-group__footer {
+        display: grid;
+        grid-template-columns:
+            repeat(2, minmax(0, 1fr));
+    }
+}
+
+
+/* ==========================================================
+   PATCH 08.004 — UMA OCORRÊNCIA POR VEZ
+   ========================================================== */
+
+/* Oculta definitivamente o botão/interface antiga do módulo. */
+.aurora-evidence-legacy-hidden {
+    display: none !important;
+}
+
+/* O único botão permitido é "Criar ocorrência". */
+.aurora-add-evidence-group::first-letter {
+    letter-spacing: 0;
+}
+
+.aurora-add-evidence-group:disabled,
+.aurora-add-evidence-group[aria-disabled="true"] {
+    opacity: .45;
+    cursor: not-allowed;
+    filter: saturate(.55);
+    box-shadow: none;
+}
+
+/* Mantém a sequência visual: cards salvos primeiro, botão ao final. */
+.aurora-evidence-group-list {
+    order: 1;
+}
+
+.aurora-add-evidence-group {
+    order: 2;
+}

@@ -1,0 +1,27 @@
+AURORA — ETIQUETA 50,8 MM — DESIGN APROVADO V3
+Data: 13/09/2026
+
+Base funcional:
+- FIX6 do motor de impressão/QR local, já aprovado por abrir a impressão.
+
+Layout aplicado:
+- circular 50,8 x 50,8 mm
+- preto e branco / impressora térmica
+- sem card retangular em código/nome
+- companhia real no topo, com fonte adaptativa
+- código centralizado abaixo da companhia
+- descrição logo abaixo do código
+- QR central com 24 mm
+- ícone de celular à esquerda
+- textos laterais reposicionados integralmente dentro do círculo
+- histórico de serviços / relatórios / informações técnicas à direita
+- Powered by Aurora rebaixado para o rodapé
+- sem fallback visível EMPRESA
+- sem traço decorativo sob a empresa
+
+Preservado:
+- gerador QR local qrPayload + qrSvg
+- QR público/contextual
+- lazy-load/fluidez
+- Minha Equipe
+- Tupy, Aurora AI e relatórios intocados

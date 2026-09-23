@@ -1,0 +1,16 @@
+AURORA V145 — STATUS DE MEMBRO PERSISTENTE
+
+BASE: V144 aprovada.
+
+ESCOPO ÚNICO:
+- O checkbox lateral do COMPANY_USER passa a representar explicitamente Ativo/Bloqueado.
+- Persistência via RPC oficial aurora_company_set_member_status.
+- Marcado = active; desmarcado = blocked.
+- Após a alteração, Minha Equipe recarrega do Supabase para confirmar o estado persistido.
+- Seleção para exclusão continua disponível em controle separado e explicitamente rotulado “Selecionar para excluir”.
+- Status blocked recebe rótulo visual “Bloqueado”.
+
+PRESERVADO:
+- Gate de bloqueio V144.
+- Resolvedor de módulos V141.
+- Ambientes permitidos, Aurora AI, permissões de cadastros, convites, relatórios, QR e demais fluxos.

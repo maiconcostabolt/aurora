@@ -1,0 +1,15 @@
+AURORA — CORREÇÃO V20 — QR AUTENTICADO + PERMISSÕES ADMIN
+Data: 13/09/2026
+
+Escopo corrigido:
+1. COMPANY_ADMIN / ADMIN_BOLT / OWNER recebem explicitamente todas as permissões de Painéis e equipamentos no cliente, preservando os 3 botões da ficha: Nova vistoria, Etiqueta QR e Editar equipamento.
+2. Usuários convidados continuam obedecendo aurora_asset_my_permissions.
+3. Leitura do QR: a página pública verifica sessão Supabase existente e valida o token pela lista autenticada aurora_assets_my_list. Se o ativo pertence à empresa do usuário autenticado, converte a rota pública para aurora_asset_open e entrega o fluxo à Aurora.
+4. Visitante sem sessão ou sem vínculo com a empresa permanece somente na ficha pública.
+5. Nenhuma alteração no QR permanente, relatórios Tupy, Vistoria Veicular, IA, orçamento ou assinatura.
+
+Arquivos alterados:
+- js/aurora_assets_pilot.js
+- js/aurora_asset_public.js
+- app.html (cache-bust V20)
+- index.html (cache-bust V20)

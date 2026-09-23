@@ -1,0 +1,15 @@
+AURORA PWA — PRODUÇÃO — V1.1.19
+
+Destino: mlcaurora.com
+
+Este é o pacote completo da Aurora com o módulo de Vistoria Veicular integrado.
+Os arquivos index.html, app.html, manifest.webmanifest e service_worker.js estão
+na raiz do pacote para publicação direta no Worker/Pages do Cloudflare.
+
+Publicação:
+1. Envie todo o conteúdo do ZIP para o projeto que já atende mlcaurora.com.
+2. Não crie outro Worker e não altere a rota do domínio.
+3. Depois da publicação, faça uma atualização forçada ou limpe o cache do PWA.
+
+Identificação do cache de produção:
+aurora-pwa-producao-vistoria-1

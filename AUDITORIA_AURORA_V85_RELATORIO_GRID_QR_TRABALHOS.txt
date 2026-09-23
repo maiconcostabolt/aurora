@@ -1,0 +1,24 @@
+AURORA V85 — ELÉTRICA · RELATÓRIO GRID + QR TRABALHOS
+Base: V84 aprovada.
+
+ALTERADO SOMENTE NESTA RODADA
+- Relatório: removido “X de Y trabalhos marcados como executados”.
+- Relatório: Trabalhos a realizar em grid de 2 colunas.
+- Relatório: espaço próprio entre checkbox e descrição.
+- Relatório: descrições longas quebram dentro da célula; em tela estreita volta a 1 coluna.
+- QR público: preservada a RPC aurora_asset_public_work_items(text) já existente.
+- QR público: lista ☑/☐ + descrição, sem contador visual.
+- Versão oficial atualizada no campo já existente.
+
+VALIDAÇÃO DO QR/BACKEND
+A RPC public.aurora_asset_public_work_items(text) existe no Supabase e lê diagnostic.work_items
+do projeto elétrico mais recente vinculado ao ativo pelo asset_registry_id/code/tag.
+Nenhuma alteração SQL/RPC foi necessária nesta rodada.
+
+PRESERVADO
+- V84 e exclusão de eletrica_tupy.
+- Offline/cold-start aprovado.
+- Correção generation_failed / geração offline.
+- Auth, License Ticket, módulos, empresa, Home, BOLT e Tupy.
+- Demais serviços não foram alterados.
+- MLCAurora.com não foi alterado.

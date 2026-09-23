@@ -1,0 +1,45 @@
+{
+    "systems": [
+
+        {
+            "id": "engine",
+            "name": "Motor"
+        },
+
+        {
+            "id": "suspension",
+            "name": "Suspensão"
+        },
+
+        {
+            "id": "brakes",
+            "name": "Freios"
+        },
+
+        {
+            "id": "steering",
+            "name": "Direção"
+        },
+
+        {
+            "id": "cooling",
+            "name": "Arrefecimento"
+        },
+
+        {
+            "id": "electrical",
+            "name": "Sistema Elétrico"
+        },
+
+        {
+            "id": "transmission",
+            "name": "Transmissão"
+        },
+
+        {
+            "id": "body",
+            "name": "Carroceria"
+        }
+
+    ]
+}

@@ -1,0 +1,99 @@
+/* AURORA RC7.2 — página física A4 integralmente branca */
+@media print {
+  @page { size: A4 portrait; margin: 0 !important; }
+
+  html, body {
+    width: 210mm !important;
+    min-width: 210mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    color: #172235 !important;
+  }
+
+  body.aurora-report-open { overflow: visible !important; }
+  body > *:not(.aurora-report-preview) { display: none !important; }
+
+  .aurora-report-preview,
+  .aurora-report-preview.is-open,
+  .aurora-report-preview__sheet,
+  .aurora-report-preview__viewport {
+    position: static !important;
+    inset: auto !important;
+    display: block !important;
+    width: 210mm !important;
+    min-width: 210mm !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    outline: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+    backdrop-filter: none !important;
+  }
+
+  .aurora-report-preview__backdrop,
+  .aurora-report-preview__toolbar { display: none !important; }
+
+  .aurora-report-document {
+    width: 210mm !important;
+    min-height: 297mm !important;
+    margin: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    outline: 0 !important;
+    background: #fff !important;
+    box-shadow: none !important;
+  }
+
+  .aurora-report-cover {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    margin: 0 !important;
+    border: 0 !important;
+  }
+
+  .aurora-report-body,
+  .aurora-report-document__footer {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    background: #fff !important;
+  }
+
+  .aurora-report-body { padding: 9mm 12mm !important; }
+  .aurora-report-document__footer { padding: 5mm 12mm !important; break-inside: avoid !important; }
+
+  /* RC8 — distribuição mais compacta sem perder legibilidade. */
+  .aurora-report-section { margin-bottom: 7mm !important; }
+  .aurora-report-section > h2 { margin-bottom: 3mm !important; padding-bottom: 2mm !important; }
+  .aurora-report-executive { margin-bottom: 6mm !important; padding: 4mm !important; }
+  .aurora-report-info { padding: 3mm !important; }
+  .aurora-report-occurrence { margin-bottom: 7mm !important; }
+  .aurora-report-alert { padding: 4mm !important; }
+  .aurora-report-recommendation { margin-top: 3mm !important; padding-top: 3mm !important; }
+  .aurora-report-photos { gap: 3mm !important; margin-top: 3mm !important; }
+  .aurora-report-photos--single figure { width: min(72%, 125mm) !important; }
+  .aurora-report-photos img { max-height: 52mm !important; }
+
+  .aurora-report-section,
+  .aurora-report-info,
+  .aurora-report-summary,
+  .aurora-report-occurrence,
+  .aurora-report-diagnostic,
+  .aurora-report-diagnostic article,
+  .aurora-report-approval,
+  .aurora-report-alert,
+  .aurora-report-photos figure,
+  .aurora-report-photo-frame,
+  .aurora-report-empty-section {
+    outline: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .aurora-report-photos img {
+    object-fit: contain !important;
+    object-position: center !important;
+  }
+}

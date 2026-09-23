@@ -1,0 +1,24 @@
+AURORA — ETIQUETA 50,8 MM COMPACTA V4
+Data: 13/09/2026
+
+Motivo:
+A impressão física V3 confirmou que as colunas laterais extrapolavam o círculo em 50,8 mm.
+
+Correção:
+- removidos Histórico de serviços / Relatórios / Informações técnicas da etiqueta 50,8 mm
+- removido bloco lateral de instrução
+- QR ampliado e centralizado em 26 mm
+- mantidos somente: companhia, código, descrição, QR, Escaneie para consultar e Powered by Aurora
+- todos os textos possuem margens internas próprias para o círculo
+- formato térmico preto e branco preservado
+
+Motor preservado:
+- FIX6 qrPayload + qrSvg
+- iframe interno de impressão
+- consulta pública/contextual
+- bootstrap lazy/fluidez
+- Minha Equipe
+- Tupy, AI e relatórios intocados
+
+Observação de produto:
+A versão detalhada com informações laterais fica reservada para etiquetas maiores (ex.: 80 mm).

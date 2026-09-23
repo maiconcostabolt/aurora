@@ -1,0 +1,191 @@
+.aurora-mobile-menu-button,
+.aurora-mobile-overlay,
+.aurora-mobile-actions {
+    display: none;
+}
+
+.aurora-bootstrap-error {
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px;
+    color: #ff9aa6;
+    background: #07111f;
+    white-space: pre-wrap;
+}
+
+@media (max-width: 760px) {
+    body {
+        padding-bottom:
+            calc(
+                76px +
+                env(safe-area-inset-bottom)
+            );
+    }
+
+    .aurora-shell {
+        display: block;
+        min-height: 100vh;
+    }
+
+    .aurora-sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 80;
+        width: min(84vw, 310px);
+        height: 100vh;
+        padding: 16px 12px;
+        border-right:
+            1px solid
+            var(--aurora-border);
+        border-bottom: 0;
+        transform:
+            translateX(-105%);
+        transition:
+            transform .2s ease;
+        overflow-y: auto;
+    }
+
+    .aurora-mobile-menu-open
+    .aurora-sidebar {
+        transform:
+            translateX(0);
+    }
+
+    .aurora-sidebar__nav {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 7px;
+        overflow: visible;
+    }
+
+    .aurora-sidebar__item {
+        justify-content: flex-start;
+        min-height: 48px;
+        padding: 11px 13px;
+        font-size: 15px;
+    }
+
+    .aurora-sidebar__item
+    span:last-child {
+        display: inline;
+    }
+
+    .aurora-mobile-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 70;
+        width: 100%;
+        height: 100%;
+        border: 0;
+        background:
+            rgba(0,0,0,.55);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+            opacity .2s ease;
+    }
+
+    .aurora-mobile-menu-open
+    .aurora-mobile-overlay {
+        display: block;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    .aurora-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        min-height: 64px;
+        padding: 10px 12px;
+    }
+
+    .aurora-mobile-menu-button {
+        display: grid;
+        place-items: center;
+        flex: 0 0 auto;
+        width: 42px;
+        height: 42px;
+        border:
+            1px solid
+            var(--aurora-border);
+        border-radius: 12px;
+        color:
+            var(--aurora-text);
+        background:
+            var(--aurora-surface-2);
+        cursor: pointer;
+    }
+
+    .aurora-topbar__identity {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .aurora-topbar h1 {
+        font-size: 16px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .aurora-topbar p {
+        max-width: 48vw;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .aurora-user-chip {
+        padding: 5px;
+    }
+
+    .aurora-shell__content {
+        padding: 12px;
+    }
+
+    .aurora-form,
+    [data-module="evidence"] {
+        width: 100%;
+        margin: 0;
+        padding: 16px;
+        border-radius: 16px;
+    }
+
+    .aurora-form__header {
+        margin-bottom: 18px;
+    }
+
+    .aurora-form__header h2,
+    [data-module="evidence"] h2 {
+        font-size: 24px;
+    }
+
+    .aurora-form__fields {
+        gap: 15px;
+    }
+
+    .aurora-field input,
+    .aurora-field select,
+    .aurora-field textarea {
+        min-height: 52px;
+        font-size: 16px;
+    }
+
+    .aurora-field textarea {
+        min-height: 110px;
+    }
+
+    .aurora-runtime-status {
+        right: 10px;
+        bottom:
+            calc(
+                142px +
+                env(safe-area-inset-bottom)
+            );
+        left: 10px;
+        max-width: none;
+    }
+}

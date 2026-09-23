@@ -1,0 +1,827 @@
+/* =========================================================
+   AURORA RC4.1 — MOBILE REFINEMENT + OPENING OFICIAL
+   Somente apresentação/responsividade. Não altera textos,
+   fluxo, dados, relatório ou salvamento.
+   ========================================================= */
+
+:root {
+    --aurora-mobile-safe-top: env(safe-area-inset-top, 0px);
+    --aurora-mobile-safe-bottom: env(safe-area-inset-bottom, 0px);
+    --aurora-mobile-footer-space: calc(72px + var(--aurora-mobile-safe-bottom));
+    --aurora-mobile-dock-space: calc(132px + var(--aurora-mobile-safe-bottom));
+}
+
+/* ==========================================================
+   RC8.13 — Z FOLD FECHADO: EVIDENCIAS SEM "BONECA RUSSA" V3
+   Mantem o card principal da tela, transforma Registros em
+   secao e remove a ultima moldura lateral da evidencia aberta.
+   ========================================================== */
+@media (max-width: 520px) {
+    [data-module="evidence"] .aurora-evidence-hub {
+        margin-top: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+    }
+
+    [data-module="evidence"] .aurora-evidence-hub__header {
+        gap: 10px;
+        padding: 0 0 11px;
+        border-bottom: 1px solid var(--aurora-border);
+    }
+
+    [data-module="evidence"] .aurora-evidence-hub__header h2 {
+        margin: 3px 0;
+        font-size: 19px;
+    }
+
+    [data-module="evidence"] .aurora-evidence-hub__header p {
+        font-size: 10px;
+        line-height: 1.38;
+    }
+
+    [data-module="evidence"] .aurora-evidence-hub__counter {
+        min-width: 54px;
+        padding: 7px 6px;
+        border-radius: 11px;
+    }
+
+    [data-module="evidence"] .aurora-evidence-hub__counter strong {
+        font-size: 19px;
+    }
+
+    [data-module="evidence"] .aurora-evidence-group-list {
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    [data-module="evidence"] .aurora-evidence-group {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    [data-module="evidence"] .aurora-evidence-group__form,
+    [data-module="evidence"] .aurora-evidence-group__photo-actions,
+    [data-module="evidence"] .aurora-evidence-photo-grid {
+        margin-top: 8px;
+    }
+}
+
+/* ==========================================================
+   RC8.13 — REGISTRO ABERTO: MODO DE EDICAO FOCADO
+   Enquanto uma ocorrencia esta aberta, ela vira a unica tarefa
+   visivel. Acoes globais retornam ao finalizar a ocorrencia.
+   ========================================================== */
+.aurora-evidence-hub.is-editing .aurora-add-evidence-group {
+    display: none !important;
+}
+
+body.aurora-evidence-editing .aurora-workflow-dock,
+body.aurora-evidence-editing .aurora-footer-nav {
+    display: none !important;
+}
+
+html,
+body {
+    width: 100%;
+    min-width: 0;
+    min-height: 100%;
+    overscroll-behavior-y: none;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+    touch-action: manipulation;
+}
+
+/* ---------- Abertura cinematográfica oficial ---------- */
+body:has(.aurora-opening--rc4) {
+    overflow: hidden !important;
+}
+
+.aurora-opening--rc4 {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    overflow: hidden;
+    color: #fff;
+    background: #020612;
+    opacity: 1;
+    transition: opacity .72s ease;
+    isolation: isolate;
+}
+
+.aurora-opening--rc4.is-leaving {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.aurora-opening-rc4__background {
+    position: absolute;
+    inset: 0;
+    background: #020612 url("../assets/illustrations/aurora_opening_clean.png") center center / cover no-repeat;
+    opacity: 0;
+    transform: scale(1.018);
+    filter: brightness(.9) saturate(1.05);
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__background {
+    animation: auroraRc4Background 1.2s .34s ease forwards;
+}
+
+.aurora-opening-rc4__veil {
+    position: absolute;
+    inset: 0;
+    background:
+        linear-gradient(180deg, rgba(0,2,10,.05), rgba(0,2,10,.01) 39%, rgba(0,2,10,.11) 62%, rgba(0,2,10,.62)),
+        radial-gradient(circle at 50% 61%, transparent 0 24%, rgba(0,3,13,.08) 58%, rgba(0,3,13,.3));
+}
+
+.aurora-opening-rc4__moon-pulse {
+    position: absolute;
+    left: 50%;
+    top: 55%;
+    width: clamp(42px, 13vw, 64px);
+    aspect-ratio: 1;
+    border-radius: 50%;
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(.45);
+    background: radial-gradient(circle, rgba(255,255,255,.66), rgba(147,168,255,.2) 43%, transparent 72%);
+    filter: blur(3px);
+    mix-blend-mode: screen;
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__moon-pulse {
+    animation: auroraRc4Moon 1.35s 1.25s ease forwards;
+}
+
+.aurora-opening-rc4__brand {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: calc(22px + var(--aurora-mobile-safe-top)) 22px calc(42px + var(--aurora-mobile-safe-bottom));
+    text-align: center;
+    transform: translateY(7%);
+}
+
+.aurora-opening-rc4__trails {
+    position: absolute;
+    left: 50%;
+    top: 42%;
+    width: 220px;
+    height: 180px;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.aurora-opening-rc4__trails span {
+    position: absolute;
+    bottom: 0;
+    width: 16px;
+    height: 0;
+    border-radius: 999px;
+    opacity: 0;
+    filter: blur(7px);
+    transform-origin: bottom;
+}
+
+.aurora-opening-rc4__trails span:first-child {
+    left: 42%;
+    background: linear-gradient(180deg, transparent, rgba(34,231,255,.94));
+    transform: rotate(-24deg);
+}
+
+.aurora-opening-rc4__trails span:last-child {
+    right: 42%;
+    background: linear-gradient(180deg, transparent, rgba(217,90,255,.94));
+    transform: rotate(24deg);
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__trails span:first-child {
+    animation: auroraRc4Trail 1.15s 1.62s ease forwards;
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__trails span:last-child {
+    animation: auroraRc4Trail 1.15s 1.8s ease forwards;
+}
+
+.aurora-opening-rc4__logo {
+    position: relative;
+    width: clamp(118px, 35vw, 150px);
+    height: clamp(108px, 31vw, 136px);
+    opacity: 0;
+    filter: blur(14px) drop-shadow(0 14px 30px rgba(45,111,255,.32));
+    transform: translateY(25px) scale(.76);
+}
+
+.aurora-opening-rc4__logo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 30px;
+    box-shadow: 0 18px 46px rgba(29,191,255,.3);
+}
+
+.aurora-opening-rc4__logo-glow {
+    position: absolute;
+    inset: -42%;
+    border-radius: 50%;
+    opacity: 0;
+    background: radial-gradient(circle, rgba(55,194,255,.34), transparent 68%);
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__logo {
+    animation: auroraRc4Logo 1.05s 2.05s cubic-bezier(.18,.9,.22,1.05) forwards;
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__logo-glow {
+    animation: auroraRc4Glow .95s 2.68s ease forwards;
+}
+
+.aurora-opening-rc4__name {
+    position: relative;
+    display: flex;
+    gap: .18em;
+    margin-top: 18px;
+    color: #f8fbff;
+    font-size: clamp(42px, 12.5vw, 68px);
+    font-weight: 250;
+    line-height: 1;
+    letter-spacing: .035em;
+    text-shadow: 0 0 18px rgba(255,255,255,.14);
+}
+
+.aurora-opening-rc4__name span {
+    display: inline-block;
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(20px) scale(.82);
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__name span:nth-child(1) { animation: auroraRc4Text .7s 2.92s cubic-bezier(.18,.9,.22,1.05) forwards; }
+.aurora-opening--rc4.is-running .aurora-opening-rc4__name span:nth-child(2) { animation: auroraRc4Text .7s 3.08s cubic-bezier(.18,.9,.22,1.05) forwards; }
+.aurora-opening--rc4.is-running .aurora-opening-rc4__name span:nth-child(3) { animation: auroraRc4Text .7s 3.24s cubic-bezier(.18,.9,.22,1.05) forwards; }
+.aurora-opening--rc4.is-running .aurora-opening-rc4__name span:nth-child(4) { animation: auroraRc4Text .7s 3.4s cubic-bezier(.18,.9,.22,1.05) forwards; }
+.aurora-opening--rc4.is-running .aurora-opening-rc4__name span:nth-child(5) { animation: auroraRc4Text .7s 3.56s cubic-bezier(.18,.9,.22,1.05) forwards; }
+.aurora-opening--rc4.is-running .aurora-opening-rc4__name span:nth-child(6) { animation: auroraRc4Text .7s 3.72s cubic-bezier(.18,.9,.22,1.05) forwards; }
+
+.aurora-opening-rc4__name::after {
+    content: "";
+    position: absolute;
+    top: -18px;
+    bottom: -18px;
+    left: -36%;
+    width: 23%;
+    opacity: 0;
+    filter: blur(5px);
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,.78), transparent);
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__name::after {
+    animation: auroraRc4Sweep 1.08s 4.18s ease forwards;
+}
+
+.aurora-opening-rc4__line {
+    width: 148px;
+    height: 2px;
+    margin-top: 13px;
+    opacity: 0;
+    transform: scaleX(.12);
+    background: linear-gradient(90deg, transparent, #22e7ff, #9147ff, transparent);
+    box-shadow: 0 0 12px #22e7ff, 0 0 23px #9147ff;
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__line.is-first {
+    animation: auroraRc4Line .66s 3.9s ease forwards;
+}
+
+.aurora-opening-rc4__purpose {
+    margin: 22px 0 0;
+    font-size: clamp(18px, 5.2vw, 27px);
+    font-weight: 500;
+    line-height: 1.45;
+}
+
+.aurora-opening-rc4__purpose span {
+    display: block;
+    opacity: 0;
+    filter: blur(7px);
+    transform: translateY(13px);
+}
+
+.aurora-opening-rc4__purpose span:first-child { color: #22e7ff; }
+.aurora-opening-rc4__purpose span:last-child { color: #c976ff; }
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__purpose span:first-child {
+    animation: auroraRc4Text .62s 4.43s ease forwards;
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__purpose span:last-child {
+    animation: auroraRc4Text .62s 4.76s ease forwards;
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__line.is-second {
+    animation: auroraRc4Line .64s 5.05s ease forwards;
+}
+
+.aurora-opening-rc4__values {
+    margin: 25px 0 0;
+    color: #eef2fb;
+    font-size: clamp(12px, 3.8vw, 17px);
+    letter-spacing: .03em;
+    opacity: 0;
+    filter: blur(6px);
+    transform: translateY(11px);
+}
+
+.aurora-opening-rc4__values i {
+    color: #9d4dff;
+    font-style: normal;
+    margin: 0 9px;
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__values {
+    animation: auroraRc4Text .62s 5.34s ease forwards;
+}
+
+.aurora-opening-rc4__loader {
+    position: absolute;
+    right: 18px;
+    bottom: calc(15px + var(--aurora-mobile-safe-bottom));
+    left: 18px;
+    display: grid;
+    gap: 7px;
+    opacity: 0;
+}
+
+.aurora-opening-rc4__loader span {
+    width: 0;
+    height: 3px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #22e7ff, #9147ff, #d95aff);
+    box-shadow: 0 0 14px rgba(34,231,255,.72);
+}
+
+.aurora-opening-rc4__loader small {
+    color: rgba(255,255,255,.48);
+    font-size: 10px;
+    letter-spacing: .08em;
+    text-align: center;
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__loader {
+    animation: auroraRc4LoaderShow .4s .55s ease forwards;
+}
+
+.aurora-opening--rc4.is-running .aurora-opening-rc4__loader span {
+    animation: auroraRc4Loader 6.45s .35s linear forwards;
+}
+
+@keyframes auroraRc4Background { to { opacity: 1; transform: scale(1); } }
+@keyframes auroraRc4Moon {
+    0% { opacity: 0; transform: translate(-50%,-50%) scale(.45); }
+    42% { opacity: .78; }
+    100% { opacity: 0; transform: translate(-50%,-50%) scale(2.3); }
+}
+@keyframes auroraRc4Trail {
+    0% { height: 0; opacity: 0; }
+    35% { opacity: .9; }
+    100% { height: 150px; opacity: 0; }
+}
+@keyframes auroraRc4Logo { to { opacity: 1; filter: blur(0) drop-shadow(0 14px 30px rgba(45,111,255,.32)); transform: none; } }
+@keyframes auroraRc4Glow { to { opacity: 1; } }
+@keyframes auroraRc4Text { to { opacity: 1; filter: blur(0); transform: none; } }
+@keyframes auroraRc4Sweep {
+    0% { left: -36%; opacity: 0; }
+    16% { opacity: 1; }
+    100% { left: 118%; opacity: 0; }
+}
+@keyframes auroraRc4Line { to { opacity: 1; transform: scaleX(1); } }
+@keyframes auroraRc4LoaderShow { to { opacity: 1; } }
+@keyframes auroraRc4Loader { to { width: 100%; } }
+
+/* ---------- Responsividade e aproveitamento de tela ---------- */
+@media (max-width: 760px) {
+    .aurora-shell {
+        min-height: 100dvh;
+    }
+
+    .aurora-shell__main {
+        min-height: 100dvh;
+        grid-template-rows: auto minmax(0, 1fr);
+    }
+
+    .aurora-topbar {
+        position: sticky;
+        top: 0;
+        z-index: 55;
+        min-height: calc(54px + var(--aurora-mobile-safe-top));
+        padding: calc(7px + var(--aurora-mobile-safe-top)) 10px 7px;
+        gap: 8px;
+        background: color-mix(in srgb, var(--aurora-surface) 92%, transparent);
+        backdrop-filter: blur(16px);
+    }
+
+    .aurora-topbar h1 {
+        font-size: 15px;
+        line-height: 1.1;
+    }
+
+    .aurora-topbar p {
+        max-width: 50vw;
+        margin-top: 2px;
+        font-size: 10px;
+        line-height: 1.15;
+    }
+
+    .aurora-mobile-menu-button,
+    .aurora-icon-button {
+        width: 38px;
+        height: 38px;
+        border-radius: 11px;
+    }
+
+    /* V66: restaura o desenho original avatar + nome no mobile.
+       O botão de nuvem do topo é ocultado visualmente; a sincronização automática permanece intacta. */
+    .aurora-topbar__brand {
+        min-width: 0;
+        flex: 1 1 auto;
+        overflow: hidden;
+    }
+
+    .aurora-topbar__actions {
+        min-width: 0;
+        flex: 0 1 auto;
+    }
+
+    .aurora-topbar__actions > .aurora-cloud-button {
+        display: none;
+    }
+
+    .aurora-user-chip {
+        min-width: 0;
+        max-width: min(44vw, 190px);
+        min-height: 38px;
+        padding: 4px 7px 4px 4px;
+        border-radius: 11px;
+        overflow: hidden;
+        flex: 0 1 auto;
+    }
+
+    .aurora-user-chip [data-topbar-user-name] {
+        display: block;
+        min-width: 0;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .aurora-user-chip span[data-user-name],
+    .aurora-user-chip__chevron {
+        display: none;
+    }
+
+    .aurora-user-chip__avatar {
+        width: 28px;
+        height: 28px;
+        flex: 0 0 28px;
+        border-radius: 9px;
+    }
+
+    .aurora-shell__content {
+        min-height: 0;
+        padding: 10px 10px var(--aurora-mobile-dock-space);
+        scroll-padding-bottom: var(--aurora-mobile-dock-space);
+        overflow-x: hidden;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .aurora-home-layer,
+    .aurora-workflow-layer,
+    .aurora-module,
+    .aurora-form,
+    [data-module="evidence"] {
+        max-width: 100%;
+    }
+
+    .aurora-home-hero {
+        padding: 16px;
+        border-radius: 19px;
+    }
+
+    .aurora-home-hero h2 {
+        margin-top: 7px;
+        font-size: clamp(25px, 7.2vw, 34px);
+    }
+
+    .aurora-home-hero strong {
+        font-size: clamp(17px, 5vw, 23px);
+    }
+
+    .aurora-home-hero p {
+        margin-top: 8px;
+        font-size: 12px;
+        line-height: 1.42;
+    }
+
+    .aurora-home-hero__count {
+        margin-top: 12px;
+    }
+
+    .aurora-home-section {
+        margin-top: 16px;
+    }
+
+    .aurora-home-section__header h3 {
+        margin: 4px 0 9px;
+        font-size: 17px;
+    }
+
+    .aurora-service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 9px;
+    }
+
+    .aurora-service-card {
+        min-height: 92px;
+        grid-template-columns: auto minmax(0, 1fr);
+        align-content: center;
+        gap: 9px;
+        padding: 11px;
+        border-radius: 16px;
+    }
+
+    .aurora-service-card__icon {
+        width: 39px;
+        height: 39px;
+        border-radius: 12px;
+        font-size: 19px;
+    }
+
+    .aurora-service-card strong {
+        font-size: 13px;
+        line-height: 1.2;
+    }
+
+    .aurora-service-card small {
+        display: -webkit-box;
+        margin-top: 3px;
+        overflow: hidden;
+        font-size: 9px;
+        line-height: 1.25;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+    }
+
+    .aurora-service-card__arrow {
+        display: none;
+    }
+
+    .aurora-form,
+    [data-module="evidence"] {
+        padding: 14px;
+        border-radius: 17px;
+        box-shadow: 0 12px 30px rgba(0,0,0,.16);
+    }
+
+    .aurora-form__header {
+        margin-bottom: 14px;
+    }
+
+    .aurora-form__header h2,
+    [data-module="evidence"] h2 {
+        font-size: clamp(21px, 6vw, 27px);
+        line-height: 1.08;
+    }
+
+    .aurora-form__header p {
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 1.4;
+    }
+
+    .aurora-form__fields {
+        gap: 11px;
+    }
+
+    .aurora-field {
+        gap: 5px;
+    }
+
+    .aurora-field label {
+        font-size: 12px;
+    }
+
+    .aurora-field small {
+        font-size: 10px;
+        line-height: 1.3;
+    }
+
+    .aurora-field input,
+    .aurora-field select,
+    .aurora-field textarea {
+        min-height: 44px;
+        padding: 9px 11px;
+        border-radius: 11px;
+        font-size: 16px;
+    }
+
+    .aurora-field textarea {
+        min-height: 82px;
+    }
+
+    .aurora-field--checkbox {
+        padding: 10px 12px;
+        border-radius: 11px;
+    }
+
+    [data-module="evidence"] #evidence-list {
+        gap: 8px;
+        margin: 13px 0;
+    }
+
+    [data-module="evidence"] #evidence-list > div {
+        padding: 11px;
+    }
+
+    .aurora-footer-nav {
+        position: fixed;
+        right: 50%;
+        bottom: calc(7px + var(--aurora-mobile-safe-bottom));
+        left: auto;
+        z-index: 80;
+        width: min(284px, calc(100% - 22px));
+        min-height: 54px;
+        margin: 0;
+        padding: 5px;
+        transform: translateX(50%);
+        border-radius: 18px;
+        background: color-mix(in srgb, var(--aurora-surface) 84%, transparent);
+        box-shadow: 0 16px 36px rgba(0,0,0,.34);
+        backdrop-filter: blur(18px);
+    }
+
+    .aurora-footer-nav__item {
+        min-height: 43px;
+        border-radius: 13px;
+        opacity: .9;
+    }
+
+    .aurora-footer-nav__icon {
+        font-size: 17px;
+    }
+
+    .aurora-footer-nav__item span:last-child {
+        font-size: 9px;
+    }
+
+    .aurora-workflow-dock {
+        position: fixed;
+        right: 10px;
+        bottom: calc(68px + var(--aurora-mobile-safe-bottom));
+        left: 10px;
+        z-index: 75;
+        grid-template-columns: minmax(86px, 1fr) auto minmax(86px, 1fr);
+        gap: 7px;
+        padding: 6px;
+        border-radius: 15px;
+        background: color-mix(in srgb, var(--aurora-surface) 90%, transparent);
+        box-shadow: 0 14px 34px rgba(0,0,0,.3);
+        backdrop-filter: blur(16px);
+    }
+
+    .aurora-workflow-dock button {
+        min-height: 40px;
+        padding: 0 10px;
+        border-radius: 10px;
+        font-size: 12px;
+    }
+
+    .aurora-workflow-dock span {
+        max-width: 76px;
+        overflow: hidden;
+        font-size: 8px;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .aurora-runtime-status {
+        right: 10px;
+        bottom: calc(130px + var(--aurora-mobile-safe-bottom));
+        left: 10px;
+        max-width: none;
+    }
+
+    .aurora-report-card,
+    .aurora-recent-card {
+        border-radius: 15px;
+    }
+
+    .aurora-custom-service-sheet,
+    .aurora-settings-sheet {
+        max-height: calc(100dvh - var(--aurora-mobile-safe-top) - 12px);
+        padding-bottom: calc(18px + var(--aurora-mobile-safe-bottom));
+    }
+}
+
+@media (max-width: 359px) {
+    /* Mantém o padrão histórico 2x2 também em telas externas/ultraestreitas. */
+    .aurora-service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 7px;
+    }
+
+    .aurora-service-card {
+        min-width: 0;
+        min-height: 86px;
+        gap: 7px;
+        padding: 9px 8px;
+    }
+
+    .aurora-service-card__icon {
+        width: 34px;
+        height: 34px;
+        font-size: 17px;
+    }
+
+    .aurora-service-card strong {
+        min-width: 0;
+        overflow-wrap: anywhere;
+        font-size: 12px;
+    }
+
+    .aurora-service-card small {
+        font-size: 8px;
+    }
+
+    .aurora-opening-rc4__brand {
+        transform: translateY(4%) scale(.9);
+    }
+}
+
+@media (min-width: 761px) and (max-width: 1100px) {
+    .aurora-sidebar {
+        width: 210px;
+    }
+
+    .aurora-shell {
+        grid-template-columns: 210px minmax(0, 1fr);
+    }
+
+    .aurora-shell__content {
+        padding: 16px 16px 90px;
+    }
+
+    .aurora-service-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .aurora-service-card {
+        min-height: 98px;
+        padding: 12px;
+    }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+    .aurora-opening-rc4__brand {
+        transform: translateY(1%) scale(.72);
+    }
+
+    .aurora-opening-rc4__loader {
+        display: none;
+    }
+
+    .aurora-topbar {
+        min-height: calc(48px + var(--aurora-mobile-safe-top));
+    }
+
+    .aurora-shell__content {
+        padding-top: 8px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aurora-opening--rc4 *,
+    .aurora-opening--rc4 *::before,
+    .aurora-opening--rc4 *::after {
+        animation-duration: .01ms !important;
+        animation-delay: 0ms !important;
+    }
+}

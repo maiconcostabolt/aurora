@@ -1,0 +1,86 @@
+AURORA V124 — BOLT LOGIN / AUTORIDADE DA LICENÇA
+Data: 16/09/2026
+Base recebida: AURORA_V123_BOLT_ENTRADA_POR_LICENCA_PWA_TESTE
+
+OBJETIVO ÚNICO
+Corrigir a precedência de entrada da conta empresarial Bolt sem alterar o interior de Atividades Rotineiras, relatórios, QR, impressão, offline, fotos ou fluxos congelados.
+
+CAUSA COMPROVADA NO CÓDIGO DA V123
+1) O logout chamava AuroraModuleAccess.clearActive().
+2) clearActive() removia aurora_active_module_v1, porém NÃO removia aurora_explicit_module_session_v1.
+3) A V123 havia criado esse marcador justamente para respeitar uma troca manual de módulo durante a sessão.
+4) Como o marcador sobrevivia ao logout, uma troca manual anterior para electrical continuava existindo no próximo login.
+5) No bootstrap V123, explicitSessionModule tinha precedência sobre eletrica_tupy. Resultado: novo login podia voltar para Elétrica, contrariando a regra Bolt.
+
+SEGUNDO ERRO DE PRECEDÊNCIA ENCONTRADO
+No ramo de reconstrução de identidade incompleta, a V123 resolvia corretamente a licença eletrica_tupy para o profile operacional electrical, mas em seguida persistia:
+AuroraModuleAccess.activate(profileCode)
+Como profileCode = electrical para eletrica_tupy, a licença privada era convertida novamente em electrical no estado ativo.
+
+CORREÇÕES MÍNIMAS V124
+A) js/module_access.js
+- clearActive() agora também remove o marcador explícito de sessão.
+- Consequência: troca manual vale somente durante a sessão atual; após logout, novo login volta a decidir pela licença empresarial Bolt.
+
+B) js/bootstrap.js
+- No bootstrap de identidade incompleta, passa a persistir existingAccess.module_code (licença) em vez de profileCode (implementação operacional).
+- eletrica_tupy continua reutilizando internamente electrical, sem perder sua identidade/licença privada.
+
+C) Trocar segmento — COMPANY_ADMIN
+- O switcher do administrador empresarial passa a usar os módulos realmente acessíveis retornados pela camada de licenças/entitlements.
+- Não usa selected_services_by_module legado como autoridade para COMPANY_ADMIN.
+- Isso impede demonstrações antigas como Drone de aparecerem apenas porque ficaram gravadas no perfil local/cloud antigo.
+
+D) Editar serviços do segmento
+- O card só permanece quando active_license_module_code = electrical.
+- Quando o ambiente ativo é eletrica_tupy / Atividades Rotineiras, o card é removido, mesmo que o profile operacional interno seja electrical.
+
+REGRA RESULTANTE
+NOVO LOGIN BOLT com licença eletrica_tupy acessível e sem escolha explícita na sessão:
+BOLT SOLUÇÕES ELÉTRICAS -> ATIVIDADES ROTINEIRAS.
+
+TROCA MANUAL NA MESMA SESSÃO:
+Perfil e Configurações -> Módulos Aurora -> Elétrica
+A Aurora respeita Elétrica durante essa sessão.
+
+LOGOUT + NOVO LOGIN:
+A escolha manual da sessão anterior é descartada.
+A entrada volta para a licença privada Bolt/Atividades Rotineiras.
+
+MÓDULOS AURORA
+Permanece como caminho manual para o ADMIN alternar entre Elétrica normal e BOLT SOLUÇÕES ELÉTRICAS.
+
+NÃO ALTERADO
+- Interior de Atividades Rotineiras
+- Etapas Tupy
+- Fotos
+- Relatórios
+- Impressão V106
+- QR V107
+- Offline
+- Refresh
+- Supabase/RLS/SQL
+- Admin Aurora separado
+
+VALIDAÇÃO TÉCNICA LOCAL
+PASS — sintaxe js/module_access.js
+PASS — sintaxe js/bootstrap.js
+PASS — sintaxe config/runtime_config.js
+PASS — logout remove marcador explícito
+PASS — bootstrap persiste licença existente
+PASS — Atividades Rotineiras oculta Editar serviços do segmento
+PASS — switcher COMPANY_ADMIN usa licenças acessíveis
+PASS — build/cache atualizados para V124
+
+TESTE HUMANO NECESSÁRIO NO PWA DE TESTE
+1. Deploy no aurora-pwa-teste.
+2. Fazer logout.
+3. Login com a conta ADMIN Bolt.
+4. Confirmar entrada direta em BOLT SOLUÇÕES ELÉTRICAS -> ATIVIDADES ROTINEIRAS.
+5. Abrir Perfil e Configurações: Configurações Tupy deve existir; Editar serviços do segmento não deve existir no ambiente Atividades Rotineiras.
+6. Abrir Trocar segmento: não deve aparecer Drone legado; devem ser considerados apenas ambientes realmente licenciados/acessíveis.
+7. Módulos Aurora -> Elétrica: deve abrir Elétrica normal.
+8. Dentro da Elétrica, Editar serviços do segmento deve aparecer.
+9. Fazer logout e login novamente: deve voltar para Atividades Rotineiras, não permanecer em Elétrica.
+
+Nenhuma publicação em produção foi realizada.

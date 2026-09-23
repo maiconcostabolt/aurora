@@ -1,0 +1,266 @@
+.aurora-shell__content {
+    background:
+        radial-gradient(
+            circle at 20% 10%,
+            rgba(100,240,229,.06),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(126,87,255,.06),
+            transparent 28%
+        ),
+        var(--aurora-bg);
+}
+
+.aurora-module,
+.aurora-form {
+    width: min(980px, 100%);
+    margin: 0 auto;
+}
+
+.aurora-module {
+    animation:
+        aurora-module-enter
+        .22s ease-out;
+}
+
+.aurora-form {
+    padding: 24px;
+    border: 1px solid
+        var(--aurora-border);
+    border-radius: 20px;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.025),
+            transparent 40%
+        ),
+        var(--aurora-surface);
+    box-shadow:
+        var(--aurora-shadow);
+}
+
+.aurora-form__header {
+    margin-bottom: 24px;
+}
+
+.aurora-form__header h2 {
+    margin: 0;
+    font-size: clamp(
+        24px,
+        3vw,
+        34px
+    );
+}
+
+.aurora-form__header p {
+    max-width: 680px;
+    margin:
+        8px 0 0;
+    color:
+        var(--aurora-muted);
+    line-height:
+        1.55;
+}
+
+.aurora-form__fields {
+    display: grid;
+    gap: 18px;
+}
+
+.aurora-field {
+    display: grid;
+    gap: 8px;
+}
+
+.aurora-field label {
+    color:
+        var(--aurora-text);
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.aurora-field small {
+    color:
+        var(--aurora-muted);
+}
+
+.aurora-field input,
+.aurora-field select,
+.aurora-field textarea {
+    width: 100%;
+    min-height: 48px;
+    padding:
+        12px 14px;
+    border:
+        1px solid
+        var(--aurora-border);
+    border-radius:
+        13px;
+    outline: none;
+    color:
+        var(--aurora-text);
+    background:
+        var(--aurora-surface-2);
+    transition:
+        border-color .15s ease,
+        box-shadow .15s ease,
+        transform .15s ease;
+}
+
+.aurora-field textarea {
+    min-height: 112px;
+    resize: vertical;
+}
+
+.aurora-field input:focus,
+.aurora-field select:focus,
+.aurora-field textarea:focus {
+    border-color:
+        var(--aurora-primary);
+    box-shadow:
+        0 0 0 3px
+        rgba(100,240,229,.13);
+}
+
+.aurora-field [aria-invalid="true"] {
+    border-color:
+        #ff7084;
+    box-shadow:
+        0 0 0 3px
+        rgba(255,112,132,.12);
+}
+
+.aurora-field--checkbox {
+    padding:
+        14px 16px;
+    border:
+        1px solid
+        var(--aurora-border);
+    border-radius:
+        13px;
+    background:
+        var(--aurora-surface-2);
+}
+
+.aurora-field--checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.aurora-field--checkbox input {
+    width: 20px;
+    min-height: 20px;
+    margin: 0;
+    accent-color:
+        var(--aurora-primary);
+}
+
+[data-module="evidence"] {
+    width: min(980px,100%);
+    margin: 0 auto;
+    padding: 24px;
+    border: 1px solid
+        var(--aurora-border);
+    border-radius: 20px;
+    background:
+        var(--aurora-surface);
+    box-shadow:
+        var(--aurora-shadow);
+}
+
+[data-module="evidence"] h2 {
+    margin-top: 0;
+    font-size: 30px;
+}
+
+#evidence-list {
+    display: grid;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+#evidence-list > div {
+    padding: 14px;
+    border: 1px solid
+        var(--aurora-border);
+    border-radius: 12px;
+    background:
+        var(--aurora-surface-2);
+}
+
+#add-evidence {
+    min-height: 44px;
+    padding: 0 16px;
+    border: 1px solid
+        var(--aurora-primary);
+    border-radius: 12px;
+    color: #062421;
+    font-weight: 700;
+    background:
+        var(--aurora-primary);
+    cursor: pointer;
+}
+
+.aurora-runtime-status {
+    position: fixed;
+    right: 18px;
+    bottom: 76px;
+    z-index: 30;
+    max-width: 340px;
+    padding: 12px 14px;
+    border: 1px solid
+        var(--aurora-border);
+    border-radius: 12px;
+    color:
+        var(--aurora-text);
+    background:
+        var(--aurora-surface);
+    box-shadow:
+        var(--aurora-shadow);
+    opacity: 0;
+    transform:
+        translateY(10px);
+    pointer-events: none;
+    transition:
+        opacity .18s ease,
+        transform .18s ease;
+}
+
+.aurora-runtime-status.is-visible {
+    opacity: 1;
+    transform:
+        translateY(0);
+}
+
+@keyframes aurora-module-enter {
+    from {
+        opacity: 0;
+        transform:
+            translateY(8px);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0);
+    }
+}
+
+@media (max-width:760px) {
+    .aurora-form,
+    [data-module="evidence"] {
+        padding: 18px;
+        border-radius: 16px;
+    }
+
+    .aurora-runtime-status {
+        right: 12px;
+        bottom: 72px;
+        left: 12px;
+        max-width: none;
+    }
+}

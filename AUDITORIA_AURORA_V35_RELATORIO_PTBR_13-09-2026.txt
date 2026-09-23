@@ -1,0 +1,31 @@
+AURORA V35 — RELATÓRIO PT-BR
+Base: V34 HERANÇA ATIVO NOVA VISTORIA
+Escopo exclusivo: apresentação do relatório em português.
+
+Arquivo alterado:
+- core/reporting/report_preview.js
+  Traduções adicionadas somente na camada de apresentação do relatório:
+  Code -> Código
+  Name -> Nome
+  Type -> Tipo
+  Asset Registry Id -> ID de registro do ativo
+  Qr Token -> Token do QR Code
+  Work Permit -> Permissão de trabalho
+  Lockout -> Bloqueio de segurança
+  Inspection Date -> Data da inspeção
+  Due Date -> Data prevista
+  Scheduled Date -> Data programada
+  A data inspection_date também passa a ser exibida em DD/MM/AAAA.
+
+Cache atualizado:
+- app.html: query-string do report_preview.js
+- service_worker.js: CACHE_BUST V35
+
+IMPORTANTE:
+- Chaves internas, IDs, schema, Supabase e estruturas de dados permanecem em inglês.
+- Nenhuma tradução estrutural foi feita no banco ou no estado interno.
+- Alteração restrita ao texto apresentado no relatório.
+- Fluxo V34, QR público, fotos, Home, IA, convites e demais áreas não foram alterados.
+
+Validação estática:
+- node --check core/reporting/report_preview.js: PASSOU

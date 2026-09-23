@@ -1,0 +1,27 @@
+{
+  "version": "RC8.0",
+  "positioning": "Plataforma de operações técnicas em campo",
+  "entitlement_model": {
+    "states": ["included", "trial", "available", "locked"],
+    "default_for_existing_services": "included",
+    "preview_allowed_for": ["included", "trial", "available", "locked"],
+    "report_allowed_for": ["included", "trial"],
+    "currency": "BRL"
+  },
+  "operation_types": [
+    {"id":"inspection","label":"Inspeção técnica","section_title":"Registros técnicos"},
+    {"id":"technical_visit","label":"Visita técnica","section_title":"Levantamento realizado"},
+    {"id":"budget","label":"Orçamento técnico","section_title":"Levantamento realizado"},
+    {"id":"survey","label":"Levantamento em campo","section_title":"Levantamento realizado"},
+    {"id":"audit","label":"Auditoria","section_title":"Itens avaliados"},
+    {"id":"checklist","label":"Checklist operacional","section_title":"Itens avaliados"},
+    {"id":"delivery","label":"Entrega / recebimento","section_title":"Condições registradas"},
+    {"id":"maintenance","label":"Manutenção","section_title":"Serviços executados"},
+    {"id":"inventory","label":"Inventário","section_title":"Itens registrados"}
+  ],
+  "priority_markets": [
+    "Indústria e manutenção", "Oficinas e auto centers", "Energia solar", "Construção civil",
+    "Imobiliárias e locações", "Condomínios", "Drones e inspeção visual", "Locadoras de equipamentos",
+    "Agronegócio", "Transporte e frotas", "Hotelaria e eventos", "Facilities e climatização"
+  ]
+}

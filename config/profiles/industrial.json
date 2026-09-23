@@ -1,0 +1,30 @@
+{
+    "id": "industrial",
+
+    "name": "Industrial",
+
+    "icon": "🏭",
+
+    "description": "Perfil industrial.",
+
+    "asset": {
+
+        "fields": [
+
+            "tag",
+
+            "equipamento",
+
+            "fabricante",
+
+            "modelo",
+
+            "setor",
+
+            "localizacao"
+
+        ]
+
+    }
+
+}

@@ -1,0 +1,14 @@
+AURORA PWA V5.9 — SERVIÇOS INDEPENDENTES POR MÓDULO
+
+1. Execute uma única vez no Supabase o arquivo 08_SERVICOS_POR_MODULO_E_TROCA_CORRIGIDA.sql.
+2. Publique esta pasta no Worker aurora-pwa-teste.
+3. Atualize a Aurora com Ctrl + Shift + R.
+
+CORREÇÕES
+- Cada módulo mantém sua própria seleção de serviços.
+- Ao iniciar um novo módulo, a Aurora solicita os serviços oferecidos antes de abrir a Home.
+- Ao voltar a um módulo já configurado, a seleção anterior é restaurada.
+- A Home não abre mais um módulo novo com zero serviços disponíveis.
+- As escolhas existentes de Estofados são migradas automaticamente pelo SQL.
+
+Não é necessário republicar o Aurora Admin.

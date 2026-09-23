@@ -1,0 +1,50 @@
+AURORA V184 — SHAPE ATERRAMENTO E EQUIPOTENCIALIZAÇÃO — R02 LAUDO BOLT
+Data: 18/09/2026
+Base: AURORA_V184_SHAPE_ATERRAMENTO_EQUIPOTENCIALIZACAO_R01
+
+ESCOPO DESTA RODADA
+- Mantida a Shape Aterramento criada sobre a V183.
+- Criado caminho de renderização exclusivo para service_id=grounding dentro do Report Preview existente.
+- Mantido o Report Engine Aurora: não foi criado segundo motor de relatório.
+- Estrutura do laudo alinhada ao Laudo Técnico Bolt 2026.23 usado como referência funcional:
+  1 Objetivo
+  2 Normas aplicáveis
+  3 Generalidades
+  4 Metodologia
+  5 Dados da obra
+  6 Nível de proteção
+  7 Dados da medição
+  8 Recomendações
+  9 Conclusão
+  10 Anexo / registro fotográfico
+- Identificação inclui cliente, local, unidade/setor, número do laudo, ART, data, responsável técnico e registro profissional.
+- Dados da obra incluem tipo de edificação, solo, comprimento, largura, perímetro e área de exposição.
+- Sistema inclui configuração, haste/eletrodo, condutor/malha, conexão e tipo de inspeção.
+- Instrumento inclui fabricante, modelo, número de série e calibração/certificado.
+- Pontos apresentam categoria, condição, valor medido, referência, parecer, observação e fotos vinculadas.
+- Cálculo automático de quantidade de pontos, média e maior valor medido.
+- Nenhuma tela/valor comercial foi adicionada ao relatório de aterramento.
+- Conclusão permanece texto técnico sob responsabilidade/validação do responsável técnico; Aurora não inventa aprovação normativa.
+
+ARQUIVOS ALTERADOS
+- core/shapes/grounding/flow.js
+- core/reporting/report_preview.js
+- app.html (somente cache-bust dos dois arquivos acima)
+- index.html (somente cache-bust dos dois arquivos acima)
+
+NÃO ALTERADO
+- bootstrap.js
+- cloud_sync.js
+- service_worker.js
+- autenticação/sessão
+- ADMIN/USUÁRIO
+- Aurora AI
+- Atividades Rotineiras Tupy
+- Vistoria Veicular
+- QR Code
+- sincronização/offline
+
+VALIDAÇÃO ESTÁTICA
+- node --check flow.js: OK
+- node --check report_preview.js: OK
+- Teste humano PWA/APK ainda necessário.

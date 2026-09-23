@@ -1,0 +1,25 @@
+AURORA V137 — SWITCHER EMPRESARIAL DINÂMICO + RASTREIO
+Data: 16/09/2026
+Base: AURORA_V136_HOME_USER_BOLT_SEM_AUTO_VISTORIA_RASTREIO_PWA_TESTE.zip (V136 aprovada no login/Home USER_BOLT)
+
+ESCOPO ÚNICO
+- Corrigido somente o resolvedor da tela Trocar segmento no modo empresarial.
+- V136 de login/Home preservada.
+- Minha Equipe e regras de banco não foram alteradas neste ZIP.
+
+REGRA
+- aurora_my_modules é a autoridade efetiva para o switcher empresarial.
+- ADMIN: recebe os módulos/licenças efetivos da empresa.
+- USUÁRIO convidado: recebe somente os módulos concedidos em Minha Equipe.
+- electrical e eletrica_tupy são cards independentes, mesmo compartilhando profile operacional electrical.
+- A lista é dinâmica: 1, 2, 4 ou mais módulos autorizados são renderizados sem lista fixa.
+
+TESTE ATUAL ESPERADO
+usuario_bolt@hotmail.com possui electrical=true e eletrica_tupy=true.
+Trocar segmento deve mostrar:
+1. Elétrica
+2. BOLT SOLUÇÕES ELÉTRICAS (Atividades Rotineiras)
+
+RASTREIO
+- DIAG V137 permanece recolhível.
+- Rodapé/build_id: AURORA_V137_SWITCHER_EMPRESARIAL_DINAMICO_RASTREIO_16-09-2026

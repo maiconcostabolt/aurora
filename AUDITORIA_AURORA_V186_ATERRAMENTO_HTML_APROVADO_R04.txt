@@ -1,0 +1,14 @@
+AURORA V186 ATERRAMENTO HTML APROVADO R04
+Base: V186 R02; interface da shape transplantada das prévias HTML aprovadas R05/R07; relatório mantém composição R21 já integrada.
+
+bootstrap.js: base=6445bf837bf03ce4b0f1253c9e86c8a8a80ead5c900ac096402bc1eb35a2b2fd novo=6445bf837bf03ce4b0f1253c9e86c8a8a80ead5c900ac096402bc1eb35a2b2fd igual=True
+cloud_sync.js: base=8a05dea1a23dc3ba7ebb964379997b10cd532ce6c86ce735b0f0ab1546ad2977 novo=8a05dea1a23dc3ba7ebb964379997b10cd532ce6c86ce735b0f0ab1546ad2977 igual=True
+service_worker.js: base=9d5671f9840e3d75a535b19ccdedb3802112e17d1b4ae014f9fafcf6d4fb2c6c novo=9d5671f9840e3d75a535b19ccdedb3802112e17d1b4ae014f9fafcf6d4fb2c6c igual=True
+
+Validações:
+- flow.js: node --check OK
+- report_preview.js: node --check OK
+- Etapas 1-4: estrutura visual baseada nas prévias HTML aprovadas R05/R07
+- Etapa 3: Occurrences/Evidence visual aprovado; Adicionar foto chama AuroraEvidenceFeature
+- Relatório: pontos técnicos 2 colunas + registro fotográfico separado (R21)
+- Nenhuma alteração intencional em startup/auth/offline/AI/Tupy/QR.

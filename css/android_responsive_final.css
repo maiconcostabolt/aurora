@@ -1,0 +1,126 @@
+/* Aurora Android 1.0.13 — alinhamento responsivo final. */
+html,body,#app,.aurora-shell,.aurora-shell__main,.aurora-shell__content{width:100%;max-width:100%;min-width:0}
+body{overflow-x:hidden}
+.aurora-shell__content>*{min-width:0}
+.aurora-home-layer,.aurora-workflow-layer,.aurora-reports-layer,.aurora-module,.aurora-form,[data-module="evidence"]{box-sizing:border-box;width:min(100%,980px);max-width:100%;margin-right:auto;margin-left:auto}
+.aurora-home-layer{width:min(100%,920px)}
+.aurora-topbar>*{min-width:0}
+.aurora-topbar__identity,.aurora-topbar__brand{min-width:0;overflow:hidden}
+.aurora-topbar__actions{min-width:0;flex:0 1 auto}
+.aurora-user-chip{min-width:0;max-width:min(42vw,250px)}
+.aurora-user-chip [data-user-name]{min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.aurora-dashboard-metrics,.aurora-service-grid{width:100%}
+.aurora-dashboard-metrics article,.aurora-service-card,.aurora-recent-card,.aurora-recent-card__main,.aurora-recent-card__main>span{min-width:0}
+.aurora-recent-card strong,.aurora-recent-card small{overflow:hidden;text-overflow:ellipsis}
+.aurora-recent-card small{white-space:nowrap}
+.aurora-evidence-hub,.aurora-evidence-hub__header,.aurora-empty-state{max-width:100%;min-width:0}
+.aurora-workflow-dock{box-sizing:border-box;max-width:calc(100% - 20px);margin-right:auto;margin-left:auto}
+
+@media(max-width:760px){
+  .aurora-shell__content{box-sizing:border-box;width:100%;padding-right:12px!important;padding-left:12px!important}
+  .aurora-topbar{width:100%;padding-right:10px!important;padding-left:10px!important;gap:7px!important}
+  .aurora-topbar__identity{flex:1 1 auto}
+  .aurora-topbar__actions{flex:0 1 auto;gap:5px!important}
+  .aurora-user-chip{max-width:42px;padding:4px!important}
+  .aurora-user-chip [data-user-name],.aurora-user-chip__chevron{display:none!important}
+  .aurora-dashboard-metrics{grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+  .aurora-dashboard-metrics article{padding:10px 8px;border-radius:14px}
+  .aurora-dashboard-metrics strong{font-size:20px}
+  .aurora-dashboard-metrics small{font-size:8px;line-height:1.25}
+  .aurora-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .aurora-recent-card{grid-template-columns:minmax(0,1fr)!important;overflow:hidden!important}
+  .aurora-recent-card__main{grid-template-columns:auto minmax(0,1fr) auto!important;padding:12px!important}
+  .aurora-recent-card__main>b{grid-column:auto!important}
+  .aurora-recent-card__actions{display:grid!important;grid-template-columns:42px minmax(72px,1fr) 42px!important;width:100%;padding:0 12px 12px!important;gap:7px!important}
+  .aurora-recent-card__actions button{width:100%!important;height:42px!important}
+  .aurora-recent-card__actions .aurora-recent-cloud{width:100%!important}
+  .aurora-workflow-dock{right:10px!important;left:10px!important;width:auto!important;max-width:none!important;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr)!important}
+  .aurora-workflow-dock button{min-width:0!important;padding:0 6px!important;white-space:normal;line-height:1.15}
+  .aurora-workflow-dock span{min-width:0;max-width:68px!important}
+  .aurora-form,[data-module="evidence"]{width:100%!important;margin:0!important}
+  .aurora-evidence-hub__header>div:first-child{min-width:0}
+  .aurora-evidence-hub__counter{flex:0 0 auto}
+}
+
+@media(max-width:420px){
+  .aurora-shell__content{padding-right:9px!important;padding-left:9px!important}
+  .aurora-service-grid{grid-template-columns:1fr}
+  .aurora-dashboard-metrics{gap:5px}
+  .aurora-dashboard-metrics article{padding:9px 6px}
+  .aurora-dashboard-metrics span{font-size:8px}
+  .aurora-dashboard-metrics strong{font-size:18px}
+  .aurora-home-section__header--inline{align-items:center}
+  .aurora-home-section__header--inline>button{flex:0 0 auto}
+  .aurora-recent-card__main{grid-template-columns:auto minmax(0,1fr)!important}
+  .aurora-recent-card__main>b{grid-column:2!important}
+  .aurora-workflow-dock{right:7px!important;left:7px!important;gap:5px!important;padding:5px!important}
+  .aurora-workflow-dock button{font-size:10px!important}
+  .aurora-dialog-backdrop{padding-right:10px!important;padding-left:10px!important}
+  .aurora-dialog{width:100%!important;max-width:100%!important}
+}
+
+@media(min-width:761px) and (max-width:1180px){
+  .aurora-shell{display:block!important}
+  .aurora-sidebar{position:fixed!important;top:0;bottom:0;left:0;width:min(340px,82vw)!important;height:100dvh;transform:translateX(-105%);z-index:80;overflow-y:auto;transition:transform .2s ease}
+  .aurora-mobile-menu-open .aurora-sidebar{transform:translateX(0)}
+  .aurora-mobile-overlay{position:fixed;inset:0;z-index:70;display:block;width:100%;height:100%;border:0;background:rgba(0,0,0,.55);opacity:0;pointer-events:none;transition:opacity .2s ease}
+  .aurora-mobile-menu-open .aurora-mobile-overlay{opacity:1;pointer-events:auto}
+  .aurora-mobile-menu-button{display:grid!important}
+  .aurora-shell__content{padding:18px 22px 110px!important}
+  .aurora-home-layer,.aurora-reports-layer{width:min(100%,980px)}
+  .aurora-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .aurora-recent-card{grid-template-columns:minmax(0,1fr) auto!important}
+  .aurora-workflow-dock{position:fixed;right:22px;bottom:86px;left:22px}
+}
+
+@media(min-width:1181px){
+  .aurora-shell__content{padding-right:clamp(24px,4vw,60px);padding-left:clamp(24px,4vw,60px)}
+}
+
+/* R11.20 — preserva no mobile o card de atendimento já aprovado: lápis + nuvem + lixeira. */
+@media(max-width:760px){
+ .aurora-recent-card{grid-template-columns:minmax(0,1fr) auto!important;align-items:center!important}
+ .aurora-recent-card__main{grid-template-columns:auto minmax(0,1fr) auto!important;padding:11px!important}
+ .aurora-recent-card__main>b{grid-column:auto!important}
+ .aurora-recent-card__actions{display:flex!important;flex-direction:row!important;align-items:center!important;width:auto!important;padding:7px 7px 7px 0!important;gap:5px!important}
+ .aurora-recent-card__actions button{width:38px!important;height:38px!important;min-width:38px!important;padding:0!important}
+ .aurora-recent-card__actions .aurora-recent-cloud{width:68px!important;min-width:68px!important}
+}
+@media(max-width:480px){
+ .aurora-recent-card{grid-template-columns:minmax(0,1fr) auto!important}
+ .aurora-recent-card__main{grid-template-columns:auto minmax(0,1fr)!important}
+ .aurora-recent-card__main>b{grid-column:2!important;justify-self:start!important}
+ .aurora-recent-card__actions{flex-direction:column!important;padding:6px 6px 6px 0!important}
+ .aurora-recent-card__actions .aurora-recent-cloud{width:38px!important;min-width:38px!important}
+ .aurora-recent-card__actions .aurora-recent-cloud span{display:none!important}
+}
+@media(max-width:480px){
+ .aurora-recent-card{grid-template-columns:minmax(0,1fr)!important}
+ .aurora-recent-card__actions{flex-direction:row!important;justify-content:flex-end!important;width:100%!important;padding:0 9px 9px!important}
+ .aurora-recent-card__actions .aurora-recent-cloud{width:68px!important;min-width:68px!important}
+ .aurora-recent-card__actions .aurora-recent-cloud span{display:block!important}
+}
+
+/* V47 RC1 R03 — um único serviço deve usar toda a largura útil no mobile. */
+@media(max-width:760px){
+  .aurora-service-grid:has(> .aurora-service-card:only-child),.aurora-service-grid--single{grid-template-columns:minmax(0,1fr)!important}
+  .aurora-service-grid:has(> .aurora-service-card:only-child) > .aurora-service-card,.aurora-service-grid--single>.aurora-service-card{width:100%!important;max-width:none!important}
+}
+
+
+/* V47 RC1 R04 — card único do serviço: conteúdo sempre contido no card. */
+@media(max-width:760px){
+ .aurora-service-grid:has(> .aurora-service-card:only-child) > .aurora-service-card{
+   grid-template-columns:auto minmax(0,1fr)!important;
+   overflow:hidden!important;
+ }
+ .aurora-service-grid:has(> .aurora-service-card:only-child) .aurora-service-card__content{min-width:0!important;width:100%!important;overflow:hidden!important}
+ .aurora-service-grid:has(> .aurora-service-card:only-child) .aurora-service-card strong,
+ .aurora-service-grid:has(> .aurora-service-card:only-child) .aurora-service-card small{max-width:100%!important;white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important}
+}
+
+/* V47 R09 — grid oficial quando existe um único serviço operacional visível. */
+.aurora-service-grid--single{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.aurora-service-grid--single>.aurora-service-card{width:100%!important;max-width:100%!important;grid-template-columns:auto minmax(0,1fr) auto!important}
+.aurora-service-grid--single .aurora-service-card__content{min-width:0!important;width:100%!important}
+.aurora-service-grid--single .aurora-service-card strong,.aurora-service-grid--single .aurora-service-card small{max-width:100%!important;white-space:normal!important;overflow-wrap:anywhere!important}

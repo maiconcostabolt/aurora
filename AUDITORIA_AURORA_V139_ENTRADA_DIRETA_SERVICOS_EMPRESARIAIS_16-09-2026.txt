@@ -1,0 +1,15 @@
+AURORA V139 — ENTRADA DIRETA SERVIÇOS EMPRESARIAIS
+Base: V138.
+Escopo único: impedir COMPANY_USER/COMPANY_ADMIN de cair na tela de configuração "Qual serviço você oferece?" ao trocar para um módulo já configurado pela empresa.
+
+Regra:
+- Trocar segmento continua dinâmico (V137 preservada).
+- Antes do onboarding de serviços, o bootstrap consulta aurora_get_my_company_services.
+- Serviços são validados contra o catálogo operacional do módulo.
+- Havendo serviços corporativos, são aplicados em memória/identidade e a Home abre diretamente.
+- Funcionário convidado não executa saveModuleServicesResilient nesse fluxo e, portanto, não cai na validação de edição offline.
+- Atividades Rotineiras eletrica_tupy permanece isolada.
+- Novo rastreio: 11 APPLY COMPANY SERVICES.
+
+Teste alvo Bolt/electrical:
+panel, electric_motor, thermography, installation, lighting.

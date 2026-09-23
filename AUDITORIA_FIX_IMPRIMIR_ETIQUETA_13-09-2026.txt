@@ -1,0 +1,6 @@
+Correção focada no botão Imprimir etiqueta.
+Causa tratada: o documento de impressão em iframe tentava carregar vendor/qrcode.min.js por caminho relativo dentro de about:blank, deixando o acionamento dependente de um recurso que podia não carregar.
+Agora o QR é preparado no documento principal (onde a biblioteca já existe), convertido em imagem e enviado pronto ao iframe de impressão.
+Nenhuma nova aba é aberta. O diálogo nativo de impressão é chamado após a imagem QR estar carregada.
+Formato mantido: circular 50,8 x 50,8 mm, monocromático.
+Bootstrap lazy/fluidez preservado. Tupy, AI, relatórios e QR público não alterados.

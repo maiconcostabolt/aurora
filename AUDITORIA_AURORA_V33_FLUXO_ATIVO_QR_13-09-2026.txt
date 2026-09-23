@@ -1,0 +1,60 @@
+AURORA V33 PWA TESTE — FLUXO DO ATIVO + QR SEMÂNTICO
+Data: 13/09/2026
+Base: AURORA_V32_FOTOS_MEMBROS_QR_RESUMO_PWA_TESTE.zip
+
+ESCOPO EXECUTADO — SOMENTE ITENS APROVADOS
+1) Painéis e equipamentos > ativo > Nova vistoria
+- Removido o disparo automático do serviço "panel".
+- Agora Nova vistoria retorna à seleção operacional para a pessoa escolher o tipo de trabalho.
+- O ativo selecionado permanece pendente e é aplicado ao serviço elétrico escolhido.
+- Excluído do reaproveitamento automático o fluxo especial eletrica_tupy.
+
+2) Botão Anterior na primeira tela do atendimento
+- Quando a vistoria nasceu de Painéis e equipamentos, Anterior permanece habilitado na Etapa 1.
+- Anterior retorna à ficha do mesmo ativo.
+- Início continua com o comportamento já aprovado de voltar à Home Aurora.
+
+3) QR público — mapeamento semântico
+- Serviço executado usa o título amigável do serviço salvo no atendimento (ex.: grounding -> Aterramento).
+- Resumo do que foi encontrado prioriza a condição inicial registrada no atendimento.
+- Trabalho realizado usa o campo de trabalho/finalização, incluindo approval.notes quando é o dado disponível.
+- Condição atual do ativo NÃO usa mais o status genérico "Concluído" da inspeção.
+- Próxima ação/manutenção NÃO usa mais as notas do trabalho realizado.
+- Campos sem dado semanticamente correto ficam omitidos, em vez de mostrar informação errada.
+
+VALIDAÇÃO REAL NO SUPABASE — QGBT001
+- Serviço executado: Aterramento
+- Resumo encontrado: BARRAMENTO COM CABOS SOLTOS
+- Trabalho realizado: TODOS OS PARAFUSOS FORAM SUBSTITUIDOS
+- Recomendação: REAPERTO EM 10 DIAS
+- Condição atual: omitida (não existe campo específico preenchido)
+- Próxima ação/manutenção: omitida (não existe campo específico preenchido)
+
+SUPABASE
+- RPC aurora_asset_public_get(text) atualizada.
+- Permissões públicas mantidas somente para a RPC de resumo público.
+- Fotos e relatórios completos continuam privados.
+
+ARQUIVOS DE APLICAÇÃO ALTERADOS
+- js/aurora_assets_pilot.js
+- js/bootstrap.js
+- app.html (somente cache-bust dos scripts alterados)
+- index.html (somente cache-bust dos scripts alterados)
+- service_worker.js (somente cache-bust V33)
+
+ARQUIVO SQL ADICIONADO
+- AURORA_V33_QR_MAPEAMENTO_SEMANTICO.sql
+
+NÃO ALTERADO
+- Correção das fotos V32 (aprovada/passou)
+- Aurora AI
+- Convites/equipe
+- Home/cards/ordenação
+- Layout geral do relatório
+- Layout visual do QR público
+- Demais módulos e shapes
+
+STATUS
+- JavaScript verificado sintaticamente com node --check.
+- RPC verificada com dado real QGBT001 após aplicação.
+- Pronto para deploy PWA TESTE e teste humano.

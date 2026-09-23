@@ -1,0 +1,103 @@
+/* Aurora PWA installer — 0.6 RC1 */
+
+.aurora-pwa-install[hidden] {
+    display: none !important;
+}
+
+.aurora-pwa-install {
+    position: fixed;
+    left: 16px;
+    right: auto;
+    bottom: 78px;
+    z-index: 1000;
+    width: min(390px, calc(100% - 24px));
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto auto;
+    align-items: center;
+    gap: 10px;
+    padding: 11px;
+    border: 1px solid var(--aurora-border, #2b3d57);
+    border-radius: 17px;
+    color: var(--aurora-text, #edf5ff);
+    background: rgba(16, 28, 45, .96);
+    box-shadow: 0 22px 70px rgba(0, 0, 0, .42);
+    backdrop-filter: blur(18px);
+}
+
+.aurora-pwa-install__icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 13px;
+    color: #062421;
+    background: var(--aurora-primary, #64f0e5);
+    font-weight: 900;
+}
+
+.aurora-pwa-install__content {
+    min-width: 0;
+}
+
+.aurora-pwa-install__content strong,
+.aurora-pwa-install__content small {
+    display: block;
+}
+
+.aurora-pwa-install__content small {
+    margin-top: 3px;
+    color: var(--aurora-muted, #9cb0c9);
+    font-size: 9px;
+    line-height: 1.35;
+}
+
+.aurora-pwa-install button {
+    min-height: 38px;
+    padding: 0 11px;
+    border: 1px solid var(--aurora-border, #2b3d57);
+    border-radius: 10px;
+    color: #062421;
+    background: var(--aurora-primary, #64f0e5);
+    cursor: pointer;
+    font-weight: 850;
+}
+
+.aurora-pwa-install button.aurora-pwa-install__close {
+    width: 34px;
+    padding: 0;
+    color: var(--aurora-muted, #9cb0c9);
+    background: transparent;
+}
+
+body.aurora-is-offline::before {
+    content: "Offline";
+    position: fixed;
+    top: 8px;
+    left: 50%;
+    z-index: 1200;
+    padding: 5px 10px;
+    border-radius: 999px;
+    color: #07111f;
+    background: #ffd06a;
+    font-size: 9px;
+    font-weight: 900;
+    transform: translateX(-50%);
+}
+
+@media (max-width: 760px) {
+    .aurora-pwa-install {
+        left: auto;
+        right: 50%;
+        bottom: calc(72px + env(safe-area-inset-bottom));
+        width: min(390px, calc(100% - 18px));
+        grid-template-columns: auto minmax(0, 1fr) auto;
+        transform: translateX(50%);
+    }
+
+    .aurora-pwa-install__close {
+        position: absolute;
+        top: -9px;
+        right: -5px;
+        background: #101c2d !important;
+    }
+}

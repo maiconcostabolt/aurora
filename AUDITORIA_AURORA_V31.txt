@@ -1,0 +1,16 @@
+AURORA V31 — PWA DE TESTES
+Data: 13/09/2026
+
+Escopo aplicado nesta versão:
+1. A Home restaura somente as seções que pertencem à tela inicial; painéis internos permanecem ocultos.
+2. O botão Início retorna à Home e, quando a Home já está aberta, novos cliques não mudam a tela.
+3. O botão Voltar nativo segue a mesma hierarquia de navegação dos painéis e equipamentos.
+4. A Aurora AI fica oculta em relatórios, consulta pública, painéis internos e modais; o cache da PWA foi renovado.
+
+Fora do escopo e não alterado:
+- QR Code e consulta pública do ativo.
+- Conteúdo e imagens dos relatórios.
+- Permissões e fluxo de equipe/convites.
+- Supabase e produção mlcaurora.com.
+
+Destino: exclusivamente PWA de testes para validação humana.

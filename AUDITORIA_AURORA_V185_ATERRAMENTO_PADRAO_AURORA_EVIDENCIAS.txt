@@ -1,0 +1,36 @@
+AURORA V185 — ATERRAMENTO PADRÃO AURORA + EVIDÊNCIAS NATIVAS
+Data: 18/09/2026
+Base: AURORA_V184_SHAPE_ATERRAMENTO_R02_LAUDO_BOLT
+
+ESCOPO:
+- Shape Aterramento reduzida de 5 para 4 etapas; removida a tela artificial "Revisão automática".
+- Etapas reorganizadas na linguagem visual Aurora: Dados iniciais, Dados técnicos, Registros técnicos, Finalização.
+- Pontos de aferição mantêm campos técnicos específicos de aterramento.
+- Fotos deixam de usar FileReader/Base64 próprio da shape.
+- Botão "Fotos e evidências do ponto" abre o AuroraEvidenceFeature/EvidenceStore nativo já existente.
+- Evidence Hub nativo é montado na etapa de registros; o botão genérico "Novo registro" fica oculto para evitar registros sem vínculo com ponto.
+- Na geração do laudo, evidências nativas são sincronizadas aos respectivos pontos por grounding_point_id.
+- Relatório específico de aterramento da V184 foi preservado.
+- Removidos textos internos sobre "Report Engine" da tela do usuário.
+- Tela de valores continua inexistente nesta shape.
+- Rodapé Perfil e configurações atualizado para identificar a V185.
+
+CONGELADO / NÃO ALTERADO:
+- bootstrap.js
+- cloud_sync.js
+- service_worker.js
+- autenticação, offline/cold-start, admin/usuários, permissões e hierarquia empresarial
+- Aurora AI
+- demais shapes e relatórios
+
+VALIDAÇÃO ESTÁTICA:
+- core/shapes/grounding/flow.js: node --check OK
+- hashes de bootstrap.js, cloud_sync.js e service_worker.js idênticos à base V184.
+
+PENDENTE DE TESTE HUMANO:
+1. Abrir Aterramento e confirmar 4 etapas.
+2. Criar Ponto 01 e preencher medição.
+3. Abrir "Fotos e evidências do ponto" e anexar foto pelo motor nativo.
+4. Voltar ao ponto, concluir e gerar relatório.
+5. Confirmar foto vinculada ao Ponto 01 no novo laudo de aterramento.
+6. Confirmar Perfil e configurações: AURORA_V185_ATERRAMENTO_PADRAO_AURORA_EVIDENCIAS_18-09-2026.

@@ -1,0 +1,29 @@
+AURORA — QR INTELIGENTE + PERMISSÕES DE EQUIPAMENTOS V18
+Data: 13/09/2026
+Base: AURORA_EQUIPAMENTO_FLUXO_V17_FIX_ABERTURA_PWA_TESTE
+Escopo piloto: Elétrica / Painéis e equipamentos
+
+IMPLEMENTADO
+1. QR permanente continua pertencendo ao equipamento, não ao relatório.
+2. Leitura do QR com sessão válida de membro da empresa redireciona para a Aurora e abre a ficha interna do equipamento.
+3. Visitante ou usuário sem vínculo com a empresa permanece na ficha pública somente leitura.
+4. Painéis e equipamentos passa a aparecer também para membro convidado do módulo Elétrica.
+5. Ativos da empresa são carregados da nuvem para permitir uso em outro aparelho/usuário convidado.
+6. Permissões de equipamentos configuráveis pelo ADMIN em Minha Equipe:
+   - Visualizar
+   - Nova vistoria
+   - Histórico
+   - Etiqueta QR
+   - Cadastrar
+   - Editar
+   - Desativar
+7. ADMIN/OWNER mantém permissões completas.
+8. Banco: tabela aurora_asset_member_permissions + RPCs de leitura/gravação de permissões + contexto QR v2.
+
+PRESERVADO
+- QR físico permanente.
+- Etiqueta 50,8 x 50,8 mm aprovada.
+- Histórico de vários atendimentos no mesmo equipamento.
+- Fluxo V17 de abertura de Painéis e equipamentos.
+- Tupy não alterado.
+- Relatório veicular não alterado.

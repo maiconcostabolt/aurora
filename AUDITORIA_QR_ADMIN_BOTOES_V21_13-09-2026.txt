@@ -1,0 +1,10 @@
+AURORA — V21 — CORREÇÃO DE ORIGEM DOS BOTÕES DO ADMIN
+Data: 13/09/2026
+
+Correção:
+- build_id atualizado de V18 para V21; a versão visível em Configurações agora identifica este deploy.
+- permissões do equipamento não dependem somente do claim assíncrono CompanyAccess.
+- se o claim ainda não estiver hidratado, a Aurora consulta aurora_my_active_membership (sessão autenticada) e reconhece COMPANY_ADMIN / ADMIN_BOLT / OWNER.
+- ADMIN mantém sempre: Nova vistoria + Etiqueta QR + Editar equipamento.
+- convidado continua obedecendo aurora_asset_my_permissions.
+- sem alteração em relatórios, QR permanente, Tupy, IA, orçamento ou assinatura.

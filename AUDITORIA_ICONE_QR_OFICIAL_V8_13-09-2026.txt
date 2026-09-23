@@ -1,0 +1,24 @@
+AURORA — ÍCONE QR/CELULAR OFICIAL V8
+Data: 13/09/2026
+
+Fonte:
+- EPS vetorial enviado pelo usuário.
+- Convertido diretamente para SVG vetorial.
+- Não redesenhado manualmente.
+
+Asset oficial reutilizável:
+assets/icons/aurora_qr_phone_official.svg
+
+Aplicação:
+- substitui integralmente o SVG artesanal anterior da etiqueta 50,8 mm
+- impressão aguarda o carregamento do asset antes de abrir o diálogo
+- QR principal permanece matematicamente centralizado e independente do ícone
+- zona segura da companhia/código/rodapé da V7 preservada
+- filtro monocromático aplicado no contexto da etiqueta térmica
+
+Cache:
+- nova versão do controlador em index/app
+- novo CACHE_BUST no service worker
+
+Regra:
+Este arquivo passa a ser o asset padrão para representação visual de leitura QR por celular na Aurora. Reutilizar o mesmo arquivo; não criar variantes manuais sem nova aprovação.

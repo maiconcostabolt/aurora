@@ -1,0 +1,18 @@
+AURORA V140 — SERVIÇOS EMPRESARIAIS COMO FONTE DE VERDADE
+Base: V139.
+Escopo único: corrigir a entrada no módulo electrical para COMPANY_USER/COMPANY_ADMIN.
+
+Causa confirmada:
+- A mensagem literal "Este módulo não está autorizado offline." nasce em js/cloud_sync.js::assertModuleServicesAllowedOffline.
+- Ela só é acionada porque o fluxo cai indevidamente em chooseServicesForModule -> saveModuleServicesResilient.
+- A identidade local possuía seleção herdada/incompatível e a V139 condicionava a hidratação empresarial ao estado prévio de AuroraCompanyAccess.
+
+Correção V140:
+- Antes de decidir abrir onboarding, filtra a seleção local pelo catálogo real do módulo atual.
+- Consulta aurora_get_my_company_services diretamente sempre que online, sem depender de companyAccess.loaded.
+- Se a empresa possui serviços configurados para o módulo, eles substituem a seleção local e são aplicados em memória.
+- COMPANY_USER não abre "Qual serviço você oferece?" nem chama saveModuleServicesResilient nesse caso.
+- Fluxo pessoal legado permanece como fallback quando não existe configuração empresarial.
+- eletrica_tupy continua isolado de electrical.
+
+Rastreio: 11 APPLY COMPANY SERVICES V140.

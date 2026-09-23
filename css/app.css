@@ -1,0 +1,1383 @@
+/* =========================================================
+   AURORA PROTOTYPE V2
+   PATCH 005.1 — SPLASH OFICIAL + CORREÇÃO RESPONSIVA
+   ========================================================= */
+
+/* =========================================================
+   RESET E CONTROLE DE TAMANHO
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+
+    width: 100%;
+    min-height: 100%;
+
+    background: #030817;
+    color: #ffffff;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+#app {
+    width: 100%;
+    min-height: 100svh;
+}
+
+/* =========================================================
+   ESTRUTURA BASE DAS TELAS
+   ========================================================= */
+
+.screen {
+    width: 100%;
+    min-height: 100svh;
+
+    padding:
+        calc(22px + env(safe-area-inset-top))
+        20px
+        calc(24px + env(safe-area-inset-bottom));
+
+    display: flex;
+    flex-direction: column;
+
+    position: relative;
+    overflow: hidden;
+
+    background:
+        radial-gradient(
+            circle at 50% 92%,
+            rgba(133, 45, 255, 0.30),
+            transparent 24%
+        ),
+        radial-gradient(
+            circle at 16% 55%,
+            rgba(0, 214, 255, 0.18),
+            transparent 34%
+        ),
+        radial-gradient(
+            circle at 84% 42%,
+            rgba(128, 42, 255, 0.20),
+            transparent 36%
+        ),
+        linear-gradient(
+            180deg,
+            #020617 0%,
+            #07152d 55%,
+            #020918 100%
+        );
+}
+
+/* =========================================================
+   FUNDO CINEMATOGRÁFICO
+   ========================================================= */
+
+.screen::before {
+    content: "";
+
+    position: absolute;
+    inset: -30%;
+
+    background:
+        linear-gradient(
+            112deg,
+            transparent 29%,
+            rgba(0, 229, 255, 0.04) 37%,
+            rgba(0, 229, 255, 0.20) 44%,
+            rgba(46, 116, 255, 0.10) 50%,
+            rgba(143, 48, 255, 0.23) 57%,
+            rgba(225, 64, 255, 0.08) 65%,
+            transparent 73%
+        );
+
+    filter: blur(34px);
+
+    transform:
+        translate3d(-6%, 4%, 0)
+        rotate(-12deg);
+
+    opacity: 0.78;
+
+    pointer-events: none;
+
+    animation:
+        aurora-flow
+        7.5s
+        ease-in-out
+        infinite
+        alternate;
+}
+
+.screen::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background-image:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.85) 0 1px,
+            transparent 1.5px
+        );
+
+    background-size: 74px 74px;
+
+    opacity: 0.12;
+
+    pointer-events: none;
+
+    animation:
+        stars-drift
+        18s
+        linear
+        infinite;
+}
+
+/* =========================================================
+   SPLASH
+   ========================================================= */
+
+.splash-screen {
+    justify-content: center;
+    align-items: center;
+
+    isolation: isolate;
+}
+
+.splash-screen::before {
+    opacity: 0;
+
+    animation:
+        aurora-birth
+        3.3s
+        cubic-bezier(0.22, 0.8, 0.2, 1)
+        forwards;
+}
+
+.splash-screen::after {
+    opacity: 0;
+
+    animation:
+        stars-appear
+        2.4s
+        ease
+        0.35s
+        forwards;
+}
+
+.splash-content {
+    width: min(100%, 520px);
+
+    margin-left: auto;
+    margin-right: auto;
+
+    position: relative;
+    z-index: 2;
+
+    text-align: center;
+
+    animation:
+        splash-content-enter
+        1.15s
+        cubic-bezier(0.2, 0.85, 0.2, 1)
+        both;
+}
+
+/* Luz no horizonte */
+
+.splash-content::before {
+    content: "";
+
+    position: absolute;
+
+    width: min(300px, 80vw);
+    height: 2px;
+
+    left: 50%;
+    top: calc(50% + 202px);
+
+    transform:
+        translateX(-50%)
+        scaleX(0);
+
+    transform-origin: center;
+
+    border-radius: 999px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(62, 122, 255, 0.35),
+            #67f6ff,
+            #ffffff,
+            #9d6cff,
+            rgba(166, 67, 255, 0.35),
+            transparent
+        );
+
+    box-shadow:
+        0 0 14px rgba(74, 217, 255, 0.90),
+        0 0 34px rgba(82, 112, 255, 0.70),
+        0 0 60px rgba(145, 69, 255, 0.55);
+
+    animation:
+        horizon-light
+        2.2s
+        ease
+        0.7s
+        forwards;
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.aurora-logo {
+    width: 112px;
+    height: 106px;
+
+    margin: 0 auto 30px;
+
+    position: relative;
+
+    filter:
+        drop-shadow(
+            0 0 18px
+            rgba(56, 177, 255, 0.30)
+        );
+
+    animation:
+        logo-container-enter
+        1.15s
+        cubic-bezier(0.22, 0.85, 0.2, 1)
+        0.42s
+        both;
+}
+
+.aurora-logo--official {
+    width: 132px;
+    height: 132px;
+    margin-bottom: 24px;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 18px 50px rgba(31, 194, 255, .28);
+}
+
+.aurora-logo--official::before { display: none; }
+
+.aurora-logo--official img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.aurora-logo::before {
+    content: "";
+
+    position: absolute;
+
+    width: 104px;
+    height: 104px;
+
+    left: 4px;
+    top: 0;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(97, 182, 255, 0.17),
+            rgba(89, 55, 255, 0.06) 46%,
+            transparent 72%
+        );
+
+    transform: scale(0);
+
+    animation:
+        logo-glow
+        1.6s
+        ease
+        0.45s
+        forwards;
+}
+
+.aurora-logo span {
+    position: absolute;
+
+    display: block;
+
+    border-radius: 999px;
+
+    opacity: 0;
+}
+
+.logo-left {
+    width: 39px;
+    height: 82px;
+
+    left: 21px;
+    top: 4px;
+
+    transform:
+        translateY(26px)
+        rotate(-43deg)
+        scale(0.78);
+
+    background:
+        linear-gradient(
+            180deg,
+            #b32cff 0%,
+            #6e2dff 48%,
+            #315dff 100%
+        );
+
+    box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.24),
+        0 10px 28px rgba(126, 42, 255, 0.36);
+
+    animation:
+        logo-left-enter
+        0.95s
+        cubic-bezier(0.18, 0.88, 0.26, 1)
+        0.60s
+        forwards;
+}
+
+.logo-right {
+    width: 39px;
+    height: 82px;
+
+    right: 21px;
+    top: 4px;
+
+    transform:
+        translateY(26px)
+        rotate(43deg)
+        scale(0.78);
+
+    background:
+        linear-gradient(
+            180deg,
+            #2bf3ee 0%,
+            #22c6ff 42%,
+            #3775ff 100%
+        );
+
+    box-shadow:
+        inset 0 1px 2px rgba(255, 255, 255, 0.27),
+        0 10px 28px rgba(32, 216, 255, 0.34);
+
+    animation:
+        logo-right-enter
+        0.95s
+        cubic-bezier(0.18, 0.88, 0.26, 1)
+        0.74s
+        forwards;
+}
+
+.logo-center {
+    width: 42px;
+    height: 64px;
+
+    left: 35px;
+    bottom: 0;
+
+    transform:
+        translateY(28px)
+        scale(0.78);
+
+    background:
+        linear-gradient(
+            180deg,
+            #c9f9ff 0%,
+            #71ceff 31%,
+            #397bff 68%,
+            #3158f5 100%
+        );
+
+    box-shadow:
+        inset 0 1px 3px rgba(255, 255, 255, 0.42),
+        0 12px 30px rgba(52, 115, 255, 0.40);
+
+    animation:
+        logo-center-enter
+        0.88s
+        cubic-bezier(0.18, 0.88, 0.26, 1)
+        0.90s
+        forwards;
+}
+
+/* =========================================================
+   TEXTOS DA SPLASH
+   ========================================================= */
+
+.aurora-name {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size:
+        clamp(
+            35px,
+            10vw,
+            56px
+        );
+
+    font-weight: 300;
+
+    letter-spacing: 0.34em;
+    text-indent: 0.34em;
+
+    text-shadow:
+        0 0 20px
+        rgba(120, 189, 255, 0.20);
+
+    opacity: 0;
+
+    transform:
+        translateY(18px);
+
+    animation:
+        text-reveal
+        1.05s
+        ease
+        1.20s
+        forwards;
+}
+
+.aurora-purpose {
+    margin: 24px 0 0;
+
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.58;
+
+    opacity: 0;
+
+    transform:
+        translateY(14px);
+
+    animation:
+        text-reveal
+        0.95s
+        ease
+        1.64s
+        forwards;
+
+    background:
+        linear-gradient(
+            90deg,
+            #69eaff,
+            #c3efff 45%,
+            #c387ff 100%
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+}
+
+.loading-line {
+    width: 174px;
+    max-width: 70vw;
+    height: 3px;
+
+    margin: 34px auto 0;
+
+    overflow: hidden;
+
+    border-radius: 999px;
+
+    background:
+        rgba(255, 255, 255, 0.08);
+
+    opacity: 0;
+
+    animation:
+        simple-fade
+        0.55s
+        ease
+        1.90s
+        forwards;
+}
+
+.loading-line span {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    transform:
+        scaleX(0);
+
+    transform-origin: left;
+
+    border-radius: inherit;
+
+    background:
+        linear-gradient(
+            90deg,
+            #396fff,
+            #61f1ff,
+            #ffffff,
+            #ac6cff
+        );
+
+    box-shadow:
+        0 0 12px
+        rgba(86, 218, 255, 0.85);
+
+    animation:
+        loading
+        1.15s
+        cubic-bezier(0.22, 0.8, 0.2, 1)
+        1.98s
+        forwards;
+}
+
+.aurora-values {
+    margin: 34px 0 0;
+
+    color:
+        rgba(
+            221,
+            231,
+            247,
+            0.78
+        );
+
+    font-size: 14px;
+    font-weight: 400;
+
+    letter-spacing: 0.04em;
+
+    opacity: 0;
+
+    transform:
+        translateY(12px);
+
+    animation:
+        text-reveal
+        0.85s
+        ease
+        2.18s
+        forwards;
+}
+
+/* =========================================================
+   LOGIN
+   ========================================================= */
+
+.login-screen {
+    justify-content: center;
+    align-items: center;
+}
+
+.login-card {
+    width: min(calc(100% - 32px), 520px);
+    max-width: 520px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: 28px;
+
+    position: relative;
+    z-index: 2;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.105),
+            rgba(255, 255, 255, 0.052)
+        );
+
+    box-shadow:
+        0 26px 70px
+        rgba(0, 0, 0, 0.34);
+
+    backdrop-filter:
+        blur(20px);
+
+    animation:
+        card-enter
+        0.70s
+        cubic-bezier(0.22, 0.82, 0.2, 1)
+        both;
+}
+
+.login-mini-logo {
+    width: 56px;
+    height: 56px;
+
+    display: grid;
+    place-items: center;
+
+    margin-bottom: 24px;
+
+    border-radius: 18px;
+
+    color: #06101f;
+
+    font-size: 24px;
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5fa9ff,
+            #63f1e5,
+            #9f7cff
+        );
+
+    box-shadow:
+        0 10px 28px
+        rgba(73, 183, 255, 0.23);
+}
+
+.login-mini-logo--official {
+    overflow: hidden;
+    padding: 0;
+    background: #06101f;
+}
+
+.login-mini-logo--official img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.eyebrow {
+    margin: 0 0 8px;
+
+    color: #67f2e9;
+
+    font-size: 12px;
+    font-weight: 800;
+
+    letter-spacing: 0.16em;
+
+    text-transform: uppercase;
+}
+
+.login-card h1,
+.home-header h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size:
+        clamp(
+            28px,
+            8vw,
+            40px
+        );
+
+    font-weight: 700;
+}
+
+.muted {
+    margin: 10px 0 0;
+
+    color: #b9c8dc;
+
+    line-height: 1.55;
+}
+
+.field {
+    width: 100%;
+
+    display: grid;
+    gap: 8px;
+
+    margin-top: 18px;
+}
+
+.field span {
+    color: #bdcce0;
+
+    font-size: 14px;
+}
+
+.field input {
+    display: block;
+
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
+    padding: 16px;
+
+    color: #ffffff;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    border-radius: 18px;
+
+    outline: none;
+
+    background:
+        rgba(255, 255, 255, 0.065);
+
+    transition:
+        border-color 220ms ease,
+        box-shadow 220ms ease,
+        background 220ms ease;
+}
+
+.field input:focus {
+    border-color:
+        rgba(100, 240, 229, 0.72);
+
+    background:
+        rgba(255, 255, 255, 0.085);
+
+    box-shadow:
+        0 0 0 4px
+        rgba(100, 240, 229, 0.09);
+}
+
+.primary-button,
+.secondary-button {
+    width: 100%;
+    max-width: 100%;
+    min-height: 56px;
+
+    padding: 14px 18px;
+
+    border-radius: 18px;
+
+    font-weight: 800;
+
+    cursor: pointer;
+
+    transition:
+        transform 180ms ease,
+        filter 180ms ease;
+}
+
+.primary-button:active,
+.secondary-button:active {
+    transform:
+        scale(0.985);
+}
+
+.primary-button {
+    margin-top: 24px;
+
+    color: #04111e;
+
+    border: 0;
+
+    background:
+        linear-gradient(
+            100deg,
+            #5ca8ff,
+            #64f0e5
+        );
+
+    box-shadow:
+        0 14px 34px
+        rgba(64, 181, 255, 0.22);
+}
+
+.secondary-button {
+    margin-top: 16px;
+
+    color: #ffffff;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    background:
+        rgba(255, 255, 255, 0.07);
+}
+
+/* =========================================================
+   HOME
+   ========================================================= */
+
+.home-screen {
+    justify-content: flex-start;
+}
+
+.home-header,
+.home-content {
+    width: min(100%, 760px);
+    max-width: 760px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    position: relative;
+    z-index: 2;
+}
+
+.home-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 18px;
+}
+
+.avatar {
+    width: 46px;
+    height: 46px;
+
+    flex: 0 0 46px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 15px;
+
+    color: #ffffff;
+
+    font-weight: 900;
+
+    background:
+        linear-gradient(
+            135deg,
+            #5ca8ff,
+            #9f7cff
+        );
+}
+
+.home-content {
+    margin-top: 34px;
+}
+
+.welcome-card {
+    width: 100%;
+
+    padding: 22px;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    border-radius: 24px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(92, 168, 255, 0.22),
+            rgba(159, 124, 255, 0.20)
+        );
+}
+
+.welcome-card p {
+    margin: 0 0 8px;
+
+    color: #b9c8dc;
+}
+
+.welcome-card strong {
+    color: #ffffff;
+
+    font-size: 22px;
+}
+
+.action-grid {
+    width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap: 14px;
+
+    margin-top: 22px;
+}
+
+.action-card {
+    width: 100%;
+    min-width: 0;
+    min-height: 172px;
+
+    padding: 18px;
+
+    position: relative;
+
+    color: #ffffff;
+
+    text-align: left;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    border-radius: 22px;
+
+    background:
+        rgba(255, 255, 255, 0.07);
+
+    cursor: pointer;
+
+    transition:
+        transform 180ms ease,
+        background 180ms ease;
+}
+
+.action-card:hover {
+    background:
+        rgba(255, 255, 255, 0.10);
+}
+
+.action-card:active {
+    transform:
+        scale(0.985);
+}
+
+.action-icon {
+    display: block;
+
+    font-size: 30px;
+}
+
+.action-title {
+    display: block;
+
+    margin-top: 20px;
+
+    font-size: 17px;
+    font-weight: 800;
+}
+
+.action-description {
+    display: block;
+
+    margin-top: 7px;
+
+    color: #b9c8dc;
+
+    font-size: 13px;
+    line-height: 1.45;
+}
+
+.action-arrow {
+    position: absolute;
+
+    top: 16px;
+    right: 16px;
+
+    color: #64f0e5;
+
+    font-size: 24px;
+}
+
+.action-message {
+    margin: 22px 0 0;
+
+    color: #b9c8dc;
+
+    text-align: center;
+    font-size: 13px;
+}
+
+/* =========================================================
+   ANIMAÇÕES
+   ========================================================= */
+
+@keyframes aurora-flow {
+    from {
+        transform:
+            translate3d(-7%, 3%, 0)
+            rotate(-13deg);
+
+        opacity: 0.62;
+    }
+
+    to {
+        transform:
+            translate3d(6%, -3%, 0)
+            rotate(-5deg);
+
+        opacity: 1;
+    }
+}
+
+@keyframes aurora-birth {
+    0% {
+        opacity: 0;
+
+        transform:
+            translate3d(-8%, 20%, 0)
+            rotate(-16deg)
+            scale(0.82);
+    }
+
+    42% {
+        opacity: 0.50;
+    }
+
+    100% {
+        opacity: 1;
+
+        transform:
+            translate3d(0, 0, 0)
+            rotate(-8deg)
+            scale(1);
+    }
+}
+
+@keyframes stars-drift {
+    from {
+        background-position:
+            0 0;
+    }
+
+    to {
+        background-position:
+            74px 148px;
+    }
+}
+
+@keyframes stars-appear {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 0.13;
+    }
+}
+
+@keyframes splash-content-enter {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes logo-container-enter {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(24px)
+            scale(0.82);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes logo-glow {
+    from {
+        opacity: 0;
+
+        transform:
+            scale(0.30);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            scale(1);
+    }
+}
+
+@keyframes logo-left-enter {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(26px)
+            rotate(-43deg)
+            scale(0.78);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            rotate(-43deg)
+            scale(1);
+    }
+}
+
+@keyframes logo-right-enter {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(26px)
+            rotate(43deg)
+            scale(0.78);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            rotate(43deg)
+            scale(1);
+    }
+}
+
+@keyframes logo-center-enter {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(28px)
+            scale(0.78);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+@keyframes text-reveal {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(16px);
+
+        filter:
+            blur(5px);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+        filter:
+            blur(0);
+    }
+}
+
+@keyframes simple-fade {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes loading {
+    from {
+        transform:
+            scaleX(0);
+    }
+
+    to {
+        transform:
+            scaleX(1);
+    }
+}
+
+@keyframes horizon-light {
+    0% {
+        opacity: 0;
+
+        transform:
+            translateX(-50%)
+            scaleX(0);
+    }
+
+    55% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.65;
+
+        transform:
+            translateX(-50%)
+            scaleX(1);
+    }
+}
+
+@keyframes card-enter {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(18px)
+            scale(0.985);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+/* =========================================================
+   RESPONSIVIDADE
+   ========================================================= */
+
+@media (max-width: 600px) {
+    .screen {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 520px;
+
+        padding: 24px 20px;
+
+        border-radius: 24px;
+    }
+
+    .home-header,
+    .home-content {
+        width: 100%;
+    }
+}
+
+@media (max-width: 420px) {
+    .screen {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .login-card {
+        width: 100%;
+
+        padding: 22px 18px;
+    }
+
+    .action-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .aurora-name {
+        letter-spacing: 0.24em;
+        text-indent: 0.24em;
+    }
+
+    .aurora-purpose {
+        font-size: 16px;
+    }
+
+    .aurora-values {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 340px) {
+    .login-card {
+        padding: 20px 15px;
+    }
+
+    .login-card h1 {
+        font-size: 26px;
+    }
+
+    .field input {
+        padding: 14px;
+    }
+
+    .primary-button,
+    .secondary-button {
+        min-height: 52px;
+    }
+}
+
+/* =========================================================
+   ACESSIBILIDADE
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+}
+
+/* Aurora AI — controle por membro da empresa */
+.aurora-team-ai-note{margin:0 0 10px;padding:10px 12px;border:1px solid color-mix(in srgb,var(--aurora-primary,#3d7bff) 45%,var(--aurora-border,#2a3142));border-radius:12px;background:color-mix(in srgb,var(--aurora-primary,#3d7bff) 8%,transparent);font-size:12px;line-height:1.4;color:var(--aurora-muted,#b8c0d4)}
+.aurora-team-ai-toggle{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:7px;padding-top:10px;border-top:1px solid var(--aurora-border,#2a3142);cursor:pointer}
+.aurora-team-ai-toggle>span{display:grid;gap:2px}.aurora-team-ai-toggle b{font-size:13px;color:var(--aurora-cyan,#41d9ff)}.aurora-team-ai-toggle small{font-size:11px;color:var(--aurora-muted,#b8c0d4)}
+.aurora-team-ai-toggle input{position:absolute;opacity:0;pointer-events:none}.aurora-team-ai-toggle i{position:relative;flex:0 0 44px;height:24px;border-radius:999px;background:#343a49;border:1px solid var(--aurora-border,#2a3142);transition:.18s}.aurora-team-ai-toggle i:after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.18s}.aurora-team-ai-toggle input:checked+i{background:var(--aurora-primary,#3d7bff)}.aurora-team-ai-toggle input:checked+i:after{transform:translateX(20px)}.aurora-team-ai-toggle input:disabled+i{opacity:.55}
+
+/* Aurora ativos — permissões por membro */
+.aurora-team-asset-perms{grid-column:1/-1;margin-top:8px;padding-top:10px;border-top:1px solid var(--aurora-border,#2a3142);display:grid;gap:7px}.aurora-team-asset-perms>b{font-size:13px;color:var(--aurora-cyan,#41d9ff)}.aurora-team-asset-perms>small{font-size:11px;color:var(--aurora-muted,#b8c0d4)}.aurora-team-asset-perms>div{display:flex;flex-wrap:wrap;gap:7px 12px}.aurora-team-asset-perms label{font-size:11px;display:flex;align-items:center;gap:5px;cursor:pointer}.aurora-team-asset-perms input{accent-color:var(--aurora-primary,#3d7bff)}

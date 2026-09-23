@@ -1,0 +1,170 @@
+/* =========================================================
+   AURORA MOTION SYSTEM · RC8.13 MOTION 2
+
+   Movimento funcional e discreto para a interface do app.
+   Não participa do documento técnico nem da impressão.
+   ========================================================= */
+
+:root {
+    --aurora-motion-tap: 120ms;
+    --aurora-motion-view: 210ms;
+    --aurora-motion-sheet: 220ms;
+    --aurora-motion-ease: cubic-bezier(.2, .8, .2, 1);
+}
+
+/* Feedback físico: o controle confirma o toque sem chamar atenção. */
+button:not(:disabled):not(.aurora-settings-modal__backdrop):not(.aurora-custom-service-modal__backdrop):not(.aurora-report-preview__backdrop):not(.aurora-photo-editor__backdrop),
+.aurora-evidence-action,
+.aurora-user-chip {
+    transition:
+        transform var(--aurora-motion-tap) var(--aurora-motion-ease),
+        filter var(--aurora-motion-tap) ease,
+        border-color 180ms ease,
+        background-color 180ms ease,
+        box-shadow 180ms ease;
+    transform-origin: center;
+}
+
+button:not(:disabled):not(.aurora-settings-modal__backdrop):not(.aurora-custom-service-modal__backdrop):not(.aurora-report-preview__backdrop):not(.aurora-photo-editor__backdrop):active,
+.aurora-evidence-action:active,
+.aurora-user-chip:active {
+    transform: scale(.978);
+    filter: brightness(1.06);
+}
+
+/* Cards clicáveis recebem resposta ainda mais contida. */
+.aurora-service-card:active,
+.aurora-report-card:active,
+.aurora-recent-card__main:active,
+.aurora-evidence-summary__main:active {
+    transform: scale(.986);
+}
+
+/* Cada etapa montada no workflow entra como uma nova página curta. */
+.aurora-module {
+    animation: aurora-motion-view-in var(--aurora-motion-view) var(--aurora-motion-ease) both;
+}
+
+/* Home e Relatórios: a troca de contexto também fica perceptível. */
+.aurora-home-layer:not([hidden]),
+.aurora-reports-layer:not([hidden]),
+.aurora-workflow-layer:not([hidden]) {
+    animation: aurora-motion-layer-in var(--aurora-motion-view) var(--aurora-motion-ease) both;
+}
+
+/* A navegação de workflow acompanha a entrada sem saltar na tela. */
+.aurora-workflow-dock.is-visible {
+    animation: aurora-motion-dock-in 190ms var(--aurora-motion-ease) both;
+}
+
+/* Sheets/modais: fundo aparece primeiro; a folha assume o foco. */
+.aurora-settings-modal.is-open .aurora-settings-modal__backdrop,
+.aurora-custom-service-modal.is-open .aurora-custom-service-modal__backdrop,
+.aurora-report-preview.is-open .aurora-report-preview__backdrop,
+.aurora-photo-editor.is-open .aurora-photo-editor__backdrop {
+    animation: aurora-motion-backdrop-in 180ms ease both;
+}
+
+.aurora-settings-modal.is-open .aurora-settings-sheet,
+.aurora-custom-service-modal.is-open .aurora-custom-service-sheet,
+.aurora-report-preview.is-open .aurora-report-preview__sheet,
+.aurora-photo-editor.is-open .aurora-photo-editor__sheet {
+    animation: aurora-motion-sheet-in var(--aurora-motion-sheet) var(--aurora-motion-ease) both;
+}
+
+/* Estados de seleção mudam de maneira contínua. */
+.aurora-footer-nav__item,
+.aurora-sidebar__item,
+.aurora-report-filters button,
+.aurora-photo-editor__tools button,
+.aurora-report-card,
+.aurora-recent-card {
+    transition:
+        color 180ms ease,
+        background-color 180ms ease,
+        border-color 180ms ease,
+        box-shadow 180ms ease,
+        opacity 180ms ease,
+        transform var(--aurora-motion-tap) var(--aurora-motion-ease);
+}
+
+@keyframes aurora-motion-view-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes aurora-motion-layer-in {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes aurora-motion-dock-in {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+@keyframes aurora-motion-backdrop-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes aurora-motion-sheet-in {
+    from {
+        opacity: 0;
+        transform: translateY(8px) scale(.992);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .aurora-module,
+    .aurora-home-layer:not([hidden]),
+    .aurora-reports-layer:not([hidden]),
+    .aurora-workflow-layer:not([hidden]),
+    .aurora-workflow-dock.is-visible,
+    .aurora-settings-modal.is-open .aurora-settings-modal__backdrop,
+    .aurora-custom-service-modal.is-open .aurora-custom-service-modal__backdrop,
+    .aurora-report-preview.is-open .aurora-report-preview__backdrop,
+    .aurora-photo-editor.is-open .aurora-photo-editor__backdrop,
+    .aurora-settings-modal.is-open .aurora-settings-sheet,
+    .aurora-custom-service-modal.is-open .aurora-custom-service-sheet,
+    .aurora-report-preview.is-open .aurora-report-preview__sheet,
+    .aurora-photo-editor.is-open .aurora-photo-editor__sheet {
+        animation: none !important;
+    }
+
+    button,
+    .aurora-evidence-action,
+    .aurora-user-chip {
+        transition: none !important;
+    }
+}
+
+@media print {
+    /* A camada de movimento nunca interfere na composição do relatório. */
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}

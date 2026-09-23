@@ -1,0 +1,24 @@
+AURORA — ETIQUETA V6 REAL + CACHE BUST
+Data: 13/09/2026
+
+Diagnóstico:
+A V5 anterior NÃO continha a alteração visual prometida no arquivo aurora_assets_pilot.js.
+O arquivo ainda possuía .scan e o texto "ESCANEIE PARA CONSULTAR".
+Além disso, index/app mantinham a mesma query version antiga e o service worker mantinha CACHE_BUST anterior.
+Por isso o build_id em Config mudava, mas a etiqueta permanecia igual.
+
+Correção desta V6:
+- alteração visual aplicada e validada no arquivo real
+- texto "ESCANEIE PARA CONSULTAR" removido do JS
+- ícone SVG de celular inserido à esquerda
+- QR aumentado para 27 mm
+- nova query version do aurora_assets_pilot.js em index.html e app.html
+- novo CACHE_BUST do service worker
+- motor FIX6 de impressão/QR preservado
+
+Validações automáticas antes de gerar ZIP:
+- phonehint presente
+- texto antigo ausente
+- QR 27 mm presente
+- index e app apontam para nova versão
+- SW usa novo cache namespace

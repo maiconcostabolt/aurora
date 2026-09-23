@@ -1,0 +1,25 @@
+AURORA — ETIQUETA 50,8 MM BALANCEADA V10
+Data: 13/09/2026
+
+Base: V9 com SVG oficial do usuário.
+
+Alterações desta rodada:
+- QR principal NÃO foi deslocado: continua matematicamente centralizado no círculo em left:50% + translateX(-50%).
+- QR permanece com 25,8 mm.
+- SVG oficial de celular/QR aumentado moderadamente de 8,4 x 11,4 mm para 9,6 x 13,0 mm.
+- SVG permanece somente na lateral esquerda; não interfere no eixo do QR.
+- Powered by Aurora aproximado do QR e aumentado:
+  texto base 4,25 pt; Aurora 5,7 pt.
+- companhia, código e descrição mantidos nas posições da V9/V7.
+- nenhum texto lateral foi reintroduzido.
+
+Preservado:
+- assets/icons/aurora_qr_phone_official.svg
+- motor FIX6 de impressão
+- QR público/contextual
+- Ativos/Equipamentos e Minha Equipe
+- Aurora AI, Tupy e relatórios intocados
+
+Cache:
+- versão nova do controlador em index/app
+- CACHE_BUST novo no service worker

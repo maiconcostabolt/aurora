@@ -1,0 +1,25 @@
+AURORA V132 — CARD ATIVIDADES ROTINEIRAS + RASTREIO — 16/09/2026
+
+BASE: V130, que comprovou:
+- listMyModules: electrical=true e eletrica_tupy=true
+- decisão inicial: eletrica_tupy
+- identity antes/depois apply: active_license_module_code=eletrica_tupy; selected_services=[eletrica_tupy]
+- imediatamente antes de renderHome: companyAccess.loaded=false; canEnterTupy=false
+- depois de renderHome: cards elétricos comuns foram montados.
+
+ALTERAÇÃO FUNCIONAL ÚNICA:
+Antes de renderHome(), quando active_license_module_code === eletrica_tupy e companyAccess ainda não está loaded,
+aguardar AuroraCloudSync.refreshCompanyAccessClaim().
+Depois registrar 08B e somente então chamar renderHome().
+
+OBJETIVO:
+Eliminar a corrida comprovada em V130 sem hardcode de e-mail, sem renomear eletrica_tupy e sem alterar a shape Atividades Rotineiras.
+
+RASTREIO VISUAL MANTIDO:
+- checkpoints 01-05 da seleção
+- 08 ANTES HIDRATACAO BOLT
+- 08B DEPOIS HIDRATACAO BOLT
+- 09 DEPOIS RENDER HOME
+
+VERSÃO VISÍVEL NO RODAPÉ:
+AURORA_V132_CARD_ATIVIDADES_ROTINEIRAS_BOLT_RASTREIO_16-09-2026

@@ -1,0 +1,108 @@
+AURORA PWA TESTE — VISTORIA VEICULAR V1.1.19
+
+Correção V1.1.19:
+- PDF da vistoria passa a preservar os mesmos cards e proporções da prévia HTML;
+- título, descrição e fotografias de cada avaria não são mais separados entre páginas;
+- fotos guiadas de frente, traseira e laterais aceitam somente uma imagem por posição;
+- uma nova imagem guiada substitui a anterior, sem criar ocorrência duplicada;
+- imagens extras existentes em registros guiados antigos deixam de aparecer como complementares;
+- avarias continuam permitindo vários registros e várias fotografias;
+- cache atualizado para aurora-pwa-teste-vistoria-22.
+
+AURORA PWA TESTE — VISTORIA VEICULAR V1.1.18
+
+Correção V1.1.18:
+- corrigido o reinício do aplicativo ao concluir várias fotos e criar avarias;
+- imagens completas ficam somente no armazenamento próprio de evidências;
+- o estado central e o armazenamento local mantêm referências leves das fotos;
+- removidas cópias Base64 duplicadas durante o fechamento das ocorrências;
+- fotos passam por compactação adequada antes do armazenamento;
+- cache atualizado para aurora-pwa-teste-vistoria-21.
+
+AURORA PWA TESTE — VISTORIA VEICULAR V1.1.17
+
+Correção V1.1.17:
+- regiões do veículo abrem exclusivamente a foto guiada correspondente;
+- Avarias sempre abre o formulário técnico completo, inclusive após editar um relatório;
+- fotos guiadas concluídas não bloqueiam nem reutilizam o próximo registro;
+- duas avarias preservam fotos legíveis lado a lado no PDF;
+- prévia final no celular limita imagens ao card e mantém a proporção;
+- cache atualizado para aurora-pwa-teste-vistoria-20.
+
+AURORA PWA TESTE — VISTORIA VEICULAR V1.1.16
+
+Correção V1.1.16:
+- frente, traseira, laterais e painel abrem um painel fotográfico simplificado;
+- cada vista possui título automático e aceita somente uma foto;
+- apenas Avarias abre o formulário técnico completo;
+- fotos guiadas não aparecem misturadas na lista de Ocorrências;
+- corrigido o vínculo que podia transferir o título de uma vista para uma avaria;
+- cache atualizado para aurora-pwa-teste-vistoria-19.
+
+AURORA PWA TESTE — VISTORIA VEICULAR V1.1
+
+Pacote completo da Aurora Teste com Vistoria Veicular integrada.
+
+Principais mudanças:
+- fluxo visual de 5 etapas dentro da Aurora;
+- cliente e veículo em formulários compactos e responsivos;
+- serviço solicitado e itens recebidos com cartões selecionáveis;
+- checklist OK, Atenção ou Reparo;
+- data e hora locais preenchidas automaticamente e editáveis;
+- mapa interativo do veículo para registrar avarias;
+- roteiro de seis fotos usando o sistema real de ocorrências/evidências;
+- resumo do recebimento;
+- assinatura opcional do cliente;
+- barra Anterior, Início, Relatório e Próximo fixa;
+- relatório de vistoria ampliado;
+- cache do PWA atualizado para a versão aurora-pwa-teste-vistoria-3.
+
+Correção V1.1.1:
+- restaurada a rolagem normal da página em computador e celular;
+- barra Aurora fixada pelo componente correto;
+- botões inferiores mantêm tamanho legível sem precisar alterar o zoom;
+- conteúdo recebe espaço inferior e não fica escondido pela navegação;
+- cache atualizado para aurora-pwa-teste-vistoria-4.
+
+Correção V1.1.2:
+- cards fotográficos preenchem automaticamente o título "Foto + posição";
+- o card Avarias e as regiões do veículo abrem uma ocorrência em branco;
+- novo painel com duas perspectivas realistas do mesmo veículo;
+- áreas dianteira, laterais e traseira continuam clicáveis;
+- roda do mouse e barra lateral passam a controlar simultaneamente a página;
+- navegação inferior continua fixa;
+- cache atualizado para aurora-pwa-teste-vistoria-5.
+
+Publicação no Cloudflare:
+envie o conteúdo deste pacote para o projeto aurora-pwa-teste.
+
+Importante:
+este é o pacote completo da Aurora Teste, e não o HTML demonstrativo separado.
+AURORA PWA TESTE — VISTORIA VEICULAR V1.1.3
+
+Atualização desta versão:
+- o fundo da Aurora fica bloqueado enquanto qualquer modal estiver aberto;
+- roda do mouse, toque e barra de rolagem atuam somente dentro do modal;
+- regiões do veículo abrem evidências com títulos Frente, Traseira e Laterais;
+- cards de fotos exibem miniaturas reais após o anexo;
+- tocar na miniatura reabre a evidência e o editor de marcações da Aurora;
+- cache do PWA atualizado para impedir carregamento da revisão anterior.
+AURORA PWA TESTE — CORREÇÃO V1.1.4
+
+- Corrigido o travamento ao avançar de Dados iniciais para Ocorrências.
+- O editor de fotos fechado não é mais interpretado como modal aberto.
+- O bloqueio de mouse, toque e rolagem agora existe somente durante um modal realmente visível.
+AURORA PWA TESTE — CORREÇÃO V1.1.5
+
+- Eliminado ciclo contínuo de renderização ao abrir a etapa Ocorrências.
+- O contador de fotos só altera o DOM quando o valor realmente muda.
+- O observador da vistoria agora processa somente novas estruturas e no máximo uma vez por quadro.
+- Eliminada a condição que fazia o navegador informar “Página sem resposta”.
+AURORA PWA TESTE — CORREÇÃO V1.1.6
+
+- Barra lateral do computador fixa e preenchida até o final da tela.
+- Corrigida a rolagem que ocasionalmente permanecia bloqueada ao voltar entre telas.
+- Fora dos modais, mouse, trackpad e toque usam a rolagem nativa do navegador.
+- Rolagem móvel restaurada para apenas um dedo.
+- Checklist móvel compacto: nome e estados OK/Atenção/Reparo na mesma linha.
+- Cache renovado para VISTORIA9.

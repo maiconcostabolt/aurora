@@ -1,0 +1,74 @@
+{
+  "id": "./app.html?source=pwa-v2",
+  "name": "Aurora",
+  "short_name": "Aurora",
+  "description": "Aurora Web — inspeções, evidências e relatórios profissionais.",
+  "lang": "pt-BR",
+  "dir": "ltr",
+  "start_url": "./app.html?source=pwa-v2",
+  "scope": "./",
+  "display": "standalone",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "orientation": "portrait-primary",
+  "background_color": "#07111f",
+  "theme_color": "#07111f",
+  "categories": [
+    "business",
+    "productivity",
+    "utilities"
+  ],
+  "icons": [
+    {
+      "src": "./assets/icons/aurora-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icons/aurora-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/icons/aurora-maskable-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./assets/icons/aurora-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Abrir Aurora Web",
+      "short_name": "Início",
+      "url": "./app.html?screen=home",
+      "icons": [
+        {
+          "src": "./assets/icons/aurora-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Relatórios",
+      "short_name": "Relatórios",
+      "url": "./app.html?screen=reports",
+      "icons": [
+        {
+          "src": "./assets/icons/aurora-192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

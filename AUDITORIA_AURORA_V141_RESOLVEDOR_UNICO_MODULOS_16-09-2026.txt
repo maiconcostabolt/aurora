@@ -1,0 +1,17 @@
+AURORA V141 — RESOLVEDOR ÚNICO DE MÓDULOS
+Data: 16/09/2026
+Base: V140
+
+ESCOPO ÚNICO
+- Unificar a resolução operacional de Perfil > Trocar segmento com a já usada por Módulos Aurora.
+- openSwitcher() agora enriquece o módulo selecionado via resolveOperationalActivation().
+- eletrica_tupy passa a retornar profile=electrical e serviceIds=[eletrica_tupy] também pelo switcher.
+- electrical continua independente e usa seus serviços empresariais configurados.
+- Nenhuma alteração em Supabase, Minha Equipe, relatórios, shapes ou permissões.
+- Rodapé/build_id corrigido para V141.
+- Cache bust do Service Worker atualizado para V141.
+
+RESULTADO ESPERADO
+Trocar segmento > Elétrica -> Home Elétrica.
+Trocar segmento > BOLT SOLUÇÕES ELÉTRICAS -> Atividades Rotineiras Tupy.
+Módulos Aurora > BOLT -> mesmo destino, sem caminho paralelo.

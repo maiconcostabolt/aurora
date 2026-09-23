@@ -1,0 +1,71 @@
+AURORA V37 — CATÁLOGOS MULTISSERVIÇO
+Data: 13/09/2026
+Base: AURORA V36 aprovada
+
+ESCOPO APROVADO
+- Expandir o padrão validado de Painéis e equipamentos para os demais ambientes elegíveis.
+- Manter a Home com a mesma estrutura visual.
+- Alterar nome/conteúdo do card de cadastro permanente conforme o segmento ativo.
+- Manter Atividades Rotineiras / Elétrica Tupy FORA desta rodada.
+- Manter Vistoria Veicular FORA desta rodada.
+
+NOMES APROVADOS
+- Oficina: Veículos
+- Elétrica: Painéis e equipamentos
+- Industrial: Máquinas e equipamentos
+- Drone: Estruturas inspecionadas
+- Lavação automotiva: Veículos
+- Higienização de estofados: Estofados cadastrados
+- Cortinas e persianas: Cortinas e persianas
+- Reparos e manutenção: Locais e manutenções
+- Condomínios: Áreas e equipamentos
+
+IMPLEMENTAÇÃO
+1. js/bootstrap.js
+- Card de cadastro permanente passa a ser resolvido pelo perfil/segmento.
+- Serviços continuam sendo os serviços já habilitados no ambiente.
+- Nova vistoria iniciada por um cadastro permanente passa a herdar os dados cadastrais em todos os perfis elegíveis.
+- Bloqueio explícito para vehicle_inspection e eletrica_tupy.
+
+2. js/aurora_assets_pilot.js
+- Estrutura da V36 generalizada sem duplicar um módulo por segmento.
+- Contexto por perfil controla nome, textos, busca, ícone, tipos e rótulos de cadastro.
+- Registros locais/nuvem são separados visualmente por module_code.
+- Mantidos QR, histórico, Nova vistoria, edição e permissões ADMIN/USUÁRIO.
+- Histórico usa AuroraI18n para os nomes dos serviços de todos os segmentos.
+- Dados permanentes seguem separados dos dados de cada atendimento.
+
+3. js/company_team.js
+- O bloco de permissões passa a mostrar o nome do catálogo do ambiente atual, em vez de fixar “Painéis e equipamentos”.
+- Mesmas permissões existentes: visualizar, nova vistoria, histórico, etiqueta QR, cadastrar, editar e desativar.
+
+4. app.html / service_worker.js
+- Cache/versionamento V37 para evitar carregar JS da V36 após deploy de teste.
+
+SUPABASE
+- Nenhuma alteração de schema/RLS/RPC necessária nesta rodada.
+- A tabela aurora_assets já possui module_code e service_code e a V37 reutiliza essa estrutura.
+- RPCs e permissões empresariais existentes foram preservados.
+
+CONGELADO / NÃO ALTERADO
+- Atividades Rotineiras / Elétrica Tupy.
+- Vistoria Veicular.
+- Fotos aprovadas na V32.
+- QR público e seu resumo semântico.
+- Aurora AI.
+- Fluxo de convites / Minha Equipe, exceto o texto do nome do catálogo no bloco de permissões.
+- Layout geral do relatório.
+- Navegação aprovada da V36.
+
+TESTE HUMANO RECOMENDADO
+1. Elétrica: confirmar que Painéis e equipamentos continua igual à V36.
+2. Estofados: confirmar card Estofados cadastrados; cadastrar um sofá; abrir; Nova vistoria; escolher um serviço; confirmar herança do cadastro.
+3. Oficina: confirmar card Veículos e cadastro por placa/código.
+4. Industrial: confirmar Máquinas e equipamentos.
+5. Drone: confirmar Estruturas inspecionadas.
+6. Lavação: confirmar Veículos.
+7. Cortinas: confirmar Cortinas e persianas.
+8. Reparos: confirmar Locais e manutenções.
+9. Condomínios: confirmar Áreas e equipamentos.
+10. Confirmar que Vistoria Veicular não recebeu o card.
+11. Confirmar que Atividades Rotineiras Tupy não recebeu alterações.

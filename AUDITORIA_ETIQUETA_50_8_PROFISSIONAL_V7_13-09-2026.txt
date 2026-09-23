@@ -1,0 +1,12 @@
+AURORA — ETIQUETA 50,8 PROFISSIONAL V7
+Base: V6 REAL testada.
+- companhia desceu para zona segura
+- código e descrição alinhados ao mesmo eixo
+- QR centralizado matematicamente em 50% do círculo
+- QR 25,8 mm para margem física de impressão
+- SVG anterior removido
+- novo ícone vetorial simples de smartphone/câmera
+- rodapé elevado para margem segura
+- sem textos laterais / sem 'Escaneie para consultar'
+- cache bust real em index, app e service worker
+- motor FIX6 de impressão e QR preservado

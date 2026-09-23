@@ -1,0 +1,85 @@
+AURORA V186 — ATERRAMENTO FLUXO COMPLETO R02
+Base operacional: V183 + integração grounding já iniciada na V185/V186 R01.
+
+OBJETIVO DESTA RODADA
+Corrigir a V186 R01, que integrou principalmente o relatório mas não consolidou as quatro etapas aprovadas da shape.
+
+FLUXO INTEGRADO
+ETAPA 1 — Identificação da vistoria
+- Cliente / empresa
+- CNPJ / documento
+- Telefone
+- E-mail
+- Endereço / local
+- Unidade
+- Setor / instalação
+- Título do laudo
+- Número do laudo
+- ART
+- Data
+- Responsável técnico
+- Registro profissional
+
+ETAPA 2 — Sistema, metodologia e instrumento
+- Configuração do sistema
+- Tipo de edificação
+- Tipo de solo
+- Haste / eletrodo
+- Condutor / malha
+- Tipo de conexão
+- Tipo de inspeção
+- Valor de referência
+- Dimensões / área
+- Instrumento / série / calibração
+- Objetivo
+- Normas
+- Generalidades
+- Metodologia
+- Nível de proteção / gerenciamento de risco
+- Seletores com painel Aurora, múltiplas seleções e sugestões personalizadas persistentes.
+- Sem prompt() de navegador e sem botão '+ Outra opção'.
+
+ETAPA 3 — Pontos de aferição / ocorrências
+- Novo registro abre formulário do ponto.
+- Categoria, localização, valor, referência, condição, parecer, observação.
+- Fotos pelo Evidence Engine Aurora.
+- Finalizar ocorrência recolhe para card-resumo compacto.
+- Card reabre o mesmo ponto para edição.
+- Exclusão individual de ponto.
+- Foto de capa permanece responsabilidade do Evidence Engine Aurora.
+
+ETAPA 4 — Finalização
+- Recomendações
+- Conclusão
+- Contagem de pontos e fotos
+- Geração via Report Engine existente.
+
+RELATÓRIO
+- Renderer específico de grounding dentro do Report Preview existente.
+- Identificação e dados técnicos em pares/duas colunas pelo componente Aurora.
+- Pontos técnicos em duas colunas.
+- Registro fotográfico em seção separada, vinculado ao respectivo registro.
+- Campos sem valor são omitidos pelo renderer.
+- Descrição de foto só aparece quando existe.
+
+PROTEÇÕES
+NÃO ALTERADOS nesta rodada:
+- js/bootstrap.js
+- js/cloud_sync.js
+- service_worker.js
+- startup/cold-start
+- autenticação/sessão
+- Aurora AI
+- Tupy
+- Vistoria Veicular
+- QR
+- infraestrutura offline/sync
+
+HASHES PROTEGIDOS (iguais à V183)
+bootstrap.js: 6445bf837bf03ce4b0f1253c9e86c8a8a80ead5c900ac096402bc1eb35a2b2fd
+cloud_sync.js: 8a05dea1a23dc3ba7ebb964379997b10cd532ce6c86ce735b0f0ab1546ad2977
+service_worker.js: 9d5671f9840e3d75a535b19ccdedb3802112e17d1b4ae014f9fafcf6d4fb2c6c
+
+VALIDAÇÃO ESTÁTICA
+- node --check core/shapes/grounding/flow.js: OK
+- Teste humano/PWA ainda obrigatório.

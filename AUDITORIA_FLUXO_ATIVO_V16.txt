@@ -1,0 +1,25 @@
+AURORA — FLUXO ATIVO V16
+Correção estrutural, sem Codex.
+
+1. Nova vistoria pela ficha do equipamento:
+- usa o MESMO handler oficial de Painel elétrico da Home;
+- reaproveita Cliente do atendimento anterior quando existente;
+- reaproveita identificação técnica do ativo anterior;
+- força código/tag, nome, localização, setor, observações e vínculo do ativo atual;
+- NÃO reaproveita ocorrências, diagnóstico, orçamento ou fotos.
+
+2. Navegação:
+- Próximo continua no runtime oficial.
+- Anterior continua runtime.previous().
+- Na primeira etapa, quando a origem é a ficha do equipamento, Anterior volta à ficha do equipamento.
+- Início usa a Home oficial e fecha camadas de Ativos.
+- removida a possibilidade de a camada QR ser revelada por navegação incorreta.
+
+3. Isolamento:
+- somente fluxo genérico Painel elétrico / Painéis e equipamentos;
+- Tupy não alterado;
+- Vistoria Veicular não alterada;
+- relatório, AI e banco não alterados.
+
+Regra de arquitetura:
+Ativos não deve criar uma segunda navegação paralela. Ele apenas prepara contexto e entrega o atendimento ao bootstrap/runtime oficial.

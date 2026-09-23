@@ -1,0 +1,29 @@
+AURORA — CORREÇÃO DE ORIGEM DO TRAVAMENTO DE ABERTURA
+Data: 13/09/2026
+
+Sintoma:
+- Chrome exibia "Página sem resposta" durante a abertura da Aurora após as rodadas de Ativos/Painéis e equipamentos.
+
+Correção:
+- O controlador de Painéis e equipamentos NÃO monta mais sua interface durante DOMContentLoaded.
+- NÃO usa MutationObserver global.
+- NÃO reage construindo UI durante AuroraAuthReady, company-access-ready, home-rendered ou module-changed.
+- AuroraAssetsPilot.sync() permanece compatível com cloud_sync.js, porém é deliberadamente leve/no-op no bootstrap.
+- A interface de Painéis e equipamentos é criada somente quando o usuário toca no card.
+- A sincronização dos equipamentos com Supabase ocorre somente após abrir a área.
+- O ícone de informação também inicializa a área sob demanda.
+- Corrigida a exclusão do modal de ajuda ao alternar telas internas.
+
+Escopo preservado:
+- Tupy intocado.
+- Aurora AI intocada.
+- Relatórios intocados.
+- QR público/contextual preservado.
+- Minha Equipe preservada.
+- Nomenclatura "Painéis e equipamentos" preservada.
+
+Teste prioritário:
+1. Deploy.
+2. Atualizar/abrir Aurora.
+3. Confirmar que Home abre fluida.
+4. Só depois abrir Painéis e equipamentos.

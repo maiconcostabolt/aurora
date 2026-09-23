@@ -1,0 +1,24 @@
+AURORA — FIX6 DE ORIGEM — IMPRESSÃO DA ETIQUETA
+
+Motivo da correção:
+Cinco rodadas anteriores criaram dependências novas para imprimir um QR que a própria Aurora já conseguia renderizar corretamente na tela.
+
+Fluxo adotado agora:
+1. O registro do equipamento já possui qr_token.
+2. qrPayload(r) já gera a URL permanente usada pelo QR visível e funcional.
+3. qrSvg(qrPayload(r)) já gera o SVG local mostrado corretamente na Aurora.
+4. A impressão usa EXATAMENTE esse mesmo SVG, diretamente no HTML da etiqueta.
+5. Não existe publicUrl().
+6. Não existe current() dentro de printLabel().
+7. Não existe biblioteca QR adicional dentro do iframe.
+8. Não existe serviço externo api.qrserver.com.
+9. Não existe procura de QR no DOM.
+10. Os dois botões de impressão chamam printLabel(registro) diretamente.
+
+Escopo preservado:
+- formato circular 50,8 x 50,8 mm
+- monocromático para impressora térmica
+- QR público/contextual existente
+- lazy-load/fluidez
+- Minha Equipe
+- Tupy, AI e relatórios intocados

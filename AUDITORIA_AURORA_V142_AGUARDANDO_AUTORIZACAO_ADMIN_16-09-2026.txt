@@ -1,0 +1,14 @@
+AURORA V142 — AGUARDANDO AUTORIZACAO ADMIN
+Base congelada: V141 RESOLVEDOR UNICO MODULOS — APROVADA
+
+ESCOPO UNICO
+- Convite empresarial aceito + membership COMPANY_USER/USER_BOLT ativa + zero módulos can_access=true deixa de cair na tela genérica de erro interno.
+- Exibe estado controlado: Aguardando liberação do administrador.
+- Botão Atualizar Aurora reconsulta o acesso via reload.
+- Botão Sair / usar outro e-mail usa o logout já existente da Aurora.
+- Após ADMIN liberar ao menos um ambiente, o bootstrap V141 segue normalmente sem alteração do resolvedor de módulos.
+
+NAO ALTERADO
+- Trocar segmento / Módulos Aurora (V141 aprovado).
+- Minha Equipe e checkbox Ativo/Inativo (pendência separada).
+- Supabase, RLS, RPCs, shapes, relatórios e QR.

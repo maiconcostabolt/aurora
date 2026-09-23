@@ -1,0 +1,56 @@
+AURORA — HISTÓRICO EMPRESARIAL DE EQUIPAMENTO V26
+Data: 13/09/2026
+Base: AURORA_EQUIPE_CONVITE_EMPRESARIAL_V25_PWA_TESTE
+Destino: somente PWA Testes
+
+CAUSA CONFIRMADA
+- A ficha do equipamento consultava apenas aurora_reports do navegador atual.
+- Por isso cada conta via somente os próprios relatórios locais.
+- O Supabase possui 3 projetos concluídos do QGBT5656 na mesma empresa:
+  2 criados pelo administrador e 1 criado pelo usuário.
+
+CORREÇÃO DE HISTÓRICO
+- Criadas RPCs autenticadas para listar e abrir históricos por asset_id.
+- A empresa do equipamento é resolvida server-side.
+- ADMIN ativo pode consultar o histórico.
+- COMPANY_USER ativo somente consulta quando can_view_history=true.
+- O vínculo aceita asset_registry_id/client_key e também código/tag legado.
+- A tela usa o histórico empresarial como autoridade e mantém fallback local.
+- Abrir relatório reconstitui o case salvo na nuvem em modo de visualização.
+
+CORREÇÃO DE PAPÉIS
+- Removida a inferência de ADMIN baseada na tela/shape Elétrica.
+- Minha Equipe agora exige exclusivamente manage_users no claim autenticado.
+- COMPANY_USER não recebe Minha empresa, Minha Equipe, Trocar segmento,
+  Editar serviços do segmento nem Módulos Aurora.
+- Tema, suporte, conta da nuvem e sair permanecem disponíveis.
+
+OTIMIZAÇÃO VISUAL
+- Card de identificação do equipamento teve altura e espaçamentos reduzidos.
+- Nova vistoria, Etiqueta QR e Editar ficam na mesma linha.
+- No celular os três botões usam colunas compactas e sem rolagem horizontal.
+- Área do histórico começa mais acima, deixando espaço para listas longas.
+
+BANCO
+- Arquivo aplicado: AURORA_V26_ASSET_HISTORY_EMPRESARIAL.sql
+- Funções: aurora_asset_history_list(uuid) e
+  aurora_asset_history_project_get(uuid,uuid).
+- EXECUTE removido de PUBLIC/anon e concedido somente a authenticated.
+- As funções validam auth.uid(), membership, empresa e can_view_history.
+
+VALIDAÇÃO
+- COMPANY_USER de teste recebeu history_count=3.
+- Relatório pertencente ao ADMIN foi retornado ao COMPANY_USER autorizado.
+- Sintaxe dos arquivos JavaScript alterados: OK.
+- Produção mlcaurora.com: não alterada.
+
+TESTE HUMANO
+1. Publicar o ZIP V26 somente no PWA Testes.
+2. Entrar com aurora_usuario@hotmail.com e abrir o QR do QGBT5656.
+3. Confirmar que aparecem todos os atendimentos da empresa.
+4. Abrir um relatório do ADMIN e o relatório do usuário.
+5. Conferir os três botões na mesma linha e o card compacto.
+6. Abrir Perfil e configurações e confirmar ausência de Minha Equipe e
+   dos demais controles administrativos.
+7. Entrar como ADMIN e confirmar que Minha Empresa, Minha Equipe e os
+   controles de administração continuam presentes.

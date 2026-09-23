@@ -1,0 +1,47 @@
+AURORA V132 — CARD ATIVIDADES ROTINEIRAS + RASTREIO
+Data: 16/09/2026
+Base: V129/V127 unificada.
+Objetivo: continuar o rastreio APÓS o ponto já comprovado na V129.
+
+PROVA V129 RECEBIDA DO TESTE REAL
+- LIST_MY_MODULES: electrical=true; eletrica_tupy=true.
+- DECISAO INICIAL TUPY: chosen=eletrica_tupy.
+- MAPA OPERACIONAL: profile=electrical; serviceIds=[eletrica_tupy].
+- ACTIVE observado: eletrica_tupy.
+Conclusão: a escolha inicial está correta. O desvio ocorre depois do mapa operacional.
+
+V130 — NOVOS CHECKPOINTS VISUAIS
+04 ANTES APPLY SELECTED
+05 DEPOIS APPLY SELECTED
+06 ANTES COMPANY SERVICES
+07 COMPANY SERVICES RETORNO
+08 ANTES RENDER HOME
+09 DEPOIS RENDER HOME
+
+O checkpoint 08 registra também:
+- companyAccess completo
+- canEnterTupy
+- canManageTupy
+- profile
+- active_license_module_code
+- selected_services
+
+O checkpoint 09 registra os cards de serviço efetivamente renderizados e se a Home ADMIN Tupy foi criada.
+
+RASTREABILIDADE
+- Painel: AURORA V132 — CARD ATIVIDADES ROTINEIRAS + RASTREIO
+- Rodapé/config build_id: AURORA_V132_CARD_ATIVIDADES_ROTINEIRAS_BOLT_RASTREIO_16-09-2026
+- Service Worker CACHE_BUST: AURORA_V130_RASTREIO_VISUAL_BOLT
+
+ALTERAÇÃO FUNCIONAL
+- Nenhuma regra de negócio foi alterada nesta rodada.
+- Apenas instrumentação passiva adicional após o ponto 03.
+- Não intercepta localStorage/sessionStorage.
+- Não altera Supabase, relatórios, QR, impressão, offline, fotos ou shape Tupy.
+
+VALIDAÇÕES LOCAIS
+- node --check js/bootstrap.js: PASSOU
+- node --check config/runtime_config.js: PASSOU
+- node --check service_worker.js: PASSOU
+- scripts inline index.html: PASSARAM
+- ordem dos checkpoints 04→09 verificada.

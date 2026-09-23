@@ -1,0 +1,38 @@
+AURORA V129 — RASTREIO VISUAL BOLT — 16/09/2026
+
+BASE: V127 UNIFICACAO ENTRADA BOLT.
+OBJETIVO: diagnóstico visível + rastreio da sequência que abre Atividades Rotineiras e depois sobrescreve para Elétrica.
+
+ACHADO V128:
+- O painel V128 foi inserido em app.html.
+- A PWA atual executa o shell principal por index.html.
+- Por isso o painel não apareceu no teste do usuário.
+- runtime_config.js e service_worker.js também ainda identificavam V124, portanto o rodapé permaneceu V124 e o cache-bust não comprovava V128.
+
+V129:
+1. Painel de rastreio inserido em index.html ANTES de bootstrap.js.
+2. Bootstrap recebe marcadores passivos:
+   - 01 LIST_MY_MODULES
+   - 02 DECISAO INICIAL TUPY
+   - 03 MAPA OPERACIONAL TUPY
+   - 04 COMPANY SERVICES
+   - mudanças de estado em tempo real.
+3. Painel mostra licença, profile, serviço, módulo ativo, troca manual e empresa.
+4. runtime_config build_id atualizado para AURORA_V132_CARD_ATIVIDADES_ROTINEIRAS_BOLT_RASTREIO_16-09-2026.
+5. service_worker CACHE_BUST atualizado para V129.
+6. URL de registro do service worker atualizada para V129.
+7. Cache-bust de runtime_config/bootstrap/module_access/pwa_installer atualizado no index.
+8. Nenhuma regra funcional Bolt foi alterada em relação à V127 nesta rodada.
+
+VALIDAÇÕES LOCAIS:
+- node --check js/bootstrap.js: PASSOU
+- node --check js/pwa_installer.js: PASSOU
+- node --check config/runtime_config.js: PASSOU
+- extração + node --check do script inline do painel V129: PASSOU
+- painel carregado antes de bootstrap.js: CONFIRMADO
+- build_id V129 no rodapé: CONFIRMADO NO ARQUIVO
+- CACHE_BUST V129: CONFIRMADO NO ARQUIVO
+
+TESTE HUMANO ÚNICO:
+Deploy aurora-pwa-teste -> logout -> login Bolt -> não clicar em nada -> fotografar painel V129 após estabilizar.
+Rodapé de Perfil deve mostrar AURORA_V132_CARD_ATIVIDADES_ROTINEIRAS_BOLT_RASTREIO_16-09-2026.

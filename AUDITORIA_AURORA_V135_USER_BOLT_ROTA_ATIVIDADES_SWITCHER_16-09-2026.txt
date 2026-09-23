@@ -1,0 +1,19 @@
+AURORA V135 — USER_BOLT ROTA ATIVIDADES + SWITCHER
+Data: 16-09-2026
+Base: V134 aprovada parcialmente.
+
+ESCOPO CIRURGICO
+1. Preservada a autorização de Minha Equipe da V134.
+2. Preservada a hidratação Bolt antes de renderHome da V131.
+3. Preservada a Home ADMIN Bolt / Atividades Rotineiras da V132.
+4. USER_BOLT autorizado em eletrica_tupy: materializa o serviço privado eletrica_tupy no catálogo operacional do profile electrical somente para esse caso. Isso permite que o handler canônico [data-service-id] abra a shape existente de Atividades Rotineiras; não foi criada tela paralela.
+5. Trocar segmento: leitura do role empresarial passa a usar AuroraCompanyAccess.get()/AURORA_COMPANY_ACCESS antes do claim legado, evitando classificar USER_BOLT como conta pessoal durante o switcher.
+6. DIAG V136 permanece recolhível.
+7. Rodapé/build_id: AURORA_V136_HOME_USER_BOLT_SEM_AUTO_VISTORIA_RASTREIO_16-09-2026.
+
+TESTES ESTATICOS
+- node --check js/bootstrap.js: OK
+- node --check js/module_access.js: OK
+- node --check service_worker.js: OK
+- serviço eletrica_tupy continua protegido por canEnterEletricaTupyOperationalFlow(): OK
+- ADMIN não recebe card operacional sintético: condição exige isCompanyOperationalUser(): OK

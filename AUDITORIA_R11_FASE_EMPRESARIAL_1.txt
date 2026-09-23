@@ -1,0 +1,11 @@
+AURORA R11 TESTE — FASE EMPRESARIAL 1
+Base: R10.2 TESTE derivado do Marco R9 validado.
+Alterações funcionais:
+- Primeiro acesso pergunta Individual ou Empresarial.
+- Individual mantém onboarding/trial sem company_id.
+- Empresarial cria empresa via RPC aurora_self_provision_company e torna primeiro usuário COMPANY_ADMIN.
+- Minha Equipe continua usando o componente existente e o claim aurora_my_company_access.
+- Catálogo de códigos e materiais continuam exclusivos da Tupy.
+Não alterado: evidências, fotos, relatório, fluxos de shapes, sync de projetos, RLS de projetos, layout das etapas Tupy.
+Backend: migration aurora_self_provision_company_phase1 aplicada em TESTE/mesmo projeto Supabase.
+Escopo desta fase: provisionamento empresarial e Minha Equipe. Compartilhamento de projetos Oficina fica para Fase 2 após validação.

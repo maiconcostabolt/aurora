@@ -1,0 +1,44 @@
+{
+    "id": "electrical",
+
+    "name": "Elétrica",
+
+    "icon": "⚡",
+
+    "description": "Perfil para inspeções elétricas.",
+
+    "asset": {
+
+        "fields": [
+
+            "tag",
+
+            "fabricante",
+
+            "modelo",
+
+            "tipo",
+
+            "tensao",
+
+            "corrente",
+
+            "ip",
+
+            "ambiente",
+
+            "setor"
+
+        ]
+
+    },
+
+    "report": {
+
+        "inspection": true,
+
+        "execution": true
+
+    }
+
+}

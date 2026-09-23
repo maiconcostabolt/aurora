@@ -1,0 +1,18 @@
+AURORA V36 — HISTÓRICO DO ATIVO + RELATÓRIO
+Base: V35
+
+ESCOPO EXECUTADO
+1. Relatório: removidos somente da apresentação ao cliente os campos internos code, asset_registry_id e qr_token. Dados continuam internos.
+2. Histórico TB05: corrigido no Supabase o atendimento Aterramento informado pelo usuário para o vínculo permanente TB05.
+3. Verificação no banco: TB05 retorna dois atendimentos ARCELOR MITTAL: Instalação elétrica e Aterramento, ambos por admin_mlc.
+4. Histórico do equipamento: substituído card antigo pelo padrão visual de Atendimentos recentes, sem botão Na nuvem.
+5. Card mostra cliente/título, serviço em português, executor, data/hora e status.
+6. ADMIN: Editar e Excluir disponíveis. Membro convidado: histórico depende de can_view_history e não recebe ações administrativas de editar/excluir.
+7. Permissões existentes de Nova vistoria, Etiqueta QR e Editar equipamento preservadas.
+
+NÃO ALTERADO
+Home, fotos, QR público, Aurora AI, convites/Minha Equipe e fluxo V34/V35 fora do escopo.
+
+SUPABASE
+Migration aurora_v36_asset_history_creator aplicada com sucesso.
+Correção do vínculo do atendimento grounding TB05 aplicada e verificada.

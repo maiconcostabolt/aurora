@@ -1,0 +1,56 @@
+AURORA V61 — AUDITORIA QR ATIVO APÓS BOOT COMPLETO
+Data: 14/09/2026
+Base: AURORA V59 (último QR que comprovadamente chegou ao catálogo Elétrica)
+Base de estabilidade de login/sync: V58
+
+DIAGNÓSTICO DA VARREDURA
+1. V59 publicava AuroraOperationalReady cedo demais: imediatamente após renderHome(), ANTES de hydrateOwnProjectsMissingLocally().
+2. V59 sobrevivia porque o destino final era apenas ui.showPanel(), que não consulta histórico.
+3. V60 trocou apenas ui.showPanel() por showDetail(r). showDetail() chama assetHistory(), que consulta histórico cloud enquanto o bootstrap ainda estava hidratando projetos. Isso introduziu uma segunda operação cloud/navegação antes de BOOT_SUCCESS e reabriu a corrida.
+4. Portanto, o defeito não era o token QGBT5656 nem o cadastro. Era o significado incorreto de “operacional pronto” na V59/V60.
+
+CORREÇÃO V61
+- Base retornada para V59; V60 não foi usada.
+- O evento exclusivo do QR AuroraOperationalReady foi movido para DEPOIS de hydrateOwnProjectsMissingLocally() e depois de auroraMobile estar montado.
+- openByQrToken não cria fluxo novo de detalhe: localiza o token e chama openAsset(r.id), o caminho público já existente para abertura de ativo no catálogo.
+- O QR continua com saída imediata se não houver aurora_asset_open na URL.
+- Nenhum activateForUser foi introduzido.
+- cloud_sync.js é byte-a-byte idêntico ao V58 aprovado.
+
+ARQUIVOS ALTERADOS EM RELAÇÃO À V59
+- js/aurora_assets_pilot.js — somente entrega QR ao ativo via openAsset e chave de guarda V61.
+- js/bootstrap.js — somente momento do evento exclusivo do QR + identificação de versão.
+- config/runtime_config.js — somente build_id V61.
+
+NÃO ALTERADO
+- Supabase / SQL / RLS / RPC
+- BOLT
+- autenticação/login
+- COMPANY_USER/COMPANY_ADMIN
+- Minha Equipe / convites / permissões
+- cloud_sync.js e correção V58
+- relatórios / fotos / Aurora AI
+- layout/CSS
+- tokens/ativos/etiquetas QR
+- demais shapes/serviços
+
+TESTES ESTÁTICOS EXECUTADOS
+PASS — node --check js/bootstrap.js
+PASS — node --check js/aurora_assets_pilot.js
+PASS — node --check config/runtime_config.js
+PASS — AuroraOperationalReady ocorre após hydrateOwnProjectsMissingLocally
+PASS — openByQrToken delega para openAsset(r.id)
+PASS — rota QR retorna imediatamente sem aurora_asset_open
+PASS — consumeQrRoute não contém activateForUser
+PASS — cloud_sync.js == V58 por SHA-256
+PASS — diff integral: somente os 3 arquivos declarados foram alterados
+
+FLUXO ESPERADO
+QR -> consulta pública -> autenticação/membership -> módulo autorizado -> troca operacional se necessária -> reload único -> bootstrap completo -> hidratação cloud completa -> AuroraOperationalReady -> token localizado -> openAsset(id) -> ficha do ativo -> histórico.
+
+CASOS DE ACEITAÇÃO
+MLC1212: Oficina -> ficha Honda Civic -> histórico.
+TB05: Elétrica -> ficha TB05 -> 2 atendimentos.
+QGBT5656: Elétrica -> ficha Lavador de gás -> 3 atendimentos.
+QGBT001: Elétrica -> ficha Tesoura de borda -> 0 atendimentos, sem impedir abertura.
+Abertura normal sem QR: comportamento idêntico à base; ADMIN e COMPANY_USER não entram na lógica QR.

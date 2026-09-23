@@ -1,0 +1,24 @@
+AURORA — RELATÓRIO + ETIQUETA QR V11
+Data: 13/09/2026
+
+Base: V10 aprovada.
+
+Implementado:
+- novo botão "Etiqueta QR" na barra da Prévia do relatório
+- disponível ao lado de Compartilhar HTML
+- não altera Compartilhar PDF, Compartilhar HTML ou Editar atendimento
+- piloto limitado a Painel elétrico
+- se o relatório já corresponder a equipamento cadastrado, abre o QR permanente existente
+- se ainda não existir, pergunta se deseja identificar o equipamento
+- ao confirmar, reaproveita dados do relatório e cria/sincroniza o equipamento sem segundo cadastro manual
+- abre o mesmo modal de QR e usa o mesmo motor V10 de impressão
+- o QR de validação do relatório permanece totalmente separado
+- etiqueta V10, SVG oficial, QR centralizado e impressão FIX6 preservados
+- cache bust real em assets, report_preview e service worker
+
+Não alterado:
+- Tupy
+- Vistoria Veicular
+- Aurora AI
+- conteúdo/layout do relatório
+- QR de validação do documento

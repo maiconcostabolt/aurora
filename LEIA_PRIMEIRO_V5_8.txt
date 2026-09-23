@@ -1,0 +1,10 @@
+AURORA PWA V5.8 - FLUXO INICIAL E SERVIÇOS SELECIONADOS
+
+1. Execute uma única vez no Supabase:
+   07_FLUXO_INICIAL_E_SERVICOS_SELECIONADOS.sql
+2. Publique esta PWA no Worker aurora-pwa-teste.
+3. Atualize a Aurora com Ctrl + Shift + R.
+
+Fluxo: cadastro → segmento/módulo → seleção múltipla dos serviços oferecidos
+→ ativação única de 7 dias → entrada direta na Aurora. A Home mostra somente
+os serviços selecionados. Não é necessário republicar o Aurora Admin.

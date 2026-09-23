@@ -1,0 +1,29 @@
+AURORA V173 — TESTE AURORA AI UNIVERSAL (CLIENTE)
+Data: 2026-09-18
+Base: V172
+Objetivo: permitir que o botão Aurora AI da Home interprete um trabalho entre os serviços já configurados da conta e abra o aplicativo/segmento correspondente.
+
+ESCOPO ALTERADO:
+- js/aurora_ai_home.js: passa a aceitar rota com profile de destino e mensagens universais.
+- js/aurora_ai_universal_router.js: NOVO. Monta catálogo apenas com serviços configurados na conta; troca o profile quando necessário; após reload retoma o serviço solicitado.
+- app.html / index.html: carregam o roteador V173 e cache-bust do aurora_ai_home.js.
+
+NÃO ALTERADO:
+- js/bootstrap.js
+- js/cloud_sync.js
+- service_worker.js
+- autenticação/cold-start/offline
+- relatórios
+- fotos/evidências
+- sincronização
+- fluxos internos dos serviços
+
+REGRA DE SEGURANÇA:
+A IA não inventa serviço/segmento. Só recebe como candidatos serviços já presentes em selected_services / selected_services_by_module da conta.
+
+TESTE ALVO:
+Falar na Home: "Aurora, hoje eu tenho um orçamento de uma reforma de um banheiro para fazer para o cliente Tubi."
+Esperado: identificar Reparos e manutenção — Pequena reforma (ou outro serviço de reparos coerente devolvido pela interpretação), trocar para o ambiente Reparos e manutenção se necessário e iniciar o atendimento existente.
+
+OBSERVAÇÃO:
+Esta é uma rodada ONLINE para demonstração. A investigação offline V171/V172 permanece em standby e não foi tratada nesta versão.

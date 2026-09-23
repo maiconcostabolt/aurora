@@ -1,0 +1,6 @@
+AURORA — ETIQUETA 50,8 — ÍCONE QR OFICIAL MAIOR V9
+- Mantido exatamente o asset oficial aurora_qr_phone_official.svg.
+- Ícone aumentado de 6,0 x 8,2 mm para 8,4 x 11,4 mm.
+- Reposicionado para ficar visualmente centralizado ao lado esquerdo do QR.
+- QR principal, companhia, código, descrição e rodapé não alterados.
+- Cache bust atualizado em index/app/service worker.

@@ -1,0 +1,3440 @@
+﻿/* AURORA RC8.10 - linguagem editorial premium para relatórios */
+
+.aurora-report-document {
+    --report-ink: #172235;
+    --report-muted: #66778b;
+    --report-line: #dde6ec;
+    --report-soft: #f5f8fa;
+    --report-accent: #1d9189;
+    --report-accent-soft: #e9f7f5;
+    --report-media-h: 190px;
+    --report-media-gap: 12px;
+    --report-card-radius: 12px;
+    color: var(--report-ink);
+    font-size: 14px;
+}
+
+.aurora-report-cover {
+    min-height: 300px;
+    padding: 38px 42px 34px;
+    background:
+        radial-gradient(circle at 86% 18%, rgba(100, 240, 229, .20), transparent 31%),
+        linear-gradient(142deg, #091827, #12324b 68%, #17465a);
+}
+
+.aurora-report-cover__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.aurora-report-cover__logo-slot {
+    margin: 0;
+    flex: 0 0 auto;
+}
+
+.aurora-report-cover__logo-slot .aurora-report-brand__logo {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 120px;
+    max-height: 48px;
+    object-fit: contain;
+}
+
+.aurora-report-brand {
+    gap: 16px;
+}
+
+.aurora-report-brand > span,
+.aurora-report-brand__logo {
+    width: 58px;
+    height: 58px;
+    border-radius: 15px;
+}
+
+.aurora-report-brand strong {
+    font-size: 19px;
+    letter-spacing: -.01em;
+}
+
+.aurora-report-brand small {
+    margin-top: 4px;
+    color: #bad0dd;
+    font-size: 11px;
+    letter-spacing: .025em;
+}
+
+/* RC8.18 — tipografia editorial (L1 seção · L2 valor · L3 label · L4 meta) */
+.aurora-report-brand--text-only {
+    gap: 0;
+}
+
+.aurora-report-brand--text-only .aurora-report-brand__text {
+    min-width: 0;
+}
+
+.aurora-report-brand__text {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+}
+
+.aurora-report-cover--editorial {
+    /* hook futuro para hero image sem depender dela hoje */
+}
+
+.aurora-report-fact-sheet {
+    display: grid;
+    gap: 18px;
+}
+
+.aurora-report-fact-sheet__row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px 28px;
+    align-items: start;
+}
+
+.aurora-report-fact {
+    display: grid;
+    gap: 5px;
+    min-width: 0;
+    align-content: start;
+    align-self: start;
+}
+
+.aurora-report-fact__value {
+    color: var(--report-ink);
+    font-size: 15px;
+    font-weight: 650;
+    letter-spacing: -.02em;
+    line-height: 1.3;
+}
+
+.aurora-report-fact__label {
+    color: var(--report-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.aurora-report-spec-sheet {
+    display: grid;
+    gap: 16px;
+}
+
+.aurora-report-spec-sheet__row {
+    display: grid;
+    gap: 14px 20px;
+    align-items: start;
+}
+
+.aurora-report-spec-sheet__row--3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    align-items: start;
+}
+
+.aurora-report-spec-sheet__row--1 {
+    grid-template-columns: minmax(0, 1fr);
+    max-width: 280px;
+    align-items: start;
+}
+
+.aurora-report-spec-cell {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+    align-content: start;
+    align-self: start;
+}
+
+.aurora-report-spec-cell__label {
+    color: var(--report-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+
+.aurora-report-spec-cell__value {
+    color: var(--report-ink);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -.01em;
+    line-height: 1.35;
+}
+
+.aurora-report-spec-sheet__notes {
+    padding-top: 4px;
+    border-top: 1px solid #e8eef2;
+}
+
+.aurora-report-spec-sheet__notes-label {
+    display: block;
+    color: var(--report-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+
+.aurora-report-spec-sheet__notes p {
+    margin: 6px 0 0;
+    color: #3f5062;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.aurora-report-intake-summary {
+    display: grid;
+    gap: 14px;
+}
+
+.aurora-report-intake-summary__block {
+    display: grid;
+    gap: 5px;
+}
+
+.aurora-report-intake-summary__label {
+    color: var(--report-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+
+.aurora-report-intake-summary__value {
+    margin: 0;
+    color: var(--report-ink);
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.5;
+    letter-spacing: -.005em;
+}
+
+.aurora-report-inline-sep {
+    color: #9aabb8;
+    font-weight: 400;
+}
+
+.aurora-report-status-list {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid #e8eef2;
+}
+
+.aurora-report-status-row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eef2f5;
+}
+
+.aurora-report-status-row__label {
+    color: var(--report-ink);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+.aurora-report-status-row__value {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--report-muted);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.aurora-report-status-row__dot {
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #c5d0da;
+    flex-shrink: 0;
+}
+
+.aurora-report-status-row__value[data-status="ok"] {
+    color: #147259;
+}
+
+.aurora-report-status-row__value[data-status="ok"] .aurora-report-status-row__dot {
+    background: #1d9189;
+    box-shadow: 0 0 0 2px rgba(29, 145, 137, .14);
+}
+
+.aurora-report-status-row__value[data-status="attention"] {
+    color: #8b5d00;
+}
+
+.aurora-report-status-row__value[data-status="attention"] .aurora-report-status-row__dot {
+    background: #d4a017;
+    box-shadow: 0 0 0 2px rgba(212, 160, 23, .16);
+}
+
+.aurora-report-status-row__value[data-status="repair"] {
+    color: #a72038;
+}
+
+.aurora-report-status-row__value[data-status="repair"] .aurora-report-status-row__dot {
+    background: #d6455d;
+    box-shadow: 0 0 0 2px rgba(214, 69, 93, .14);
+}
+
+.aurora-report-status-list__meta {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid #e8eef2;
+}
+
+.aurora-report-status-list__meta p {
+    display: grid;
+    gap: 3px;
+    margin: 0;
+}
+
+.aurora-report-status-list__meta span {
+    color: var(--report-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.aurora-report-status-list__meta strong {
+    color: var(--report-ink);
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1.35;
+}
+
+.aurora-report-section--intake-summary {
+    margin-bottom: 18px;
+}
+
+.aurora-report-section--vehicle-checklist {
+    margin-bottom: 22px;
+}
+
+.aurora-report-cover__content {
+    max-width: 700px;
+    margin-top: 28px;
+}
+
+.aurora-report-cover--with-photo .aurora-report-cover__content {
+    margin-top: 0;
+}
+
+.aurora-report-cover--with-photo .aurora-report-cover__layout {
+    margin-top: 24px;
+}
+
+.aurora-report-cover h1 {
+    margin: 8px 0 11px;
+    font-size: clamp(38px, 7vw, 56px);
+    letter-spacing: -.035em;
+}
+
+.aurora-report-cover p {
+    max-width: 680px;
+    padding-right: 150px;
+    color: #d3e0e8;
+    font-size: 13px;
+    line-height: 1.55;
+}
+
+.aurora-report-cover--with-photo .aurora-report-cover__layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, var(--aurora-cover-photo-max-width, 75mm));
+    gap: 22px;
+    align-items: start;
+    margin-top: 36px;
+}
+
+.aurora-report-cover--with-photo {
+    --aurora-cover-photo-max-width: 75mm;
+    --aurora-cover-photo-max-height: 56mm;
+}
+
+.aurora-report-cover--with-photo .aurora-report-cover__content {
+    margin-top: 0;
+    max-width: none;
+}
+
+.aurora-report-cover--with-photo h1 {
+    margin: 8px 0 10px;
+    font-size: clamp(28px, 4.5vw, 40px);
+    line-height: 1.08;
+}
+
+.aurora-report-cover--with-photo p {
+    max-width: none;
+    padding-right: 0;
+}
+
+.aurora-report-cover__photo {
+    margin: 0;
+    width: fit-content;
+    max-width: var(--aurora-cover-photo-max-width, 75mm);
+    max-height: var(--aurora-cover-photo-max-height, 56mm);
+    padding: 5px;
+    border: 1px solid rgba(100, 240, 229, .72);
+    border-radius: 10px;
+    overflow: hidden;
+    line-height: 0;
+    background: rgba(7, 17, 31, .34);
+    box-sizing: border-box;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, .16);
+}
+
+.aurora-report-cover__photo img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: var(--aurora-cover-photo-max-width, 75mm);
+    max-height: var(--aurora-cover-photo-max-height, 56mm);
+    object-fit: contain;
+    object-position: center center;
+}
+
+@media screen and (max-width: 520px) {
+    .aurora-report-cover--with-photo {
+        --aurora-cover-photo-max-width: min(100%, 220px);
+        --aurora-cover-photo-max-height: 140px;
+    }
+
+    .aurora-report-cover--with-photo .aurora-report-cover__layout {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .aurora-report-cover__photo {
+        justify-self: start;
+    }
+
+    .aurora-report-cover__logo-slot .aurora-report-brand__logo {
+        max-width: 92px;
+        max-height: 36px;
+    }
+
+    .aurora-report-cover p {
+        padding-right: 0;
+    }
+}
+
+@media screen and (min-width: 521px) and (max-width: 900px) {
+    .aurora-report-cover--with-photo {
+        --aurora-cover-photo-max-width: min(42vw, 280px);
+        --aurora-cover-photo-max-height: 180px;
+    }
+
+    .aurora-report-cover--with-photo .aurora-report-cover__layout {
+        grid-template-columns: minmax(0, 1fr) minmax(0, var(--aurora-cover-photo-max-width));
+    }
+
+    .aurora-report-cover__logo-slot .aurora-report-brand__logo {
+        max-width: 108px;
+        max-height: 42px;
+    }
+}
+
+@media screen and (min-width: 901px) {
+    .aurora-report-cover--with-photo {
+        --aurora-cover-photo-max-width: min(320px, 34vw);
+        --aurora-cover-photo-max-height: 220px;
+    }
+
+    .aurora-report-cover--with-photo .aurora-report-cover__layout {
+        grid-template-columns: minmax(0, 1fr) minmax(0, var(--aurora-cover-photo-max-width));
+    }
+}
+
+.aurora-report-cover__meta {
+    position: absolute;
+    right: 42px;
+    bottom: 34px;
+    display: grid;
+    gap: 4px;
+    text-align: right;
+}
+
+.aurora-report-cover__meta span:first-child {
+    color: #64f0e5;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+}
+
+.aurora-report-cover__meta span:last-child {
+    color: #c4d6e1;
+    font-size: 10px;
+}
+
+.aurora-report-body {
+    padding: 30px 42px 24px;
+}
+
+.aurora-report-section {
+    margin-bottom: 22px;
+}
+
+.aurora-report-section__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin: 0 0 16px;
+    padding: 0 0 12px;
+    border-bottom: 1px solid #e4eaee;
+}
+
+.aurora-report-section__head::before {
+    content: "";
+    flex-shrink: 0;
+    width: 3px;
+    height: 18px;
+    margin-top: 2px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--report-accent) 0%, #64f0e5 100%);
+}
+
+.aurora-report-section__head h2,
+.aurora-report-section > h2 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    color: var(--report-ink);
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: -.025em;
+    line-height: 1.25;
+}
+
+.aurora-report-info-grid,
+.aurora-report-approval {
+    gap: 9px;
+}
+
+.aurora-report-info {
+    min-width: 0;
+    padding: 11px 13px;
+    border: 1px solid var(--report-line);
+    border-radius: 10px;
+    background: linear-gradient(180deg, #fafcfd, var(--report-soft));
+}
+
+.aurora-report-info span {
+    color: var(--report-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .015em;
+}
+
+.aurora-report-info strong {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.aurora-report-section--identity .aurora-report-info,
+.aurora-report-section--technical .aurora-report-info {
+    border-color: #e0e8ed;
+}
+
+.aurora-report-section--conditions .aurora-report-summary {
+    position: relative;
+    padding: 13px 15px 13px 18px;
+    border: 1px solid #dce9e7;
+    border-radius: 10px;
+    background: #f3faf9;
+}
+
+.aurora-report-section--conditions .aurora-report-summary::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 0;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--report-accent);
+}
+
+.aurora-report-summary p,
+.aurora-report-diagnostic p {
+    color: #3f5062;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.aurora-report-section--records .aurora-report-empty-section {
+    padding: 13px 16px;
+    border: 1px dashed #cbd7df;
+    border-radius: 10px;
+    color: var(--report-muted);
+    background: #fafcfd;
+    font-size: 11px;
+}
+
+.aurora-report-diagnostic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.aurora-report-diagnostic article {
+    position: relative;
+    min-height: 0;
+    padding: 16px 16px 16px 20px;
+    border: 1px solid #dce7e9;
+    border-radius: 11px;
+    background: linear-gradient(180deg, #f9fcfc, #f4f8f9);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .75);
+}
+
+.aurora-report-diagnostic article::before {
+    content: "";
+    position: absolute;
+    top: 12px;
+    bottom: 12px;
+    left: 0;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--report-accent);
+}
+
+.aurora-report-diagnostic span,
+.aurora-report-recommendation span {
+    color: var(--report-accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.aurora-report-diagnostic p {
+    margin-top: 8px;
+}
+
+.aurora-report-finalization--documental {
+    display: grid;
+    gap: 14px;
+    padding: 16px 18px;
+    border: 1px solid #dce7e9;
+    border-radius: var(--report-card-radius);
+    background: linear-gradient(180deg, #f9fcfc, #f4f8f9);
+}
+
+.aurora-report-finalization--documental .aurora-report-finalization__status-line,
+.aurora-report-finalization--documental .aurora-report-finalization__notes-block {
+    display: grid;
+    gap: 6px;
+}
+
+.aurora-report-finalization--documental .aurora-report-finalization__status-label,
+.aurora-report-finalization--documental .aurora-report-finalization__notes-label {
+    color: var(--report-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+
+.aurora-report-finalization--documental .aurora-report-finalization__value {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 0;
+    color: #126f69;
+    font-size: 14px;
+    font-weight: 650;
+    line-height: 1.35;
+    letter-spacing: -.01em;
+    text-transform: none;
+}
+
+.aurora-report-finalization--documental .aurora-report-finalization__value--complete::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--report-accent);
+    box-shadow: 0 0 0 3px rgba(29, 145, 137, .14);
+}
+
+.aurora-report-finalization--documental .aurora-report-finalization__notes-block p {
+    margin: 0;
+    color: #3f5062;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.aurora-report-section--conclusion {
+    margin-bottom: 10px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.aurora-report-section--conclusion > .aurora-report-section__head {
+    margin-bottom: 12px;
+}
+
+/* Elétrica Tupy — Materiais utilizados (HTML authority; no PDF-specific draw) */
+.aurora-report-section--tupy-materials {
+    break-inside: auto;
+    page-break-inside: auto;
+}
+
+.aurora-report-section--tupy-materials > .aurora-report-section__head {
+    break-after: avoid;
+    page-break-after: avoid;
+}
+
+.aurora-report-materials {
+    width: 100%;
+    overflow: visible;
+}
+
+.aurora-report-materials-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.aurora-report-materials-table thead th {
+    padding: 8px 8px;
+    border-bottom: 1px solid #c9d6df;
+    color: #66778b;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    text-align: left;
+    background: #f4f8fa;
+}
+
+.aurora-report-materials-table th:nth-child(1),
+.aurora-report-materials-table td:nth-child(1) {
+    width: 16%;
+}
+
+.aurora-report-materials-table th:nth-child(2),
+.aurora-report-materials-table td:nth-child(2) {
+    width: 44%;
+}
+
+.aurora-report-materials-table th:nth-child(3),
+.aurora-report-materials-table td:nth-child(3) {
+    width: 22%;
+    text-align: left;
+}
+
+.aurora-report-materials-table th:nth-child(4),
+.aurora-report-materials-table td:nth-child(4) {
+    width: 18%;
+    text-align: right;
+}
+
+/* Elétrica Tupy — Códigos dos trabalhos: 5 colunas dentro da largura A4. */
+.aurora-report-section--tupy-service-codes .aurora-report-materials-table th:nth-child(1),
+.aurora-report-section--tupy-service-codes .aurora-report-materials-table td:nth-child(1) { width: 15%; }
+.aurora-report-section--tupy-service-codes .aurora-report-materials-table th:nth-child(2),
+.aurora-report-section--tupy-service-codes .aurora-report-materials-table td:nth-child(2) { width: 43%; }
+.aurora-report-section--tupy-service-codes .aurora-report-materials-table th:nth-child(3),
+.aurora-report-section--tupy-service-codes .aurora-report-materials-table td:nth-child(3) { width: 16%; text-align: left; }
+.aurora-report-section--tupy-service-codes .aurora-report-materials-table th:nth-child(4),
+.aurora-report-section--tupy-service-codes .aurora-report-materials-table td:nth-child(4) { width: 12%; text-align: left; }
+.aurora-report-section--tupy-service-codes .aurora-report-materials-table th:nth-child(5),
+.aurora-report-section--tupy-service-codes .aurora-report-materials-table td:nth-child(5) { width: 14%; text-align: right; }
+
+.aurora-report-materials-row {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.aurora-report-materials-cell {
+    padding: 9px 8px;
+    border-bottom: 1px solid #e8eef2;
+    vertical-align: top;
+    word-wrap: break-word;
+    overflow-wrap: anywhere;
+}
+
+.aurora-report-materials-cell--sap {
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .02em;
+}
+
+.aurora-report-materials-cell--qty,
+.aurora-report-materials-cell--sit {
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+}
+
+.aurora-print-stage .aurora-report-section--tupy-materials {
+    break-inside: auto;
+    margin-bottom: 4mm;
+}
+
+.aurora-print-stage .aurora-report-materials-table {
+    font-size: 10pt;
+}
+
+.aurora-print-stage .aurora-report-materials-table thead th {
+    padding: 1.6mm 1.5mm;
+    font-size: 7.5pt;
+}
+
+.aurora-print-stage .aurora-report-materials-cell {
+    padding: 1.7mm 1.5mm;
+    font-size: 9.5pt;
+}
+
+@media (max-width: 720px) {
+    /* Share/mobile only — never retarget .aurora-print-stage A4 geometry */
+    .aurora-report-document:not(.aurora-print-stage) .aurora-report-materials,
+    .aurora-report-body .aurora-report-materials {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .aurora-print-stage .aurora-report-materials {
+        overflow: visible;
+    }
+
+    .aurora-report-document:not(.aurora-print-stage) .aurora-report-materials-table,
+    .aurora-report-body .aurora-report-materials-table {
+        min-width: 520px;
+    }
+
+    .aurora-print-stage .aurora-report-materials-table {
+        min-width: 0;
+    }
+}
+
+.aurora-report-finalization {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    overflow: hidden;
+    border: 1px solid #cde5e2;
+    border-radius: var(--report-card-radius);
+    background: linear-gradient(135deg, #edf8f6 0%, #f5fbfb 100%);
+}
+
+.aurora-report-finalization__status,
+.aurora-report-finalization__notes {
+    padding: 14px 16px;
+}
+
+.aurora-report-finalization__status {
+    border-right: 1px solid rgba(205, 229, 226, .85);
+}
+
+.aurora-report-finalization__status span,
+.aurora-report-finalization__notes span {
+    display: block;
+    color: var(--report-muted);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+
+.aurora-report-finalization__value {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 8px;
+    color: #126f69;
+    font-size: 14px;
+    line-height: 1.35;
+}
+
+.aurora-report-finalization__value--complete::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--report-accent);
+    box-shadow: 0 0 0 3px rgba(29, 145, 137, .14);
+}
+
+.aurora-report-finalization__notes p {
+    margin: 8px 0 0;
+    color: #3f5062;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.aurora-report-occurrence {
+    margin-bottom: 22px;
+}
+
+.aurora-report-alert {
+    padding: 15px 16px;
+    border-left-width: 4px;
+    border-radius: 10px;
+}
+
+.aurora-report-alert h3 {
+    font-size: 16px;
+}
+
+.aurora-report-alert > p,
+.aurora-report-recommendation p {
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.aurora-report-document__footer {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 28px;
+    align-items: center;
+    padding: 13px 42px 15px;
+    border-top: 1px solid #e4eaee;
+    color: #718096;
+    background: #fff;
+    font-size: 8px;
+}
+
+.aurora-report-footer__brand,
+.aurora-report-footer__user,
+.aurora-report-footer__code {
+    display: grid;
+    gap: 2px;
+}
+
+.aurora-report-footer__brand .aurora-footer-generated {
+    margin-left: 8px;
+}
+
+.aurora-report-footer__user span,
+.aurora-report-footer__code span {
+    margin: 0;
+    color: #8491a0;
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+.aurora-report-footer__user b,
+.aurora-report-footer__code b {
+    color: #314458;
+    font-size: 9px;
+    letter-spacing: .035em;
+}
+
+/*
+ * RC8.13 - compositor fisico A4.
+ * A area abaixo existe fora da tela para que o WebView possa medir cada
+ * bloco nas mesmas dimensoes usadas no PDF antes de abrir a impressao.
+ */
+.aurora-print-stage {
+    --report-accent: #1d9189;
+    position: fixed;
+    top: 0;
+    left: -1000vw;
+    width: 210mm;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.aurora-print-stage[data-print-measure-visible="1"] {
+    left: 0;
+    visibility: visible;
+    opacity: 0.01;
+    z-index: -1;
+}
+
+#aurora-pdf-measure-host {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 794px;
+    height: 1123px;
+    overflow: hidden;
+    opacity: 0.01;
+    pointer-events: none;
+    z-index: -1;
+    background: #fff;
+}
+
+.aurora-print-stage--pdf-export {
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+    width: 210mm !important;
+    visibility: visible !important;
+    pointer-events: none !important;
+}
+
+/*
+ * Nunca exibir o compositor PDF dentro da prévia na tela.
+ * O palco só entra no fluxo de impressão via @media print ou WebView isolado.
+ */
+.aurora-report-preview > .aurora-print-stage,
+.aurora-report-preview > [data-report-print-stage] {
+    position: fixed !important;
+    left: -10000px !important;
+    top: 0 !important;
+    width: 210mm !important;
+    height: 0 !important;
+    overflow: hidden !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    z-index: -1 !important;
+}
+
+.aurora-print-stage--pdf-export .aurora-print-page {
+    display: none !important;
+    margin: 0 !important;
+}
+
+.aurora-print-stage--pdf-export .aurora-print-page.aurora-pdf-page-active {
+    display: grid !important;
+}
+
+.aurora-print-page {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: minmax(0, 1fr) 14mm;
+    width: 210mm;
+    height: 297mm;
+    overflow: hidden;
+    color: #172235;
+    background: #fff;
+    font-family: Arial, sans-serif;
+    font-size: 8pt;
+}
+
+.aurora-print-page--first {
+    grid-template-rows: 62mm minmax(0, 1fr) 14mm;
+}
+
+.aurora-print-page__cover {
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 0 !important;
+    height: 62mm;
+    padding: 10mm 13mm 9mm !important;
+    overflow: hidden;
+}
+
+/*
+ * Capa no palco/PDF: WebView de snapshot usa CSS de tela, nao @media print.
+ * Sem estas regras, .aurora-report-document herda --report-ink escuro na capa.
+ */
+.aurora-print-page__cover .aurora-report-cover {
+    color: #fff !important;
+    background:
+        radial-gradient(circle at 86% 18%, rgba(100, 240, 229, .20), transparent 31%),
+        linear-gradient(142deg, #091827, #12324b 68%, #17465a) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.aurora-print-page__cover .aurora-report-brand strong,
+.aurora-print-page__cover .aurora-report-cover h1 {
+    color: #fff !important;
+    -webkit-text-fill-color: #fff !important;
+}
+
+.aurora-print-page__cover .aurora-report-cover__kicker {
+    color: #64f0e5 !important;
+    -webkit-text-fill-color: #64f0e5 !important;
+}
+
+.aurora-print-page__cover .aurora-report-brand small {
+    color: #bad0dd !important;
+    -webkit-text-fill-color: #bad0dd !important;
+}
+
+.aurora-print-page__cover .aurora-report-cover p {
+    color: #d3e0e8 !important;
+    -webkit-text-fill-color: #d3e0e8 !important;
+}
+
+.aurora-print-page__cover .aurora-report-cover__meta span:first-child {
+    color: #64f0e5 !important;
+    -webkit-text-fill-color: #64f0e5 !important;
+}
+
+.aurora-print-page__cover .aurora-report-cover__meta span:last-child {
+    color: #c4d6e1 !important;
+    -webkit-text-fill-color: #c4d6e1 !important;
+}
+
+.aurora-print-page__content {
+    box-sizing: border-box;
+    min-height: 0;
+    padding: 8mm 13mm 5mm;
+    overflow: hidden;
+}
+
+.aurora-print-page__content > :last-child:not(.aurora-print-debug-overlay) {
+    margin-bottom: 0 !important;
+}
+
+.aurora-print-debug-overlay {
+    pointer-events: none;
+    margin: 0 0 2mm !important;
+    padding: 1mm 1.5mm;
+    border: .35mm dashed #d6455d;
+    color: #d6455d;
+    font: 6pt/1.2 Arial, sans-serif;
+    background: rgba(255, 240, 240, .85);
+}
+
+.aurora-print-debug-unit-tag {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 2;
+    padding: .5mm 1mm;
+    border: .2mm solid #1d9189;
+    background: rgba(233, 247, 245, .92);
+    color: #12324b;
+    font: 5.5pt/1.1 Arial, sans-serif;
+}
+
+.aurora-print-stage .aurora-print-intake-block,
+.aurora-print-stage .aurora-print-checklist-head {
+    margin-bottom: 4mm;
+}
+
+.aurora-print-page--first .aurora-print-page__content {
+    padding-top: 6mm;
+}
+
+.aurora-print-stage .aurora-report-section {
+    margin-bottom: 4mm;
+}
+
+.aurora-print-stage .aurora-report-section > h2,
+.aurora-print-stage .aurora-report-section__head {
+    margin: 0 0 2.3mm;
+    padding: 0 0 1.8mm;
+    border: 0;
+    border-bottom: .25mm solid #dde6ec;
+    font-size: 12pt;
+}
+
+.aurora-print-stage .aurora-report-section__head {
+    display: flex;
+    align-items: flex-start;
+    gap: 2.5mm;
+}
+
+.aurora-print-stage .aurora-report-section__head::before {
+    content: "";
+    flex-shrink: 0;
+    width: .75mm;
+    height: 4.5mm;
+    margin-top: .4mm;
+    border-radius: .5mm;
+    background: linear-gradient(180deg, #1d9189 0%, #64f0e5 100%);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.aurora-print-stage .aurora-report-info-grid,
+.aurora-print-stage .aurora-report-approval {
+    /*
+     * O palco de medicao representa uma folha A4, nao a tela do celular.
+     * Em WebViews <= 760px, report_engine.css colapsa estes grids para uma
+     * coluna. Se deixarmos essa regra entrar aqui, o compositor mede uma
+     * geometria mobile e depois imprime outra geometria (A4).
+     */
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.2mm;
+}
+
+.aurora-print-stage .aurora-report-info {
+    padding: 2mm 3mm;
+    border-radius: 2.2mm;
+}
+
+.aurora-print-stage .aurora-report-info span {
+    font-size: 6.5pt;
+}
+
+.aurora-print-stage .aurora-report-info strong {
+    margin-top: 1mm;
+    font-size: 8.2pt;
+    line-height: 1.3;
+}
+
+.aurora-print-stage .aurora-report-summary p,
+.aurora-print-stage .aurora-report-diagnostic p,
+.aurora-print-stage .aurora-report-alert > p,
+.aurora-print-stage .aurora-report-recommendation p {
+    font-size: 8pt;
+    line-height: 1.45;
+}
+
+.aurora-print-stage .aurora-report-diagnostic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5mm;
+}
+
+.aurora-print-stage .aurora-report-diagnostic article {
+    min-height: 15mm;
+    padding: 2.5mm 3.5mm;
+}
+
+.aurora-print-stage .aurora-report-section--conclusion {
+    margin-bottom: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+}
+
+.aurora-print-stage .aurora-print-tail-bundle .aurora-report-section--diagnostic,
+.aurora-print-stage .aurora-print-tail-bundle .aurora-report-section--conclusion {
+    margin-bottom: 0;
+}
+
+.aurora-print-stage .aurora-print-tail-bundle .aurora-report-finalization {
+    min-height: 0;
+}
+
+.aurora-print-stage [data-print-atomic="section"] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.aurora-print-stage [data-print-atomic="section"] > .aurora-report-section__head,
+.aurora-print-stage [data-print-atomic="section"] > h2 {
+    break-after: avoid;
+    page-break-after: avoid;
+}
+
+.aurora-print-stage .aurora-report-finalization {
+    border: .25mm solid #cde5e2;
+    border-radius: 2.5mm;
+    background: linear-gradient(135deg, #edf8f6, #f5fbfb);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.aurora-print-stage .aurora-report-finalization__status,
+.aurora-print-stage .aurora-report-finalization__notes {
+    padding: 2.5mm 3.5mm;
+}
+
+.aurora-print-stage .aurora-report-finalization__status span,
+.aurora-print-stage .aurora-report-finalization__notes span {
+    font-size: 6.3pt;
+}
+
+.aurora-print-stage .aurora-report-finalization__value {
+    margin-top: 1mm;
+    font-size: 9pt;
+}
+
+.aurora-print-stage .aurora-report-finalization__notes p {
+    margin-top: 1mm;
+    font-size: 8pt;
+    line-height: 1.45;
+}
+
+.aurora-print-stage .aurora-report-finalization--documental {
+    display: grid;
+    gap: 3mm;
+    padding: 3mm 3.5mm;
+    border: .25mm solid #dce7e9;
+    border-radius: 2.5mm;
+    background: linear-gradient(180deg, #f9fcfc, #f4f8f9);
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+}
+
+.aurora-print-stage .aurora-report-finalization--documental .aurora-report-finalization__status-label,
+.aurora-print-stage .aurora-report-finalization--documental .aurora-report-finalization__notes-label {
+    font-size: 6.3pt;
+}
+
+.aurora-print-stage .aurora-report-finalization--documental .aurora-report-finalization__value {
+    font-size: 9pt;
+}
+
+.aurora-print-stage .aurora-report-finalization--documental .aurora-report-finalization__notes-block p {
+    font-size: 8pt;
+    line-height: 1.45;
+}
+
+.aurora-print-stage .aurora-report-section,
+.aurora-print-stage [data-print-keep-together="1"],
+.aurora-print-stage .aurora-report-section--vehicle-checklist {
+    break-inside: auto;
+    page-break-inside: auto;
+}
+
+.aurora-print-stage .aurora-report-fact-sheet {
+    gap: 4mm;
+}
+
+.aurora-print-stage .aurora-report-fact-sheet__row {
+    gap: 4mm 6mm;
+}
+
+.aurora-print-stage .aurora-report-fact__value {
+    font-size: 10pt;
+}
+
+.aurora-print-stage .aurora-report-fact__label,
+.aurora-print-stage .aurora-report-spec-cell__label,
+.aurora-print-stage .aurora-report-intake-summary__label {
+    font-size: 6.3pt;
+}
+
+.aurora-print-stage .aurora-report-spec-cell__value,
+.aurora-print-stage .aurora-report-intake-summary__value {
+    font-size: 8.5pt;
+}
+
+.aurora-print-stage .aurora-report-status-row {
+    padding: 1.8mm 0;
+}
+
+.aurora-print-stage .aurora-report-status-row__label {
+    font-size: 8pt;
+}
+
+.aurora-print-stage .aurora-report-status-row__value {
+    font-size: 7pt;
+}
+
+.aurora-print-stage .aurora-report-occurrence {
+    margin-bottom: 4.5mm;
+}
+
+.aurora-print-stage .aurora-report-alert {
+    padding: 3mm 3.5mm;
+}
+
+.aurora-print-stage .aurora-report-photos,
+.aurora-print-stage .aurora-report-media {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--report-media-gap, 2.5mm);
+    margin-top: 2.5mm;
+}
+
+.aurora-print-stage .aurora-report-media--single,
+.aurora-print-stage .aurora-report-photos--single {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.aurora-print-stage .aurora-report-media--single .aurora-report-media-item,
+.aurora-print-stage .aurora-report-photos--single figure {
+    width: min(72%, var(--report-media-max-single, 72mm));
+}
+
+.aurora-print-stage .aurora-report-media--single.aurora-report-media--portrait .aurora-report-media-item,
+.aurora-print-stage .aurora-report-photos--single.aurora-report-media--portrait figure {
+    width: min(58%, 74mm);
+}
+
+.aurora-print-stage .aurora-report-media--trio > .aurora-report-media-item:nth-child(3),
+.aurora-print-stage .aurora-report-media--trio > figure:nth-child(3) {
+    grid-column: 1 / -1;
+    width: min(58%, 72mm);
+    justify-self: center;
+}
+
+.aurora-print-stage .aurora-report-media-frame img,
+.aurora-print-stage .aurora-report-photo-frame img,
+.aurora-print-stage .aurora-report-photos img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/*
+ * Vistoria veicular - composicao fotografica exclusiva do PDF.
+ * Estas regras precisam existir no CSS global porque o compositor clona
+ * apenas o corpo do relatorio para o palco A4; estilos embutidos na previa
+ * nao acompanham esse clone.
+ */
+.aurora-print-stage .aurora-print-vehicle-records,
+.aurora-print-stage .aurora-print-vehicle-photos {
+    margin-bottom: 4mm;
+}
+
+.aurora-print-stage .aurora-print-vehicle-photos .aurora-vehicle-photo-section {
+    margin: 0;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-grid--print-row {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5mm;
+    margin-bottom: 0;
+}
+
+.aurora-print-stage .aurora-print-checklist-row,
+.aurora-print-stage .aurora-print-checklist-meta,
+.aurora-print-stage .aurora-print-diagnostic-part,
+.aurora-print-stage .aurora-print-fact-row,
+.aurora-print-stage .aurora-print-spec-row {
+    margin-bottom: 4mm;
+}
+
+.aurora-print-stage .aurora-print-occurrence-unit {
+    margin-bottom: 4mm;
+}
+
+.aurora-print-stage .aurora-vehicle-photo {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-section {
+    margin: 0;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-section__header {
+    margin: 0 0 2.5mm;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-section__header h3 {
+    margin: 0 0 .8mm;
+    font-size: 9pt;
+    line-height: 1.25;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-section__header p {
+    margin: 0;
+    color: #718096;
+    font-size: 6.5pt;
+    line-height: 1.35;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5mm;
+    margin: 0;
+    align-items: start;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-grid--all-portrait {
+    --vehicle-portrait-cell-w: 76mm;
+    grid-template-columns: repeat(2, var(--vehicle-portrait-cell-w));
+    justify-content: center;
+    column-gap: 5mm;
+    row-gap: 3mm;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-grid--all-portrait .aurora-vehicle-photo {
+    width: var(--vehicle-portrait-cell-w);
+    max-width: 100%;
+    justify-self: center;
+}
+
+.aurora-print-stage .aurora-vehicle-photo {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: auto auto;
+    align-content: start;
+    min-width: 0;
+    margin: 0;
+    overflow: hidden;
+    border: .25mm solid #dce6ec;
+    border-radius: 2.3mm;
+    background: #f6f9fa;
+    break-inside: avoid;
+}
+
+.aurora-print-stage .aurora-vehicle-photo__frame,
+.aurora-print-stage .aurora-vehicle-photo__placeholder {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: var(--report-media-h-landscape, var(--report-media-h));
+    min-height: var(--report-media-h-landscape, var(--report-media-h));
+    max-height: var(--report-media-h-landscape, var(--report-media-h));
+    padding: 1.5mm;
+    overflow: hidden;
+    color: #8996a5;
+    background: #eef3f6;
+    font-size: 7pt;
+}
+
+.aurora-print-stage .aurora-vehicle-photo__frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.aurora-print-stage .aurora-vehicle-photo figcaption {
+    box-sizing: border-box;
+    display: grid;
+    gap: .7mm;
+    min-width: 0;
+    padding: 1.6mm 2mm 1.8mm;
+    background: #fff;
+}
+
+.aurora-print-stage .aurora-vehicle-photo figcaption span {
+    color: #718096;
+    font-size: 5.5pt;
+    font-weight: 800;
+    letter-spacing: .08em;
+    line-height: 1.2;
+    text-transform: uppercase;
+}
+
+.aurora-print-stage .aurora-vehicle-photo figcaption strong {
+    color: #172235;
+    font-size: 8pt;
+    line-height: 1.25;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-grid--all-portrait .aurora-vehicle-photo {
+    grid-template-rows: var(--report-media-h-portrait, var(--report-media-h)) auto;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-grid--all-portrait .aurora-vehicle-photo__frame,
+.aurora-print-stage .aurora-vehicle-photo-grid--all-portrait .aurora-vehicle-photo__placeholder {
+    width: 100%;
+    height: var(--report-media-h-portrait, var(--report-media-h));
+    min-height: var(--report-media-h-portrait, var(--report-media-h));
+    max-height: var(--report-media-h-portrait, var(--report-media-h));
+}
+
+.aurora-print-stage .aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--portrait {
+    grid-template-rows: auto auto;
+}
+
+.aurora-print-stage .aurora-vehicle-photo--landscape .aurora-vehicle-photo__frame,
+.aurora-print-stage .aurora-vehicle-photo--landscape .aurora-vehicle-photo__placeholder,
+.aurora-print-stage .aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--landscape .aurora-vehicle-photo__frame,
+.aurora-print-stage .aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--landscape .aurora-vehicle-photo__placeholder {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+}
+
+.aurora-print-stage .aurora-vehicle-photo--landscape .aurora-vehicle-photo__frame img,
+.aurora-print-stage .aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--landscape .aurora-vehicle-photo__frame img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: var(--report-media-h-landscape, var(--report-media-h));
+    object-fit: contain;
+}
+
+.aurora-print-stage .aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--portrait .aurora-vehicle-photo__frame,
+.aurora-print-stage .aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--portrait .aurora-vehicle-photo__placeholder {
+    height: auto;
+    min-height: 0;
+    max-height: var(--report-media-h-portrait, var(--report-media-h));
+}
+
+.aurora-print-stage .aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--portrait .aurora-vehicle-photo__frame img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: var(--report-media-h-portrait, var(--report-media-h));
+    margin-inline: auto;
+    object-fit: contain;
+}
+
+.aurora-print-stage .aurora-vehicle-additional-records {
+    display: block;
+    margin-top: 0;
+}
+
+.aurora-print-stage .aurora-print-record-sheet,
+.aurora-print-stage .aurora-print-additional-record {
+    display: block;
+    margin-bottom: 3.5mm;
+}
+
+.aurora-print-stage .aurora-print-record-sheet > .aurora-vehicle-photo-section__header {
+    margin-bottom: 2.5mm;
+    padding-bottom: 2mm;
+    border-bottom: .25mm solid #e4eaee;
+}
+
+.aurora-print-stage .aurora-print-record-row {
+    display: grid;
+    gap: 3mm;
+    align-items: start;
+}
+
+.aurora-print-stage .aurora-print-record-row[data-record-count="1"],
+.aurora-print-stage .aurora-print-record-row[data-print-density="full"],
+.aurora-print-stage .aurora-print-record-row[data-print-density="single"] {
+    grid-template-columns: minmax(0, 1fr);
+}
+
+.aurora-print-stage .aurora-print-record-row[data-record-count="2"],
+.aurora-print-stage .aurora-print-record-row[data-print-density="duo"] {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aurora-print-stage .aurora-print-record-row .aurora-report-record-card {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+}
+
+.aurora-print-stage .aurora-print-tail-bundle {
+    display: grid;
+    gap: 3.5mm;
+}
+
+.aurora-print-stage .aurora-print-tail-part {
+    min-width: 0;
+}
+
+.aurora-print-stage .aurora-print-tail-part[data-print-keep-together="1"] > .aurora-report-section__head,
+.aurora-print-stage [data-print-keep-together="1"] > .aurora-report-section__head {
+    break-after: avoid;
+    page-break-after: avoid;
+}
+
+.aurora-print-stage .aurora-print-additional-record > .aurora-vehicle-photo-section__header {
+    margin-bottom: 2mm;
+    padding-bottom: 1.5mm;
+    border-bottom: .25mm solid #dde6ec;
+}
+
+.aurora-print-stage .aurora-vehicle-record-grid--print {
+    display: block;
+}
+
+.aurora-print-stage .aurora-vehicle-record-grid--print .aurora-report-record-card {
+    width: 100%;
+    max-width: 100%;
+}
+
+.aurora-print-stage .aurora-vehicle-record-pair,
+.aurora-print-stage .aurora-vehicle-record-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3mm;
+}
+
+.aurora-print-stage .aurora-vehicle-record-pair {
+    margin-top: 0;
+    break-inside: avoid;
+}
+
+.aurora-print-stage .aurora-vehicle-record-pair > .aurora-vehicle-additional-records {
+    display: block;
+}
+
+.aurora-print-stage .aurora-print-additional-record .aurora-report-occurrence {
+    margin-bottom: 0;
+}
+
+.aurora-print-stage .aurora-vehicle-record-card,
+.aurora-print-stage .aurora-report-record-card {
+    box-sizing: border-box;
+    margin: 0 0 3mm;
+    padding: 0;
+    overflow: hidden;
+    border: .25mm solid #dce6ec;
+    border-radius: 2.3mm;
+    background: #fafcfd;
+    break-inside: avoid;
+}
+
+.aurora-print-stage .aurora-vehicle-record-card--issue,
+.aurora-print-stage .aurora-report-record-card--issue {
+    border-top: 0;
+    border-left: .45mm solid rgba(214, 69, 93, .42);
+    background: linear-gradient(180deg, #fffcfc 0%, #fafcfd 100%);
+}
+
+.aurora-print-stage .aurora-vehicle-record-card--complementary,
+.aurora-print-stage .aurora-report-record-card--complementary {
+    border-top: 0;
+    border-left: .45mm solid rgba(29, 145, 137, .48);
+    background: linear-gradient(180deg, #f8fcfb 0%, #fafcfd 100%);
+}
+
+.aurora-print-stage .aurora-vehicle-record-card .aurora-report-occurrence__header {
+    margin-bottom: 1.5mm;
+}
+
+.aurora-print-stage .aurora-report-occurrence__header--severity-only {
+    justify-content: flex-end;
+}
+
+.aurora-print-stage .aurora-vehicle-record-card__content h3 {
+    margin: 0 0 1mm;
+    font-size: 9pt;
+    line-height: 1.25;
+}
+
+.aurora-print-stage .aurora-vehicle-record-card__content small {
+    display: block;
+    margin-bottom: 1.5mm;
+    color: #718096;
+    font-size: 6.5pt;
+}
+
+.aurora-print-stage .aurora-vehicle-record-card__content > p {
+    margin: 0;
+    color: #465365;
+    font-size: 7.5pt;
+    line-height: 1.4;
+}
+
+.aurora-print-stage .aurora-vehicle-record-card .aurora-report-recommendation {
+    margin-top: 2mm;
+    padding-top: 2mm;
+}
+
+.aurora-print-stage .aurora-vehicle-record-card .aurora-report-photos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2mm;
+    margin-top: 2mm;
+}
+
+/* Cada avaria ocupa meia página, mas sua foto usa toda a largura do card. */
+.aurora-print-stage .aurora-vehicle-record-card .aurora-report-photos--single {
+    display: block;
+}
+
+.aurora-print-stage .aurora-vehicle-record-card .aurora-report-photos--single figure {
+    width: 100%;
+}
+
+.aurora-print-stage .aurora-vehicle-record-card .aurora-report-media-frame,
+.aurora-print-stage .aurora-vehicle-record-card .aurora-report-photo-frame,
+.aurora-print-stage .aurora-report-record-card .aurora-report-media-frame,
+.aurora-print-stage .aurora-report-record-card .aurora-report-photo-frame {
+    box-sizing: border-box;
+    width: 100%;
+    height: var(--report-media-h-landscape, var(--report-media-h, 42mm));
+    min-height: var(--report-media-h-landscape, var(--report-media-h, 42mm));
+    max-height: var(--report-media-h-landscape, var(--report-media-h, 42mm));
+    padding: 1.5mm;
+    overflow: hidden;
+}
+
+.aurora-print-stage .aurora-report-media-item--portrait .aurora-report-media-frame,
+.aurora-print-stage .aurora-report-media-item--portrait .aurora-report-photo-frame {
+    height: var(--report-media-h-portrait, var(--report-media-h, 52mm));
+    min-height: var(--report-media-h-portrait, var(--report-media-h, 52mm));
+    max-height: var(--report-media-h-portrait, var(--report-media-h, 52mm));
+}
+
+.aurora-print-stage .aurora-vehicle-record-card .aurora-report-photo-frame img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.aurora-print-stage .aurora-report-record-card .aurora-report-media--duo.aurora-report-media--portrait,
+.aurora-print-stage .aurora-report-record-card .aurora-report-media--duo.aurora-report-media--all-portrait {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    justify-items: center;
+}
+
+.aurora-print-stage .aurora-report-record-card .aurora-report-media--trio > .aurora-report-media-item:nth-child(3),
+.aurora-print-stage .aurora-report-record-card .aurora-report-media--trio > figure:nth-child(3) {
+    grid-column: 1 / -1;
+    width: min(52%, 68mm);
+    justify-self: center;
+}
+
+/* Cards inteiros evitam quebra; fragmentos divididos podem continuar na pagina seguinte. */
+.aurora-print-stage .aurora-print-record-sheet:not([data-print-split="1"]),
+.aurora-print-stage .aurora-print-additional-record:not([data-print-split="1"]),
+.aurora-print-stage .aurora-print-record-row:not([data-print-split="1"]) .aurora-report-record-card,
+.aurora-print-stage .aurora-vehicle-record-grid:not([data-print-split="1"]),
+.aurora-print-stage .aurora-vehicle-record-card:not(.aurora-report-record-card--continued),
+.aurora-print-stage .aurora-vehicle-record-card__content,
+.aurora-print-stage .aurora-vehicle-record-card .aurora-report-photos,
+.aurora-print-stage .aurora-vehicle-record-card figure {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+}
+
+.aurora-print-stage [data-print-split="1"] .aurora-report-record-card,
+.aurora-print-stage .aurora-report-record-card--continued {
+    break-inside: auto !important;
+    page-break-inside: auto !important;
+    overflow: hidden;
+}
+
+.aurora-print-stage .aurora-report-record-card--fragment-start {
+    margin-bottom: 0;
+    border-bottom: 0;
+    border-radius: 2.3mm 2.3mm 0 0;
+}
+
+.aurora-print-stage .aurora-report-record-card--fragment-middle {
+    margin-bottom: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius: 0;
+}
+
+.aurora-print-stage .aurora-report-record-card--fragment-end {
+    margin-bottom: 3mm;
+    border-top: 0;
+    border-radius: 0 0 2.3mm 2.3mm;
+}
+
+.aurora-print-stage [data-print-split="1"] .aurora-report-record-card__header,
+.aurora-print-stage [data-print-split="1"] .aurora-report-record-card__recommendation,
+.aurora-print-stage [data-print-split="1"] .aurora-report-media-item,
+.aurora-print-stage [data-print-split="1"] .aurora-report-photos figure {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+}
+
+.aurora-print-stage .aurora-report-section--signature {
+    margin-bottom: 0;
+    break-inside: avoid;
+}
+
+.aurora-print-stage .aurora-report-signature {
+    display: grid;
+    justify-items: center;
+    gap: 2mm;
+    padding: 3mm;
+}
+
+.aurora-print-stage .aurora-report-signature img {
+    display: block;
+    width: auto;
+    max-width: 105mm;
+    height: auto;
+    max-height: 28mm;
+    object-fit: contain;
+    border-bottom: .25mm solid #657785;
+}
+
+.aurora-print-stage .aurora-report-signature span {
+    color: #718096;
+    font-size: 6.5pt;
+}
+
+.aurora-print-stage .aurora-report-photo-index {
+    right: 1.8mm;
+    bottom: 1.8mm;
+    padding: 1mm 1.8mm;
+    font-size: 6pt;
+}
+
+.aurora-print-records-title {
+    margin-bottom: 0 !important;
+}
+
+.aurora-print-page__footer {
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 8mm;
+    align-items: center;
+    width: 100%;
+    height: 14mm;
+    padding: 2mm 13mm 2.5mm;
+    border-top: .25mm solid #e4eaee;
+    color: #718096;
+    background: #fff;
+}
+
+/* A data de emissao pertence somente ao encerramento do documento. */
+.aurora-print-footer__date {
+    display: none;
+    gap: .5mm;
+}
+
+.aurora-print-page--last .aurora-print-footer__date {
+    display: grid;
+}
+
+.aurora-print-page:not(.aurora-print-page--last) .aurora-print-page__footer {
+    grid-template-columns: 1fr auto;
+}
+
+.aurora-print-stage .aurora-report-occurrence--photos {
+    margin-top: -2mm;
+}
+
+.aurora-print-stage .aurora-report-photos--print-row {
+    margin-top: 0;
+}
+
+.aurora-print-stage .aurora-report-photos--print-row.aurora-report-media--duo,
+.aurora-print-stage .aurora-report-media--print-row.aurora-report-media--duo {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aurora-print-stage .aurora-report-photos--print-row.aurora-report-media--single,
+.aurora-print-stage .aurora-report-media--print-row.aurora-report-media--single {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.aurora-print-footer__brand,
+.aurora-print-footer__user,
+.aurora-print-footer__code {
+    display: grid;
+    gap: .5mm;
+}
+
+.aurora-print-footer__brand .aurora-footer-generated {
+    margin-left: 2mm;
+}
+
+.aurora-print-footer__code {
+    text-align: right;
+}
+
+.aurora-print-page__footer strong,
+.aurora-print-page__footer b {
+    color: #314458;
+    font-size: 6.7pt;
+}
+
+.aurora-print-page__footer span,
+.aurora-print-page__footer small {
+    color: #7b8998;
+    font-size: 5.5pt;
+    letter-spacing: .035em;
+}
+
+.aurora-report-document__footer strong {
+    color: #344458;
+    font-size: 9px;
+}
+
+.aurora-report-footer__code {
+    display: grid;
+    gap: 2px;
+    text-align: right;
+}
+
+.aurora-report-footer__code span {
+    margin: 0;
+    color: #8491a0;
+    font-size: 7px;
+    font-weight: 800;
+    letter-spacing: .12em;
+}
+
+.aurora-report-footer__code b {
+    color: #314458;
+    font-size: 9px;
+    letter-spacing: .035em;
+}
+
+@media (max-width: 760px) {
+    .aurora-report-cover {
+        min-height: 285px;
+        padding: 26px 22px;
+    }
+
+    .aurora-report-cover__content {
+        margin-top: 48px;
+    }
+
+    .aurora-report-cover p {
+        padding-right: 0;
+    }
+
+    .aurora-report-cover__meta {
+        right: 22px;
+        bottom: 22px;
+    }
+
+    .aurora-report-body {
+        padding: 24px 20px 18px;
+    }
+
+    .aurora-report-diagnostic {
+        grid-template-columns: 1fr;
+    }
+
+    .aurora-report-fact-sheet__row,
+    .aurora-report-spec-sheet__row--3 {
+        grid-template-columns: 1fr;
+    }
+
+    .aurora-report-spec-sheet__row--1 {
+        max-width: none;
+    }
+
+    /* Z Fold / telas estreitas: a legenda pertence a foto e nao ocupa uma coluna. */
+    .aurora-report-preview__sheet .aurora-report-photo-frame {
+        position: relative;
+    }
+
+    .aurora-report-preview__sheet .aurora-report-photo-index {
+        display: none !important;
+    }
+
+    .aurora-report-document__footer {
+        padding: 13px 20px 15px;
+    }
+}
+
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 0 !important;
+    }
+
+    .aurora-report-preview__sheet {
+        display: none !important;
+    }
+
+    .aurora-report-preview > .aurora-print-stage {
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+        display: block !important;
+        width: 210mm !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+    }
+
+    .aurora-print-page {
+        display: grid !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        min-height: 297mm !important;
+        max-height: 297mm !important;
+        margin: 0 !important;
+        overflow: hidden !important;
+        break-after: page !important;
+        page-break-after: always !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .aurora-print-page:last-child {
+        break-after: auto !important;
+        page-break-after: auto !important;
+    }
+
+    html,
+    body,
+    .aurora-report-preview,
+    .aurora-report-preview__sheet,
+    .aurora-report-preview__viewport,
+    .aurora-report-document {
+        width: 210mm !important;
+        min-width: 210mm !important;
+        background: #fff !important;
+    }
+
+    .aurora-report-cover {
+        min-height: 62mm !important;
+        padding: 10mm 13mm 9mm !important;
+        color: #fff !important;
+        background: #12324b !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .aurora-report-brand > span {
+        width: 13mm !important;
+        height: 13mm !important;
+        border-radius: 3mm !important;
+    }
+
+    .aurora-report-cover__logo-slot .aurora-report-brand__logo {
+        width: auto !important;
+        height: auto !important;
+        max-width: 30mm !important;
+        max-height: 16mm !important;
+        object-fit: contain !important;
+    }
+
+    .aurora-report-cover--with-photo .aurora-report-cover__layout {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 75mm) !important;
+        margin-top: 6mm !important;
+    }
+
+    .aurora-report-cover--with-photo {
+        --aurora-cover-photo-max-width: 75mm;
+        --aurora-cover-photo-max-height: 56mm;
+    }
+
+    .aurora-report-cover__photo {
+        width: fit-content !important;
+        height: auto !important;
+        max-width: 75mm !important;
+        max-height: 56mm !important;
+        padding: 1.5mm !important;
+        border: .3mm solid rgba(100, 240, 229, .72) !important;
+        border-radius: 2.5mm !important;
+        line-height: 0 !important;
+        background: rgba(7, 17, 31, .34) !important;
+        box-sizing: border-box !important;
+        box-shadow: none !important;
+    }
+
+    .aurora-report-cover__photo img {
+        width: auto !important;
+        height: auto !important;
+        max-width: 75mm !important;
+        max-height: 56mm !important;
+        object-fit: contain !important;
+        object-position: center center !important;
+    }
+
+    .aurora-report-brand strong {
+        font-size: 13pt !important;
+    }
+
+    .aurora-report-brand small {
+        font-size: 7.5pt !important;
+    }
+
+    .aurora-report-cover__content {
+        margin-top: 10mm !important;
+    }
+
+    .aurora-report-cover__kicker {
+        font-size: 7pt !important;
+    }
+
+    .aurora-report-cover h1 {
+        margin: 1.5mm 0 2mm !important;
+        font-size: 30pt !important;
+    }
+
+    .aurora-report-cover p {
+        max-width: 132mm !important;
+        padding-right: 0 !important;
+        font-size: 8pt !important;
+        line-height: 1.4 !important;
+    }
+
+    .aurora-report-cover__meta {
+        right: 13mm !important;
+        bottom: 9mm !important;
+    }
+
+    .aurora-report-cover__meta span:first-child {
+        font-size: 6pt !important;
+    }
+
+    .aurora-report-cover__meta span:last-child {
+        font-size: 7pt !important;
+    }
+
+    .aurora-report-body {
+        padding: 7mm 13mm 5mm !important;
+    }
+
+    .aurora-vehicle-additional-records .aurora-report-media,
+    .aurora-vehicle-additional-records .aurora-report-photos {
+        margin-top: 1.5mm !important;
+        gap: 2mm !important;
+    }
+
+    .aurora-vehicle-found-issues .aurora-report-media-frame,
+    .aurora-vehicle-found-issues .aurora-report-photo-frame {
+        height: auto !important;
+        min-height: 38mm !important;
+        max-height: 48mm !important;
+        padding: 1.5mm !important;
+    }
+
+    .aurora-vehicle-found-issues .aurora-report-media-frame img,
+    .aurora-vehicle-found-issues .aurora-report-photo-frame img {
+        height: auto !important;
+        max-height: 46mm !important;
+        width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    .aurora-vehicle-complementary-records .aurora-report-media-frame,
+    .aurora-vehicle-complementary-records .aurora-report-photo-frame {
+        height: auto !important;
+        min-height: 42mm !important;
+        max-height: 52mm !important;
+        padding: 1.5mm !important;
+    }
+
+    .aurora-vehicle-complementary-records .aurora-report-media-frame img,
+    .aurora-vehicle-complementary-records .aurora-report-photo-frame img {
+        height: auto !important;
+        max-height: 50mm !important;
+        width: 100% !important;
+        object-fit: contain !important;
+    }
+
+    .aurora-vehicle-additional-records > .aurora-vehicle-photo-section__header {
+        padding-top: 2mm !important;
+        margin-bottom: 1.5mm !important;
+    }
+
+    .aurora-report-section {
+        margin-bottom: 4mm !important;
+        break-inside: avoid;
+    }
+
+    .aurora-report-section--records {
+        break-inside: auto !important;
+    }
+
+    .aurora-report-section--tupy-materials {
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+
+    .aurora-report-section--tupy-materials > .aurora-report-section__head {
+        break-after: avoid !important;
+        page-break-after: avoid !important;
+    }
+
+    .aurora-report-materials-row {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .aurora-report-section > h2,
+    .aurora-report-section__head {
+        margin: 0 0 2.3mm !important;
+        padding: 0 0 1.8mm !important;
+        border: 0 !important;
+        border-bottom: .25mm solid #dde6ec !important;
+        font-size: 12pt !important;
+    }
+
+    .aurora-report-info-grid,
+    .aurora-report-approval {
+        gap: 2.2mm !important;
+    }
+
+    .aurora-report-info {
+        padding: 2mm 3mm !important;
+        border: .25mm solid #dfe7ec !important;
+        border-radius: 2.2mm !important;
+        background: #f6f8fa !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .aurora-report-info span {
+        font-size: 6.5pt !important;
+    }
+
+    .aurora-report-info strong {
+        margin-top: 1mm !important;
+        font-size: 8.2pt !important;
+        line-height: 1.3 !important;
+    }
+
+    .aurora-report-section--conditions .aurora-report-summary {
+        padding: 2.7mm 3.5mm 2.7mm 4.5mm !important;
+        border: .25mm solid #dce9e7 !important;
+        border-radius: 2.2mm !important;
+        background: #f3faf9 !important;
+    }
+
+    .aurora-report-summary p,
+    .aurora-report-diagnostic p,
+    .aurora-report-alert > p,
+    .aurora-report-recommendation p {
+        font-size: 8pt !important;
+        line-height: 1.45 !important;
+    }
+
+    .aurora-report-section--records .aurora-report-empty-section {
+        padding: 2.8mm 3.5mm !important;
+        border: .25mm dashed #cbd7df !important;
+        border-radius: 2.2mm !important;
+        background: #fafcfd !important;
+        font-size: 7.5pt !important;
+    }
+
+    .aurora-report-diagnostic {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 2mm !important;
+    }
+
+    .aurora-report-section--diagnostic {
+        margin-bottom: 2mm !important;
+    }
+
+    .aurora-report-section--diagnostic > .aurora-report-section__head {
+        margin-bottom: 1.5mm !important;
+    }
+
+    .aurora-report-diagnostic article {
+        min-height: 0 !important;
+        padding: 2mm 2.5mm !important;
+        border: .25mm solid #dce7e9 !important;
+        border-radius: 2.3mm !important;
+        background: #f4f9f9 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .aurora-report-diagnostic span,
+    .aurora-report-recommendation span {
+        font-size: 6.3pt !important;
+    }
+
+    .aurora-report-section--conclusion {
+        margin-bottom: 0 !important;
+        padding: 0 !important;
+        border: 0 !important;
+        background: transparent !important;
+    }
+
+    .aurora-report-section--conclusion > .aurora-report-section__head {
+        margin-bottom: 1.5mm !important;
+    }
+
+    .aurora-report-finalization--documental {
+        gap: 2mm !important;
+        padding: 2mm 2.5mm !important;
+        border: .25mm solid #dce7e9 !important;
+        border-radius: 2.5mm !important;
+        background: linear-gradient(180deg, #f9fcfc, #f4f8f9) !important;
+        break-inside: avoid !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .aurora-report-finalization--documental .aurora-report-finalization__status-label,
+    .aurora-report-finalization--documental .aurora-report-finalization__notes-label {
+        font-size: 6.3pt !important;
+    }
+
+    .aurora-report-finalization--documental .aurora-report-finalization__value {
+        font-size: 9pt !important;
+    }
+
+    .aurora-report-finalization--documental .aurora-report-finalization__notes-block p {
+        font-size: 8pt !important;
+        line-height: 1.45 !important;
+    }
+
+    .aurora-report-section--vehicle-checklist {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .aurora-print-stage .aurora-report-section,
+    .aurora-print-stage [data-print-keep-together="1"],
+    .aurora-print-stage .aurora-report-section--vehicle-checklist {
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+
+    .aurora-print-stage .aurora-report-section__head {
+        display: flex !important;
+        align-items: flex-start !important;
+        gap: 2.5mm !important;
+    }
+
+    .aurora-print-stage .aurora-report-section__head::before {
+        content: "" !important;
+        flex-shrink: 0 !important;
+        width: .75mm !important;
+        height: 4.5mm !important;
+        margin-top: .4mm !important;
+        border-radius: .5mm !important;
+        background: linear-gradient(180deg, #1d9189 0%, #64f0e5 100%) !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .aurora-report-finalization {
+        border: .25mm solid #cde5e2 !important;
+        border-radius: 2.5mm !important;
+        background: linear-gradient(135deg, #edf8f6, #f5fbfb) !important;
+        break-inside: avoid !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .aurora-report-finalization__status,
+    .aurora-report-finalization__notes {
+        padding: 2.5mm 3.5mm !important;
+    }
+
+    .aurora-report-finalization__status span,
+    .aurora-report-finalization__notes span {
+        font-size: 6.3pt !important;
+    }
+
+    .aurora-report-finalization__value {
+        font-size: 9pt !important;
+    }
+
+    .aurora-report-finalization__notes p {
+        font-size: 8pt !important;
+        line-height: 1.45 !important;
+    }
+
+    .aurora-report-occurrence:not(.aurora-report-record-card):not(.aurora-vehicle-record-card) {
+        margin-bottom: 4.5mm !important;
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+
+    .aurora-report-occurrence.aurora-report-record-card,
+    .aurora-report-occurrence.aurora-vehicle-record-card,
+    .aurora-vehicle-additional-records > .aurora-report-record-card {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+    }
+
+    .aurora-vehicle-additional-records.aurora-vehicle-found-issues {
+        break-inside: auto !important;
+        page-break-inside: auto !important;
+    }
+
+    .aurora-report-occurrence__header {
+        break-after: avoid !important;
+    }
+
+    .aurora-report-alert {
+        padding: 3mm 3.5mm !important;
+        border-left: 1mm solid #e24e63 !important;
+        border-radius: 2.3mm !important;
+        background: #fff5f6 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+        break-inside: avoid !important;
+    }
+
+    .aurora-report-photos {
+        gap: 2.5mm !important;
+        margin-top: 2.5mm !important;
+    }
+
+    .aurora-report-photos figure {
+        border: .25mm solid #dfe7ed !important;
+        border-radius: 2.3mm !important;
+    }
+
+    .aurora-report-photo-frame {
+        position: relative !important;
+        background: #f5f7f8 !important;
+    }
+
+    .aurora-report-photo-index {
+        position: absolute !important;
+        right: 1.8mm !important;
+        bottom: 1.8mm !important;
+        padding: 1mm 1.8mm !important;
+        border-radius: 99mm !important;
+        background: rgba(18, 50, 75, .82) !important;
+        color: #fff !important;
+        font-size: 6pt !important;
+        font-weight: 700 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .aurora-report-photos img,
+    .aurora-report-media-frame img {
+        width: 100% !important;
+        height: 100% !important;
+        max-width: 100% !important;
+        max-height: 100% !important;
+        object-fit: contain !important;
+    }
+
+    .aurora-report-document__footer {
+        display: none !important;
+    }
+
+    .aurora-report-document__footer strong,
+    .aurora-report-footer__user b,
+    .aurora-report-footer__code b {
+        font-size: 7pt !important;
+    }
+
+    .aurora-report-document__footer span {
+        font-size: 6pt !important;
+    }
+}
+
+/* RC8.14 — sistema unificado de midia, cards e ocorrencias */
+
+.aurora-print-stage {
+    --report-media-h: 42mm;
+    --report-media-h-landscape: 42mm;
+    --report-media-h-portrait: 52mm;
+    --report-media-gap: 2.5mm;
+    --report-media-max-single: 72mm;
+    --report-media-max-portrait: 68mm;
+}
+
+.aurora-report-document {
+    --report-media-h: 210px;
+    --report-media-h-landscape: 210px;
+    --report-media-h-portrait: 220px;
+    --report-media-gap: 12px;
+    --report-media-max-single: 420px;
+    --report-media-max-portrait: 280px;
+}
+
+.aurora-report-media-frame,
+.aurora-report-photo-frame,
+.aurora-vehicle-photo__frame,
+.aurora-vehicle-photo__placeholder {
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    padding: 8px;
+    overflow: hidden;
+    background: #eef3f6;
+}
+
+.aurora-report-media-item--portrait .aurora-report-media-frame,
+.aurora-report-media-item--portrait .aurora-report-photo-frame,
+.aurora-vehicle-photo--portrait .aurora-vehicle-photo__frame,
+.aurora-vehicle-photo--portrait .aurora-vehicle-photo__placeholder {
+    height: var(--report-media-h-portrait, var(--report-media-h));
+    min-height: var(--report-media-h-portrait, var(--report-media-h));
+    max-height: var(--report-media-h-portrait, var(--report-media-h));
+}
+
+.aurora-report-media-frame img,
+.aurora-report-photo-frame img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.aurora-report-photo-safe,
+.aurora-report-media-frame .aurora-report-photo-safe,
+.aurora-report-photo-card__frame img.aurora-report-photo-safe {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+    object-position: center center;
+}
+
+.aurora-vehicle-photo__frame img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.aurora-report-media,
+.aurora-report-photos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--report-media-gap);
+    margin-top: 12px;
+}
+
+.aurora-report-media--single,
+.aurora-report-photos--single {
+    grid-template-columns: 1fr;
+    justify-items: center;
+}
+
+.aurora-report-media--single .aurora-report-media-item,
+.aurora-report-photos--single figure {
+    width: min(72%, var(--report-media-max-single, 420px));
+}
+
+.aurora-report-media--single.aurora-report-media--portrait .aurora-report-media-item,
+.aurora-report-photos--single.aurora-report-media--portrait figure {
+    width: min(58%, var(--report-media-max-portrait, 280px));
+}
+
+.aurora-report-media--duo,
+.aurora-report-media--quad,
+.aurora-report-media--many {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aurora-report-media--trio {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.aurora-report-media--trio > .aurora-report-media-item:nth-child(3),
+.aurora-report-media--trio > figure:nth-child(3) {
+    grid-column: 1 / -1;
+    width: min(58%, 340px);
+    justify-self: center;
+}
+
+.aurora-report-media--mixed .aurora-report-media-item--landscape .aurora-report-media-frame,
+.aurora-report-media--mixed .aurora-report-media-item--landscape .aurora-report-photo-frame {
+    height: var(--report-media-h-landscape, var(--report-media-h));
+    min-height: var(--report-media-h-landscape, var(--report-media-h));
+    max-height: var(--report-media-h-landscape, var(--report-media-h));
+}
+
+.aurora-report-media--mixed .aurora-report-media-item--portrait .aurora-report-media-frame,
+.aurora-report-media--mixed .aurora-report-media-item--portrait .aurora-report-photo-frame {
+    height: var(--report-media-h-portrait, var(--report-media-h));
+    min-height: var(--report-media-h-portrait, var(--report-media-h));
+    max-height: var(--report-media-h-portrait, var(--report-media-h));
+}
+
+.aurora-report-media-item,
+.aurora-report-photos figure {
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid #dce6ec;
+    border-radius: 10px;
+    background: #f8fafb;
+    break-inside: avoid;
+}
+
+.aurora-report-media-badge,
+.aurora-report-photo-index {
+    display: none !important;
+}
+
+.aurora-report-record-card {
+    display: grid;
+    gap: 0;
+    margin: 0 0 14px;
+    overflow: hidden;
+    border: 1px solid var(--report-line);
+    border-radius: var(--report-card-radius);
+    background: #fafcfd;
+    break-inside: avoid;
+}
+
+.aurora-report-record-card--fragment-start {
+    margin-bottom: 0;
+    border-bottom: 0;
+    border-radius: var(--report-card-radius) var(--report-card-radius) 0 0;
+}
+
+.aurora-report-record-card--fragment-middle {
+    margin-bottom: 0;
+    border-top: 0;
+    border-bottom: 0;
+    border-radius: 0;
+}
+
+.aurora-report-record-card--fragment-end {
+    border-top: 0;
+    border-radius: 0 0 var(--report-card-radius) var(--report-card-radius);
+}
+
+.aurora-report-record-card--issue {
+    border-top: 0;
+    border-left: 2px solid rgba(214, 69, 93, .42);
+    background: linear-gradient(180deg, #fffcfc 0%, #fafcfd 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8);
+}
+
+.aurora-report-record-card--complementary {
+    border-top: 0;
+    border-left: 2px solid rgba(29, 145, 137, .48);
+    background: linear-gradient(180deg, #f8fcfb 0%, #fafcfd 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .8);
+}
+
+.aurora-report-record-card__header,
+.aurora-report-occurrence__header.aurora-report-record-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin: 0;
+    padding: 10px 14px 8px;
+    border-bottom: 1px solid #e8eef2;
+    background: rgba(255, 255, 255, .58);
+    break-after: avoid;
+}
+
+.aurora-report-record-card__label,
+.aurora-report-record-card__header > span {
+    color: var(--report-muted);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+}
+
+.aurora-report-record-card__severity,
+.aurora-report-record-card__header b {
+    padding: 3px 8px;
+    border: 1px solid rgba(139, 93, 0, .12);
+    border-radius: 999px;
+    color: #7a5400;
+    background: rgba(255, 240, 191, .55);
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+}
+
+.aurora-report-record-card__severity[data-severity*="alta"],
+.aurora-report-record-card__severity[data-severity*="crítica"],
+.aurora-report-record-card__header b[data-severity*="alta"],
+.aurora-report-record-card__header b[data-severity*="crítica"] {
+    color: #a72038;
+    background: #ffe0e6;
+}
+
+.aurora-report-record-card__severity[data-severity*="baixa"],
+.aurora-report-record-card__header b[data-severity*="baixa"] {
+    color: #147259;
+    background: #dff8ef;
+}
+
+.aurora-report-record-card__body,
+.aurora-vehicle-record-card__content {
+    padding: 12px 14px;
+}
+
+.aurora-report-record-card__body h3,
+.aurora-vehicle-record-card__content h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    line-height: 1.3;
+}
+
+.aurora-report-record-card__body p,
+.aurora-vehicle-record-card__content p {
+    margin: 0;
+    color: #465365;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.aurora-report-record-card .aurora-report-alert {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.aurora-report-record-card .aurora-report-media,
+.aurora-report-record-card .aurora-report-photos {
+    margin: 0;
+    padding: 0 14px 14px;
+}
+
+.aurora-report-record-card__recommendation {
+    padding: 10px 14px 14px;
+    border-top: 1px solid #e8eef2;
+    background: rgba(255, 255, 255, .45);
+}
+
+.aurora-report-record-card__recommendation span {
+    color: var(--report-accent);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .11em;
+    text-transform: uppercase;
+}
+
+.aurora-report-record-card__recommendation p {
+    margin: 6px 0 0;
+    color: #465365;
+    font-size: 12px;
+    line-height: 1.55;
+}
+
+.aurora-vehicle-photo {
+    display: grid;
+    grid-template-rows: auto;
+    align-content: start;
+    margin: 0;
+    overflow: hidden;
+    border: 1px solid #dce6ec;
+    border-radius: 12px;
+    background: #eef3f6;
+    break-inside: avoid;
+}
+
+.aurora-vehicle-photo__frame {
+    position: relative;
+    border-radius: 12px;
+    background: #eef3f6;
+}
+
+.aurora-vehicle-photo__chip {
+    position: absolute;
+    left: 8px;
+    top: 8px;
+    z-index: 1;
+    padding: 3px 8px;
+    border-radius: 6px;
+    background: rgba(8, 28, 44, .78);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: .02em;
+    line-height: 1.2;
+    pointer-events: none;
+}
+
+.aurora-vehicle-photo figcaption {
+    display: none;
+}
+
+.aurora-vehicle-photo figcaption span {
+    color: var(--report-muted);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+}
+
+.aurora-vehicle-photo figcaption strong {
+    font-size: 12px;
+    line-height: 1.35;
+}
+
+.aurora-vehicle-photo.is-missing {
+    border-style: dashed;
+    background: #fafcfd;
+}
+
+.aurora-vehicle-photo-section__header {
+    position: relative;
+    margin-bottom: 14px;
+    padding: 0 0 12px 14px;
+    border-bottom: 1px solid #e4eaee;
+}
+
+.aurora-vehicle-photo-section__header::before {
+    content: "";
+    position: absolute;
+    top: 2px;
+    bottom: 12px;
+    left: 0;
+    width: 3px;
+    border-radius: 2px;
+    background: linear-gradient(180deg, var(--report-accent) 0%, #64f0e5 100%);
+}
+
+.aurora-vehicle-photo-section__header h3 {
+    margin: 0 0 4px;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: 1.25;
+}
+
+.aurora-vehicle-photo-section__header p {
+    margin: 0;
+    color: var(--report-muted);
+    font-size: 11px;
+    line-height: 1.45;
+}
+
+.aurora-vehicle-photo-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--report-media-gap);
+    margin-bottom: 18px;
+    align-items: start;
+}
+
+.aurora-vehicle-photo-grid--all-portrait {
+    grid-template-columns: repeat(2, minmax(120px, 280px));
+    justify-content: center;
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
+}
+
+.aurora-vehicle-photo-grid--all-portrait .aurora-vehicle-photo {
+    width: 100%;
+    max-width: 280px;
+    justify-self: center;
+}
+
+.aurora-vehicle-photo--landscape .aurora-vehicle-photo__frame,
+.aurora-vehicle-photo--landscape .aurora-vehicle-photo__frame.aurora-report-media-frame,
+.aurora-vehicle-photo--square .aurora-vehicle-photo__frame,
+.aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--landscape .aurora-vehicle-photo__frame {
+    display: block;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+}
+
+.aurora-vehicle-photo--landscape .aurora-vehicle-photo__frame img,
+.aurora-vehicle-photo--square .aurora-vehicle-photo__frame img,
+.aurora-vehicle-photo-grid--all-landscape .aurora-vehicle-photo__frame img,
+.aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--landscape .aurora-vehicle-photo__frame img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    max-height: var(--report-media-h-landscape, var(--report-media-h));
+    object-fit: contain;
+}
+
+.aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--portrait,
+.aurora-vehicle-photo-grid--all-portrait .aurora-vehicle-photo {
+    grid-template-rows: auto auto;
+}
+
+.aurora-vehicle-photo--portrait .aurora-vehicle-photo__frame,
+.aurora-vehicle-photo--portrait .aurora-vehicle-photo__placeholder,
+.aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--portrait .aurora-vehicle-photo__frame,
+.aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--portrait .aurora-vehicle-photo__placeholder,
+.aurora-vehicle-photo-grid--all-portrait .aurora-vehicle-photo__frame,
+.aurora-vehicle-photo-grid--all-portrait .aurora-vehicle-photo__placeholder {
+    height: auto;
+    min-height: 0;
+    max-height: var(--report-media-h-portrait, var(--report-media-h));
+}
+
+.aurora-vehicle-photo--portrait .aurora-vehicle-photo__frame img,
+.aurora-vehicle-photo-grid--mixed .aurora-vehicle-photo--portrait .aurora-vehicle-photo__frame img,
+.aurora-vehicle-photo-grid--all-portrait .aurora-vehicle-photo__frame img {
+    width: auto;
+    max-width: 100%;
+    height: auto;
+    max-height: var(--report-media-h-portrait, var(--report-media-h));
+    margin-inline: auto;
+    object-fit: contain;
+}
+
+.aurora-vehicle-additional-records {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.aurora-vehicle-additional-records > .aurora-vehicle-photo-section__header {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+    padding-top: 14px;
+    border-top: 1px solid #e2e8ed;
+}
+
+.aurora-vehicle-record-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+}
+
+.aurora-vehicle-additional-records[data-record-count="1"] > .aurora-report-record-card,
+.aurora-vehicle-additional-records[data-orphan-card="true"] > .aurora-report-record-card:last-of-type {
+    grid-column: 1 / -1;
+    width: 100%;
+    max-width: 100%;
+    justify-self: stretch;
+}
+
+.aurora-print-stage .aurora-vehicle-record-grid[data-record-count="1"] {
+    grid-template-columns: 1fr;
+}
+
+.aurora-print-stage .aurora-vehicle-record-grid[data-record-count="1"] .aurora-report-record-card {
+    width: 100%;
+    max-width: 100%;
+    justify-self: stretch;
+}
+
+.aurora-print-stage .aurora-report-record-card,
+.aurora-print-stage .aurora-vehicle-record-card {
+    margin-bottom: 3mm;
+    border-radius: 2.3mm;
+    break-inside: avoid;
+}
+
+.aurora-print-stage .aurora-report-record-card__header,
+.aurora-print-stage .aurora-report-record-card__body,
+.aurora-print-stage .aurora-report-record-card__recommendation {
+    padding: 2mm 3mm;
+}
+
+.aurora-print-stage .aurora-report-record-card .aurora-report-media,
+.aurora-print-stage .aurora-report-record-card .aurora-report-photos {
+    padding: 0 3mm 3mm;
+    margin-top: 0;
+}
+
+.aurora-print-stage .aurora-vehicle-photo {
+    grid-template-rows: var(--report-media-h) auto;
+}
+
+@media (max-width: 760px) {
+    .aurora-report-finalization {
+        grid-template-columns: 1fr;
+    }
+
+    .aurora-report-finalization__status {
+        border-right: 0;
+        border-bottom: 1px solid rgba(205, 229, 226, .85);
+    }
+
+    .aurora-vehicle-additional-records,
+    .aurora-vehicle-record-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* RC8.19 — piloto Estofados: galeria genérica editorial + meta de ocorrência */
+.aurora-report-record-card__meta {
+    margin: 0 0 6px;
+    color: var(--report-muted);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .01em;
+}
+
+.aurora-report-record-card__meta + p {
+    margin-top: 0;
+}
+
+.aurora-report-media--editorial .aurora-report-media-item figcaption,
+.aurora-report-general-record-card .aurora-report-media-item figcaption {
+    display: block;
+    padding: 9px 11px;
+    border-top: 1px solid #e8eef2;
+    background: rgba(255, 255, 255, .65);
+}
+
+.aurora-report-media--editorial .aurora-report-photo-caption,
+.aurora-report-general-record-card .aurora-report-photo-caption {
+    display: block;
+    color: var(--report-muted);
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.45;
+    letter-spacing: .01em;
+}
+
+.aurora-print-stage .aurora-report-media--editorial .aurora-report-media-item figcaption,
+.aurora-print-stage .aurora-report-general-record-card .aurora-report-media-item figcaption {
+    padding: 1.8mm 2.2mm;
+}
+
+.aurora-print-stage .aurora-report-general-record-card {
+    break-inside: avoid;
+}
+/* ============================================================
+ * AURORA-2F25-REPORT-LAYOUT
+ * Composicao da galeria "Foto do trabalho finalizado" Tupy.
+ * O restante do relatorio nao recebe altura fixa global.
+ * ============================================================ */
+
+.aurora-print-stage .aurora-print-tupy-final-photo-row {
+    margin-bottom: 3mm;
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+.aurora-print-stage .aurora-print-tupy-final-photo-row > .aurora-report-media,
+.aurora-print-stage .aurora-print-tupy-final-photo-row > .aurora-report-photos {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 3mm;
+    margin-top: 0;
+    align-items: start;
+}
+
+.aurora-print-stage .aurora-print-tupy-final-photo-row > .aurora-report-media--single,
+.aurora-print-stage .aurora-print-tupy-final-photo-row > .aurora-report-photos--single {
+    grid-template-columns: minmax(0, 1fr);
+    justify-items: center;
+}
+
+.aurora-print-stage .aurora-print-tupy-final-photo-row .aurora-report-media-item,
+.aurora-print-stage .aurora-print-tupy-final-photo-row figure {
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+
+/* R23 — identidade do cabeçalho + metadados Tupy + contenção da foto de capa */
+.aurora-report-brand--cover {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.aurora-report-brand--cover .aurora-report-cover__logo-slot {
+    margin: 0;
+    flex: 0 0 auto;
+}
+
+.aurora-report-brand--cover .aurora-report-cover__logo-slot .aurora-report-brand__logo {
+    max-width: 48px;
+    max-height: 48px;
+    border-radius: 10px;
+    object-fit: contain;
+}
+
+.aurora-report-cover__admin-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    gap: 8px 18px;
+    margin-top: 14px;
+}
+
+.aurora-report-cover__orders,
+.aurora-report-cover__report-number {
+    display: grid;
+    gap: 3px;
+    min-width: 0;
+}
+
+.aurora-report-cover__orders {
+    flex: 1 1 260px;
+}
+
+.aurora-report-cover__report-number {
+    flex: 0 1 auto;
+}
+
+.aurora-report-cover__admin-meta span {
+    color: #a9bcc8;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: .10em;
+    text-transform: uppercase;
+}
+
+.aurora-report-cover__orders strong {
+    color: #fff;
+    font-size: 13px;
+    font-weight: 750;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.aurora-report-cover__report-number strong {
+    color: #d3e0e8;
+    font-size: 11px;
+    font-weight: 650;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+}
+
+.aurora-report-cover--with-photo .aurora-report-cover__layout {
+    margin-top: 20px;
+}
+
+.aurora-report-cover__photo,
+.aurora-report-cover__photo img {
+    max-height: var(--aurora-cover-photo-max-height, 52mm);
+}
+
+.aurora-print-page--first {
+    grid-template-rows: 72mm minmax(0, 1fr) 14mm;
+}
+
+.aurora-print-page__cover {
+    height: 72mm;
+}
+
+.aurora-print-page__cover.aurora-report-cover--with-photo {
+    --aurora-cover-photo-max-height: 36mm;
+    --aurora-cover-photo-max-width: 66mm;
+}
+
+.aurora-print-page__cover.aurora-report-cover--with-photo .aurora-report-cover__layout {
+    margin-top: 3mm;
+    align-items: start;
+}
+
+.aurora-print-page__cover .aurora-report-brand--cover .aurora-report-cover__logo-slot .aurora-report-brand__logo {
+    max-width: 11mm;
+    max-height: 11mm;
+}
+
+.aurora-print-page__cover .aurora-report-cover__admin-meta {
+    gap: 1.5mm 4mm;
+    margin-top: 2.5mm;
+}
+
+.aurora-print-page__cover .aurora-report-cover__orders strong {
+    font-size: 7.5pt;
+}
+
+.aurora-print-page__cover .aurora-report-cover__report-number strong {
+    font-size: 6.5pt;
+}
+
+/* R25 — composição aprovada do cabeçalho técnico Tupy. */
+.aurora-report-cover__header {
+    align-items: flex-start;
+}
+
+.aurora-report-cover__header > .aurora-report-brand--cover {
+    flex: 1 1 auto;
+}
+
+.aurora-report-cover__header > .aurora-report-cover__admin-meta {
+    flex: 0 1 360px;
+    justify-content: flex-end;
+    align-items: flex-start;
+    margin-top: 0;
+    padding-top: 2px;
+}
+
+.aurora-report-cover__header .aurora-report-cover__orders {
+    flex: 1 1 190px;
+}
+
+.aurora-report-cover__header .aurora-report-cover__report-number {
+    flex: 0 1 120px;
+    padding-left: 16px;
+    border-left: 1px solid rgba(211, 224, 232, .28);
+}
+
+.aurora-report-cover__kicker {
+    color: #d3e0e8;
+}
+
+.aurora-print-page__cover .aurora-report-cover__kicker {
+    color: #d3e0e8 !important;
+    -webkit-text-fill-color: #d3e0e8 !important;
+}
+
+.aurora-print-page__cover .aurora-report-cover__header > .aurora-report-cover__admin-meta {
+    flex-basis: 78mm;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.aurora-print-page__cover .aurora-report-cover__header .aurora-report-cover__orders {
+    flex-basis: 43mm;
+}
+
+.aurora-print-page__cover .aurora-report-cover__header .aurora-report-cover__report-number {
+    flex-basis: 28mm;
+    padding-left: 3mm;
+}
+
+/* ============================================================
+ * AURORA R29 — Elétrica Tupy: paridade HTML -> PDF
+ * O HTML permanece autoridade visual. O compositor A4 só pode
+ * quebrar tabelas entre linhas e deve preservar grids de fotos.
+ * ============================================================ */
+.aurora-print-stage--eletrica-tupy .aurora-print-tupy-table-row {
+    margin-bottom: 0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+}
+
+.aurora-print-stage--eletrica-tupy .aurora-print-tupy-table-row--continuation > .aurora-report-materials {
+    margin-top: 0 !important;
+}
+
+.aurora-print-stage--eletrica-tupy .aurora-print-tupy-table-row--continuation .aurora-report-materials-table {
+    margin-top: 0 !important;
+}
+
+.aurora-print-stage--eletrica-tupy .aurora-report-media--print-row.aurora-report-media--duo,
+.aurora-print-stage--eletrica-tupy .aurora-report-photos--print-row.aurora-report-media--duo {
+    display: grid !important;
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    gap: 3mm !important;
+    align-items: start !important;
+}
+
+.aurora-print-stage--eletrica-tupy .aurora-report-media--print-row.aurora-report-media--duo > .aurora-report-media-item,
+.aurora-print-stage--eletrica-tupy .aurora-report-photos--print-row.aurora-report-media--duo > figure {
+    min-width: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+}
+
+/* ============================================================
+ * AURORA R30 — Elétrica Tupy: evidências compactas e uniformes
+ * Escopo exclusivo do palco A4 da Elétrica Tupy.
+ * O card define a altura; qualquer proporção de foto se adapta
+ * com contain, sem corte e sem deformação.
+ * ============================================================ */
+.aurora-print-stage--eletrica-tupy .aurora-report-photos,
+.aurora-print-stage--eletrica-tupy .aurora-report-media {
+    --report-media-h: 38mm;
+    --report-media-h-landscape: 38mm;
+    --report-media-h-portrait: 38mm;
+    --report-media-gap: 3mm;
+}
+
+.aurora-print-stage--eletrica-tupy .aurora-report-media-item .aurora-report-media-frame,
+.aurora-print-stage--eletrica-tupy .aurora-report-media-item .aurora-report-photo-frame,
+.aurora-print-stage--eletrica-tupy .aurora-report-photos figure .aurora-report-media-frame,
+.aurora-print-stage--eletrica-tupy .aurora-report-photos figure .aurora-report-photo-frame {
+    box-sizing: border-box !important;
+    width: 100% !important;
+    height: 38mm !important;
+    min-height: 38mm !important;
+    max-height: 38mm !important;
+    padding: 1.5mm !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+}
+
+.aurora-print-stage--eletrica-tupy .aurora-report-media-item .aurora-report-media-frame img,
+.aurora-print-stage--eletrica-tupy .aurora-report-media-item .aurora-report-photo-frame img,
+.aurora-print-stage--eletrica-tupy .aurora-report-photos figure img {
+    display: block !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    object-fit: contain !important;
+    object-position: center center !important;
+}
+
+.aurora-print-stage--eletrica-tupy .aurora-report-media--print-row.aurora-report-media--duo > .aurora-report-media-item,
+.aurora-print-stage--eletrica-tupy .aurora-report-photos--print-row.aurora-report-media--duo > figure {
+    align-self: stretch !important;
+}
+
+.aurora-print-stage--eletrica-tupy .aurora-report-media--print-row.aurora-report-media--single,
+.aurora-print-stage--eletrica-tupy .aurora-report-photos--print-row.aurora-report-media--single {
+    justify-items: center !important;
+}
+
+.aurora-print-stage--eletrica-tupy .aurora-report-media--print-row.aurora-report-media--single > .aurora-report-media-item,
+.aurora-print-stage--eletrica-tupy .aurora-report-photos--print-row.aurora-report-media--single > figure {
+    width: min(62%, 82mm) !important;
+    max-width: 82mm !important;
+}
+
+/* AURORA V186 TESTE — Aterramento: composição compacta dos pontos */
+.aurora-grounding-report .aurora-grounding-point-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;align-items:start}
+.aurora-grounding-report .aurora-grounding-point-grid>.aurora-report-record-card{min-width:0;margin:0;break-inside:avoid;page-break-inside:avoid}
+.aurora-grounding-report .aurora-grounding-evidence-block{margin:0 0 18px;break-inside:avoid;page-break-inside:avoid}
+.aurora-grounding-report .aurora-grounding-evidence-block__head{margin:0 0 9px;padding:0 0 7px;border-bottom:1px solid var(--report-line)}
+.aurora-grounding-report .aurora-grounding-evidence-block__head h3{margin:0;color:var(--report-ink);font-size:12px;font-weight:700;line-height:1.35}
+.aurora-grounding-report .aurora-grounding-evidence-block .aurora-report-media{width:100%;max-width:100%}
+@media print{.aurora-grounding-report .aurora-grounding-point-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10mm 6mm}}
+
+/* Grounding V11 — leitura técnica dos registros e normas */
+.aurora-grounding-report .aurora-grounding-point__header{align-items:flex-start}
+.aurora-grounding-report .aurora-grounding-point__header>div:first-child{min-width:0;flex:1}
+.aurora-grounding-report .aurora-grounding-point__status{display:grid;gap:3px;justify-items:end;text-align:right;max-width:46%}
+.aurora-grounding-report .aurora-grounding-point__status span{color:#1d9189;font-size:8px;font-weight:800;letter-spacing:.10em;text-transform:uppercase}
+.aurora-grounding-report .aurora-grounding-point__status strong{font-size:10px;line-height:1.3;color:#334b5e}
+.aurora-grounding-report .aurora-grounding-point__body{padding:12px 14px 14px}
+.aurora-grounding-report .aurora-grounding-point__body .aurora-report-fact-sheet{gap:14px}
+.aurora-grounding-report .aurora-grounding-point__body .aurora-grounding-copy{margin:10px 0 0}
+.aurora-grounding-report .aurora-grounding-standards{display:grid;gap:10px;margin:12px 0 18px}
+.aurora-grounding-report .aurora-grounding-standards__label{color:#66778b;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.aurora-grounding-report .aurora-grounding-standard{display:grid;gap:2px;padding:0 0 9px;border-bottom:1px solid #e8eef2}
+.aurora-grounding-report .aurora-grounding-standard:last-child{border-bottom:0;padding-bottom:0}
+.aurora-grounding-report .aurora-grounding-standard strong{font-size:12px;color:#172235}
+.aurora-grounding-report .aurora-grounding-standard span{font-size:11px;line-height:1.45;color:#526579}
+
+/* Grounding V12 — layout técnico aprovado: Modelo A */
+.aurora-grounding-report .aurora-grounding-text-block{display:grid;gap:9px;margin:0 0 24px}
+.aurora-grounding-report .aurora-grounding-text-block>strong{font-size:12px;line-height:1.3;letter-spacing:.015em;color:#172235}
+.aurora-grounding-report .aurora-grounding-copy{margin:0;color:#26384a;font-size:12px;line-height:1.62}
+.aurora-grounding-report .aurora-grounding-standards{display:grid;gap:0;margin:2px 0 26px;padding:0}
+.aurora-grounding-report .aurora-grounding-standards__label{display:block;margin:0 0 10px;color:#172235;font-size:12px;font-weight:700;letter-spacing:.015em;text-transform:uppercase}
+.aurora-grounding-report .aurora-grounding-standard{display:grid;gap:3px;padding:8px 0 9px;border-bottom:1px solid #e8eef2}
+.aurora-grounding-report .aurora-grounding-standard:first-of-type{padding-top:0}
+.aurora-grounding-report .aurora-grounding-standard:last-child{border-bottom:0;padding-bottom:0}
+.aurora-grounding-report .aurora-grounding-standard strong{font-size:11.5px;line-height:1.35;color:#172235}
+.aurora-grounding-report .aurora-grounding-standard span{font-size:11px;line-height:1.48;color:#526579}
+.aurora-grounding-report .aurora-grounding-point-grid{grid-template-columns:1fr;gap:14px}
+.aurora-grounding-report .aurora-grounding-point--model-a{display:block;margin:0;overflow:hidden;border:1px solid #dce6ec;border-radius:12px;background:#fafcfd}
+.aurora-grounding-report .aurora-grounding-point--model-a .aurora-grounding-point__header{display:grid;grid-template-columns:minmax(0,1fr) minmax(180px,32%);gap:24px;align-items:center;padding:14px 16px 13px;border-bottom:1px solid #e8eef2;background:#fff}
+.aurora-grounding-report .aurora-grounding-point__identity{display:grid;gap:7px;min-width:0}
+.aurora-grounding-report .aurora-grounding-point__record{color:#66778b;font-size:9px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.aurora-grounding-report .aurora-grounding-point__identity h3{margin:0;font-size:15px;line-height:1.35;color:#172235}
+.aurora-grounding-report .aurora-grounding-point--model-a .aurora-grounding-point__status{display:grid;gap:5px;justify-items:end;align-content:center;text-align:right;max-width:none;min-width:0;padding-left:18px;border-left:1px solid #e4eaee}
+.aurora-grounding-report .aurora-grounding-point--model-a .aurora-grounding-point__status span{color:#66778b;font-size:8px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.aurora-grounding-report .aurora-grounding-point--model-a .aurora-grounding-point__status strong{font-size:12px;line-height:1.35;color:#126f69}
+.aurora-grounding-report .aurora-grounding-point__measurements{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;padding:14px 16px 12px}
+.aurora-grounding-report .aurora-grounding-point__measurements .aurora-report-fact{gap:4px}
+.aurora-grounding-report .aurora-grounding-point__details{display:grid;gap:8px;padding:0 16px 15px}
+.aurora-grounding-report .aurora-grounding-point__detail{display:grid;gap:4px}
+.aurora-grounding-report .aurora-grounding-point__detail span{color:#66778b;font-size:8px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.aurora-grounding-report .aurora-grounding-point__detail strong{font-size:12px;line-height:1.45;color:#172235}
+.aurora-grounding-report .aurora-grounding-point__details p{margin:0;padding-top:8px;border-top:1px solid #eef2f5;color:#526579;font-size:11px;line-height:1.5}
+@media(max-width:700px){
+ .aurora-grounding-report .aurora-grounding-point--model-a .aurora-grounding-point__header{grid-template-columns:1fr;gap:11px}
+ .aurora-grounding-report .aurora-grounding-point--model-a .aurora-grounding-point__status{justify-items:start;text-align:left;padding:10px 0 0;border-left:0;border-top:1px solid #e8eef2}
+}
+@media print{
+ .aurora-grounding-report .aurora-grounding-point-grid{grid-template-columns:1fr!important;gap:3.5mm!important}
+ .aurora-grounding-report .aurora-grounding-point--model-a{break-inside:avoid!important;page-break-inside:avoid!important}
+ .aurora-grounding-report .aurora-grounding-point--model-a .aurora-grounding-point__header{grid-template-columns:minmax(0,1fr) 52mm!important;gap:5mm!important;padding:3mm 4mm!important}
+ .aurora-grounding-report .aurora-grounding-point__measurements{gap:6mm!important;padding:3mm 4mm 2.5mm!important}
+ .aurora-grounding-report .aurora-grounding-point__details{padding:0 4mm 3.5mm!important}
+ .aurora-grounding-report .aurora-grounding-text-block{margin-bottom:5mm!important}
+ .aurora-grounding-report .aurora-grounding-standards{margin-bottom:5.5mm!important}
+}
+
+/* AURORA GROUNDING V19 — Tabela técnica compacta B2 aprovada. */
+.aurora-grounding-report .aurora-grounding-table-shell{margin-top:18px;overflow:hidden;border:1px solid #d9e4e9;border-radius:10px;background:#fff}
+.aurora-grounding-report .aurora-grounding-table{width:100%;border-collapse:collapse;table-layout:fixed;font-size:10.5px;color:#132337}
+.aurora-grounding-report .aurora-grounding-table thead{display:table-header-group}
+.aurora-grounding-report .aurora-grounding-table th{box-sizing:border-box;padding:9px 8px;background:#f2f7f8;border-bottom:1px solid #d9e4e9;text-align:left;color:#536a7d;font-size:8px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;line-height:1.25}
+.aurora-grounding-report .aurora-grounding-table th:nth-child(1){width:6%}
+.aurora-grounding-report .aurora-grounding-table th:nth-child(2){width:43%}
+.aurora-grounding-report .aurora-grounding-table th:nth-child(3){width:13%}
+.aurora-grounding-report .aurora-grounding-table th:nth-child(4){width:11%}
+.aurora-grounding-report .aurora-grounding-table th:nth-child(5){width:13%}
+.aurora-grounding-report .aurora-grounding-table th:nth-child(6){width:14%}
+.aurora-grounding-report .aurora-grounding-table tbody tr:nth-child(even){background:#fbfcfd}
+.aurora-grounding-report .aurora-grounding-table td{box-sizing:border-box;padding:8px;vertical-align:middle;border-bottom:1px solid #e5ecef;line-height:1.25;overflow-wrap:anywhere}
+.aurora-grounding-report .aurora-grounding-table tbody tr:last-child td{border-bottom:0}
+.aurora-grounding-report .aurora-grounding-table__reg{font-weight:800;color:#17344e}
+.aurora-grounding-report .aurora-grounding-table__point strong{display:block!important;margin:0!important;font-size:10.7px!important;font-weight:700!important;line-height:1.25!important;color:#132337!important}
+.aurora-grounding-report .aurora-grounding-table__point span{display:block!important;margin-top:3px!important;color:#63778a!important;font-size:9.3px!important;font-weight:400!important;line-height:1.3!important}
+.aurora-grounding-report .aurora-grounding-table__measure{font-weight:800;white-space:nowrap}
+.aurora-grounding-report .aurora-grounding-table__reference{font-weight:700}
+.aurora-grounding-report .aurora-grounding-table__condition{font-weight:400}
+.aurora-grounding-report .aurora-grounding-table__status{font-weight:700;color:#08746e}
+@media(max-width:760px){.aurora-grounding-report .aurora-grounding-table-shell{overflow:auto}.aurora-grounding-report .aurora-grounding-table{min-width:820px}}
+@media print{.aurora-grounding-report .aurora-grounding-table-shell{border-radius:0}.aurora-grounding-report .aurora-grounding-table thead{display:table-header-group}.aurora-grounding-report .aurora-grounding-table tr{break-inside:avoid;page-break-inside:avoid}}

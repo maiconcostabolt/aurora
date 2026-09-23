@@ -1,0 +1,40 @@
+AURORA V42 — AMBIENTES POR PLANO / DEMONSTRAÇÃO
+Data: 13-09-2026
+
+OBJETIVO
+Padronizar Minha Equipe para que o ADMIN somente possa conceder ao membro ambientes que a empresa possui ativos por compra/demonstração, sem liberação automática ao usuário.
+
+REGRA DEFINITIVA
+1. Empresa possui ambiente ativo por plano/demonstração.
+2. O ambiente aparece em Minha Equipe > Ambientes permitidos.
+3. O ADMIN decide individualmente se concede ou não o ambiente ao COMPANY_USER.
+4. Permissões operacionais continuam definidas pelo ADMIN.
+5. QR autenticado respeita o ambiente concedido.
+6. Visitante sem login continua na identificação pública do ativo.
+
+CORREÇÃO DE DADOS DO TESTE
+Usuário: AURORA_USUARIO@HOTMAIL.COM
+- Revertida a liberação temporária automática de todos os ambientes.
+- Mantida somente Elétrica = autorizada.
+- Oficina mecânica aparece como opção disponível, mas NÃO autorizada até o ADMIN marcar.
+
+EMPRESA DE TESTE
+- Elétrica: demonstração ativa.
+- Oficina mecânica: registrada como demonstração ativa para refletir o ambiente que o ADMIN está testando.
+- Os demais ambientes não aparecem enquanto não houver plano/demonstração ativo da empresa.
+
+INTERFACE
+- Ambientes permitidos é alimentado pelos ambientes efetivamente disponíveis para a empresa.
+- Título das permissões deixa de usar o segmento atual do ADMIN.
+- Com apenas Elétrica concedida: Painéis e equipamentos.
+- Com apenas Oficina concedida: Veículos.
+- Com mais de um ambiente concedido: Cadastros dos ambientes permitidos.
+- Ao marcar/desmarcar ambiente, Minha Equipe recarrega para refletir imediatamente o estado persistido.
+
+FORA DO ESCOPO
+- Vistoria Veicular.
+- Atividades Rotineiras / Elétrica Tupy.
+- Fotos, relatórios, Aurora AI, Home e demais áreas congeladas não foram alterados.
+
+VERSÃO VISÍVEL
+AURORA_V42_AMBIENTES_POR_PLANO_13-09-2026

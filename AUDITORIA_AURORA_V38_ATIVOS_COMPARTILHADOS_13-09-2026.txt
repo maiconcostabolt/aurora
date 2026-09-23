@@ -1,0 +1,88 @@
+AURORA V38 — AUDITORIA ATIVOS COMPARTILHADOS
+Data: 13-09-2026
+Base congelada: AURORA V37 CATALOGOS MULTISSERVICO PWA TESTE
+
+OBJETIVO
+Corrigir na camada compartilhada, e não por shape, o vínculo Cadastro permanente -> Nova vistoria -> Projeto -> Histórico -> Relatório, além de padronizar Editar/Excluir nos catálogos.
+
+ESCOPO COMPARTILHADO
+- Oficina: Veículos
+- Elétrica: Painéis e equipamentos
+- Industrial: Máquinas e equipamentos
+- Drone: Estruturas inspecionadas
+- Lavação automotiva: Veículos
+- Estofados: Estofados cadastrados
+- Cortinas e persianas: Cortinas e persianas
+- Reparos e manutenção: Locais e manutenções
+- Condomínios: Áreas e equipamentos
+
+FORA DESTA RODADA — BLOQUEADOS
+- Atividades Rotineiras / eletrica_tupy
+- Vistoria Veicular / vehicle_inspection
+
+VISTORIA / CAUSA ENCONTRADA
+1. O motor de ativos já era compartilhado em js/aurora_assets_pilot.js, mas o RPC de histórico ainda reconhecia principalmente aliases da Elétrica (asset_registry_id/code/tag).
+2. Em Oficina, o atendimento LIZ Costa / Suspensão gravou placa MLC1212, mas não asset_registry_id. Por isso o cadastro MLC1212 mostrava 0 atendimentos.
+3. A criação/identificação de ativo a partir de relatório em Oficina usava identification antes de plate, podendo criar cadastro pelo nome do veículo em vez da placa.
+4. A listagem dos cadastros permanentes não tinha ações Editar/Excluir.
+5. O resolvedor ADMIN possuía fallback autenticado, mas a função visual de ações do histórico relia apenas CompanyAccess; V38 mantém o resultado autenticado em assetIsAdmin.
+6. O clique delegado ainda continha referência antiga electricalHome(); V38 usa catalogHome(), comum a todos os catálogos.
+
+CORREÇÕES V38
+- Histórico cloud generalizado por asset_registry_id como chave principal.
+- Compatibilidade legada:
+  * Elétrica: code/tag.
+  * Oficina e Lavação: plate -> código permanente.
+  * Demais catálogos: identification -> código/nome permanente.
+- aurora_asset_history_project_get usa exatamente a mesma regra do histórico.
+- Nova vistoria preserva asset_registry_id em qualquer catálogo elegível; Oficina/Lavação também recebem plate a partir do código permanente.
+- openForReport em Oficina/Lavação prioriza plate para evitar cadastro duplicado pelo nome do veículo.
+- Listagem de TODOS os catálogos V37 ganhou Editar e Excluir, respeitando can_edit e can_deactivate.
+- Novo RPC aurora_asset_delete(uuid), autorizado somente para COMPANY_ADMIN ou membro com can_deactivate. Excluir cadastro não apaga atendimentos/relatórios históricos.
+- Ações de histórico ADMIN passam a usar o papel autenticado já resolvido por loadPermissions().
+- Perfil e configurações atualizado para: AURORA_V38_ATIVOS_COMPARTILHADOS_13-09-2026.
+- Cache PWA atualizado para V38.
+
+SUPABASE
+Projeto: MLC AURORA / muzapxquvqfvziwellty
+Migration aplicada: aurora_v38_shared_asset_history_and_delete
+- aurora_asset_history_list substituída.
+- aurora_asset_history_project_get substituída.
+- aurora_asset_delete criada.
+
+REPARO DO TESTE REAL
+Projeto LIZ Costa / Suspensão:
+- project_id: d15ec2e8-1895-4c5a-a1c5-916632d4aff8
+- placa: MLC1212
+- cadastro permanente: 0122d3c2-e290-448d-80aa-a8527a9fe6ed
+- asset_registry_id corrigido para asset_mu0lb5es_sb86ex
+Validação SQL confirmou o vínculo MLC1212 -> LIZ Costa / Suspensão.
+O cadastro HODA CIVIC não foi apagado automaticamente; V38 fornece o botão Excluir para o administrador decidir.
+
+ARQUIVOS ALTERADOS
+- js/aurora_assets_pilot.js
+- js/bootstrap.js
+- css/rc6_patch.css
+- config/runtime_config.js
+- app.html
+- service_worker.js
+- AURORA_V38_ATIVOS_COMPARTILHADOS.sql (registro da migration)
+
+ARQUIVOS/ÁREAS NÃO ALTERADOS FUNCIONALMENTE
+- Fotos/evidências aprovadas
+- QR público e seu resumo
+- Aurora AI
+- Minha Equipe/convites
+- Relatório fora do vínculo já aprovado
+- Atividades Rotineiras/Tupy
+- Vistoria Veicular
+
+TESTE HUMANO RECOMENDADO
+1. Deploy em PWA de TESTE.
+2. Perfil e configurações: confirmar V38 no rodapé.
+3. Oficina -> Veículos -> MLC1212: histórico deve mostrar LIZ Costa / Suspensão.
+4. Voltar à lista Veículos: confirmar Editar e Excluir.
+5. Excluir somente o cadastro duplicado se desejar; não deve apagar o atendimento LIZ Costa.
+6. MLC1212 -> Nova vistoria -> escolher Suspensão: placa MLC1212 deve vir herdada; concluir e sincronizar; novo atendimento deve aparecer no histórico do mesmo veículo.
+7. Elétrica -> TB05: confirmar que histórico aprovado continua funcionando.
+8. Fazer uma amostra em outro catálogo (ex. Estofados) para confirmar que o mesmo motor é utilizado.

@@ -1,0 +1,23 @@
+AURORA — AUDITORIA UX PAINÉIS E EQUIPAMENTOS
+Data: 13/09/2026
+Build: AURORA_ELETRICA_PAINEIS_EQUIPAMENTOS_UX_13-09-2026
+
+ESCOPO
+- Piloto somente Elétrica.
+- Termo técnico interno Ativo/asset preservado na arquitetura.
+- Interface amigável: Ativos -> Painéis e equipamentos.
+- Card principal com descrição: Histórico e identificação dos equipamentos.
+- Ícone de informação (i) clicável/toque com explicação curta.
+- Área, busca, cadastro, editor e estado vazio com nomenclatura amigável.
+- QR contextual público e reconhecimento de membro preservados.
+- Nenhuma alteração no fluxo Tupy.
+- Nenhuma alteração nos relatórios Tupy/Vistoria Veicular.
+- Nenhuma alteração em Aurora AI, orçamento ou assinatura.
+
+ARQUITETURA DEFINIDA PARA PRÓXIMA ETAPA
+- Ativo/asset = prontuário permanente do item atendido.
+- Trabalho = evento/atendimento realizado naquele item.
+- Relação futura: 1 ativo -> N trabalhos -> N relatórios.
+- QR pertence ao ativo; QR documental do relatório continua separado.
+- Interface futura deve usar nomenclatura contextual por serviço (Veículos, Extintores, Painéis e equipamentos etc.).
+- Não criar histórico paralelo nem exigir recadastro manual após cada trabalho.

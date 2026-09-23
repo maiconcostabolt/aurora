@@ -1,0 +1,28 @@
+AURORA V48 — AUTORIZAÇÃO DE MEMBRO FAIL-CLOSED
+Data: 14-09-2026
+
+BASE VISUAL: V45. Nenhuma alteração de layout/CSS/cards/cabeçalho/navegação.
+
+CAUSA IDENTIFICADA APÓS 5 TENTATIVAS:
+1. filterMemberAllowedModules() possuía fallback inseguro: se a RPC ainda não estivesse pronta ou falhasse durante o boot, retornava a lista original de módulos.
+2. O cache aurora_member_allowed_modules_v1 era global, sem user_id. Um usuário podia reutilizar autorização/cache de outro usuário no mesmo aparelho.
+3. Com isso, electrical/panel legado permanecia utilizável mesmo quando Minha Equipe mostrava zero ambientes autorizados.
+
+CORREÇÃO V48:
+- COMPANY_USER usa exclusivamente aurora_my_company_authorized_modules.
+- Zero linhas autorizadas = zero módulos, sem fallback.
+- Falha/boot antecipado da RPC = acesso negado (fail-closed), nunca lista pessoal antiga.
+- Cache de autorização agora é isolado por user_id: aurora_member_allowed_modules_v2:<user_id>.
+- Cache vazio é um estado válido e mantém zero ambientes.
+- Limpa módulo ativo quando membro não possui ambiente.
+- Contas administrativas/pessoais preservadas.
+
+ESCOPO CONGELADO:
+- Layout V45 integralmente preservado.
+- QR, relatórios, fotos, Aurora AI, Minha Equipe visual, cards e navegação não alterados.
+
+TESTE PRINCIPAL:
+Aurora_usuario01 com Elétrica e Oficina desmarcadas deve ter zero ambientes/serviços.
+Depois ADMIN marca um ambiente e somente esse ambiente pode ser liberado.
+
+BUILD: AURORA_V48_AUTORIZACAO_MEMBRO_FAIL_CLOSED_14-09-2026

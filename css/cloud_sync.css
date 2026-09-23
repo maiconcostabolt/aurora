@@ -1,0 +1,162 @@
+.aurora-cloud-button {
+    position: static;
+    flex: 0 0 auto;
+    z-index: 1;
+    min-width: 44px;
+    height: 40px;
+    padding: 0 12px;
+    border: 1px solid rgba(127, 226, 255, .34);
+    border-radius: 14px;
+    color: #e9fbff;
+    background: rgba(7, 17, 31, .92);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, .28);
+    font: 700 12px/1 system-ui, sans-serif;
+}
+.aurora-cloud-button[data-account="connected"] { background: rgba(17, 64, 70, .92); }
+.aurora-cloud-button[data-state="synced"] { border-color: rgba(58, 214, 150, .75); }
+.aurora-cloud-button[data-state="pending"] { border-color: rgba(255, 190, 70, .78); }
+.aurora-cloud-button[data-state="error"] { border-color: rgba(255, 92, 112, .8); }
+.aurora-cloud-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 13000;
+    display: grid;
+    place-items: center;
+    padding: 20px;
+    background: rgba(2, 8, 17, .72);
+    backdrop-filter: blur(8px);
+}
+.aurora-cloud-overlay[hidden] { display: none; }
+.aurora-cloud-panel {
+    width: min(100%, 430px);
+    max-height: min(720px, calc(100vh - 40px));
+    overflow: auto;
+    border: 1px solid rgba(127, 226, 255, .2);
+    border-radius: 24px;
+    padding: 22px;
+    color: #edfaff;
+    background: #0a1728;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, .5);
+    font-family: system-ui, sans-serif;
+}
+.aurora-cloud-panel h2 { margin: 0 0 6px; font-size: 21px; }
+.aurora-cloud-panel p { margin: 0 0 16px; color: #a9bdca; line-height: 1.45; }
+.aurora-cloud-panel label { display: block; margin: 12px 0 5px; font-size: 13px; color: #c8dbe5; }
+.aurora-cloud-panel input {
+    width: 100%; box-sizing: border-box; min-height: 46px; padding: 0 13px;
+    border: 1px solid #29435a; border-radius: 12px; color: #fff; background: #07111f;
+}
+.aurora-cloud-actions { display: grid; gap: 10px; margin-top: 18px; }
+.aurora-cloud-actions button {
+    min-height: 46px; border: 0; border-radius: 13px; padding: 0 14px;
+    color: #06101b; background: #78e4ff; font-weight: 800;
+}
+.aurora-cloud-actions button.is-secondary { color: #d8ebf4; background: #172b3e; }
+.aurora-cloud-actions button.is-danger { color: #ffdce1; background: #4a1d29; }
+.aurora-cloud-actions button:disabled { opacity: .55; }
+.aurora-cloud-result { min-height: 20px; margin-top: 14px; color: #9fe8ff; font-size: 13px; }
+.aurora-cloud-account,
+.aurora-cloud-note { display: grid; gap: 4px; padding: 10px 12px; border-radius: 12px; background: rgba(120, 228, 255, .08); word-break: break-word; }
+.aurora-cloud-note { margin-bottom: 10px; color: #b9ccd6; }
+.aurora-cloud-account span,
+.aurora-cloud-note span { font-size: 13px; line-height: 1.4; }
+.aurora-cloud-projects, .aurora-cloud-local-projects { margin-top: 18px; }
+.aurora-cloud-local-projects { padding: 12px; border: 1px solid rgba(120, 228, 255, .22); border-radius: 16px; background: rgba(120, 228, 255, .045); }
+.aurora-cloud-local-card { border-color: rgba(120, 228, 255, .28); }
+.aurora-cloud-projects__header { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 10px; }
+.aurora-cloud-projects__header div { display: grid; gap: 2px; }
+.aurora-cloud-projects__header small { color: #9db3c1; }
+.aurora-cloud-projects__header > button { width: 40px; height: 40px; border: 0; border-radius: 12px; color: #dff8ff; background: #172b3e; font-size: 20px; }
+.aurora-cloud-projects__list { display: grid; gap: 10px; }
+.aurora-cloud-project-card { display: grid; gap: 8px; padding: 14px; border: 1px solid rgba(127, 226, 255, .16); border-radius: 15px; background: rgba(255, 255, 255, .035); }
+.aurora-cloud-project-card__title { display: flex; align-items: start; justify-content: space-between; gap: 10px; }
+.aurora-cloud-project-card__title span { flex: 0 0 auto; padding: 4px 7px; border-radius: 999px; color: #9ff0ce; background: rgba(58, 214, 150, .12); font-size: 11px; font-weight: 800; }
+.aurora-cloud-project-card small { color: #a9bdca; line-height: 1.35; }
+.aurora-cloud-project-card code { overflow: hidden; color: #7593a5; font: 11px/1.3 ui-monospace, monospace; text-overflow: ellipsis; }
+.aurora-cloud-project-card > button,
+.aurora-cloud-project-card__actions button { min-height: 42px; border: 0; border-radius: 12px; color: #06101b; background: #78e4ff; font-weight: 800; }
+.aurora-cloud-project-card > button:disabled,
+.aurora-cloud-project-card__actions button:disabled { opacity: .55; }
+.aurora-cloud-project-card__actions { display: grid; grid-template-columns: 1fr; gap: 8px; }
+.aurora-cloud-project-card__actions .is-danger {
+    width: 100%; padding: 0 14px; color: #ffdce1; background: #4a1d29;
+    border: 1px solid rgba(255, 132, 148, .28);
+}
+.aurora-cloud-project-card > button[data-cloud-sync-status="synced"],
+.aurora-cloud-project-card__actions button[data-cloud-download-status="downloaded"] {
+    color: #a9ead0;
+    border: 1px solid rgba(58, 214, 150, .38);
+    background: rgba(58, 214, 150, .12);
+    opacity: 1;
+    cursor: default;
+}
+.aurora-cloud-empty, .aurora-cloud-loading { display: grid; place-items: center; gap: 7px; min-height: 104px; padding: 14px; border: 1px dashed rgba(127, 226, 255, .2); border-radius: 14px; color: #a9bdca; text-align: center; }
+.aurora-cloud-empty strong, .aurora-cloud-loading strong { color: #dff8ff; }
+.aurora-cloud-empty span { font-size: 13px; line-height: 1.4; }
+.aurora-cloud-empty.is-error { border-color: rgba(255, 92, 112, .35); }
+.aurora-cloud-loading span { width: 24px; height: 24px; border: 3px solid rgba(120, 228, 255, .2); border-top-color: #78e4ff; border-radius: 50%; animation: aurora-cloud-spin .8s linear infinite; }
+@keyframes aurora-cloud-spin { to { transform: rotate(360deg); } }
+.aurora-auth-required body { overflow: hidden !important; }
+.aurora-auth-gate { position: fixed; inset: 0; z-index: 2147483647; display: grid; place-items: center; padding: 20px; overflow: auto; background: radial-gradient(circle at 50% 0, #18394e 0, #081521 48%, #050c13 100%); color: #effbff; }
+.aurora-auth-gate[hidden] { display: none; }
+.aurora-auth-card { width: min(100%, 430px); padding: 28px; border: 1px solid rgba(120,228,255,.2); border-radius: 24px; background: rgba(9,25,38,.96); box-shadow: 0 28px 80px rgba(0,0,0,.45); }
+.aurora-auth-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+.aurora-auth-brand > img { display: block; width: 52px; height: 52px; object-fit: cover; border-radius: 15px; box-shadow: 0 8px 24px rgba(34,198,255,.28); }
+.aurora-auth-brand__mark{display:grid;place-items:center;width:58px;height:58px;flex:0 0 auto;border:1px solid rgba(120,228,255,.2);border-radius:18px;background:rgba(120,228,255,.055);box-shadow:0 10px 28px rgba(34,198,255,.13)}
+.aurora-auth-brand__mark svg{width:48px;height:48px;filter:drop-shadow(0 5px 12px rgba(70,125,255,.28))}
+.aurora-auth-brand div { display: grid; gap: 2px; }
+.aurora-auth-brand strong { letter-spacing: .14em; }
+.aurora-auth-brand small, .aurora-auth-card > p { color: #a9bdca; }
+.aurora-auth-eyebrow { margin: 0 0 6px; color: #78e4ff !important; font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+.aurora-auth-card h1 { margin: 0 0 8px; font-size: 27px; }
+.aurora-auth-card > p:not(.aurora-auth-eyebrow) { margin: 0 0 20px; line-height: 1.5; }
+.aurora-auth-card label { display: block; margin: 12px 0 6px; color: #c8dbe5; font-size: 13px; font-weight: 700; }
+.aurora-auth-card input { width: 100%; box-sizing: border-box; min-height: 48px; padding: 0 13px; border: 1px solid rgba(127,226,255,.22); border-radius: 12px; color: #f3fbff; background: #0b1d2c; font: inherit; }
+.aurora-auth-card form > button { width: 100%; min-height: 48px; margin-top: 18px; border: 0; border-radius: 12px; color: #06101b; background: #78e4ff; font-weight: 900; }
+.aurora-auth-card button:disabled { opacity: .55; }
+.aurora-auth-switch { width: 100%; margin-top: 12px; padding: 10px; border: 0; color: #bcefff; background: transparent; font-weight: 750; }
+.aurora-auth-result { min-height: 22px; margin-top: 10px; color: #9fe8ff; font-size: 13px; line-height: 1.4; text-align: center; }
+.aurora-logout-button { min-height: 38px; padding: 0 12px; border: 1px solid rgba(255,132,148,.38); border-radius: 11px; color: #ffe4e8; background: rgba(86,25,38,.72); font-weight: 800; }
+.aurora-logout-button[hidden] { display: none; }
+
+.aurora-trial-counter {
+  position: fixed; z-index: 850;
+  top: calc(env(safe-area-inset-top, 0px) + 58px); right: 12px;
+  max-width: calc(100vw - 24px); padding: 5px 10px;
+  border: 1px solid rgba(92,224,211,.22); border-radius: 999px;
+  color: #c8fff8; background: rgba(7,21,37,.88);
+  box-shadow: 0 6px 18px rgba(0,0,0,.18);
+  font-size: 11px; font-weight: 800; line-height: 1.2;
+  letter-spacing: .01em; pointer-events: none; backdrop-filter: blur(10px);
+}
+.aurora-trial-counter.is-expired { border-color: rgba(255,132,148,.32); color: #ffe0e5; }
+.aurora-auth-required .aurora-trial-counter { display: none; }
+body.aurora-report-open .aurora-trial-counter { display: none; }
+@media print { .aurora-trial-counter { display: none !important; } }
+@media (max-width: 760px) {
+    .aurora-cloud-button { width: 42px; min-width: 42px; padding: 0; }
+    .aurora-cloud-button__label { display: none; }
+}
+
+/* Aurora 1.2.1 — biblioteca da nuvem simples e focada em recuperação. */
+.aurora-cloud-panel--library{display:flex;flex-direction:column;width:min(100%,460px);max-height:min(680px,calc(100dvh - 28px));padding:0;overflow:hidden}
+.aurora-cloud-library-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:21px 21px 17px;border-bottom:1px solid rgba(127,226,255,.14)}
+.aurora-cloud-library-header>div{min-width:0}
+.aurora-cloud-library-header span{display:block;margin-bottom:4px;color:#63e3dc;font-size:11px;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+.aurora-cloud-library-header h2{margin:0 0 5px;font-size:22px}
+.aurora-cloud-library-header p{margin:0;font-size:13px;line-height:1.4}
+.aurora-cloud-library-header>button{flex:0 0 auto;width:42px;height:42px;border:1px solid rgba(127,226,255,.18);border-radius:13px;color:#e9fbff;background:#13263a;font-size:21px}
+.aurora-cloud-panel--library>.aurora-cloud-projects{display:flex;flex-direction:column;min-height:0;margin:0;padding:17px 18px 18px;overflow:hidden}
+.aurora-cloud-panel--library .aurora-cloud-projects__header{flex:0 0 auto}
+.aurora-cloud-panel--library .aurora-cloud-projects__header>button{display:grid;place-items:center;border:1px solid rgba(127,226,255,.14);font-family:system-ui,sans-serif}
+.aurora-cloud-panel--library .aurora-cloud-projects__list{min-height:0;overflow:auto;padding-right:3px;overscroll-behavior:contain}
+.aurora-cloud-panel--library .aurora-cloud-project-card{gap:9px;padding:14px 15px}
+.aurora-cloud-panel--library .aurora-cloud-project-card code{display:none}
+.aurora-cloud-panel--library .aurora-cloud-project-card>button{width:100%;min-height:44px}
+.aurora-cloud-panel--library>.aurora-cloud-result{flex:0 0 auto;min-height:0;margin:0;padding:0 19px 16px}
+@media(max-width:520px){
+  .aurora-cloud-overlay{align-items:end;padding:8px}
+  .aurora-cloud-panel--library{width:100%;max-height:calc(100dvh - 16px);border-radius:22px}
+  .aurora-cloud-library-header{padding:18px 17px 15px}
+  .aurora-cloud-panel--library>.aurora-cloud-projects{padding:15px 14px 16px}
+}

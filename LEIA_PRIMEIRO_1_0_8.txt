@@ -1,0 +1,39 @@
+AURORA WEB 1.0.8 — OCORRÊNCIAS UNIFICADAS
+
+Publicação:
+1. Publique todo o conteúdo desta pasta no Worker ligado ao mlcaurora.com.
+2. Não execute SQL e não altere o Aurora Admin.
+3. Feche as abas antigas e atualize com Ctrl + Shift + R.
+
+Principais mudanças:
+- seleção simultânea de várias sugestões;
+- indicação visual das sugestões já selecionadas;
+- sugestões do usuário salvas por conta/segmento/serviço/campo;
+- edição e exclusão das sugestões personalizadas;
+- modal compatível com tema claro e escuro;
+- fundo bloqueado enquanto o modal está aberto;
+- seta de sugestões padronizada;
+- remoção do campo de confirmação inicial sem uso;
+- tela de ocorrências simplificada;
+- contador compacto de fotos.
+- contraste e pesos reforçados no tema claro;
+- texto do card inicial legível nos dois temas;
+- fonte única nos campos, inclusive textarea e select;
+- setas de sugestões, seleções e datas padronizadas.
+- rodapé do modal acima das áreas nativas do celular;
+- campo e botão Salvar na mesma linha;
+- Cancelar e ação principal com dimensões iguais;
+- categoria elétrica em seletor Aurora sem “Selecione” ou “Outro”;
+- categorias próprias com salvar, editar e excluir;
+- remoção do travessão entre sugestões;
+- navegação inferior neutra durante o fluxo;
+- tela de conclusão simplificada.
+- modal sempre vertical no Z Fold aberto e fechado;
+- cards com altura automática e texto integral;
+- checkbox centralizado dentro do card;
+- todas as setas de sugestões alinhadas ao padrão dos selects.
+- título da etapa simplificado para “Ocorrências”;
+- orientações redundantes unificadas no cabeçalho do card principal;
+- cabeçalho ocultado durante o preenchimento de um registro.
+
+Nenhuma migração de banco é necessária.

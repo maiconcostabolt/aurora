@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"
+    >
+
+    <meta
+        name="theme-color"
+        content="#07111f"
+    >
+
+    <meta
+        name="apple-mobile-web-app-capable"
+        content="yes"
+    >
+
+    <meta
+        name="apple-mobile-web-app-status-bar-style"
+        content="black-translucent"
+    >
+
+    <meta
+        name="apple-mobile-web-app-title"
+        content="Aurora Web"
+    >
+
+    <meta
+        name="mobile-web-app-capable"
+        content="yes"
+    >
+
+    <title>Aurora Web</title>
+
+    <script>
+        window.__AURORA_ANDROID__ =
+            window.location.protocol === "file:" ||
+            new URLSearchParams(window.location.search).get("source") === "android";
+
+        if (window.__AURORA_ANDROID__) {
+            window.AURORA_PDF_STANDALONE_PIPELINE = true;
+
+            window.print = function () {
+                if (window.AuroraAndroid) {
+                    window.AuroraAndroid.printPage();
+                }
+            };
+        }
+    </script>
+
+    <link
+        rel="manifest"
+        href="./manifest.webmanifest"
+    >
+
+    <link
+        rel="icon"
+        href="./assets/icons/aurora-192.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="./assets/icons/apple-touch-icon.png"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/app_shell.css?v=AURORA-V182-AI-CONFIRMACAO"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/aurora_runtime.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/mobile_shell.css"
+    >
+    <link rel="stylesheet" href="./css/vehicle_inspection_flow.css?v=AURORA-VISTORIA16">
+    <link rel="stylesheet" href="./core/shapes/eletrica_tupy/ui.css?v=AURORA-AI-TEAM-LAYOUT-FIX-20260909">
+
+    <link
+        rel="stylesheet"
+        href="./css/report_engine.css?v=AURORA-PREVIA-ASSINATURA-1"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/evidence_engine.css?v=AURORA-1.0.8"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/pwa_install.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/onboarding.css?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE"
+    >
+
+    <link
+        rel="stylesheet"
+        href="./css/mobile_premium_patch.css?v=V66-TOPBAR-USUARIO"
+    >
+    <link
+        rel="stylesheet"
+        href="./css/aurora_motion.css?v=RC8.13-MOTION2-LAYERFIX1"
+    >
+    <link rel="stylesheet" href="./css/rc6_patch.css?v=AURORA-V47-R26">
+    <link rel="stylesheet" href="./css/rc7_2_print.css?v=RC8.0">
+    <link rel="stylesheet" href="./css/rc8_10_report_premium.css?v=AURORA-GROUNDING-V22">
+    <link rel="stylesheet" href="./css/rc8_10_report_refinement.css?v=BUG_A_FINALIZE_TRACE_2">
+    <link rel="stylesheet" href="./css/cover_photo_feature.css?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE">
+    <link rel="stylesheet" href="./css/cloud_sync.css?v=AURORA-1.2.5-LOGOUT-ENTRADA">
+    <link rel="stylesheet" href="./css/module_access.css?v=PWA-V5.7-TRIAL1">
+    <link rel="stylesheet" href="./css/support_messages.css?v=AURORA-1.1.7">
+    <link rel="stylesheet" href="./css/aurora_dialog.css?v=AURORA-1.2.5">
+<link rel="stylesheet" href="./css/aurora_ai_customer.css?v=AURORA-V179-DISPATCHER-UX">
+<link rel="stylesheet" href="./css/aurora_ai_asset.css?v=AURORA-ESCOPO-MODULO-14">
+<link rel="stylesheet" href="./css/aurora_budget.css?v=AURORA-ASSINATURA-ORCAMENTO-1">
+</head>
+
+<body>
+
+<div id="app"></div>
+
+<div
+    id="app-status"
+    class="aurora-runtime-status"
+    aria-live="polite"
+></div>
+
+<script src="./js/aurora_dialog.js?v=AURORA-1.2.5"></script>
+
+<!-- CONFIG -->
+<script src="./config/runtime_config.js?v=AURORA-V47-RC1"></script>
+<script src="./config/build_profile.js"></script>
+<script src="./js/account_storage.js?v=MLCAURORA_R9_PROD"></script>
+
+<!-- ONBOARDING -->
+<script src="./core/onboarding/onboarding_engine.js?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE"></script>
+<script src="./modules/onboarding/onboarding_controller.js?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE"></script>
+
+<!-- SHELL -->
+<script src="./core/ui/theme_manager.js"></script>
+<script src="./core/ui/sidebar_component.js"></script>
+<script src="./core/ui/topbar_component.js?v=AURORA-1.1.8"></script>
+<script src="./core/ui/footer_navigation.js"></script>
+<script src="./core/ui/app_shell.js"></script>
+<script src="./core/ui/mobile_shell_adapter.js"></script>
+
+<!-- CORE UI -->
+<script src="./core/navigation/module_controller.js"></script>
+<script src="./core/navigation/view_manager.js"></script>
+<script src="./core/ui/ui_schema_engine.js"></script>
+<script src="./core/ui/library_engine.js"></script>
+<script src="./core/ui/field_engine.js?v=AURORA-PRODUCAO-VISTORIA1.0.1"></script>
+<script src="./core/ui/form_renderer.js"></script>
+<script src="./core/ui/base_form_module.js"></script>
+
+<!-- BINDING/STORAGE -->
+<script src="./core/binding/case_binder.js"></script>
+<script src="./core/storage/local_case_repository.js?v=AURORA-V166-CACHE-ATOMICO"></script>
+
+<!-- MODULES -->
+<script src="./modules/customer/customer_controller.js"></script>
+<script src="./modules/asset/asset_controller.js?v=AURORA-PRODUCAO-VISTORIA1.0.1"></script>
+<script src="./modules/intake/intake_controller.js"></script>
+<script src="./modules/occurrence/occurrence_controller.js"></script>
+<script src="./modules/evidence/evidence_controller.js"></script>
+<script src="./modules/budget/budget_controller.js?v=AURORA-ASSINATURA-ORCAMENTO-1"></script>
+<script src="./modules/diagnostic/diagnostic_controller.js"></script>
+<script src="./modules/approval/approval_controller.js?v=AURORA-ASSINATURA-ORCAMENTO-1"></script>
+
+<!-- REPORTING -->
+<script src="./core/reporting/report_company_identity.js"></script>
+<script src="./core/reporting/report_engine.js?v=AURORA-V166-CACHE-ATOMICO"></script>
+<script src="./js/paged.min.js?v=0.4.3"></script>
+<script src="./config/pdf_experimental_config.js?v=RC8.18-PDF-EXP-0"></script>
+<script src="./config/pdf_local_test_config.js?v=AURORA-GROUNDING-V22"></script>
+<script src="./config/report_technical_details.js?v=AURORA-TUPY1"></script>
+<link rel="stylesheet" href="./core/reporting/premium/styles/premium_report.css?v=PREMIUM-TEST2">
+<script src="./js/aurora_qrcode.js?v=AURORA-VALIDACAO-QR-1"></script>
+<script src="./core/reporting/report_preview.js?v=AURORA-V47-R14"></script>
+<script src="./core/reporting/premium/data/premium_utils.js?v=PREMIUM-TEST2"></script>
+<script src="./core/reporting/premium/data/vehicle_inspection_adapter.js?v=PREMIUM-TEST2"></script>
+<script src="./core/reporting/premium/components/premium_components.js?v=PREMIUM-TEST2"></script>
+<script src="./core/reporting/premium/pages/cover_page.js?v=PREMIUM-TEST2"></script>
+<script src="./core/reporting/premium/pages/identification_page.js?v=PREMIUM-TEST2"></script>
+<script src="./core/reporting/premium/pages/occurrences_page.js?v=PREMIUM-TEST2"></script>
+<script src="./core/reporting/premium/pages/diagnosis_page.js?v=PREMIUM-TEST2"></script>
+<script src="./core/reporting/premium/premium_report_renderer.js?v=PREMIUM-TEST2"></script>
+<script src="./core/reporting/report_pdf_serialize.js?v=AURORA-GROUNDING-V22"></script>
+<script src="./core/reporting/report_pdf_experimental.js?v=RC8.18-PDF-EXP-0"></script>
+<script src="./js/pdf-lib.min.js?v=1.17.1"></script>
+<script src="./js/fontkit.umd.min.js?v=AURORA-PDF-LAYOUT-1"></script>
+<script src="./core/reporting/report_pdf_local_test.js?v=RC8.18-PDF-LOCAL-0"></script>
+<script src="./core/reporting/report_pdf_from_layout.js?v=AURORA-PDF-LAYOUT-1"></script>
+<script src="./core/reporting/report_pdf_pwa.js?v=PANEL_KM_REPORT_CLASSIFICATION_1"></script>
+
+<!-- EVIDENCE -->
+<script src="./core/evidence/evidence_store.js?v=AURORA-V166-CACHE-ATOMICO"></script>
+<script src="./core/evidence/photo_editor.js?v=AURORA-V169-PHOTO-EDITOR-SAFE"></script>
+
+<!-- RUNTIME -->
+<script src="./core/runtime/aurora_runtime.js?v=AURORA-GROUNDING-V44"></script>
+<script src="./js/vehicle_inspection_flow.js?v=BUG_A_RUNTIME_TRACE_1"></script>
+<script src="./core/shapes/eletrica_tupy/domain.js?v=AURORA-TUPY10"></script>
+<script src="./core/shapes/eletrica_tupy/catalog_data.js?v=AURORA-FEEDBACK-CLIENTE-GESTAO-DENSITY-1"></script>
+<script src="./core/shapes/eletrica_tupy/services_catalog_data.js?v=AURORA-FEEDBACK-CLIENTE-GESTAO-DENSITY-1"></script>
+<script src="./core/shapes/eletrica_tupy/materials_priority_data.js?v=AURORA-FEEDBACK-CLIENTE-GESTAO-DENSITY-1"></script>
+<script src="./js/eletrica_tupy_service_suggestions.js?v=AURORA-FEEDBACK-CLIENTE-REV1"></script>
+<script src="./js/eletrica_tupy_codes_grid.js?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE"></script>
+<script src="./js/eletrica_tupy_pedidos.js?v=AURORA-FEEDBACK-CLIENTE-GESTAO-DENSITY-1"></script>
+<script src="./js/eletrica_tupy_report_number.js?v=AURORA-FEEDBACK-CLIENTE-GESTAO-DENSITY-1"></script>
+<script src="./core/shapes/eletrica_tupy/flow.js?v=AURORA-V178-HISTORICO-TUPY-ISOLADO"></script>
+
+<!-- FEATURES: precisam existir antes do Bootstrap -->
+<script src="./js/home_return_trace.js?v=MLCAURORA_R9_PROD"></script>
+<script src="./js/bug_a_runtime_trace.js?v=MLCAURORA_R9_PROD"></script>
+<script src="./js/evidence_feature.js?v=AURORA-V169-PHOTO-EDITOR-SAFE"></script>
+<script src="./js/cover_photo_feature.js?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE"></script>
+<script src="./js/report_feature.js?v=2.4"></script>
+
+
+<!-- ANDROID BRIDGE -->
+<script src="./js/android_bridge.js?v=AURORA-NAV-V31-20260913"></script>
+
+<!-- AUTENTICAÇÃO: valida a conta antes de iniciar a Aurora -->
+<script src="./config/cloud_config.js?v=AURORA-1.0.1"></script>
+<script src="./config/license_config.js?v=AURORA-OFFLINE-FASE4"></script>
+<script src="./js/offline_license.js?v=AURORA-OFFLINE-FASE4-REV"></script>
+<script src="./js/aurora_clock_diagnostic.js?v=AURORA-OFFLINE-FASE4-CLOCK-DIAG"></script>
+<script src="./js/supabase.min.js?v=2.55.0"></script>
+<script src="./js/aurora_asset_public.js?v=23"></script>
+<script src="./js/company_access.js?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE"></script>
+<script src="./js/company_team.js?v=AURORA-ATERRAMENTO-V2"></script>
+<script src="./js/tupy_settings.js?v=AURORA-R30-FINAL-1"></script>
+<script src="./js/admin_service_codes_cloud.js?v=AURORA-ADMIN-REPORT-REVIEW-UI-1"></script>
+<script src="./js/aurora_i18n.js?v=AURORA-ASSETS-ELECTRICAL-QR-NAV-RESTORE-4"></script>
+<script src="./js/aurora_assets_pilot.js?v=33"></script>
+<script src="./js/evidence_cloud_sync.js?v=AURORA-ESCOPO-MODULO-14"></script>
+<script src="./js/evidence_cloud_reader.js?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE"></script>
+<script src="./js/cloud_sync.js?v=AURORA-V47-R14"></script>
+<script src="./js/grounding_recovery_v11.js?v=GROUNDING-V22"></script>
+<script src="./js/support_messages.js?v=AURORA-ESCOPO-MODULO-14"></script>
+<script src="./js/app_refresh.js?v=AURORA-ESCOPO-MODULO-14"></script>
+<script src="./js/module_commercial.js?v=AURORA-COMPANY-ENTITLEMENT-GATE-R3"></script>
+<script src="./js/module_access.js?v=AURORA-V172-APP-SWITCHER"></script>
+
+<!-- AURORA AI-1 PILOT: Painel Elétrico / Cliente -->
+<script src="./js/aurora_ai_listen_overlay.js?v=AURORA-ESCOPO-MODULO-14"></script>
+<script src="./js/aurora_ai_floating.js?v=AURORA-V179-DISPATCHER-UX"></script>
+<script src="./js/aurora_ai_registry.js?v=AURORA-ESCOPO-MODULO-14"></script>
+<script src="./js/aurora_ai_engine.js?v=AURORA-AI-UX-MOVEL-1"></script>
+<script src="./js/aurora_ai_dynamic.js?v=AURORA-ESCOPO-MODULO-14"></script>
+<script src="./js/aurora_ai_customer.js?v=AURORA-ESCOPO-MODULO-14"></script>
+<script src="./js/aurora_ai_home.js?v=AURORA-V182-AI-CONFIRMACAO"></script>
+<script src="./js/aurora_ai_asset.js?v=AURORA-ESCOPO-MODULO-14"></script>
+<script src="./js/aurora_ai_panel_voice.js?v=AURORA-ESCOPO-MODULO-14"></script>
+
+
+
+<!-- BOOTSTRAP -->
+<script src="./js/entitlement_engine.js?v=RC8.0"></script>
+<script src="./js/bootstrap.js?v=AURORA-V47-R14"></script>
+<script src="./js/aurora_ai_universal_router.js?v=AURORA-V182-AI-CONFIRMACAO"></script>
+<script src="./js/aurora_ui_support_diagnostic.js?v=AURORA-SUPPORT-DIAG-v33-lite"></script>
+
+<!-- AURORA RC6 -->
+<script src="./config/report_title_suggestions.js?v=AURORA-TUPY1"></script>
+<script src="./js/rc6_patch.js?v=AURORA-PREVIA-ASSINATURA-1"></script>
+<script src="./js/rc7_commercial.js?v=RC8.1"></script>
+
+<!-- AURORA V184 — SHAPE ATERRAMENTO / EQUIPOTENCIALIZACAO -->
+<link rel="stylesheet" href="./core/shapes/grounding/ui.css?v=AURORA-V47-R04">
+<script src="./core/shapes/grounding/flow.js?v=AURORA-V47-R14"></script>
+
+<!-- DIAG V40 FORENSE — SOMENTE RASTREIO, NÃO ALTERA CONTRATOS -->
+
+
+<!-- PWA -->
+<script src="./js/pwa_installer.js?v=AURORA-V132"></script>
+
+
+
+</body>
+</html>

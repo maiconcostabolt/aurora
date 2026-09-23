@@ -1,0 +1,37 @@
+AURORA V22 — FLUXO ATIVO AUTORIZADO — 13/09/2026
+
+ESCOPO CIRURGICO
+1. Restaurar os 3 comandos da ficha para ADMIN sem recriar os botoes:
+   - Nova vistoria
+   - Etiqueta QR
+   - Editar equipamento
+2. Remover a corrida de permissao que fazia a ficha renderizar antes do ADMIN ser reconhecido.
+3. Fazer a entrada Painéis e equipamentos passar pelo gate autenticado, em vez de abrir direto com permissoes iniciais.
+4. Preservar o QR permanente e o roteamento de membro autenticado para a ficha do equipamento.
+
+CAUSA RAIZ CONFIRMADA
+- Os botoes Etiqueta QR e Editar equipamento nunca tinham sido removidos do DOM.
+- assetPerms iniciava com can_print_qr=false e can_edit=false.
+- O clique delegado do card chamava ui.showPanel() diretamente e NAO chamava loadPermissions().
+- Ao abrir a ficha, showDetail() usava esse estado inicial e ocultava os dois botoes.
+- Portanto, as rodadas anteriores reforcavam o reconhecimento de ADMIN, mas o caminho principal nem executava esse reconhecimento antes de desenhar a ficha.
+
+CORRECAO
+- showDetail agora aguarda loadPermissions antes de aplicar visibilidade das acoes.
+- Clique do card agora usa open(), que executa o gate autenticado.
+- loadPermissions ganhou fallback direto para aurora_my_company_access e depois aurora_my_active_membership.
+- COMPANY_ADMIN / ADMIN_BOLT / OWNER recebem todas as permissoes de ativo.
+- Convidados continuam obedecendo aurora_asset_my_permissions.
+
+QR
+- Visitante continua na ficha publica.
+- Sessao web/PWA valida da mesma origem e pertencente a empresa converte aurora_asset -> aurora_asset_open e abre a ficha interna.
+- QR continua permanente; nao foi regenerado.
+
+NAO ALTERADO
+- Tupy
+- relatorio veicular
+- Aurora AI
+- orcamento/assinatura
+- layout aprovado da etiqueta
+- historico existente

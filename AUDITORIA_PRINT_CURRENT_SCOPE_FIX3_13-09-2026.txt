@@ -1,0 +1,23 @@
+AURORA — FIX3 BOTÃO IMPRIMIR ETIQUETA
+Evidência do teste humano:
+Uncaught ReferenceError: current is not defined
+at printLabel (aurora_assets_pilot.js:23:10)
+at modal.querySelector.onclick (aurora_assets_pilot.js:98:471)
+
+Causa:
+printLabel() estava fora do escopo léxico em que current() existe.
+
+Correção:
+printLabel agora recebe explicitamente o registro do equipamento: printLabel(r).
+O clique do botão passa o mesmo registro que já está em escopo no modal.
+Foi removida a dependência de current() dentro do motor de impressão.
+
+Mantidos:
+- 50,8 x 50,8 mm circular
+- impressão térmica monocromática
+- QR preparado no documento principal
+- iframe interno sem aba branca
+- lazy-load/fluidez
+- QR público/contextual
+- Minha Equipe
+- Tupy/AI/relatórios intocados

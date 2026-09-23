@@ -1,0 +1,17 @@
+AURORA — FIX5 IMPRIMIR ETIQUETA
+
+Evidência do teste:
+Uncaught ReferenceError: publicUrl is not defined
+at printLabel (aurora_assets_pilot.js:29:15)
+
+Causa:
+Assim como current() no FIX3, publicUrl() também pertence ao escopo interno do controlador de equipamentos.
+printLabel() está fora desse escopo e não pode chamá-la diretamente.
+
+Correção:
+- printLabel recebe agora DOIS dados prontos: o registro e a URL pública.
+- Chamada: printLabel(r, publicUrl(r)) no ponto em que publicUrl está disponível.
+- Dentro de printLabel não existe mais referência a current() nem publicUrl().
+- QR de impressão usa apenas a URL recebida.
+
+Sem alterações em bootstrap, Tupy, AI, relatórios, Minha Equipe ou consulta pública.

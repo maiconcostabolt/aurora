@@ -1,0 +1,17 @@
+AURORA V149 — TUPY BACKSTACK / PERFIL / GESTÃO
+Base: V147 aprovada. V148 descartada como base por regressão de navegação.
+
+ALTERAÇÕES EXCLUSIVAS
+1. Perfil ADMIN: removido card separado Materiais Tupy.
+2. Perfil ADMIN: Catálogo de serviços Tupy abre Configurações Tupy centralizada, sem fechar o Perfil.
+3. Configurações Tupy mantém dois cards internos: Catálogo de serviços e Materiais Tupy.
+4. Backstack nativo: catálogo -> Configurações Tupy -> Perfil -> Home.
+5. Backstack nativo em Gestão dos trabalhos -> Home, sem minimizar o APK.
+6. Reforçado z-index do modal Configurações Tupy e catálogo interno.
+
+PRESERVADO
+- Minha Equipe e permissões.
+- Bloqueio/desbloqueio de membro.
+- Trocar segmento.
+- Nova atividade do ADMIN.
+- Fluxos e dados existentes da V147.

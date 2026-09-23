@@ -1,0 +1,33 @@
+AURORA V184 — SHAPE ATERRAMENTO E EQUIPOTENCIALIZACAO R01
+BASE: AURORA V183 AI HANDOFF APP FIX
+DATA: 18/09/2026
+
+ESCOPO
+- Nova shape dedicada ao serviço grounding/Aterramento já existente no aplicativo Elétrica.
+- 5 etapas: Identificação; Sistema/metodologia/instrumento; Pontos; Revisão; Finalização.
+- Sem tela de valores/orçamento.
+- Pontos ilimitados com descrição, categoria, valor em ohms, referência, condição, parecer, observação e fotos.
+- Sugestões nativas + opção "Outra opção" persistida em aurora_grounding_custom_suggestions_v1 para reutilização.
+- Revisão com total, pontos com foto, maior valor e média.
+- Finalização usa o ReportEngine/ReportPreview já existentes da Aurora.
+- Projeto é enfileirado no AuroraCloudSync existente após finalização.
+- Layout usa a paleta e linguagem visual Aurora, responsivo sem rolagem horizontal.
+
+ARQUIVOS NOVOS
+- core/shapes/grounding/flow.js
+- core/shapes/grounding/ui.css
+
+ARQUIVOS ALTERADOS
+- index.html / app.html / offline.html: somente inclusão dos assets da nova shape.
+- config/runtime_config.js: somente identificação do deploy em Perfil/Configurações.
+
+NAO ALTERADOS
+- js/bootstrap.js
+- js/cloud_sync.js
+- service_worker.js
+- autenticação, ADMIN/USUÁRIO, permissões, QR Code, Tupy, Aurora AI, histórico e demais shapes.
+
+OBSERVACOES / TESTE HUMANO OBRIGATORIO
+- Validar em PWA teste: criação/edição/exclusão de pontos, fotos, F5/reabertura, relatório e sincronização.
+- A R01 integra as fotos dos pontos ao snapshot/ReportEngine como evidências do respectivo ponto. Deve ser validada a persistência de imagens grandes no dispositivo e a hidratação após nuvem antes de considerar produção.
+- Offline permanece com a infraestrutura V183 sem alteração; validar a nova shape offline separadamente antes de produção.

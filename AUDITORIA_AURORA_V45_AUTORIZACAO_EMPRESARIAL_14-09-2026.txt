@@ -1,0 +1,42 @@
+AURORA V45 — AUTORIZAÇÃO EMPRESARIAL COMPARTILHADA
+Data: 14-09-2026
+
+OBJETIVO
+Eliminar a herança automática de preferred_module/selected_services para COMPANY_USER convidado.
+A autorização do ambiente passa a ser exclusivamente a concedida pelo ADMIN em Minha Equipe.
+
+CAUSA DA REGRESSÃO V44
+O bootstrap consultava os entitlements da empresa antes de aplicar o filtro individual do membro.
+Assim, um COMPANY_USER sem ambiente concedido podia receber electrical/panel pelo perfil legado ou pela licença empresarial.
+
+CORREÇÃO COMPARTILHADA
+- resolveCompanyEntitlementModules agora cruza, para COMPANY_USER, os módulos ativos da empresa com aurora_company_member_modules.
+- Nova RPC aurora_my_company_authorized_modules aplicada no Supabase.
+- Sem ambiente concedido: nenhum módulo é selecionado; Home empresarial sobe em estado restrito.
+- preferred_module, selected_services e módulo ativo local não concedem acesso implícito.
+- Chave aurora_active_module do usuário é limpa quando ele está aguardando autorização.
+- ADMIN continua vendo somente módulos contratados/em demonstração e decide quais conceder a cada membro.
+- Regra é compartilhada para Oficina, Elétrica, Industrial, Drone, Lavação, Estofados, Cortinas/Persianas, Reparos/Manutenção e Condomínios.
+- Vistoria Veicular e Atividades Rotineiras/Tupy permanecem fora desta expansão.
+
+SUPABASE
+Migration: company_user_authorized_modules
+RPC: public.aurora_my_company_authorized_modules()
+A RPC retorna para COMPANY_USER somente módulos enabled=true que também estejam ativos para a empresa.
+
+ARQUIVOS ALTERADOS
+- js/module_access.js
+- js/bootstrap.js
+- config/runtime_config.js
+- service_worker.js
+- app.html
+
+VERSÃO VISÍVEL
+AURORA_V45_AUTORIZACAO_EMPRESARIAL_14-09-2026
+
+TESTE PRINCIPAL
+1. aurora_usuario01@hotmail.com permanece sem linha em aurora_company_member_modules.
+2. Entrar com essa conta: deve abrir Home empresarial restrita, sem cair em Elétrica.
+3. ADMIN concede Elétrica em Minha Equipe.
+4. Reabrir/atualizar usuário: Elétrica passa a estar disponível.
+5. ADMIN remove Elétrica: usuário volta ao estado restrito.

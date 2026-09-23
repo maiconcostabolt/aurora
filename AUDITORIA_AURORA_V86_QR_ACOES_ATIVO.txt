@@ -1,0 +1,24 @@
+AURORA V86 — ELÉTRICA · QR COMPARTILHAR + AÇÕES DO ATIVO
+Base: V85.
+
+ALTERADO SOMENTE NESTA RODADA
+1. Modal Etiqueta QR:
+   - preservados Fechar e Imprimir etiqueta;
+   - adicionado Compartilhar QR;
+   - usa compartilhamento nativo do link permanente do ativo quando disponível;
+   - fallback copia/oferece o link do QR.
+2. Detalhe do ativo:
+   - restaurados os comandos Nova vistoria, Etiqueta QR e Editar equipamento;
+   - adicionado Excluir equipamento.
+3. Exclusão:
+   - reutiliza a permissão can_deactivate já existente;
+   - reutiliza a RPC aurora_asset_delete já existente;
+   - confirmação informa que atendimentos e relatórios históricos não serão apagados.
+4. Nenhuma alteração no histórico, relatório, Trabalhos a realizar, QR público, Offline,
+   Auth, License Ticket, BOLT, Tupy ou outros serviços.
+5. Versão oficial:
+   AURORA_V86_ELETRICA_QR_COMPARTILHAR_ACOES_ATIVO_16-09-2026
+
+OBSERVAÇÃO
+A V85 já continha ações Editar/Excluir nos cards da listagem condicionadas às permissões.
+Nesta rodada a exclusão também foi colocada explicitamente no detalhe do ativo, como aprovado.

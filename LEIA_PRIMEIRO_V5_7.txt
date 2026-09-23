@@ -1,0 +1,23 @@
+AURORA PWA V5.7 — DEMONSTRAÇÃO AUTOMÁTICA POR MÓDULO
+
+1. Execute uma única vez no SQL Editor do Supabase:
+   06_DEMONSTRACAO_AUTOMATICA_POR_MODULO.sql
+
+2. Publique esta pasta somente no Worker da PWA Aurora.
+
+3. Atualize a Aurora com Ctrl + Shift + R.
+
+FLUXO IMPLEMENTADO
+- Conta nova completa empresa/profissional, responsável e telefone.
+- O usuário escolhe um módulo para experimentar.
+- A Aurora pede confirmação antes de iniciar o prazo.
+- O módulo recebe 7 dias automaticamente, sem ação no Admin.
+- Cada conta pode usar a demonstração de cada módulo apenas uma vez.
+- Logoff, cache limpo ou outro aparelho não reiniciam o prazo.
+- Outros módulos ainda não testados continuam disponíveis para demonstração.
+- Ao expirar, o módulo é bloqueado e permanece registrado como teste utilizado.
+- O Admin continua podendo conceder exceções manualmente.
+
+TESTE RECOMENDADO
+Crie uma conta nova (ex.: Teste04), complete o cadastro, escolha um módulo,
+confirme a demonstração e confira no Admin o prazo de 7 dias.

@@ -1,0 +1,31 @@
+AURORA V66 — AUDITORIA TOPBAR USUÁRIO / NUVEM
+Data: 14/09/2026
+Base: AURORA V65 (que por sua vez foi reconstruída sobre a V61 funcional congelada)
+
+ALTERAÇÃO FUNCIONAL DE INTERFACE AUTORIZADA
+1. Restaurado no mobile o chip do usuário com avatar/inicial + nome visível e truncamento por ellipsis.
+2. A marca AURORA/segmento passa a flexionar e ceder espaço sem sair do viewport.
+3. Ocultado SOMENTE o botão visual de nuvem no topbar mobile.
+4. Nenhuma rotina de cloud/sincronização foi removida ou alterada. cloud_sync.js permanece byte-idêntico.
+5. Mantido o responsivo 2x2 da V65 para telas ultranarrow.
+
+ARQUIVO DE ESTILO ALTERADO
+- css/mobile_premium_patch.css
+
+ARQUIVOS ALTERADOS SOMENTE PARA IDENTIFICAÇÃO/CACHE
+- config/runtime_config.js
+- js/bootstrap.js: somente texto de versão exibido em Perfil/Configurações
+- service_worker.js: cache bust
+- index.html / app.html: query string do CSS
+
+NÃO ALTERADOS
+- js/cloud_sync.js
+- js/aurora_assets_pilot.js
+- lógica QR
+- Supabase / SQL / RPC / RLS
+- BOLT
+- relatórios / fotos / Aurora AI
+- app_shell.css / aurora_runtime.css / mobile_shell.css / rc6_patch.css
+
+OBSERVAÇÃO
+O botão de nuvem foi apenas removido visualmente do topbar mobile para recuperar espaço. O mecanismo automático de nuvem continua carregado e intacto.

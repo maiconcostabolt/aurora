@@ -1,0 +1,585 @@
+/* Aurora RC6.2 — navegação unificada, sugestões no campo e marca mais visível */
+.aurora-record-title-choice{display:grid;gap:5px;margin-top:12px;max-width:280px;color:var(--aurora-muted,#9fb0c8);font-size:12px}
+.aurora-record-title-choice select{min-height:42px;border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:0 12px;background:rgba(5,20,37,.75);color:inherit}
+
+/* Esconde os chips antigos e transforma as sugestões em um seletor dentro do campo. */
+.aurora-quick-texts.is-rc6-hidden,.aurora-smart-suggestions{display:none!important}
+.aurora-field--picker{position:relative}
+.aurora-field--picker textarea.has-suggestion-picker,.aurora-field--picker input.has-suggestion-picker{padding-right:56px!important}
+.aurora-suggestion-toggle{position:absolute;right:10px;z-index:4;display:grid;place-items:center;width:42px;height:42px;padding:0;border:0;border-radius:12px;color:#b9ccdc;background:transparent;font-size:27px;line-height:1;cursor:pointer}
+.aurora-suggestion-toggle:hover,.aurora-suggestion-toggle[aria-expanded="true"]{color:var(--aurora-primary,#64f0e5);background:rgba(100,240,229,.08)}
+.aurora-suggestion-toggle .aurora-chevron{display:block;width:11px;height:11px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:translateY(-2px) rotate(45deg);transition:transform .18s ease}
+.aurora-suggestion-toggle[aria-expanded="true"] .aurora-chevron{transform:translateY(3px) rotate(225deg)}
+.aurora-suggestion-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:10px;padding:12px;border:1px solid rgba(100,240,229,.22);border-radius:16px;background:rgba(8,25,42,.96);box-shadow:0 16px 38px rgba(0,0,0,.28)}
+.aurora-suggestion-panel[hidden]{display:none!important}
+.aurora-suggestion-panel button{min-height:48px;padding:11px 13px;border:1px solid rgba(100,240,229,.22);border-radius:13px;color:var(--aurora-text,#f5f8fb);background:rgba(100,240,229,.07);font-size:14px;line-height:1.25;text-align:left;cursor:pointer}
+.aurora-suggestion-panel button:active{transform:scale(.985);background:rgba(100,240,229,.16)}
+
+/* Marca do cliente: área própria à direita para não disputar espaço com o texto. */
+.aurora-home-hero{padding-right:clamp(150px,34%,245px)!important}
+.aurora-home-hero h2,.aurora-home-hero>strong,.aurora-home-hero>p{max-width:520px}
+.aurora-home-hero h2{font-size:clamp(30px,4.5vw,43px)!important;line-height:1.02!important;text-wrap:balance}
+.aurora-home-hero>strong{max-width:480px;line-height:1.12!important;text-wrap:balance}
+.aurora-home-hero>p{max-width:500px;line-height:1.48!important}
+.aurora-home-hero__company-logo{right:18px!important;left:auto!important;width:min(190px,27%)!important;max-height:72%!important;opacity:var(--aurora-user-logo-opacity,.30)!important;filter:saturate(1.05) contrast(1.08) brightness(1.06)!important}
+
+/* Workflow: Anterior, Início, Relatório e Próximo no mesmo nível. */
+.aurora-workflow-dock.aurora-workflow-dock--unified{grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:8px!important;bottom:calc(10px + env(safe-area-inset-bottom))!important;padding:7px!important}
+.aurora-workflow-dock--unified>[data-workflow-progress]{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.aurora-workflow-dock--unified button{justify-self:stretch!important;display:flex;align-items:center;justify-content:center;gap:7px;min-width:0!important;min-height:50px!important;padding:0 8px!important;font-size:14px!important;font-weight:700}
+.aurora-workflow-dock--unified button:last-child{justify-self:stretch!important}
+.aurora-workflow-dock--unified .aurora-footer-nav__item{border:1px solid var(--aurora-border)!important;border-radius:12px!important;background:var(--aurora-surface-2)!important;color:var(--aurora-text)!important;flex-direction:row!important}
+.aurora-workflow-dock--unified .aurora-footer-nav__item.is-active{color:var(--aurora-primary)!important;background:rgba(100,240,229,.07)!important}
+.aurora-workflow-dock--unified .aurora-footer-nav__icon{font-size:19px!important}
+.aurora-workflow-dock--unified .aurora-footer-nav__item span:last-child{font-size:14px!important}
+.aurora-footer-nav.is-workflow-hidden{display:none!important}
+
+.aurora-camera-tip{position:fixed;inset:0;z-index:99999;display:grid;place-items:end center;background:rgba(0,0,0,.62);padding:16px}
+.aurora-camera-tip section{width:min(430px,100%);border:1px solid rgba(255,255,255,.13);border-radius:24px;padding:20px;background:#0b1b2d;color:#f7fbff;box-shadow:0 30px 70px rgba(0,0,0,.42)}
+.aurora-camera-tip b{font-size:18px}.aurora-camera-tip p{color:#a9b9ca;line-height:1.5}.aurora-camera-tip section>div{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.aurora-camera-tip button{min-height:46px;border:1px solid rgba(255,255,255,.12);border-radius:15px;background:#10263c;color:#fff;font-weight:800}
+.aurora-camera-tip [data-tip-ok]{border:0;background:linear-gradient(90deg,#55efe4,#48b8ff);color:#04111d}
+.aurora-report-photos figcaption small{color:#708195;font-size:9px}
+
+/* RC8.6 — diagnóstico e conclusão no mesmo formulário, com blocos AURORA. */
+.aurora-conclusion-section{display:grid;gap:3px;margin:2px 0 2px;padding:12px 14px;border-left:3px solid var(--aurora-primary,#64f0e5);border-radius:0 12px 12px 0;background:linear-gradient(90deg,rgba(100,240,229,.10),rgba(100,240,229,.02));color:var(--aurora-text,#f5fbff)}
+.aurora-conclusion-section--final{margin-top:8px;border-left-color:var(--aurora-violet,#8c62ff);background:linear-gradient(90deg,rgba(140,98,255,.10),rgba(140,98,255,.02))}
+.aurora-conclusion-section span{font-size:14px;font-weight:850;letter-spacing:.01em}
+.aurora-conclusion-section small{color:var(--aurora-muted,#9cb0c9);font-size:12px;line-height:1.35}
+
+@media(max-width:600px){
+  .aurora-evidence-hub__header{align-items:flex-start}
+  .aurora-record-title-choice{max-width:100%}
+  .aurora-camera-tip section>div{grid-template-columns:1fr}
+  .aurora-suggestion-panel{grid-template-columns:1fr}
+  .aurora-home-hero{padding-right:clamp(118px,35%,155px)!important}
+  .aurora-home-hero h2{max-width:100%;font-size:clamp(27px,7vw,36px)!important;line-height:1.03!important}
+  .aurora-home-hero>strong{max-width:100%;font-size:clamp(18px,5vw,24px)!important;line-height:1.12!important}
+  .aurora-home-hero>p{max-width:100%;font-size:13px!important;line-height:1.42!important}
+  .aurora-home-hero__count{max-width:100%}
+  .aurora-home-hero__company-logo{right:10px!important;opacity:var(--aurora-user-logo-opacity,.30)!important;width:31%!important;max-height:68%!important}
+  .aurora-workflow-dock.aurora-workflow-dock--unified{right:8px!important;left:8px!important;gap:5px!important}
+  .aurora-workflow-dock--unified button{min-height:47px!important;padding:0 5px!important;font-size:11px!important}
+  .aurora-workflow-dock--unified .aurora-footer-nav__icon{font-size:16px!important}
+  .aurora-workflow-dock--unified .aurora-footer-nav__item span:last-child{font-size:11px!important}
+}
+
+/* AURORA RC7.1 — resumo e campos independentes da Shape personalizada */
+.aurora-custom-service-summary{margin:0 0 16px;padding:18px;border:1px solid rgba(100,240,229,.28);border-radius:20px;background:linear-gradient(145deg,rgba(100,240,229,.10),rgba(139,92,246,.08));color:var(--aurora-text,#f5fbff)}
+.aurora-custom-service-summary>span{color:#64f0e5;font-size:.75rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+.aurora-custom-service-summary h2{margin:6px 0 4px;font-size:1.35rem}
+.aurora-custom-service-summary p{margin:0 0 12px;color:var(--aurora-muted,#9eb0c5)}
+.aurora-custom-service-summary dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.aurora-custom-service-summary dl div{padding:10px;border-radius:14px;background:rgba(255,255,255,.05)}
+.aurora-custom-service-summary dt{font-size:.72rem;color:var(--aurora-muted,#9eb0c5)}
+.aurora-custom-service-summary dd{margin:3px 0 0;font-weight:750}
+.aurora-custom-service-summary ul{margin:8px 0 0;padding-left:18px;color:var(--aurora-muted,#9eb0c5)}
+@media(max-width:640px){.aurora-custom-service-summary dl{grid-template-columns:1fr}}
+
+/* RC7.5 — seletor de sugestões funcional com seta dentro do campo. */
+.aurora-field--picker{position:relative!important}
+.aurora-field--picker>.aurora-suggestion-toggle{right:12px!important;width:44px!important;height:44px!important;border:1px solid rgba(100,240,229,.20)!important;background:rgba(7,25,42,.72)!important;color:var(--aurora-primary,#64f0e5)!important;backdrop-filter:blur(8px)}
+.aurora-field--picker>.aurora-suggestion-toggle .aurora-chevron{width:11px;height:11px;border-width:0 2px 2px 0;transform-origin:center}
+.aurora-field--picker textarea.has-suggestion-picker,.aurora-field--picker input.has-suggestion-picker{padding-right:68px!important}
+.aurora-suggestion-panel{position:fixed!important;left:50%!important;right:auto!important;top:50%!important;bottom:auto!important;width:min(560px,calc(100vw - 28px))!important;max-height:min(84dvh,720px)!important;overflow:hidden!important;transform:translate(-50%,-50%)!important;z-index:100001!important;display:grid!important;grid-template-rows:auto minmax(120px,1fr) auto auto!important;gap:12px!important;margin:0!important;padding:16px!important;border:1px solid var(--aurora-border)!important;border-radius:22px!important;color:var(--aurora-text)!important;background:var(--aurora-surface)!important;box-shadow:0 28px 80px rgba(0,0,0,.42)!important}
+.aurora-suggestion-panel:before{display:none!important}
+.aurora-suggestion-panel button{font-size:16px!important;min-height:52px!important}
+body.aurora-picker-open{overflow:hidden!important;touch-action:none!important}
+body.aurora-picker-open:after{content:"";position:fixed;inset:0;z-index:100000;background:rgba(5,12,22,.62);backdrop-filter:blur(2px);pointer-events:auto;touch-action:none}
+.aurora-suggestion-panel__title{position:relative;padding-right:48px}.aurora-suggestion-panel__title strong,.aurora-suggestion-panel__title small{display:block}.aurora-suggestion-panel__title strong{font-size:18px}.aurora-suggestion-panel__title small{margin-top:3px;color:var(--aurora-muted)}
+.aurora-suggestion-panel__close{position:absolute;right:0;top:-6px;width:42px!important;min-height:42px!important;padding:0!important;border:1px solid var(--aurora-border)!important;border-radius:12px!important;color:var(--aurora-text)!important;background:var(--aurora-surface-2)!important;font-size:25px!important;text-align:center!important}
+.aurora-suggestion-panel__list{display:grid;gap:8px;overflow:auto;overscroll-behavior:contain;padding-right:3px}
+.aurora-suggestion-option{display:grid!important;grid-template-columns:26px minmax(0,1fr) auto;align-items:center;gap:10px;width:100%;min-height:56px!important;border:1px solid var(--aurora-border)!important;color:var(--aurora-text)!important;background:var(--aurora-surface-2)!important}
+.aurora-suggestion-option[aria-pressed="true"]{border-color:var(--aurora-primary)!important;background:color-mix(in srgb,var(--aurora-primary) 13%,var(--aurora-surface-2))!important}
+.aurora-suggestion-check{display:grid;place-items:center;width:24px;height:24px;border:2px solid var(--aurora-border);border-radius:7px;color:transparent}.aurora-suggestion-option[aria-pressed="true"] .aurora-suggestion-check{border-color:var(--aurora-primary);color:#07121f;background:var(--aurora-primary)}
+.aurora-suggestion-user-actions{display:flex;gap:4px}.aurora-suggestion-user-actions button{min-height:34px!important;padding:5px 8px!important;border:1px solid var(--aurora-border)!important;border-radius:9px!important;color:var(--aurora-muted)!important;background:transparent!important;font-size:11px!important}.aurora-suggestion-user-actions [data-delete-suggestion]{color:#d94b61!important}
+.aurora-suggestion-add{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px}.aurora-suggestion-add input{min-width:0;min-height:46px;padding:10px 12px;border:1px solid var(--aurora-border);border-radius:12px;color:var(--aurora-text);background:var(--aurora-surface-2);font-size:16px}.aurora-suggestion-add button{min-height:46px!important;padding:8px 13px!important;border:0!important;border-radius:12px!important;color:#07121f!important;background:var(--aurora-primary)!important;font-weight:800}
+.aurora-suggestion-panel__footer{display:grid;grid-template-columns:1fr 1.4fr;gap:8px}.aurora-suggestion-panel__footer button{border:1px solid var(--aurora-border)!important;border-radius:12px!important;color:var(--aurora-text)!important;background:var(--aurora-surface-2)!important;font-weight:800}.aurora-suggestion-panel__footer [data-apply-suggestions]{border-color:var(--aurora-primary)!important;color:#07121f!important;background:var(--aurora-primary)!important}
+
+body.aurora-evidence-editing [data-module="evidence"]>.aurora-form__header,body.aurora-evidence-editing .aurora-evidence-hub__header{display:none!important}
+.aurora-evidence-group__header>div{position:relative;width:100%;padding-right:72px}.aurora-evidence-photo-count{position:absolute;right:0;top:0;display:inline-flex;align-items:center;gap:5px;padding:7px 10px;border:1px solid var(--aurora-border);border-radius:999px;color:var(--aurora-primary);background:var(--aurora-surface-2);font-size:12px;font-weight:850}
+
+/* RC8.2 — um único indicador AURORA em TODOS os selects.
+   Mantém o comportamento nativo do Android, mas usa a seta pequena e a cor da marca. */
+html body select:not([multiple]){
+  -webkit-appearance:none!important;appearance:none!important;
+  padding-right:46px!important;
+  background-image:linear-gradient(45deg,transparent 50%,#64f0e5 50%),linear-gradient(135deg,#64f0e5 50%,transparent 50%)!important;
+  background-position:calc(100% - 20px) 50%,calc(100% - 15px) 50%!important;
+  background-size:5px 5px,5px 5px!important;
+  background-repeat:no-repeat!important;
+}
+
+/* A seta das sugestões agora segue a mesma linguagem visual dos selects nativos. */
+.aurora-field--picker>.aurora-suggestion-toggle{
+  right:12px!important;width:40px!important;height:40px!important;
+  border:0!important;border-radius:10px!important;background:transparent!important;
+  color:var(--aurora-primary,#64f0e5)!important;backdrop-filter:none!important;
+}
+.aurora-field--picker>.aurora-suggestion-toggle:hover,
+.aurora-field--picker>.aurora-suggestion-toggle[aria-expanded="true"]{background:rgba(100,240,229,.07)!important}
+.aurora-field--picker>.aurora-suggestion-toggle .aurora-chevron{
+  width:0!important;height:0!important;border:0!important;
+  border-left:6px solid transparent!important;border-right:6px solid transparent!important;
+  border-top:7px solid currentColor!important;
+  transform:none!important;transition:opacity .18s ease!important;
+}
+.aurora-field--picker>.aurora-suggestion-toggle[aria-expanded="true"] .aurora-chevron{transform:none!important;opacity:.72}
+
+/* Personalização da marca d'água da empresa. */
+.aurora-logo-transparency__control{display:grid;grid-template-columns:minmax(0,1fr) 48px;align-items:center;gap:12px}
+.aurora-logo-transparency__control input[type="range"]{width:100%;height:24px;padding:0!important;border:0!important;background:transparent!important;accent-color:var(--aurora-primary,#64f0e5)}
+.aurora-logo-transparency__control output{color:var(--aurora-primary,#64f0e5);font-size:13px;font-weight:800;text-align:right}
+
+/* RC8.1 — leitura confortável nos cards de todos os serviços e Shapes. */
+.aurora-service-card strong{font-size:16px!important;line-height:1.28!important}
+.aurora-service-card small{font-size:13px!important;line-height:1.38!important;margin-top:5px!important}
+@media(max-width:600px){
+  .aurora-service-card{min-height:108px!important;padding:13px!important}
+  .aurora-service-card strong{font-size:15px!important;line-height:1.28!important}
+  .aurora-service-card small{display:block!important;overflow:visible!important;font-size:12px!important;line-height:1.35!important;-webkit-line-clamp:unset!important}
+}
+@media(max-width:600px){.aurora-suggestion-panel{width:calc(100vw - 18px)!important;max-height:calc(100dvh - 24px)!important;padding:13px!important}.aurora-suggestion-add{grid-template-columns:1fr}.aurora-suggestion-add button{width:100%}.aurora-suggestion-user-actions{grid-column:2/4;justify-self:start}.aurora-suggestion-panel__footer{grid-template-columns:1fr 1.35fr}.aurora-suggestion-panel__footer button{font-size:13px!important}}
+
+/* RC8 — leitura confortável em campo e hierarquia correta das ações. */
+.aurora-evidence-group__form label{font-size:12px!important}
+.aurora-evidence-group__form input,.aurora-evidence-group__form select,.aurora-evidence-group__form textarea{font-size:16px!important;line-height:1.42!important;padding:11px 12px!important}
+.aurora-evidence-group__form input,.aurora-evidence-group__form select{min-height:48px!important}
+.aurora-evidence-group__form textarea{min-height:92px!important}
+.aurora-evidence-photo__body textarea{font-size:16px!important;line-height:1.4!important;min-height:76px!important}
+.aurora-evidence-photo__label{display:block;color:var(--aurora-text,#f5fbff);font-size:14px;line-height:1.3}
+.aurora-evidence-group__footer{display:grid!important;grid-template-columns:minmax(0,.8fr) minmax(0,1.4fr)!important;gap:9px!important;margin-top:14px!important}
+.aurora-evidence-group__footer button{min-height:50px!important;border-radius:12px!important;font-weight:800!important}
+.aurora-evidence-group__footer .is-subtle{color:#ffb2bd!important;border:1px solid rgba(255,96,120,.24)!important;background:rgba(255,96,120,.035)!important}
+
+/* Aurora 1.0.5 — tipografia e contraste consistentes nos dois temas. */
+button,input,select,textarea{font-family:Inter,"Segoe UI",Arial,Helvetica,sans-serif!important}
+textarea,input,select{letter-spacing:normal!important}
+:root[data-theme="light"] body{color:#101a2b}
+:root[data-theme="light"] .aurora-form__header h2,
+:root[data-theme="light"] .aurora-home-section__header h3,
+:root[data-theme="light"] .aurora-service-card strong,
+:root[data-theme="light"] .aurora-recent-card strong,
+:root[data-theme="light"] .aurora-field label{color:#101a2b!important;font-weight:750!important}
+:root[data-theme="light"] .aurora-form__header p,
+:root[data-theme="light"] .aurora-home-section__header span,
+:root[data-theme="light"] .aurora-service-card small,
+:root[data-theme="light"] .aurora-recent-card small{color:#4d5d73!important;font-weight:520!important}
+:root[data-theme="light"] .aurora-field input,
+:root[data-theme="light"] .aurora-field select,
+:root[data-theme="light"] .aurora-field textarea{color:#101a2b!important;font-weight:520!important}
+
+/* O hero usa fundo escuro em ambos os temas e precisa de cores próprias. */
+.aurora-home-hero h2{color:#f6fbff!important;text-shadow:0 1px 12px rgba(0,0,0,.22)}
+.aurora-home-hero>strong{color:#37d7c9!important}
+.aurora-home-hero>p{color:#c4cfdd!important;font-weight:520}
+.aurora-home-hero__count{color:#52ddd2!important;border-color:rgba(82,221,210,.38)!important;background:rgba(82,221,210,.09)!important;font-weight:750}
+
+/* Um único desenho, cor e alinhamento para sugestões, selects e data. */
+html body select:not([multiple]),html body input[type="date"]{
+  -webkit-appearance:none!important;appearance:none!important;
+  padding-right:52px!important;
+  background-image:linear-gradient(45deg,transparent 50%,var(--aurora-primary) 50%),linear-gradient(135deg,var(--aurora-primary) 50%,transparent 50%)!important;
+  background-position:calc(100% - 23px) 50%,calc(100% - 17px) 50%!important;
+  background-size:6px 6px,6px 6px!important;background-repeat:no-repeat!important;
+}
+html body input[type="date"]::-webkit-calendar-picker-indicator{position:absolute;right:9px;width:38px;height:38px;opacity:0;cursor:pointer}
+.aurora-field--picker>.aurora-suggestion-toggle{right:8px!important;transform:translateY(-50%)!important;width:44px!important;height:44px!important;color:var(--aurora-primary)!important}
+.aurora-field--picker>.aurora-suggestion-toggle .aurora-chevron{border-left-width:6px!important;border-right-width:6px!important;border-top-width:7px!important}
+
+@media(max-width:600px){
+  :root[data-theme="light"] .aurora-form__header h2{font-weight:800!important}
+  :root[data-theme="light"] .aurora-form__header p{font-size:14px!important;line-height:1.5!important}
+  :root[data-theme="light"] .aurora-field label{font-size:13px!important}
+  :root[data-theme="light"] .aurora-service-card strong{font-size:16px!important}
+  :root[data-theme="light"] .aurora-service-card small{font-size:13px!important}
+  :root[data-theme="light"] .aurora-home-section__header span{font-size:12px!important}
+}
+
+/* RC8 — atendimento recente: abrir, editar e excluir sem desvio de fluxo. */
+.aurora-recent-card{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;align-items:stretch!important;padding:0!important;overflow:hidden!important}
+.aurora-recent-card__main{display:grid!important;grid-template-columns:auto minmax(0,1fr) auto!important;align-items:center!important;gap:11px!important;width:100%!important;padding:13px 12px!important;border:0!important;background:transparent!important;color:inherit!important;text-align:left!important}
+.aurora-recent-card__actions{display:flex;align-items:center;gap:5px;padding:8px 8px 8px 0}
+.aurora-recent-card__actions button{width:42px;height:42px;border:1px solid rgba(255,255,255,.12);border-radius:11px;background:rgba(255,255,255,.035);color:var(--aurora-text,#f5fbff);font-size:20px;font-weight:800}
+.aurora-recent-card__actions button.is-danger{color:#ffb2bd;border-color:rgba(255,96,120,.22);background:rgba(255,96,120,.035)}
+@media(max-width:480px){.aurora-recent-card__main{grid-template-columns:auto minmax(0,1fr)!important}.aurora-recent-card__main>b{grid-column:2}.aurora-recent-card__actions{flex-direction:column}.aurora-recent-card__actions button{width:38px;height:38px}}
+
+/* Aurora 1.0.6 FINAL — deve permanecer no fim para prevalecer sobre patches legados. */
+.aurora-suggestion-add{grid-template-columns:minmax(0,1fr) auto!important;align-items:stretch!important}
+.aurora-suggestion-add button{width:auto!important;min-width:92px!important;white-space:nowrap!important}
+.aurora-suggestion-panel__footer{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.aurora-suggestion-panel__footer button{width:100%!important;min-width:0!important;padding:8px 10px!important}
+.aurora-workflow-dock--unified .aurora-footer-nav__item.is-active{color:var(--aurora-text)!important;background:var(--aurora-surface-2)!important;box-shadow:none!important}
+.aurora-workflow-dock--unified>[data-workflow-previous],
+.aurora-workflow-dock--unified>.aurora-footer-nav__item{border-color:var(--aurora-border)!important;color:var(--aurora-text)!important;background:var(--aurora-surface-2)!important;box-shadow:none!important}
+.aurora-workflow-dock--unified>[data-workflow-previous]:disabled{opacity:1!important;color:var(--aurora-muted)!important;background:var(--aurora-surface-2)!important}
+.aurora-workflow-dock--unified>[data-workflow-next]{border-color:var(--aurora-primary)!important;color:#062421!important;background:var(--aurora-primary)!important;box-shadow:none!important}
+@media(max-width:600px){
+  .aurora-suggestion-panel{top:12px!important;bottom:calc(72px + env(safe-area-inset-bottom))!important;width:calc(100vw - 18px)!important;height:auto!important;max-height:none!important;transform:translateX(-50%)!important;padding:13px!important}
+  .aurora-suggestion-panel__list{min-height:0!important}
+  .aurora-suggestion-add{grid-template-columns:minmax(0,1fr) 88px!important}
+  .aurora-suggestion-add input{font-size:14px!important}
+  .aurora-suggestion-add button{min-width:0!important;padding-inline:8px!important;font-size:14px!important}
+  .aurora-suggestion-panel__footer button{min-height:48px!important;font-size:12px!important;line-height:1.2!important}
+}
+@media(max-width:380px){
+  .aurora-suggestion-add{grid-template-columns:minmax(0,1fr) 76px!important}
+  .aurora-suggestion-add button{font-size:12px!important}
+  .aurora-suggestion-panel__footer button{font-size:11px!important;padding-inline:6px!important}
+}
+
+/* Aurora 1.0.7 FINAL — modal sempre vertical, inclusive no Z Fold aberto. */
+.aurora-suggestion-panel{
+  grid-template-columns:minmax(0,1fr)!important;
+  grid-auto-flow:row!important;
+  align-content:stretch!important;
+}
+.aurora-suggestion-panel__title,
+.aurora-suggestion-panel__list,
+.aurora-suggestion-add,
+.aurora-suggestion-panel__footer{grid-column:1!important;width:100%!important;min-width:0!important}
+.aurora-suggestion-panel__list{align-content:start!important}
+.aurora-suggestion-option{height:auto!important;min-height:56px!important;overflow:visible!important}
+.aurora-suggestion-option>span:nth-child(2){min-width:0!important;overflow-wrap:anywhere!important;white-space:normal!important;line-height:1.35!important}
+.aurora-suggestion-check{align-self:center!important;flex:none!important}
+
+/* Centro da seta idêntico ao indicador dos selects: 22 px da borda direita. */
+.aurora-field--picker>.aurora-suggestion-toggle{
+  right:0!important;
+  top:auto;
+  margin:0!important;
+  transform:translateY(-50%)!important;
+}
+
+/* Aurora 1.1.9 — navegação inferior com contraste próprio no tema claro. */
+:root[data-theme="light"] .aurora-footer-nav,
+:root[data-theme="light"] .aurora-workflow-dock{
+  border-color:#cbd6e3!important;
+  background:rgba(255,255,255,.94)!important;
+  box-shadow:0 12px 30px rgba(32,54,82,.14)!important;
+  backdrop-filter:blur(16px)!important;
+}
+:root[data-theme="light"] .aurora-footer-nav__item,
+:root[data-theme="light"] .aurora-workflow-dock--unified>[data-workflow-previous],
+:root[data-theme="light"] .aurora-workflow-dock--unified>.aurora-footer-nav__item{
+  border-color:#d5dee9!important;
+  color:#40516a!important;
+  background:#f5f7fa!important;
+  box-shadow:none!important;
+}
+:root[data-theme="light"] .aurora-footer-nav__item .aurora-footer-nav__icon,
+:root[data-theme="light"] .aurora-footer-nav__item span:last-child{
+  color:inherit!important;
+}
+:root[data-theme="light"] .aurora-footer-nav__item.is-active{
+  border-color:rgba(12,143,136,.30)!important;
+  color:#076e69!important;
+  background:#e7f6f4!important;
+}
+:root[data-theme="light"] .aurora-workflow-dock--unified>[data-workflow-previous]:disabled{
+  opacity:1!important;
+  border-color:#dce3eb!important;
+  color:#7b899c!important;
+  background:#f5f7fa!important;
+}
+:root[data-theme="light"] .aurora-workflow-dock--unified>[data-workflow-next]{
+  border-color:#0c8f88!important;
+  color:#ffffff!important;
+  background:#0c8f88!important;
+}
+
+/* Aurora 1.2.0 — ações compactas e sincronização nos atendimentos recentes. */
+.aurora-recent-card__actions{
+  display:grid!important;
+  grid-template-columns:42px 72px 42px!important;
+  align-items:center!important;
+  gap:6px!important;
+  padding:8px 9px 8px 0!important;
+}
+.aurora-recent-card__actions button{
+  width:42px!important;
+  height:42px!important;
+  min-width:0!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:4px!important;
+  padding:0!important;
+  border:1px solid var(--aurora-border)!important;
+  border-radius:12px!important;
+  color:var(--aurora-text)!important;
+  background:var(--aurora-surface-2)!important;
+  box-shadow:none!important;
+}
+.aurora-recent-card__actions svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.aurora-recent-card__actions .aurora-recent-cloud{width:72px!important;flex-direction:column!important;gap:1px!important;color:var(--aurora-primary-strong)!important}
+.aurora-recent-cloud span{font-size:8px!important;font-weight:800!important;line-height:1!important;white-space:nowrap!important}
+.aurora-recent-cloud.is-synced{border-color:rgba(29,185,132,.26)!important;color:#159168!important;background:rgba(29,185,132,.09)!important;opacity:1!important}
+.aurora-recent-cloud.is-update{border-color:rgba(12,143,136,.30)!important;background:rgba(12,143,136,.08)!important}
+.aurora-recent-cloud.is-error{border-color:rgba(224,73,97,.32)!important;color:#d9485f!important;background:rgba(224,73,97,.07)!important}
+.aurora-recent-cloud.is-syncing svg{animation:aurora-cloud-pulse 1s ease-in-out infinite}
+.aurora-recent-card__actions button.is-danger{border-color:rgba(224,73,97,.24)!important;color:#d9485f!important;background:rgba(224,73,97,.055)!important}
+.aurora-recent-card__main>b{width:max-content!important;max-width:100%!important;padding:5px 10px!important;border-radius:999px!important;font-size:10px!important;line-height:1.1!important}
+@keyframes aurora-cloud-pulse{50%{opacity:.38;transform:translateY(-2px)}}
+@media(max-width:480px){
+  .aurora-recent-card__main{padding:11px 8px!important;gap:8px!important}
+  .aurora-recent-card__actions{grid-template-columns:38px 54px 38px!important;gap:4px!important;padding:7px 7px 7px 0!important}
+  .aurora-recent-card__actions button{width:38px!important;height:42px!important;border-radius:11px!important}
+  .aurora-recent-card__actions .aurora-recent-cloud{width:54px!important}
+  .aurora-recent-card__actions svg{width:18px;height:18px}
+  .aurora-recent-cloud span{font-size:7px!important}
+}
+
+/* R11.20 — Home empresarial: hierarquia compacta + gestão da equipe. */
+.aurora-home-hero__badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.aurora-home-hero__badges .aurora-home-hero__count{position:static!important;display:inline-flex!important;width:auto!important}
+.aurora-company-management__grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.aurora-company-management__card{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;width:100%;padding:15px;border:1px solid var(--aurora-border);border-radius:18px;background:var(--aurora-surface);color:var(--aurora-text);text-align:left;cursor:pointer}
+.aurora-company-management__card.is-team{border-color:color-mix(in srgb,var(--aurora-primary) 55%,var(--aurora-border));background:linear-gradient(135deg,var(--aurora-surface),color-mix(in srgb,var(--aurora-primary) 8%,var(--aurora-surface)))}
+.aurora-company-management__icon{width:44px;height:44px;display:grid;place-items:center;border:1px solid var(--aurora-border);border-radius:13px;background:var(--aurora-surface-2);font-size:18px}
+.aurora-company-management__card strong,.aurora-company-management__card small{display:block}.aurora-company-management__card small{margin-top:4px;color:var(--aurora-muted);font-size:11px}.aurora-company-management__card>b{color:var(--aurora-primary);font-size:22px}
+.aurora-company-team-panel__top{display:flex;align-items:center;gap:16px;margin-bottom:16px}.aurora-company-team-panel__top span{color:var(--aurora-muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em}.aurora-company-team-panel__top h3{margin:4px 0 0}.aurora-company-team-back{border:1px solid var(--aurora-border);border-radius:12px;background:var(--aurora-surface);color:var(--aurora-primary);padding:10px 12px;cursor:pointer}
+@media(min-width:761px){.aurora-company-management~.aurora-home-section .aurora-recent-list{max-width:none}}
+@media(max-width:760px){.aurora-company-management__grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.aurora-company-management__card{grid-template-columns:auto minmax(0,1fr);gap:8px;padding:11px}.aurora-company-management__card>b{display:none}.aurora-company-management__icon{width:36px;height:36px;font-size:15px}.aurora-company-management__card strong{font-size:13px}.aurora-company-management__card small{font-size:9px;line-height:1.25}}
+.aurora-home-section--company-admin-services .aurora-service-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.aurora-home-section--company-admin-services .aurora-service-card{min-height:76px!important;padding:11px!important}
+.aurora-home-section--company-admin-services .aurora-service-card__icon{width:40px;height:40px;font-size:19px}
+.aurora-home-section--company-admin-services .aurora-service-card strong{font-size:14px!important}
+@media(max-width:760px){.aurora-home-section--company-admin-services .aurora-service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.aurora-home-section--company-admin-services .aurora-service-card{min-height:66px!important;padding:9px!important}.aurora-home-section--company-admin-services .aurora-service-card__icon{width:36px;height:36px;font-size:16px}.aurora-home-section--company-admin-services .aurora-service-card strong{font-size:12px!important}}
+
+/* R11.21 — filtros escaláveis em Trabalhos da equipe. */
+.aurora-company-team-filters{display:grid;grid-template-columns:minmax(180px,1.5fr) repeat(4,minmax(120px,1fr));gap:8px;margin:0 0 10px}
+.aurora-company-team-filters label{display:grid;gap:5px}.aurora-company-team-filters label>span{color:var(--aurora-muted);font-size:9px;text-transform:uppercase;letter-spacing:.06em;font-weight:700}
+.aurora-company-team-filters input,.aurora-company-team-filters select{width:100%;min-width:0;height:40px;border:1px solid var(--aurora-border);border-radius:11px;background:var(--aurora-surface);color:var(--aurora-text);padding:0 10px;outline:none}
+.aurora-company-team-filters input:focus,.aurora-company-team-filters select:focus{border-color:var(--aurora-primary)}
+.aurora-company-team-result{color:var(--aurora-muted);font-size:10px;margin:0 0 9px}.aurora-company-team-empty{padding:18px;text-align:center;color:var(--aurora-muted)}
+.aurora-company-team-more{display:flex;justify-content:center;padding:12px 0}.aurora-company-team-more button{border:1px solid var(--aurora-border);border-radius:11px;background:var(--aurora-surface);color:var(--aurora-primary);padding:9px 14px;cursor:pointer}
+@media(max-width:760px){.aurora-company-team-filters{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.aurora-company-team-search{grid-column:1/-1}.aurora-company-team-filters input,.aurora-company-team-filters select{height:39px;font-size:12px}.aurora-company-team-panel__top{align-items:flex-start}}
+
+/* R11.22 — atualização reconciliadora, sem reload destrutivo. */
+.aurora-home-hero{position:relative}
+.aurora-home-refresh{position:absolute;right:16px;top:16px;display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.3);border-radius:999px;background:rgba(7,29,45,.28);color:inherit;padding:7px 11px;font:inherit;cursor:pointer}
+.aurora-home-refresh:disabled{opacity:.6;cursor:wait}
+.aurora-refreshing .aurora-home-refresh{animation:aurora-refresh-pulse .8s ease-in-out infinite alternate}
+@keyframes aurora-refresh-pulse{to{opacity:.55}}
+.aurora-home-layer{transform:translateY(var(--aurora-pull-distance,0));transition:transform .2s ease}
+.aurora-home-layer[style*="--aurora-pull-distance: 0px"]{transition:transform .24s ease}
+.aurora-pull-refresh{position:fixed;z-index:840;top:calc(env(safe-area-inset-top) + 8px);left:50%;display:flex;align-items:center;gap:8px;padding:7px 12px;border:1px solid var(--aurora-border);border-radius:999px;color:var(--aurora-muted);background:var(--aurora-surface);box-shadow:var(--aurora-shadow);opacity:0;pointer-events:none;transform:translate(-50%,calc(-48px + var(--aurora-pull-distance,0)));transition:opacity .14s ease,transform .2s ease}
+.aurora-pull-refresh.is-visible{opacity:1}.aurora-pull-refresh.is-ready{color:var(--aurora-primary);border-color:var(--aurora-primary)}.aurora-pull-refresh span{font-size:18px;font-weight:900}.aurora-pull-refresh small{font-size:12px;font-weight:800}
+@media(max-width:640px){.aurora-home-refresh span{display:none}.aurora-home-refresh{padding:7px 10px}}
+.aurora-evidence-photo-chooser[hidden]{display:none!important}
+
+/* ATIVOS ELÉTRICA — piloto visual/funcional, padrão Aurora. */
+.aurora-company-management__card.is-assets{border-color:color-mix(in srgb,var(--aurora-cyan,#41D9FF) 45%,var(--aurora-border));background:var(--aurora-surface)}
+.aurora-assets-panel,.aurora-assets-editor{padding:4px 0 24px}.aurora-assets-top{display:flex;align-items:flex-start;gap:14px;margin:4px 0 16px}.aurora-assets-top span{color:var(--aurora-muted);font-size:10px;text-transform:uppercase;letter-spacing:.08em}.aurora-assets-top h3{margin:3px 0 2px}.aurora-assets-top small{color:var(--aurora-muted)}
+.aurora-assets-toolbar{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px;align-items:end;margin-bottom:12px}.aurora-assets-toolbar label,.aurora-assets-form-grid label{display:grid;gap:5px}.aurora-assets-toolbar label>span,.aurora-assets-form-grid label>span{font-size:10px;color:var(--aurora-muted);font-weight:800}.aurora-assets-toolbar input,.aurora-assets-form-grid input,.aurora-assets-form-grid select,.aurora-assets-form-grid textarea{width:100%;border:1px solid var(--aurora-border);border-radius:12px;background:var(--aurora-surface);color:var(--aurora-text);padding:11px 12px;outline:none}.aurora-assets-toolbar input:focus,.aurora-assets-form-grid input:focus,.aurora-assets-form-grid select:focus,.aurora-assets-form-grid textarea:focus{border-color:var(--aurora-primary)}
+.aurora-assets-primary{border:1px solid var(--aurora-primary);border-radius:12px;background:var(--aurora-primary);color:#fff;padding:11px 14px;font-weight:800;cursor:pointer}.aurora-assets-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 12px}.aurora-assets-summary>span{padding:11px;border:1px solid var(--aurora-border);border-radius:14px;background:var(--aurora-surface)}.aurora-assets-summary strong,.aurora-assets-summary small{display:block}.aurora-assets-summary strong{font-size:19px}.aurora-assets-summary small{margin-top:2px;color:var(--aurora-muted);font-size:10px}
+.aurora-assets-list{display:grid;gap:8px}.aurora-asset-card{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;padding:11px;border:1px solid var(--aurora-border);border-radius:16px;background:var(--aurora-surface)}.aurora-asset-card__icon{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:var(--aurora-surface-2);border:1px solid var(--aurora-border)}.aurora-asset-card__main{border:0;background:transparent;color:var(--aurora-text);text-align:left;min-width:0;cursor:pointer}.aurora-asset-card__main strong,.aurora-asset-card__main small{display:block}.aurora-asset-card__main small{margin:3px 0 5px;color:var(--aurora-muted);font-size:10px}.aurora-asset-card__main span{display:inline-flex;padding:3px 7px;border-radius:999px;font-size:9px;font-weight:800}.aurora-asset-card__main .is-active{color:#159168;background:rgba(29,185,132,.09)}.aurora-asset-card__main .is-maintenance{color:#c68a22;background:rgba(255,184,77,.10)}.aurora-asset-card__main .is-inactive{color:var(--aurora-muted);background:var(--aurora-surface-2)}.aurora-asset-card__more{border:0;background:transparent;color:var(--aurora-primary);font-size:24px;cursor:pointer}.aurora-assets-empty{padding:28px 14px;text-align:center;border:1px dashed var(--aurora-border);border-radius:16px;color:var(--aurora-muted)}.aurora-assets-empty strong,.aurora-assets-empty span{display:block}.aurora-assets-empty strong{color:var(--aurora-text);margin-bottom:4px}
+.aurora-assets-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.aurora-assets-form-grid .is-wide{grid-column:1/-1}.aurora-assets-qr-placeholder{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;margin:14px 0;padding:14px;border:1px dashed color-mix(in srgb,var(--aurora-primary) 55%,var(--aurora-border));border-radius:16px;background:color-mix(in srgb,var(--aurora-primary) 5%,var(--aurora-surface))}.aurora-assets-qr-icon{width:48px;height:48px;display:grid;place-items:center;border-radius:13px;background:var(--aurora-surface-2);font-size:25px}.aurora-assets-qr-placeholder span,.aurora-assets-qr-placeholder strong,.aurora-assets-qr-placeholder small{display:block}.aurora-assets-qr-placeholder span{color:var(--aurora-muted);font-size:9px;text-transform:uppercase;letter-spacing:.07em}.aurora-assets-qr-placeholder strong{margin:2px 0}.aurora-assets-qr-placeholder small{color:var(--aurora-muted);font-size:10px}.aurora-assets-qr-placeholder>b{padding:5px 8px;border-radius:999px;color:var(--aurora-primary);background:color-mix(in srgb,var(--aurora-primary) 10%,transparent);font-size:9px}.aurora-assets-actions{display:flex;justify-content:flex-end;gap:8px}.aurora-assets-actions>button:first-child{border:1px solid var(--aurora-border);border-radius:12px;background:var(--aurora-surface);color:var(--aurora-text);padding:11px 14px;cursor:pointer}
+@media(max-width:640px){.aurora-assets-top{gap:9px}.aurora-assets-toolbar{grid-template-columns:1fr}.aurora-assets-primary{width:100%}.aurora-assets-form-grid{grid-template-columns:1fr}.aurora-assets-form-grid .is-wide{grid-column:auto}.aurora-assets-summary>span{padding:9px}.aurora-assets-summary strong{font-size:17px}.aurora-assets-qr-placeholder{grid-template-columns:auto 1fr}.aurora-assets-qr-placeholder>b{grid-column:2}.aurora-assets-actions{display:grid;grid-template-columns:1fr 1fr}.aurora-assets-actions button{width:100%}}
+
+/* Ativos Elétrica — QR e navegação nativa */
+.aurora-assets-qr-icon.has-qr{width:92px;height:92px;padding:6px;background:#fff}.aurora-assets-qr-icon.has-qr svg{display:block;width:100%;height:100%}.aurora-assets-qr-placeholder>button{border:1px solid var(--aurora-primary);border-radius:12px;background:var(--aurora-primary);color:#fff;padding:10px 12px;font-weight:800;cursor:pointer}.aurora-assets-qr-placeholder>button[hidden]{display:none!important}
+@media(max-width:600px){.aurora-assets-qr-placeholder{grid-template-columns:auto minmax(0,1fr)}.aurora-assets-qr-placeholder>button{grid-column:1/-1;width:100%}}
+/* Aurora Ativos QR preview */
+.aurora-assets-qr-placeholder.has-action{cursor:pointer}.aurora-assets-qr-placeholder.has-action:active{transform:scale(.995)}
+.aurora-asset-qr-modal{position:fixed;inset:0;z-index:2147483646!important;background:rgba(5,13,25,.82);display:grid;place-items:center;padding:20px}.aurora-asset-qr-modal[hidden]{display:none}.aurora-asset-qr-modal__card{position:relative;z-index:2147483647;width:min(430px,100%);background:#101d31;border:1px solid #2d4765;border-radius:24px;padding:22px;color:#f7f9ff;text-align:center;box-shadow:0 24px 80px rgba(0,0,0,.45)}.aurora-asset-qr-modal__card h3{margin:4px 0 2px;font-size:24px}.aurora-asset-qr-modal__card p{margin:0 0 16px;color:#aab3c5}.aurora-asset-qr-modal__qr{width:min(260px,72vw);aspect-ratio:1;margin:0 auto 18px;background:#fff;padding:12px;border-radius:16px}.aurora-asset-qr-modal__qr svg{width:100%;height:100%;display:block}.aurora-asset-qr-modal__actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}.aurora-asset-qr-modal__actions button{min-height:48px;border-radius:14px;border:1px solid #34506e;background:#13243a;color:#fff;font-weight:700}.aurora-asset-qr-modal__actions .is-primary{background:#59dfd9;color:#08202b;border-color:#59dfd9}
+html.aurora-public-asset-mode body>*:not(#aurora-public-asset){display:none!important}#aurora-public-asset{position:fixed;inset:0;z-index:2147483647;overflow:auto;background:#07111f;color:#f7f9ff;padding:24px 16px;display:grid;place-items:center;font-family:system-ui,-apple-system,Segoe UI,sans-serif}.apa-card{width:min(620px,100%);background:#111f33;border:1px solid #29405d;border-radius:28px;padding:28px;box-shadow:0 24px 80px #0008}.apa-brand{font-weight:900;letter-spacing:.08em;color:#5de1dc;margin-bottom:24px}.apa-mark{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#123e3b;color:#5de1dc;font-size:30px;font-weight:900;margin-bottom:18px}.apa-mark.is-bad{background:#42222b;color:#ff8292}.apa-kicker{display:block;color:#9fb0c7;font-size:12px;letter-spacing:.09em}.apa-card h1{font-size:clamp(26px,6vw,38px);line-height:1.12;margin:8px 0}.apa-company{color:#5de1dc;font-weight:700}.apa-card dl{margin:24px 0 0}.apa-card dl div{display:grid;grid-template-columns:145px 1fr;gap:12px;padding:14px 0;border-top:1px solid #2a3b52}.apa-card dt{color:#9fb0c7}.apa-card dd{margin:0;font-weight:650}.apa-status{color:#5de1dc}.apa-card footer{margin-top:26px;padding-top:18px;border-top:1px solid #2a3b52;color:#8395ad;font-size:12px}.apa-loader{width:42px;height:42px;border:4px solid #29405d;border-top-color:#5de1dc;border-radius:50%;animation:apa-spin .8s linear infinite}@keyframes apa-spin{to{transform:rotate(360deg)}}@media(max-width:520px){.apa-card{padding:22px;border-radius:22px}.apa-card dl div{grid-template-columns:1fr;gap:4px}}
+.apa-context,.apa-member,.apa-powered{margin-top:18px;padding:18px;border:1px solid #2a3b52;border-radius:18px;background:#0d1a2b}.apa-context>span,.apa-member>span,.apa-powered>span{display:block;color:#8395ad;font-size:11px;letter-spacing:.08em}.apa-context h2,.apa-member h2{margin:6px 0 8px;font-size:18px}.apa-context p,.apa-member p,.apa-powered p{margin:0;color:#b7c3d4;line-height:1.5}.apa-member{border-color:#2c6b70;background:#102b33}.apa-member button{width:100%;margin-top:14px;border:0;border-radius:13px;padding:13px 16px;background:#5de1dc;color:#09202b;font-weight:850;font-size:15px}.apa-powered{text-align:center;margin-top:22px}.apa-powered strong{display:block;color:#5de1dc;font-size:24px;letter-spacing:.08em;margin:7px 0}.apa-powered a{display:inline-block;margin-top:14px;padding:11px 16px;border-radius:12px;border:1px solid #3d7bff;color:#f7f9ff;text-decoration:none;font-weight:750}.apa-powered small{display:block;margin-top:9px;color:#8395ad}
+
+/* Aurora UX — nomenclatura contextual e ajuda de Painéis e equipamentos */
+.aurora-assets-info{display:inline-grid;place-items:center;width:28px;height:28px;margin-left:4px;border-radius:50%;font-style:normal;font-size:16px;line-height:1;color:var(--aurora-primary);vertical-align:middle;cursor:pointer;touch-action:manipulation}
+.aurora-assets-info:focus{outline:2px solid var(--aurora-primary);outline-offset:2px}
+.aurora-assets-help-modal{position:fixed;inset:0;z-index:10060;display:grid;place-items:center;padding:18px;background:rgba(8,16,28,.62);backdrop-filter:blur(3px)}
+.aurora-assets-help-modal[hidden]{display:none!important}.aurora-assets-help-card{width:min(430px,100%);padding:20px;border:1px solid var(--aurora-border);border-radius:20px;background:var(--aurora-surface);color:var(--aurora-text);box-shadow:0 18px 55px rgba(0,0,0,.28)}
+.aurora-assets-help-card>span{font-size:10px;font-weight:800;letter-spacing:.08em;color:var(--aurora-primary)}.aurora-assets-help-card h3{margin:6px 0 10px}.aurora-assets-help-card p{margin:8px 0;color:var(--aurora-muted);font-size:13px;line-height:1.5}.aurora-assets-help-card button{width:100%;margin-top:12px;padding:11px 14px;border:1px solid var(--aurora-primary);border-radius:12px;background:var(--aurora-primary);color:#fff;font-weight:800;cursor:pointer}
+@media(max-width:600px){.aurora-assets-info{width:30px;height:30px;font-size:17px}.aurora-assets-help-card{padding:18px;border-radius:18px}}
+
+body > .aurora-asset-qr-modal[data-aurora-top-overlay="asset-qr"]{position:fixed!important;inset:0!important;z-index:2147483646!important;isolation:isolate!important}
+body > .aurora-asset-qr-modal[data-aurora-top-overlay="asset-qr"] .aurora-asset-qr-modal__card{position:relative!important;z-index:1!important}
+
+/* V15 — ficha do equipamento e histórico */
+.aurora-assets-detail{max-width:1080px;margin:0 auto;padding:24px}
+.aurora-asset-detail-hero{margin-top:14px;padding:14px 16px;border:1px solid #294660;border-radius:16px;background:#0f1d2d;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.aurora-asset-detail-hero span{font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:#7ddedc}
+.aurora-asset-detail-hero h2{margin:3px 0 4px;font-size:24px;color:#fff}
+.aurora-asset-detail-hero small{color:#9eb0c4}
+.aurora-asset-detail-status{padding:7px 12px;border-radius:999px;background:#10362f;color:#6ee7b7!important;font-weight:800;white-space:nowrap}
+.aurora-asset-detail-status.is-maintenance{background:#3a2d12;color:#f6c453!important}
+.aurora-asset-detail-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0 16px}
+.aurora-asset-detail-actions button{min-width:0;min-height:44px;padding:7px 10px;border:1px solid #31516e;border-radius:11px;background:#122238;color:#fff;font-size:13px;line-height:1.15;font-weight:800}
+.aurora-asset-detail-actions .aurora-assets-primary{background:#52ddd8;color:#06202a;border-color:#52ddd8}
+.aurora-asset-history{border-top:1px solid #294660;padding-top:15px}
+.aurora-asset-history-head{display:flex;justify-content:space-between;align-items:end;gap:14px;margin-bottom:12px}
+.aurora-asset-history-head span{font-size:11px;letter-spacing:.12em;color:#52ddd8}
+.aurora-asset-history-head h3{margin:3px 0 0;color:#fff}
+.aurora-asset-history-head>strong{color:#9eb0c4;font-size:13px}
+.aurora-asset-history-row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:15px 16px;margin:8px 0;border:1px solid #294660;border-radius:14px;background:#101f31}
+.aurora-asset-history-row div{min-width:0}.aurora-asset-history-row strong{display:block;color:#fff}.aurora-asset-history-row small{display:block;color:#9eb0c4;margin-top:4px}
+.aurora-asset-history-row button{flex:0 0 auto;padding:9px 13px;border:1px solid #31516e;border-radius:10px;background:#14263b;color:#fff;font-weight:800}
+@media(max-width:640px){.aurora-assets-detail{padding:12px}.aurora-asset-detail-hero{align-items:center;flex-direction:row;padding:13px 14px}.aurora-asset-detail-hero>div{min-width:0}.aurora-asset-detail-hero h2{font-size:21px}.aurora-asset-detail-hero small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.aurora-asset-detail-status{padding:6px 9px;font-size:11px}.aurora-asset-detail-actions{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.aurora-asset-detail-actions button{min-height:48px;padding:6px 5px;font-size:11px}.aurora-asset-detail-actions .aurora-assets-primary{grid-column:auto}.aurora-asset-history-head{align-items:flex-start;flex-direction:column;gap:5px}.aurora-asset-history-row{align-items:flex-start;flex-direction:column}.aurora-asset-history-row button{width:100%}}
+/* AURORA QR V23 — ficha pública enxuta */
+.apa-tech{margin-top:16px;padding:15px 16px;border:1px solid #2a3b52;border-radius:15px;background:#0d1a2b}.apa-tech>span{display:block;color:#8395ad;font-size:10px;letter-spacing:.09em;margin-bottom:7px}.apa-tech p{margin:0;color:#c5cfdd;line-height:1.45}.apa-team-open{width:100%;margin-top:18px;padding:12px 14px;border:1px solid #35506e;border-radius:13px;background:#102238;color:#dce8f5;font-weight:800;font-size:14px}.apa-powered.apa-powered-compact{margin-top:14px;padding:13px 14px;border-radius:14px}.apa-powered.apa-powered-compact strong{font-size:19px;margin:4px 0}.apa-powered.apa-powered-compact small{margin-top:2px;font-size:11px}.apa-powered.apa-powered-compact p,.apa-powered.apa-powered-compact a{display:none}
+/* V32 — resumo técnico público seguro do último serviço. */
+.apa-service{margin-top:20px;padding:18px;border:1px solid #2a3b52;border-radius:18px;background:#0d1a2b}.apa-service h2{margin:0 0 10px;font-size:18px;color:#f7f9ff}.apa-service dl{margin:0}.apa-service dl div{grid-template-columns:190px 1fr;padding:11px 0}.apa-service-empty{margin:0;color:#9fb0c7;line-height:1.5}@media(max-width:520px){.apa-service{padding:15px}.apa-service dl div{grid-template-columns:1fr;gap:4px}}
+/* V38 — ações compartilhadas dos cadastros permanentes (todos os catálogos). */
+.aurora-asset-card{grid-template-columns:auto minmax(0,1fr) auto auto}
+.aurora-asset-card__actions{display:flex;align-items:center;gap:5px}
+.aurora-asset-card__actions .aurora-recent-action{width:38px;height:38px;display:grid;place-items:center;border:1px solid var(--aurora-border);border-radius:11px;background:var(--aurora-surface-2);color:var(--aurora-text);padding:0;cursor:pointer}
+.aurora-asset-card__actions .aurora-recent-action.is-danger{color:#d9485f;border-color:rgba(224,73,97,.24);background:rgba(224,73,97,.055)}
+.aurora-asset-card__actions svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+@media(max-width:560px){.aurora-asset-card{grid-template-columns:auto minmax(0,1fr) auto auto;gap:7px;padding:10px}.aurora-asset-card__actions{grid-column:auto;grid-row:auto;justify-content:flex-end;gap:4px}.aurora-asset-card__actions .aurora-recent-action{width:34px;height:34px;border-radius:10px}.aurora-asset-card__actions svg{width:16px;height:16px}.aurora-asset-card__more{grid-column:auto;grid-row:auto;font-size:22px}}
+
+/* V83 — seção opcional de relatório + Trabalhos a realizar (Elétrica) */
+.aurora-report-switch{display:flex;align-items:center;gap:10px;cursor:pointer;user-select:none;font-size:12px;font-weight:800;color:var(--aurora-text,#f5fbff)}
+.aurora-report-switch input{position:absolute;opacity:0;pointer-events:none}.aurora-report-switch i{position:relative;width:44px;height:24px;border-radius:999px;background:#465267;transition:.18s}.aurora-report-switch i:after{content:"";position:absolute;width:18px;height:18px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.18s}.aurora-report-switch input:checked+i{background:var(--aurora-primary,#3d7bff)}.aurora-report-switch input:checked+i:after{transform:translateX(20px)}
+.aurora-work-plan{margin:4px 0 12px;padding:14px;border:1px solid rgba(100,130,170,.35);border-radius:14px;background:rgba(20,35,56,.58)}.aurora-work-plan__head{display:flex;justify-content:space-between;align-items:center;gap:14px}.aurora-work-plan__head strong,.aurora-work-plan__head small{display:block}.aurora-work-plan__head small{margin-top:3px;color:var(--aurora-muted,#9cb0c9);font-size:12px}.aurora-work-plan__body{margin-top:12px;transition:.18s}.aurora-work-plan.is-report-off .aurora-work-plan__body{opacity:.32;filter:saturate(.35)}.aurora-work-plan__row{display:grid;grid-template-columns:34px minmax(0,1fr) 40px;gap:8px;align-items:center;margin:8px 0}.aurora-work-plan__row>input{box-sizing:border-box;width:100%;border:1px solid #334a66;border-radius:11px;background:#15263c;color:#f3f7fc;padding:11px 12px;font:inherit}.aurora-work-plan__check{display:grid;place-items:center}.aurora-work-plan__check input{width:20px;height:20px;accent-color:var(--aurora-primary,#3d7bff)}.aurora-work-plan__row button,.aurora-work-plan__add{border:1px solid #35506e;background:#132338;color:#eaf3ff;border-radius:10px;padding:10px 12px;font-weight:750}.aurora-work-plan__row button{font-size:20px;padding:5px 8px}.aurora-work-plan__add{margin-top:6px}
+@media(max-width:700px){.aurora-work-plan__head{align-items:flex-start;flex-direction:column}.aurora-report-switch{width:100%;justify-content:space-between}}
+
+/* V85 — apresentação dos Trabalhos a realizar no QR público */
+.apa-work-plan{margin-top:22px;padding-top:18px;border-top:1px solid #2a3b52}
+.apa-work-plan h2{margin:0 0 10px;font-size:16px}
+.apa-work-items{display:grid;gap:0}
+.apa-work-items>div{display:grid;grid-template-columns:24px minmax(0,1fr);gap:10px;align-items:start;padding:10px 0;border-top:1px solid rgba(42,59,82,.72)}
+.apa-work-items>div:first-child{border-top:0}
+.apa-work-items b{display:block;width:24px;text-align:center;color:#5de1dc;font-size:17px;line-height:1.3}
+.apa-work-items span{min-width:0;line-height:1.45;overflow-wrap:anywhere}
+
+/* V91 — Identificação digital pública do equipamento */
+.apa-identity{margin-top:22px;padding:0 18px;border:1px solid #2a3b52;border-radius:18px;background:#0d1a2b}
+.apa-identity dl{margin:0}
+.apa-identity dl div{grid-template-columns:190px 1fr}
+.apa-identity dd{font-weight:750}
+.apa-team-open{display:none!important}
+@media(max-width:520px){.apa-identity{padding:0 15px}.apa-identity dl div{grid-template-columns:1fr;gap:4px}}
+
+
+/* AURORA V107 — QR público: rolagem mobile no documento, sem viewport fixo. */
+@media (max-width: 760px) {
+  html.aurora-public-asset-mode,
+  html.aurora-public-asset-mode body {
+    min-height: 100% !important;
+    height: auto !important;
+    overflow-x: hidden !important;
+    overflow-y: auto !important;
+    overscroll-behavior-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  html.aurora-public-asset-mode #aurora-public-asset {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    min-height: 100dvh !important;
+    height: auto !important;
+    overflow: visible !important;
+    display: block !important;
+    box-sizing: border-box !important;
+    padding: 16px 12px max(28px, env(safe-area-inset-bottom, 0px)) !important;
+  }
+
+  html.aurora-public-asset-mode #aurora-public-asset .apa-card {
+    width: min(620px, 100%) !important;
+    margin: 0 auto !important;
+    box-sizing: border-box !important;
+  }
+}
+
+/* V47 R10 — componentes universais Aurora: correção na fonte compartilhada. */
+/* Suggestions Picker: rolagem vertical nativa bidirecional em touch. */
+.aurora-suggestion-panel__list{
+  min-height:0!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch;
+  touch-action:pan-y!important;
+  overscroll-behavior-y:contain!important;
+  align-content:start!important;
+}
+.aurora-suggestion-option{align-items:center!important;height:auto!important;min-height:56px!important}
+.aurora-suggestion-option .aurora-suggestion-check{align-self:center!important;justify-self:center!important;margin:0!important;transform:none!important}
+.aurora-suggestion-option>span:nth-child(2){min-width:0!important;white-space:normal!important;overflow-wrap:anywhere!important}
+@media(max-width:760px){
+ .aurora-suggestion-panel{width:calc(100vw - 18px)!important;padding:13px!important}
+ .aurora-suggestion-panel__list{min-height:0!important}
+}
+
+/* Card universal de serviço: qualquer título/descrição fica contido nas margens. */
+.aurora-service-card{min-width:0!important;overflow:hidden!important}
+.aurora-service-card__content{min-width:0!important;width:100%!important;overflow:hidden!important}
+.aurora-service-card strong,.aurora-service-card small{
+  min-width:0!important;max-width:100%!important;white-space:normal!important;
+  overflow-wrap:anywhere!important;word-break:normal!important;box-sizing:border-box!important;
+}
+.aurora-service-grid--single{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.aurora-service-grid--single>.aurora-service-card{width:100%!important;max-width:100%!important}
+@media(max-width:760px){
+ .aurora-service-grid--single>.aurora-service-card{grid-template-columns:auto minmax(0,1fr)!important}
+ .aurora-service-grid--single .aurora-service-card__arrow{display:none!important}
+}
+
+/* AURORA V47 R11 — Suggestions Picker universal: layout aprovado no preview mobile.
+   Somente layout/rolagem do componente compartilhado; conteúdo continua pertencendo a cada shape. */
+body.aurora-picker-open{
+  overflow:hidden!important;
+  touch-action:auto!important;
+}
+.aurora-suggestion-panel{
+  top:50%!important;
+  bottom:auto!important;
+  width:min(680px,calc(100vw - 28px))!important;
+  height:min(88dvh,760px)!important;
+  max-height:calc(100dvh - 28px)!important;
+  transform:translate(-50%,-50%)!important;
+  grid-template-rows:auto minmax(0,1fr) auto auto!important;
+}
+.aurora-suggestion-panel__list{
+  min-height:0!important;
+  height:auto!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  -webkit-overflow-scrolling:touch!important;
+  touch-action:pan-y!important;
+  overscroll-behavior-y:contain!important;
+  align-content:start!important;
+  scrollbar-gutter:stable;
+}
+@media(max-width:760px){
+  .aurora-suggestion-panel{
+    top:50%!important;
+    bottom:auto!important;
+    width:calc(100vw - 18px)!important;
+    height:min(90dvh,760px)!important;
+    max-height:calc(100dvh - 18px)!important;
+    transform:translate(-50%,-50%)!important;
+    padding:16px!important;
+  }
+  .aurora-suggestion-panel__list{min-height:0!important}
+}
+@media(max-height:720px){
+  .aurora-suggestion-panel{height:calc(100dvh - 18px)!important}
+  .aurora-suggestion-option{min-height:54px!important}
+}
+
+
+/* AURORA V47 R12 — card universal de serviço.
+   Nenhuma exceção por serviço: todo conteúdo deve permanecer dentro das margens. */
+.aurora-service-grid > .aurora-service-card{min-width:0!important;max-width:100%!important}
+.aurora-service-card__content{min-width:0!important;max-width:100%!important;overflow:hidden!important}
+.aurora-service-card__content > strong,
+.aurora-service-card__content > small{
+ display:block!important;width:100%!important;min-width:0!important;max-width:100%!important;
+ white-space:normal!important;overflow-wrap:anywhere!important;word-break:normal!important
+}
+.aurora-service-grid--single{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+.aurora-service-grid--single > .aurora-service-card{
+ grid-column:auto!important;width:100%!important;max-width:100%!important;
+ grid-template-columns:auto minmax(0,1fr) auto!important
+}
+@media(max-width:760px){
+ .aurora-service-grid--single > .aurora-service-card{min-height:96px!important}
+ .aurora-service-grid--single .aurora-service-card__content > strong{font-size:14px!important;line-height:1.25!important}
+ .aurora-service-grid--single .aurora-service-card__content > small{
+  font-size:10px!important;line-height:1.3!important;-webkit-line-clamp:unset!important;overflow:visible!important
+ }
+}

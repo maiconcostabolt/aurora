@@ -1,0 +1,364 @@
+{
+  "version": "1.2",
+  "storage_key": "aurora_company_identity",
+  "segments": [
+    {
+      "id": "workshop",
+      "title": "Oficina",
+      "icon": "🔧",
+      "description": "Mecânica, suspensão, freios e elétrica automotiva.",
+      "services": [
+        {
+          "id": "suspension",
+          "title": "Suspensão",
+          "icon": "🛞"
+        },
+        {
+          "id": "engine",
+          "title": "Motor",
+          "icon": "⚙️"
+        },
+        {
+          "id": "brakes",
+          "title": "Freios",
+          "icon": "🛑"
+        },
+        {
+          "id": "vehicle_electrical",
+          "title": "Elétrica automotiva",
+          "icon": "🔌"
+        },
+        {
+          "id": "air_conditioning",
+          "title": "Ar-condicionado",
+          "icon": "❄️"
+        }
+      ]
+    },
+    {
+      "id": "vehicle_inspection",
+      "title": "Vistoria veicular",
+      "icon": "🚘",
+      "description": "Vistoria independente para recebimento, checklist, avarias, acessórios e fotos.",
+      "services": [
+        {
+          "id": "vehicle_inspection",
+          "title": "Vistoria veicular",
+          "icon": "🚘"
+        }
+      ]
+    },
+    {
+      "id": "electrical",
+      "title": "Elétrica",
+      "icon": "⚡",
+      "description": "Painéis, termografia, instalações e motores.",
+      "services": [
+        {
+          "id": "panel",
+          "title": "Painel elétrico",
+          "icon": "▦"
+        },
+        {
+          "id": "thermography",
+          "title": "Termografia",
+          "icon": "🌡"
+        },
+        {
+          "id": "installation",
+          "title": "Instalação elétrica",
+          "icon": "🔌"
+        },
+        {
+          "id": "electric_motor",
+          "title": "Motor elétrico",
+          "icon": "⚙️"
+        }
+      ]
+    },
+    {
+      "id": "grounding_equipotentialization",
+      "title": "Aterramento e Equipotencialização",
+      "icon": "⏚",
+      "description": "Inspeções, aferições e documentação técnica de sistemas de aterramento e equipotencialização.",
+      "services": [
+        {
+          "id": "grounding_equipotentialization",
+          "title": "Aterramento e Equipotencialização",
+          "icon": "⏚"
+        }
+      ]
+    },
+    {
+      "id": "industrial",
+      "title": "Industrial",
+      "icon": "🏭",
+      "description": "Máquinas, tubulações, estruturas e tanques.",
+      "services": [
+        {
+          "id": "machine",
+          "title": "Máquina",
+          "icon": "⚙️"
+        },
+        {
+          "id": "pipeline",
+          "title": "Tubulação",
+          "icon": "〰"
+        },
+        {
+          "id": "structure",
+          "title": "Estrutura",
+          "icon": "🏗"
+        },
+        {
+          "id": "tank",
+          "title": "Tanque",
+          "icon": "◉"
+        }
+      ]
+    },
+    {
+      "id": "drone",
+      "title": "Drone",
+      "icon": "🚁",
+      "description": "Coberturas, fachadas, torres e energia solar.",
+      "services": [
+        {
+          "id": "roof",
+          "title": "Telhado",
+          "icon": "⌂"
+        },
+        {
+          "id": "facade",
+          "title": "Fachada",
+          "icon": "▥"
+        },
+        {
+          "id": "tower",
+          "title": "Torre",
+          "icon": "🗼"
+        },
+        {
+          "id": "solar",
+          "title": "Usina solar",
+          "icon": "☀"
+        }
+      ]
+    },
+    {
+      "id": "car_wash",
+      "title": "Lavação automotiva",
+      "icon": "🚘",
+      "description": "Lavação, estética, higienização e proteção automotiva.",
+      "services": [
+        {
+          "id": "basic_wash",
+          "title": "Lavação simples",
+          "icon": "🚿"
+        },
+        {
+          "id": "complete_wash",
+          "title": "Lavação completa",
+          "icon": "✨"
+        },
+        {
+          "id": "technical_wash",
+          "title": "Lavação técnica",
+          "icon": "🧽"
+        },
+        {
+          "id": "interior_detailing",
+          "title": "Higienização interna",
+          "icon": "🪑"
+        },
+        {
+          "id": "polishing",
+          "title": "Polimento",
+          "icon": "💎"
+        },
+        {
+          "id": "paint_protection",
+          "title": "Proteção da pintura",
+          "icon": "🛡️"
+        }
+      ]
+    },
+    {
+      "id": "upholstery_cleaning",
+      "title": "Sofás e estofados",
+      "icon": "🛋️",
+      "description": "Higienização de sofás, colchões, cadeiras, carpetes e estofados.",
+      "services": [
+        {
+          "id": "sofa_cleaning",
+          "title": "Sofá",
+          "icon": "🛋️"
+        },
+        {
+          "id": "mattress_cleaning",
+          "title": "Colchão",
+          "icon": "🛏️"
+        },
+        {
+          "id": "armchair_cleaning",
+          "title": "Poltrona",
+          "icon": "💺"
+        },
+        {
+          "id": "chair_cleaning",
+          "title": "Cadeiras",
+          "icon": "🪑"
+        },
+        {
+          "id": "auto_upholstery",
+          "title": "Banco automotivo",
+          "icon": "🚗"
+        },
+        {
+          "id": "carpet_cleaning",
+          "title": "Tapete e carpete",
+          "icon": "🧶"
+        }
+      ]
+    },
+    {
+      "id": "curtains_blinds",
+      "title": "Cortinas e persianas",
+      "icon": "🪟",
+      "description": "Instalação, manutenção, regulagem e limpeza de cortinas e persianas.",
+      "services": [
+        {
+          "id": "curtain_installation",
+          "title": "Instalação de cortina",
+          "icon": "🪟"
+        },
+        {
+          "id": "blind_installation",
+          "title": "Instalação de persiana",
+          "icon": "▤"
+        },
+        {
+          "id": "curtain_maintenance",
+          "title": "Manutenção de cortina",
+          "icon": "🧰"
+        },
+        {
+          "id": "blind_maintenance",
+          "title": "Manutenção de persiana",
+          "icon": "🔧"
+        },
+        {
+          "id": "motorized_system",
+          "title": "Sistema motorizado",
+          "icon": "⚡"
+        },
+        {
+          "id": "track_and_rod",
+          "title": "Trilho e varão",
+          "icon": "↔️"
+        }
+      ]
+    },
+    {
+      "id": "repairs_maintenance",
+      "title": "Reparos e manutenção",
+      "icon": "🧰",
+      "description": "Pequenos reparos, reformas e manutenção residencial ou comercial.",
+      "services": [
+        {
+          "id": "small_repairs",
+          "title": "Pequenos reparos",
+          "icon": "🔧"
+        },
+        {
+          "id": "masonry",
+          "title": "Alvenaria",
+          "icon": "🧱"
+        },
+        {
+          "id": "painting",
+          "title": "Pintura",
+          "icon": "🎨"
+        },
+        {
+          "id": "flooring",
+          "title": "Pisos e revestimentos",
+          "icon": "◫"
+        },
+        {
+          "id": "minor_renovation",
+          "title": "Pequena reforma",
+          "icon": "🏠"
+        },
+        {
+          "id": "general_maintenance",
+          "title": "Manutenção geral",
+          "icon": "🛠️"
+        }
+      ]
+    },
+    {
+      "id": "condominiums",
+      "title": "Condomínios",
+      "icon": "🏢",
+      "description": "Inspeções, ocorrências e manutenção de condomínios e áreas comuns.",
+      "services": [
+        {
+          "id": "common_areas",
+          "title": "Áreas comuns",
+          "icon": "🏢"
+        },
+        {
+          "id": "electrical_system",
+          "title": "Sistema elétrico",
+          "icon": "⚡"
+        },
+        {
+          "id": "hydraulic_system",
+          "title": "Sistema hidráulico",
+          "icon": "💧"
+        },
+        {
+          "id": "pump_room",
+          "title": "Bombas e casa de máquinas",
+          "icon": "⚙️"
+        },
+        {
+          "id": "elevators",
+          "title": "Elevadores",
+          "icon": "↕️"
+        },
+        {
+          "id": "fire_safety",
+          "title": "Sistema de incêndio",
+          "icon": "🧯"
+        },
+        {
+          "id": "facade_roof",
+          "title": "Fachada e cobertura",
+          "icon": "🏠"
+        },
+        {
+          "id": "garage",
+          "title": "Garagem",
+          "icon": "🚗"
+        },
+        {
+          "id": "access_gates",
+          "title": "Portões e acessos",
+          "icon": "🚪"
+        },
+        {
+          "id": "leisure_area",
+          "title": "Piscina e área de lazer",
+          "icon": "🏊"
+        },
+        {
+          "id": "maintenance_occurrences",
+          "title": "Ocorrências e manutenção",
+          "icon": "🛠️"
+        }
+      ]
+    }
+  ]
+}

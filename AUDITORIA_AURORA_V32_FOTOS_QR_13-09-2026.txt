@@ -1,0 +1,50 @@
+AURORA V32 — FOTOS DE MEMBROS AUTORIZADOS + RESUMO TÉCNICO QR
+Data: 13/09/2026
+Base: AURORA_HOME_NAVEGACAO_AI_CACHE_V31_PWA_TESTE(1).zip
+
+ESCOPO FECHADO DESTA RODADA
+1. Fotos no relatório visualizado por usuário empresarial autorizado.
+2. Card público "Último serviço realizado" no QR do equipamento.
+
+ALTERAÇÕES DE FOTOS
+- Criada uma única hidratação autenticada de evidências cloud em cloud_sync.js.
+- Atendimentos recentes: antes de abrir a prévia, se houver vínculo cloud, a Aurora tenta recuperar as fotos autenticadas e atualiza o snapshot local da prévia.
+- Painéis e equipamentos: histórico passa a reutilizar a mesma hidratação autenticada.
+- Inclui foto de capa e fotos vinculadas aos evidence_groups.
+- Falha de rede/permissão preserva o relatório textual; não apaga dados.
+- Fotos NÃO foram tornadas públicas.
+
+BANCO/STORAGE PARA TESTE
+Arquivo: AURORA_V32_FOTOS_MEMBROS_QR_RESUMO.sql
+- Adiciona função de autorização por projeto.
+- SELECT de metadata de evidência liberado apenas para membro ativo autorizado.
+- SELECT do bucket privado liberado apenas para membro ativo autorizado ao projeto.
+- Autorização: criador do atendimento, COMPANY_ADMIN ou membro com can_view_history.
+
+QR PÚBLICO
+- Mantém identificação/status/última inspeção/quantidade/próxima inspeção.
+- Acrescenta card "Último serviço realizado".
+- Campos públicos quando existirem: serviço executado, resumo encontrado, trabalho realizado, condição atual, recomendação, próxima ação e empresa executora.
+- Não expõe fotos, relatório completo, valores, contatos, endereço interno ou botões administrativos.
+
+PROTEÇÕES
+- Home não redesenhada.
+- Aurora AI não alterada.
+- Convites não alterados.
+- Fluxo operacional do relatório não alterado.
+- Navegação V31 preservada.
+
+VALIDAÇÃO TÉCNICA LOCAL
+- node --check: cloud_sync.js OK
+- node --check: bootstrap.js OK
+- node --check: aurora_assets_pilot.js OK
+- node --check: aurora_asset_public.js OK
+
+ORDEM DE TESTE HUMANO
+1. Executar AURORA_V32_FOTOS_MEMBROS_QR_RESUMO.sql no Supabase de TESTE.
+2. Fazer deploy do ZIP V32 na PWA de TESTE.
+3. ADMIN: confirmar que relatório continua com capa e fotos.
+4. USUÁRIO CONVIDADO autorizado: abrir o mesmo atendimento em Atendimentos recentes e confirmar capa + fotos.
+5. USUÁRIO CONVIDADO com Histórico liberado: Painéis e equipamentos > equipamento > histórico > abrir relatório e confirmar capa + fotos.
+6. Abrir QR em navegador sem login e confirmar novo card público, sem fotos/dados internos.
+7. Confirmar que Home, AI e convites permanecem iguais à V31.

@@ -1,0 +1,34 @@
+AURORA PWA TESTE — VISTORIA VEICULAR INTEGRADA — V1.0.1
+
+CORREÇÃO 1.0.1
+- formulário da etapa Veículo exibido normalmente;
+- suporte ao campo Hora de entrada no mecanismo central da Aurora;
+- vínculo defensivo entre Vistoria veicular e o formulário correto;
+- novo cache do PWA para impedir a reutilização dos arquivos anteriores.
+
+Este pacote contém a Aurora completa e atualizada, com a Vistoria veicular
+integrada ao módulo Oficina.
+
+PUBLICAÇÃO
+1. Publique este ZIP somente no Worker aurora-pwa-teste.
+2. Não publique em mlcaurora.com e não altere o Aurora Admin.
+3. Após publicar, use Ctrl + Shift + R no computador.
+4. No celular, feche a PWA, limpe o cache do site de teste e abra novamente.
+
+COMO ATIVAR EM UMA CONTA EXISTENTE
+1. Abra Perfil e configurações.
+2. Entre em Editar serviços do segmento.
+3. Marque Vistoria veicular e salve.
+4. O novo card aparecerá na tela inicial do módulo Oficina.
+
+O QUE ESTÁ INTEGRADO
+- identificação do cliente e do veículo;
+- placa, quilometragem, OS, combustível e estepe;
+- serviço solicitado e itens recebidos;
+- checklist de sistemas;
+- ocorrências com região e tipo de avaria;
+- fotos pelo mecanismo normal de evidências da Aurora;
+- diagnóstico, finalização, atendimentos recentes e nuvem;
+- relatório HTML/PDF com dados do veículo e checklist de recebimento.
+
+Não exige SQL novo nesta etapa de teste.

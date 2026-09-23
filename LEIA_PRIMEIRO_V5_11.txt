@@ -1,0 +1,15 @@
+AURORA PWA V5.11 — EDITAR SERVIÇOS DO SEGMENTO
+
+Novidade:
+- Painel de configuração > Editar serviços do segmento.
+- Todos os serviços do módulo atual são exibidos.
+- Os serviços já configurados aparecem previamente selecionados.
+- O usuário pode adicionar ou remover serviços durante a demonstração ou em plano pago.
+- É obrigatório manter pelo menos um serviço selecionado.
+- A alteração não reinicia a demonstração e não apaga relatórios.
+- A Home passa a mostrar somente a seleção atualizada.
+
+PUBLICAÇÃO
+1. Publique este pacote somente no Worker aurora-pwa-teste.
+2. Atualize a Aurora com Ctrl + Shift + R.
+3. Não execute SQL e não republique o Aurora Admin.

@@ -1,0 +1,32 @@
+AURORA — ETIQUETA QR TÉRMICA 50,8 x 50,8 mm
+Data: 13/09/2026
+
+Escopo desta build:
+- Base preservada: correção de origem/lazy-load de Painéis e equipamentos.
+- Alterado somente o motor de impressão da etiqueta QR.
+- Etiqueta circular real: 50,8 x 50,8 mm.
+- Monocromática, preparada para impressora térmica preto/branco (inclusive mídia branca ou colorida).
+- Nome da empresa no topo.
+- Código do equipamento em destaque.
+- Nome/descrição do equipamento.
+- QR permanente do equipamento.
+- Texto contextual: equipamento/extintor/veículo quando reconhecido.
+- Assinatura discreta: Powered by Aurora.
+- Sem grandes fundos escuros, degradês ou áreas chapadas que consumam fita/energia térmica.
+- Impressão continua em iframe interno, sem abrir aba branca.
+
+Não alterado:
+- Tupy.
+- Aurora AI.
+- Relatórios.
+- QR público/contextual.
+- Minha Equipe.
+- Bootstrap lazy de Painéis e equipamentos.
+
+Teste:
+1. Deploy.
+2. Abrir Aurora e confirmar fluidez.
+3. Elétrica > Painéis e equipamentos.
+4. Abrir QGBT2121.
+5. Imprimir etiqueta.
+6. Selecionar papel 50,8 x 50,8 mm na Jins Printer, escala 100%, margens nenhuma/0 quando disponível.

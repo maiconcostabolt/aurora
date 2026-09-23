@@ -1,0 +1,23 @@
+{
+    "conditions": [
+
+        "Sem anomalia",
+
+        "Desgaste",
+
+        "Folga",
+
+        "Quebrado",
+
+        "Trincado",
+
+        "Oxidação",
+
+        "Vazamento",
+
+        "Ruído",
+
+        "Desalinhado"
+
+    ]
+}

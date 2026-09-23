@@ -1,0 +1,27 @@
+AURORA — CORREÇÃO DE BOOT COMPANY_USER V27
+Data: 13/09/2026
+Base: V26 PWA Testes
+
+SINTOMA
+- aurora_usuario@hotmail.com recebia "Não foi possível iniciar" ao abrir o PWA.
+
+CAUSA
+- A V26 removeu corretamente o botão Minha empresa do COMPANY_USER.
+- Um binding posterior do bootstrap ainda chamava addEventListener diretamente
+  no botão removido.
+- querySelector retornava null e o bootstrap era interrompido.
+
+CORREÇÃO
+- O binding passou a usar encadeamento seguro (?.addEventListener).
+- ADMIN continua com Minha empresa e seu evento normal.
+- COMPANY_USER continua sem Minha empresa, Minha Equipe, Trocar segmento,
+  Editar serviços e Módulos Aurora.
+- Histórico empresarial, relatório compartilhado e layout compacto da V26
+  foram integralmente preservados.
+
+BANCO
+- Nenhuma alteração adicional nesta correção.
+- Membership, permissões e entitlement permanecem ativos.
+
+PRODUÇÃO
+- mlcaurora.com não foi alterada.

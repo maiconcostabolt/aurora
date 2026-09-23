@@ -1,0 +1,52 @@
+AURORA V43 — QR BOOT / SESSÃO AUTENTICADA
+Data: 13-09-2026
+
+ESCOPO ÚNICO
+Correção do loop de carregamento ao abrir QR Code pela câmera em usuário Aurora autenticado e autorizado.
+
+CAUSA CONFIRMADA NO CÓDIGO
+- A rota QR interna detectava que o ativo pertencia a outro ambiente (ex.: workshop).
+- AuroraModuleAccess.activate(target) podia executar antes de AURORA_ACCOUNT_USER_ID estar disponível.
+- A seleção era então salva na chave aurora_active_module_v1:anonymous.
+- Após location.reload(), o bootstrap autenticado lia aurora_active_module_v1:<user_id>, mantinha o ambiente anterior e a rota QR solicitava novo reload.
+- Resultado visual: barra de carregamento avançava parcialmente, voltava e repetia.
+
+CORREÇÃO V43
+1. module_access.js
+- Criado activateForUser(code,userId).
+- A seleção do módulo do QR é gravada diretamente na chave canônica do usuário autenticado.
+
+2. aurora_assets_pilot.js
+- consumeQrRoute aguarda AuroraAuthReady quando necessário para obter o user_id real.
+- A troca de ambiente pelo QR usa activateForUser.
+- Adicionado guard de reload: no máximo UM reload para a mesma combinação módulo+token.
+- Se a troca não for aplicada, a Aurora não entra novamente em loop.
+- Após abertura correta do catálogo, o guard e os parâmetros temporários do QR são removidos.
+
+3. Cache/versionamento
+- aurora_assets_pilot.js -> v=43
+- module_access.js -> AURORA-QR-BOOT-V43-20260913
+- service worker cache bust -> aurora-v43-qr-boot-sessao-20260913-1
+- rodapé/build -> AURORA_V43_QR_BOOT_SESSAO_13-09-2026
+
+BANCO / AUTORIZAÇÃO VERIFICADA
+Usuário: AURORA_USUARIO@HOTMAIL.COM
+- COMPANY_USER ativo.
+- electrical = enabled true.
+- workshop = enabled true.
+Portanto o teste do QR de Oficina possui autorização real no banco.
+
+NÃO ALTERADO
+- Minha Equipe / regra de ambientes por plano.
+- Permissões operacionais.
+- QR público de visitante.
+- Relatórios e fotos.
+- Aurora AI.
+- Convites.
+- Atividades Rotineiras/Tupy.
+- Vistoria Veicular.
+
+TESTE PRINCIPAL
+Celular logado como AURORA_USUARIO@HOTMAIL.COM -> câmera -> QR do veículo MLC1212.
+Esperado: Aurora inicializa sem loop e abre o catálogo Veículos do ambiente Oficina.
+Visitante sem login continua vendo Identificação do ativo.

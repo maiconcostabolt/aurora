@@ -1,0 +1,29 @@
+AURORA V30 — QR PÚBLICO, NAVEGAÇÃO E AURORA AI CONTEXTUAL
+Data: 13/09/2026
+Destino: PWA de testes
+
+1. QR PÚBLICO
+- Exibe somente código, nome, tipo, status, empresa responsável, última inspeção, situação, quantidade e próxima inspeção.
+- O banco não retorna mais cliente/unidade, setor, localização interna, observações técnicas, fotos ou relatórios ao visitante.
+- KBP2323 validado com uma inspeção concluída em 13/09/2026.
+
+2. BOTÃO INÍCIO
+- Dentro de Painéis e equipamentos retorna diretamente à Home.
+- Na Home, cliques adicionais são consumidos como operação neutra.
+- Pop-up informativo e demais telas de ativos não podem reaparecer pelo botão Início.
+
+3. VOLTAR NATIVO
+- Fecha primeiro o pop-up superior.
+- QR/modal -> fecha; editor -> ficha/lista; ficha -> lista; lista -> Home.
+- Depois seguem as regras existentes de relatório, etapas e demais áreas.
+- Na Home não cria navegação interna cíclica.
+
+4. AURORA AI
+- Home: disponível somente depois que a Home e os serviços estiverem carregados.
+- Vistoria: disponível somente quando o formulário ativo estiver realmente visível.
+- Oculta em QR público, relatório, equipamentos, configurações, equipe, pop-ups e modais.
+
+PRESERVADO
+- QR autenticado e histórico empresarial.
+- Fotos do relatório do histórico (V29).
+- Produção mlcaurora.com não alterada.

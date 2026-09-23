@@ -1,0 +1,19 @@
+AURORA V51 — TROCAR SEGMENTO PARA TODOS OS USUÁRIOS CONVIDADOS
+Data: 14-09-2026
+Base: V50 aprovada no gate V49 e fluxo de autorização empresarial.
+
+ESCOPO ÚNICO
+- Reexposto o card já existente Perfil e configurações > Trocar segmento para COMPANY_USER.
+- Aplicado a todos os usuários convidados e a todos os ambientes/serviços autorizados pela empresa.
+- O switcher continua usando a camada V50: mostra somente ambientes efetivamente concedidos pelo ADMIN em Minha Equipe.
+- Nenhum ambiente não autorizado pode aparecer na troca.
+
+PRESERVADO
+- Gate V49 de zero ambientes.
+- Autorizações Minha Equipe.
+- Home/layout/cards/cabeçalho/navegação.
+- QR, relatórios, fotos e Aurora AI.
+- COMPANY_USER continua sem Minha empresa, Minha Equipe, Editar serviços do segmento e Módulos Aurora.
+
+VERSÃO
+AURORA_V51_TROCAR_SEGMENTO_TODOS_USUARIOS_14-09-2026

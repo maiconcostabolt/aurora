@@ -1,0 +1,183 @@
+{
+    "id": "workflow_workshop",
+    "profile_id": "workshop",
+    "name": "Fluxo Oficina Mecânica",
+    "version": "2.0.0",
+    "contract": "aurora.workflow.v2",
+    "start": "area",
+    "finish": "archive",
+    "metadata": {
+        "case_centered": true,
+        "supports_resume": true,
+        "supports_conditional_steps": true
+    },
+    "steps": [
+        {
+            "id": "area",
+            "order": 1,
+            "title": "Área do atendimento",
+            "screen": "work_type",
+            "required": true,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": false,
+                "allow_save_draft": true
+            }
+        },
+        {
+            "id": "mode",
+            "order": 2,
+            "title": "Destino do atendimento",
+            "screen": "report_mode",
+            "required": true,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            }
+        },
+        {
+            "id": "customer",
+            "order": 3,
+            "title": "Cliente",
+            "screen": "customer",
+            "required": true,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            }
+        },
+        {
+            "id": "asset",
+            "order": 4,
+            "title": "Veículo",
+            "screen": "asset",
+            "required": true,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            }
+        },
+        {
+            "id": "entry",
+            "order": 5,
+            "title": "Entrada do veículo",
+            "screen": "intake",
+            "required": true,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            }
+        },
+        {
+            "id": "occurrences",
+            "order": 6,
+            "title": "Registros",
+            "screen": "occurrences",
+            "required": true,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            }
+        },
+        {
+            "id": "evidences",
+            "order": 7,
+            "title": "Fotos",
+            "screen": "evidences",
+            "required": false,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            }
+        },
+        {
+            "id": "diagnostic",
+            "order": 8,
+            "title": "Diagnóstico",
+            "screen": "diagnostic",
+            "required": true,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            }
+        },
+        {
+            "id": "approval",
+            "order": 9,
+            "title": "Finalização",
+            "screen": "approval",
+            "required": false,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            }
+        },
+        {
+            "id": "executor",
+            "order": 10,
+            "title": "Executor externo",
+            "screen": "third_party_executor",
+            "required": false,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            },
+            "visible_when": {
+                "mode": [
+                    "inspection_execution_third_party"
+                ]
+            }
+        },
+        {
+            "id": "execution",
+            "order": 11,
+            "title": "Execução",
+            "screen": "execution",
+            "required": false,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            },
+            "visible_when": {
+                "mode": [
+                    "inspection_execution_internal",
+                    "inspection_execution_third_party"
+                ]
+            }
+        },
+        {
+            "id": "report",
+            "order": 12,
+            "title": "Relatório",
+            "screen": "report",
+            "required": true,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            }
+        },
+        {
+            "id": "archive",
+            "order": 13,
+            "title": "Encerramento",
+            "screen": "archive",
+            "required": true,
+            "metadata": {
+                "assistant_enabled": true,
+                "allow_back": true,
+                "allow_save_draft": true
+            }
+        }
+    ]
+}

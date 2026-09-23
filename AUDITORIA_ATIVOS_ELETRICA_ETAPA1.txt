@@ -1,0 +1,12 @@
+AURORA — ATIVOS ELÉTRICA — ETAPA 1
+Data: 12/09/2026
+Base: AURORA_PTBR_SEM_IDS_TECNICOS_PREPARO_I18N_PWA_TESTE.zip
+
+Escopo:
+- Ativos somente no módulo Elétrica e somente para ADMIN empresarial.
+- Card Ativos integrado à Gestão da Home Aurora.
+- Tela com Início, busca, resumo e cadastro/edição.
+- Campos: código, nome, tipo, status, cliente/unidade, setor, localização interna e observações.
+- Card reservado para QR Code futuro, sem função falsa.
+- QR, GPS, relatórios, Aurora AI, Tupy e demais módulos não alterados.
+- Persistência desta rodada piloto: localStorage do navegador/dispositivo. Backend compartilhado fica para etapa posterior após aprovação visual/funcional.

@@ -1,0 +1,20 @@
+AURORA PWA — ALINHADA AO APK DEFINITIVO V3
+
+Esta candidata foi reconstruída a partir da mesma camada web existente no APK
+definitivo que sincronizou o projeto com sucesso na versão 3.
+
+CORREÇÕES PRINCIPAIS
+- Editar atendimento recente.
+- Excluir atendimento recente.
+- Mesma Home, fluxos, evidências, relatórios, animações e acabamentos do APK.
+- Sincronização manual com controle de versão, conflito e timeout preservados.
+- Cache PWA renovado para impedir a permanência de arquivos antigos.
+
+PUBLICAÇÃO
+Envie todo o conteúdo desta pasta para a raiz do projeto principal da PWA.
+O arquivo index.html deve permanecer diretamente na raiz do upload.
+
+REGRA DE MANUTENÇÃO
+Toda alteração compartilhada da AURORA deve ser aplicada primeiro à camada web
+única e, depois, empacotada e validada tanto no Android quanto na PWA.
+Somente integrações realmente específicas de plataforma podem divergir.

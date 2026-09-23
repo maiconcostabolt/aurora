@@ -1,0 +1,23 @@
+AURORA — ETIQUETA QR / NOMES V12
+Base: V11.
+
+Correções:
+- criada normalização central cleanAssetLabel() para retirar prefixos genéricos repetidos
+  (Equipamento, Ativo, Painel elétrico, Veículo) apenas na apresentação.
+- criada assetDisplayParts() como regra única de exibição da identificação.
+- se código e nome resultarem iguais, a segunda linha é omitida.
+- modal agora usa hierarquia limpa e subtítulo "Identificação permanente por QR Code".
+- impressão V10 passa pela mesma regra de apresentação.
+- ao criar equipamento a partir do relatório, os campos reaproveitados já são normalizados.
+- dados antigos continuam compatíveis; não houve exclusão nem migração destrutiva.
+- regra preparada para reutilização nas futuras shapes da Aurora.
+
+Preservado:
+- botão Etiqueta QR na prévia
+- QR permanente
+- etiqueta V10 aprovada
+- SVG oficial
+- QR centralizado
+- motor de impressão
+- QR de validação do relatório separado
+- Tupy, AI e relatórios sem alterações.

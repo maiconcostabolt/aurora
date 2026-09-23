@@ -1,0 +1,54 @@
+AURORA — AUDITORIA EQUIPE / CONVITE EMPRESARIAL V25
+Data: 13/09/2026
+Base: AURORA_EQUIPE_CONVITE_EMPRESARIAL_V24_PWA_TESTE(2).zip
+Destino: somente PWA Testes
+
+CAUSA CONFIRMADA
+- O convite de aurora_usuario@hotmail.com foi aceito com sucesso.
+- A membership COMPANY_USER ficou ativa na empresa BOLT SOLUCOES EM ELETRICA.
+- O entitlement empresarial electrical havia expirado antes do aceite.
+- Sem módulo empresarial ativo, a V24 devolvia o membro ao onboarding
+  Individual/Empresarial.
+- Ao escolher Empresarial, o backend bloqueava corretamente a tentativa de criar
+  uma segunda empresa; a rejeição chegava ao catch geral do bootstrap e produzia
+  a tela genérica "Não foi possível iniciar".
+
+CORREÇÕES V25
+1. Membership empresarial ativa passa a ser autoridade do tipo de sessão.
+2. Membro empresarial não retorna ao onboarding Individual/Empresarial.
+3. O módulo selecionado para membro empresarial vem do entitlement da empresa,
+   evitando preferência acidental por módulo pessoal.
+4. Membership ativa sem módulo disponível recebe estado controlado:
+   "Módulo da empresa indisponível", sem sugestão de reinstalação.
+5. Cache-buster de bootstrap atualizado em app.html.
+
+SUPABASE — LIBERAÇÃO TEMPORÁRIA DE TESTE
+- Empresa: BOLT SOLUCOES EM ELETRICA
+- Módulo: electrical
+- Registro existente preservado; nenhuma tabela, função, RLS ou membership criada.
+- Validade de teste estendida até 20/09/2026 20:48:14 UTC.
+
+ARQUIVOS ALTERADOS
+- app.html
+- js/bootstrap.js
+- ARQUIVOS_SHA256.txt
+- AUDITORIA_EQUIPE_CONVITE_EMPRESARIAL_V25_13-09-2026.txt (novo)
+
+VALIDAÇÕES AUTOMÁTICAS
+- Sintaxe de todos os arquivos JavaScript: OK.
+- Ordem de scripts de convite, acesso, cloud_sync e bootstrap: preservada.
+- Convite e membership consultados em modo somente leitura antes da alteração.
+- Entitlement atualizado por ID, company_id e module_code exatos.
+- Consulta pós-alteração do entitlement: obrigatória antes da entrega.
+
+TESTE HUMANO PENDENTE
+1. Publicar este ZIP somente no PWA Testes.
+2. No celular de aurora_usuario@hotmail.com, fechar a aba/PWA anterior.
+3. Abrir novamente o PWA Testes e tocar em Atualizar Aurora, se solicitado.
+4. Entrar com aurora_usuario@hotmail.com.
+5. Confirmar que NÃO aparece Individual/Empresarial.
+6. Confirmar entrada direta no ambiente empresarial BOLT.
+7. Depois validar Minha Equipe, permissões e QR autenticado.
+
+PRODUÇÃO mlcaurora.com
+- Não alterada.

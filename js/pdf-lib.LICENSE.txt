@@ -1,0 +1,7 @@
+pdf-lib v1.17.1
+https://github.com/Hopding/pdf-lib
+License: MIT
+Copyright (c) 2019 Andrew Dillon
+
+Vendored locally at ./js/pdf-lib.min.js for offline PWA use.
+Do not load this library from a CDN at runtime.

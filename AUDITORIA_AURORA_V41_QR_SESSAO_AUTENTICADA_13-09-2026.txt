@@ -1,0 +1,32 @@
+AURORA V41 — QR / SESSÃO AUTENTICADA
+Data: 13/09/2026
+Base: V40
+
+ERRO REPRODUZIDO / CAUSA LOCALIZADA
+- O script aurora_asset_public.js era carregado antes de cloud_sync.js.
+- Ao abrir o QR pela câmera, a página pública consultava a sessão antes de a Aurora terminar de restaurar a autenticação persistida.
+- Se a sessão ainda não estivesse pronta naquele instante, o fluxo classificava o usuário como visitante e renderizava Identificação do ativo.
+- Por isso a V40 podia falhar mesmo com o usuário corretamente logado e autorizado.
+
+CORREÇÃO COMPARTILHADA
+1. aurora_asset_public.js agora é carregado depois de cloud_sync.js.
+2. O fluxo QR aguarda AuroraAuthReady (barreira canônica de autenticação) antes de decidir visitante x membro.
+3. Há uma janela curta de revalidação da sessão para restauração assíncrona em celular/PWA.
+4. Só depois dessa validação:
+   - membro autorizado -> rota interna do catálogo do module_code do ativo;
+   - sem sessão/autorização -> Identificação pública do ativo.
+5. Nenhuma regra específica de Oficina foi criada. O comportamento usa module_code e vale para todos os catálogos compartilhados.
+
+FLUXO ESPERADO
+- Visitante/iPad sem login -> Identificação do ativo.
+- Usuário Aurora logado + ambiente autorizado -> catálogo interno correspondente ao QR.
+- Usuário logado sem ambiente autorizado -> não recebe rota interna.
+
+ESCOPO NÃO ALTERADO
+- Relatórios/fotos/Aurora AI/Home/convites.
+- Regras dos catálogos e históricos V38.
+- Permissões por ambiente V39.
+- Supabase: nenhuma migration nesta V41.
+
+VERSÃO VISÍVEL
+AURORA_V41_QR_SESSAO_AUTENTICADA_13-09-2026

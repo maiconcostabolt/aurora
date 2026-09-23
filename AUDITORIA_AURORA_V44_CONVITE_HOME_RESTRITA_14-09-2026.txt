@@ -1,0 +1,26 @@
+AURORA V44 — CONVITE / HOME EMPRESARIAL RESTRITA
+Data: 14-09-2026
+Base: V43 QR Boot Sessão
+
+PROBLEMA CONFIRMADO
+- Convite de aurora_usuario01@hotmail.com foi aceito corretamente.
+- Membership COMPANY_USER ativa na empresa BOLT SOLUCOES EM ELETRICA.
+- Usuário recém-convidado ainda não possuía ambiente concedido em aurora_company_member_modules.
+- O bootstrap abria o gate comercial “Em qual serviço você deseja trabalhar?”, fluxo incorreto para COMPANY_USER.
+
+CORREÇÃO TRANSVERSAL
+1. COMPANY_USER com membership ativa e zero ambientes concedidos não abre mais o seletor comercial/demonstração.
+2. A sessão continua dentro da Aurora empresarial em estado restrito.
+3. Serviços/preferred_service herdados de perfil pessoal antigo são removidos enquanto não houver ambiente concedido.
+4. O ADMIN continua sendo a única origem da concessão de ambientes em Minha Equipe.
+5. Assim que um ambiente for concedido, o fluxo compartilhado existente volta a resolver o módulo autorizado normalmente.
+
+NÃO ALTERADO
+- QR V43 aprovado.
+- Fotos e relatórios.
+- Aurora AI.
+- Regras de ambientes por plano/demonstração.
+- Atividades Rotineiras e Vistoria Veicular.
+
+VERSÃO VISÍVEL
+AURORA_V44_CONVITE_HOME_RESTRITA_14-09-2026
