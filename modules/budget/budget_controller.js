@@ -16,6 +16,32 @@ function money(v){
     catch(_){return "R$ "+moneyNumber(v).toFixed(2).replace(".",",");}
 }
 
+/* R57 — assinatura usa o mesmo campo canônico, porém o PNG é recortado e
+ * reduzido antes da persistência. Evita gastar quota com os 900x260 vazios
+ * do canvas sem criar storage, autoridade ou fluxo paralelo. */
+function compactSignatureCanvas(sourceCanvas){
+    try {
+        const sourceCtx=sourceCanvas.getContext("2d",{willReadFrequently:true});
+        const w=sourceCanvas.width,h=sourceCanvas.height;
+        const pixels=sourceCtx.getImageData(0,0,w,h).data;
+        let minX=w,minY=h,maxX=-1,maxY=-1;
+        for(let y=0;y<h;y++)for(let x=0;x<w;x++){
+            const i=(y*w+x)*4;
+            if(pixels[i+3]>12){if(x<minX)minX=x;if(x>maxX)maxX=x;if(y<minY)minY=y;if(y>maxY)maxY=y;}
+        }
+        if(maxX<minX||maxY<minY)return "";
+        const pad=14;
+        minX=Math.max(0,minX-pad);minY=Math.max(0,minY-pad);
+        maxX=Math.min(w-1,maxX+pad);maxY=Math.min(h-1,maxY+pad);
+        const cropW=Math.max(1,maxX-minX+1),cropH=Math.max(1,maxY-minY+1);
+        const scale=Math.min(1,480/cropW,140/cropH);
+        const out=document.createElement("canvas");
+        out.width=Math.max(1,Math.round(cropW*scale));out.height=Math.max(1,Math.round(cropH*scale));
+        out.getContext("2d").drawImage(sourceCanvas,minX,minY,cropW,cropH,0,0,out.width,out.height);
+        return out.toDataURL("image/png");
+    } catch (_) { return sourceCanvas.toDataURL("image/png"); }
+}
+
 class BudgetModuleController extends global.ModuleController {
     constructor(){ super({id:"budget"}); this.data={mode:"detailed",show_on_report:"Sim",items:[],total_value:"",notes:"",collect_signature:false,signature_data:""}; }
     async onLoad(context={}){
@@ -148,7 +174,9 @@ class BudgetModuleController extends global.ModuleController {
             this.data.signature_data="";sigCtx.clearRect(0,0,sigCanvas.width,sigCanvas.height);sigStatus.textContent="Assinatura limpa.";
         });
         container.querySelector("[data-budget-signature-confirm]").addEventListener("click",()=>{
-            this.data.signature_data=sigCanvas.toDataURL("image/png");
+            const compact=compactSignatureCanvas(sigCanvas);
+            if(!compact){this.data.signature_data="";sigStatus.textContent="Desenhe a assinatura antes de confirmar.";return;}
+            this.data.signature_data=compact;
             sigStatus.textContent="Assinatura confirmada.";
         });
     }

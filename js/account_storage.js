@@ -14,6 +14,27 @@ function isAuroraDataKey(key) {
     return !isManagerKey(key) && !isAuthKey(key) && (key.indexOf("aurora") === 0 || key.indexOf("AURORA") === 0);
 }
 function accountKey(userId) { return DATA_PREFIX + String(userId || "").trim(); }
+function releaseActiveSnapshot(userId) {
+    const id = String(userId || "").trim();
+    if (!id) return false;
+    const target = accountKey(id);
+    try {
+        if (localStorage.getItem(target) == null) return false;
+        localStorage.removeItem(target);
+        console.info("AURORA_ACCOUNT_STORAGE", {
+            stage: "active_snapshot_reclaimed",
+            target: target
+        });
+        return true;
+    } catch (error) {
+        console.warn("AURORA_ACCOUNT_STORAGE", {
+            stage: "active_snapshot_reclaim_failed",
+            target: target,
+            error: String(error && (error.name || error.message) || error)
+        });
+        return false;
+    }
+}
 function isQuotaError(error) {
     if (!error) return false;
     const name = String(error.name || "");
@@ -168,12 +189,22 @@ function activate(userId) {
     const nextId = String(userId || "").trim();
     if (!nextId) return false;
     const currentId = localStorage.getItem(ACTIVE_KEY) || "";
-    if (currentId === nextId) return false;
+    if (currentId === nextId) {
+        /* R35 — enquanto esta conta está ativa, os dados autoritativos já estão
+         * nas chaves live. O snapshot da própria conta é redundante e pode
+         * consumir megabytes, impedindo aurora_v2_current_case de persistir.
+         * Ele será recriado por saveCurrent() antes de trocar/suspender a conta. */
+        releaseActiveSnapshot(nextId);
+        return false;
+    }
     const hr = global.AuroraHomeReturnTrace;
     const runtimeCase = hr ? hr.runtimeCaseSnapshot() : null;
     if (currentId) saveCurrent(currentId);
     restore(nextId);
     localStorage.setItem(ACTIVE_KEY, nextId);
+    /* R35 — após restaurar para as chaves live, o snapshot da conta ativa
+     * deixa de ser necessário até a próxima troca/suspensão. */
+    releaseActiveSnapshot(nextId);
     if (hr) {
         hr.logHR5({
             evento: "AccountStorage.activate",

@@ -4138,13 +4138,7 @@ global.AuroraEletricaTupy = {
                 : {};
         }
 
-        var cloudAdmin = global.AuroraCloudSync;
-        var adminCloudData = cloudAdmin && typeof cloudAdmin.loadCompanyProjectForAdmin === "function"
-            ? await cloudAdmin.loadCompanyProjectForAdmin(pid)
-            : null;
-        var workingCase = adminCloudData
-            ? cloudAdmin.caseFromCloud(adminCloudData.project, adminCloudData.records || [])
-            : this.buildWorkingCaseFromGestaoRow(row);
+        var workingCase = await this.resolveGestaoWorkingCase(row, pid);
         workingCase.admin_review = true;
         workingCase.restored_from_cloud = false;
         workingCase.admin_review_source = "gestao_cloud_row";
@@ -5184,13 +5178,7 @@ global.AuroraEletricaTupy = {
                 : {};
         }
 
-        var cloudAdmin = global.AuroraCloudSync;
-        var adminCloudData = cloudAdmin && typeof cloudAdmin.loadCompanyProjectForAdmin === "function"
-            ? await cloudAdmin.loadCompanyProjectForAdmin(pid)
-            : null;
-        var workingCase = adminCloudData
-            ? cloudAdmin.caseFromCloud(adminCloudData.project, adminCloudData.records || [])
-            : this.buildWorkingCaseFromGestaoRow(row);
+        var workingCase = await this.resolveGestaoWorkingCase(row, pid);
         workingCase.admin_review = true;
         workingCase.restored_from_cloud = false;
         workingCase.admin_review_source = "gestao_cloud_row";
@@ -6058,6 +6046,111 @@ global.AuroraEletricaTupy = {
         });
     },
 
+    /* R54 — uma única autoridade visual para Home/Gestão Tupy.
+     * A conectividade escolhe apenas a fonte de dados; nunca uma UI alternativa.
+     * Relatórios locais recém-criados entram na mesma coleção exibida pelos rows
+     * empresariais, inclusive antes da próxima sincronização com a nuvem. */
+    localEletricaTupyCompanyRows: function () {
+        var reports = [];
+        try {
+            reports = JSON.parse(localStorage.getItem("aurora_reports") || "[]");
+        } catch (_) { reports = []; }
+        if (!Array.isArray(reports)) reports = [];
+        var self = this;
+        return reports.map(function (report) {
+            var snapshot = report && report.snapshot && typeof report.snapshot === "object"
+                ? deepCloneJson(report.snapshot) : null;
+            if (!snapshot) return null;
+            var serviceId = String(snapshot.service && snapshot.service.id || snapshot.service_type || "").trim().toLowerCase();
+            var tupy = snapshot.eletrica_tupy && typeof snapshot.eletrica_tupy === "object" ? snapshot.eletrica_tupy : null;
+            if (serviceId !== SERVICE_ID && !(tupy && Object.keys(tupy).length)) return null;
+            var localCaseId = String(snapshot.id || report.case_id || report.id || "").trim();
+            if (!localCaseId) return null;
+            var cloudProjectId = String(snapshot.cloud_project_id || report.cloud_project_id || "").trim();
+            var rowId = cloudProjectId || localCaseId;
+            return {
+                id: rowId,
+                legacy_case_id: localCaseId,
+                title: snapshot.report_title || snapshot.title || (snapshot.customer && snapshot.customer.name) || "Atendimento",
+                status: report.status || snapshot.status || "Rascunho",
+                service_profile: snapshot.profile_id || (snapshot.service && snapshot.service.profile) || "electrical",
+                service_type: SERVICE_ID,
+                created_at: report.created_at || snapshot.created_at || "",
+                updated_at: report.updated_at || snapshot.updated_at || report.created_at || snapshot.created_at || "",
+                company_id: snapshot.company_id || "",
+                created_by: snapshot.cloud_created_by || snapshot.created_by || "",
+                customer: snapshot.customer || {},
+                asset: snapshot.asset || {},
+                intake: snapshot.intake || {},
+                diagnostic: snapshot.diagnostic || {},
+                approval: snapshot.approval || {},
+                custom_fields: snapshot.custom_fields || snapshot.custom_values || {},
+                workflow_state: { full_case: snapshot, eletrica_tupy: snapshot.eletrica_tupy || {} },
+                _aurora_local_snapshot: snapshot,
+                _aurora_local_report_id: String(report.id || "")
+            };
+        }).filter(Boolean);
+    },
+
+    mergeEletricaTupyActivityRows: function (companyRows) {
+        var self = this;
+        var merged = [];
+        var indexByKey = {};
+        function keys(row) {
+            return [row && row.id, row && row.legacy_case_id].map(function (value) {
+                return String(value || "").trim();
+            }).filter(Boolean);
+        }
+        function put(row, preferLocal) {
+            if (!row || !self.isEletricaTupyCompanyRow(row)) return;
+            var rowKeys = keys(row);
+            var found = -1;
+            rowKeys.some(function (key) {
+                if (Object.prototype.hasOwnProperty.call(indexByKey, key)) { found = indexByKey[key]; return true; }
+                return false;
+            });
+            if (found >= 0) {
+                if (preferLocal) {
+                    var cloudRow = merged[found];
+                    var localRow = row;
+                    merged[found] = Object.assign({}, cloudRow, localRow, {
+                        id: String(cloudRow.id || localRow.id || ""),
+                        company_id: cloudRow.company_id || localRow.company_id || "",
+                        created_by: cloudRow.created_by || localRow.created_by || "",
+                        _aurora_cloud_row: cloudRow
+                    });
+                }
+                keys(merged[found]).concat(rowKeys).forEach(function (key) { indexByKey[key] = found; });
+                return;
+            }
+            var nextIndex = merged.length;
+            merged.push(row);
+            rowKeys.forEach(function (key) { indexByKey[key] = nextIndex; });
+        }
+        self.filterEletricaTupyCompanyRows(companyRows).forEach(function (row) { put(row, false); });
+        self.localEletricaTupyCompanyRows().forEach(function (row) { put(row, true); });
+        return merged;
+    },
+
+    resolveGestaoWorkingCase: async function (row, projectId) {
+        var localSnapshot = row && row._aurora_local_snapshot;
+        if (localSnapshot && typeof localSnapshot === "object") {
+            return deepCloneJson(localSnapshot);
+        }
+        var offline = typeof navigator !== "undefined" && navigator.onLine === false;
+        var cloudAdmin = global.AuroraCloudSync;
+        if (!offline && cloudAdmin && typeof cloudAdmin.loadCompanyProjectForAdmin === "function") {
+            try {
+                var adminCloudData = await cloudAdmin.loadCompanyProjectForAdmin(projectId);
+                if (adminCloudData) return cloudAdmin.caseFromCloud(adminCloudData.project, adminCloudData.records || []);
+            } catch (error) {
+                if (!row) throw error;
+                console.warn("[AET R54] cloud indisponível; usando snapshot empresarial/local já carregado.", error);
+            }
+        }
+        return this.buildWorkingCaseFromGestaoRow(row);
+    },
+
     loadCompanyActivitiesInto: async function (host) {
         if (!host) return;
         if (!this.canOpenGestao()) {
@@ -6074,7 +6167,7 @@ global.AuroraEletricaTupy = {
             var client = cloud && cloud.client ? cloud.client : null;
             this._gestaoCurrentUserId = await this.resolveGestaoAuthUserId();
             var rows = await access.listMyCompanyProjects(client);
-            rows = this.filterEletricaTupyCompanyRows(rows);
+            rows = this.mergeEletricaTupyActivityRows(rows);
             var byId = {};
             (rows || []).forEach(function (row) {
                 if (row && row.id) byId[String(row.id)] = row;
@@ -6171,7 +6264,7 @@ global.AuroraEletricaTupy = {
             var client = cloud && cloud.client ? cloud.client : null;
             this._gestaoCurrentUserId = await this.resolveGestaoAuthUserId();
             var rows = await access.listMyCompanyProjects(client);
-            rows = this.filterEletricaTupyCompanyRows(rows);
+            rows = this.mergeEletricaTupyActivityRows(rows);
             var byId = {};
             (rows || []).forEach(function (row) {
                 if (row && row.id) byId[String(row.id)] = row;

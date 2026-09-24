@@ -18,6 +18,68 @@ var EMPTY = Object.freeze({
     source: "absent"
 });
 
+
+var COMPANY_ACCESS_CACHE_PREFIX = "aurora_company_access_claim_v1:";
+var COMPANY_PROJECTS_CACHE_PREFIX = "aurora_company_projects_cache_v1:";
+
+function companyProjectsCacheKey(userId) {
+    var uid = String(userId || "").trim();
+    return uid ? COMPANY_PROJECTS_CACHE_PREFIX + uid : "";
+}
+
+function readCachedCompanyProjects(userId) {
+    var key = companyProjectsCacheKey(userId);
+    if (!key) return null;
+    try {
+        var raw = localStorage.getItem(key);
+        if (!raw) return null;
+        var parsed = JSON.parse(raw);
+        return parsed && Array.isArray(parsed.rows) ? parsed.rows : null;
+    } catch (_) { return null; }
+}
+
+function writeCachedCompanyProjects(userId, rows) {
+    var key = companyProjectsCacheKey(userId);
+    if (!key || !Array.isArray(rows)) return;
+    try {
+        localStorage.setItem(key, JSON.stringify({ saved_at: new Date().toISOString(), rows: rows }));
+    } catch (_) { /* cache auxiliar; nunca bloqueia o app */ }
+}
+
+function companyAccessCacheKey(userId) {
+    var uid = String(userId || "").trim();
+    return uid ? COMPANY_ACCESS_CACHE_PREFIX + uid : "";
+}
+
+function readCachedCompanyAccess(userId) {
+    var key = companyAccessCacheKey(userId);
+    if (!key) return null;
+    try {
+        var raw = localStorage.getItem(key);
+        if (!raw) return null;
+        var parsed = JSON.parse(raw);
+        if (!parsed || !parsed.claim || typeof parsed.claim !== "object") return null;
+        return parsed.claim;
+    } catch (_) { return null; }
+}
+
+function writeCachedCompanyAccess(userId, claim) {
+    var key = companyAccessCacheKey(userId);
+    if (!key || !claim || claim.loaded !== true || !claim.company_id) return;
+    try {
+        localStorage.setItem(key, JSON.stringify({ saved_at: new Date().toISOString(), claim: claim }));
+    } catch (_) { /* cache auxiliar; nunca bloqueia o app */ }
+}
+
+function restoreCachedCompanyAccess(userId) {
+    var cached = readCachedCompanyAccess(userId);
+    if (!cached) return null;
+    var restored = applyClaim(cached);
+    restored.source = "offline_cache";
+    global.AURORA_COMPANY_ACCESS = restored;
+    return restored;
+}
+
 function clearCompanyAccess() {
     global.AURORA_COMPANY_ACCESS = Object.assign({}, EMPTY);
     global.AURORA_ACCOUNT_ENTITLEMENTS = null;
@@ -358,12 +420,15 @@ function claimSummarySafe() {
 }
 
 async function refreshCompanyAccess(client) {
+    var authUserId = await getAuthUserId(client);
     if (!client || typeof client.rpc !== "function") {
-        return clearCompanyAccess();
+        return restoreCachedCompanyAccess(authUserId) || clearCompanyAccess();
     }
     try {
         var result = await client.rpc("aurora_my_company_access");
         if (result.error) {
+            var cachedOnRpcFailure = restoreCachedCompanyAccess(authUserId);
+            if (cachedOnRpcFailure) return cachedOnRpcFailure;
             clearCompanyAccess();
             global.AURORA_COMPANY_ACCESS.source = "rpc_missing";
             return global.AURORA_COMPANY_ACCESS;
@@ -388,8 +453,12 @@ async function refreshCompanyAccess(client) {
                 if (statePayload && statePayload.company_id) payload = statePayload;
             }
         }
-        return applyClaim(payload || { loaded: true });
+        var applied = applyClaim(payload || { loaded: true });
+        writeCachedCompanyAccess(authUserId, applied);
+        return applied;
     } catch (error) {
+        var cachedOnError = restoreCachedCompanyAccess(authUserId);
+        if (cachedOnError) return cachedOnError;
         clearCompanyAccess();
         global.AURORA_COMPANY_ACCESS.source = "rpc_error";
         return global.AURORA_COMPANY_ACCESS;
@@ -407,13 +476,18 @@ async function listMyCompanyProjects(client) {
         denied.code = "AURORA_GESTAO_FORBIDDEN";
         throw denied;
     }
-    if (!client || typeof client.rpc !== "function") {
+    var authUserId = await getAuthUserId(client);
+    if (!client || typeof client.rpc !== "function" || (typeof navigator !== "undefined" && navigator.onLine === false)) {
+        var cachedOffline = readCachedCompanyProjects(authUserId || global.AURORA_ACCOUNT_USER_ID);
+        if (cachedOffline) return cachedOffline;
         var cfg = new Error("AURORA_BACKEND_UNAVAILABLE");
         cfg.code = "AURORA_BACKEND_UNAVAILABLE";
         throw cfg;
     }
     var result = await client.rpc("aurora_list_my_company_projects");
     if (result.error) {
+        var cachedOnError = readCachedCompanyProjects(authUserId || global.AURORA_ACCOUNT_USER_ID);
+        if (cachedOnError) return cachedOnError;
         var rpcErr = new Error(result.error.message || "AURORA_COMPANY_LIST_FAILED");
         rpcErr.code = result.error.code || "AURORA_COMPANY_LIST_FAILED";
         rpcErr.details = result.error;
@@ -422,6 +496,7 @@ async function listMyCompanyProjects(client) {
     if (!Array.isArray(result.data)) {
         return [];
     }
+    writeCachedCompanyProjects(authUserId || global.AURORA_ACCOUNT_USER_ID, result.data);
     return result.data;
 }
 

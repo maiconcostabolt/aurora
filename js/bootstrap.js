@@ -1,6 +1,7 @@
 try{window.AuroraBootDiagV78&&window.AuroraBootDiagV78.mark("ENTER_BOOTSTRAP","js/bootstrap.js iniciou")}catch(_){}
 (async function (global) {
 "use strict";
+    try { global.__AURORA_BOOTSTRAP_BUILD__ = "AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION"; } catch (_) {}
     const v78mark = (stage, detail) => {
         try {
             if (global.AuroraBootDiagV78 && typeof global.AuroraBootDiagV78.mark === "function") {
@@ -15,9 +16,19 @@ const status =
     );
 
 let auroraBootStage = "BOOT_START";
+let auroraLastCompletedStage = "BOOT_START";
+
+function r46mark(event, detail, phase) {
+    try {
+        if (global.AuroraR47ColdStartTrace && typeof global.AuroraR47ColdStartTrace.mark === "function") {
+            global.AuroraR47ColdStartTrace.mark(event, detail || {}, phase || "bootstrap");
+        }
+    } catch (_) {}
+}
 
 function auroraBootMark(stage, detail) {
     auroraBootStage = stage;
+    if (stage !== "BOOT_ERROR" && !/_START$/.test(String(stage || ""))) auroraLastCompletedStage = stage;
     const payload =
         detail && typeof detail === "object"
             ? { stage, ...detail }
@@ -39,11 +50,13 @@ function auroraBootMark(stage, detail) {
     } catch (bootTraceError) {
         console.warn("AURORA_BOOT trace unavailable", bootTraceError);
     }
+    r46mark(stage, payload, "bootstrap");
 }
 
 function auroraBootError(stage, error) {
     auroraBootMark("BOOT_ERROR", {
         stage,
+        error_name: error && error.name ? String(error.name) : "",
         message:
             error && error.message
                 ? String(error.message)
@@ -51,7 +64,9 @@ function auroraBootError(stage, error) {
         stack:
             error && error.stack
                 ? String(error.stack)
-                : ""
+                : "",
+        last_completed_stage: auroraLastCompletedStage,
+        navigator_online: navigator.onLine
     });
 }
 
@@ -1420,6 +1435,78 @@ function selectedServicesForModule(identity, moduleCode) {
     return [];
 }
 
+/* R44 — autoridade universal dos serviços da Home.
+ * Um módulo já resolvido pode compartilhar o profile operacional com outros
+ * produtos. Nesse caso operational_services é mais específico que o catálogo
+ * genérico do profile. Defaults só entram quando não há serviços operacionais
+ * explícitos nem seleção válida persistida. */
+function resolveHomeServicesAuthority(identity, selectedModule) {
+    const profileCode = String(identity && identity.profile || "").trim();
+    const activeLicenseCode = String(identity && identity.active_license_module_code || selectedModule && (selectedModule.license_module_code || selectedModule.module_code) || "").trim();
+    const profileDefaults = servicesForProfile(profileCode);
+
+    /* R48 — separação definitiva de conceitos: eletrica_tupy é o ID legado do
+     * ambiente empresarial privado ATIVIDADES ROTINEIRAS TUPY. Não é um serviço
+     * do catálogo Elétrica e nunca deve ser convertido em card genérico da Home. */
+    if (activeLicenseCode === "eletrica_tupy") {
+        return {
+            moduleCode: activeLicenseCode,
+            profileCode,
+            operationalServices: [],
+            selectedServices: [],
+            profileDefaultServices: profileDefaults.map((service) => String(service && service.id || "")),
+            chosenIds: [],
+            chosenAuthority: "private_company_environment",
+            catalog: profileDefaults,
+            services: []
+        };
+    }
+    const operationalServices = Array.from(new Set(
+        (Array.isArray(selectedModule && selectedModule.operational_services)
+            ? selectedModule.operational_services : [])
+            .map((item) => String(item || "").trim()).filter(Boolean)
+    ));
+    const selectedServices = selectedServicesForModule(identity, profileCode);
+    const chosenIds = operationalServices.length ? operationalServices : selectedServices;
+    const chosenAuthority = operationalServices.length
+        ? "explicit_operational_services"
+        : (selectedServices.length ? "selected_services" : "profile_defaults");
+    const byId = new Map(profileDefaults.map((service) => [String(service && service.id || ""), service]));
+
+    if (operationalServices.length) {
+        const moduleCode = String(selectedModule && (selectedModule.license_module_code || selectedModule.module_code) || "").trim();
+        const moduleTitle = String(selectedModule && selectedModule.title || moduleCode || "Serviço").trim();
+        operationalServices.forEach((serviceId) => {
+            if (byId.has(serviceId)) return;
+            byId.set(serviceId, {
+                id: serviceId,
+                icon: String(selectedModule && selectedModule.icon || "▣"),
+                title: operationalServices.length === 1 ? moduleTitle : serviceId.replace(/[_-]+/g, " "),
+                description: String(selectedModule && selectedModule.description || `Abrir ${moduleTitle}.`),
+                operation_type: String(selectedModule && selectedModule.operation_type || "inspection"),
+                flow_template: String(selectedModule && selectedModule.flow_template || "technical"),
+                record_section_title: String(selectedModule && selectedModule.record_section_title || "Registros técnicos")
+            });
+        });
+    }
+
+    const catalog = Array.from(byId.values());
+    const services = chosenIds.length
+        ? chosenIds.map((id) => byId.get(id)).filter(Boolean)
+        : profileDefaults;
+    return {
+        moduleCode: String(identity && identity.active_license_module_code || selectedModule && selectedModule.module_code || "").trim(),
+        profileCode,
+        operationalServices,
+        selectedServices: Array.isArray(identity && identity.selected_services) ? identity.selected_services.map(String) : [],
+        profileDefaultServices: profileDefaults.map((service) => String(service && service.id || "")),
+        chosenIds: services.map((service) => String(service && service.id || "")),
+        chosenAuthority,
+        catalog,
+        services
+    };
+}
+
 function normalizeServiceSelectionResult(result) {
     if (!result) {
         return { services: null, pending: false };
@@ -1857,7 +1944,8 @@ function auroraAssetCatalogForProfile(profile, services) {
 
 function renderHome(
     identity,
-    runtime
+    runtime,
+    selectedModule
 ) {
     const displayUserName =
         String(identity.professional || "").trim() ||
@@ -1948,41 +2036,25 @@ function renderHome(
     reportsLayer.className =
         "aurora-reports-layer";
 
-    const selectedServiceIds = new Set(
-        String(identity.active_license_module_code || "").trim() === "eletrica_tupy" && canEnterEletricaTupyOperationalFlow()
-            ? ["eletrica_tupy"]
-            : selectedServicesForModule(identity, identity.profile)
-    );
-    let allProfileServices = servicesForProfile(identity.profile);
-    /* V135 — eletrica_tupy é um módulo privado que reutiliza o profile electrical,
-     * portanto não existe no catálogo público de serviços elétricos. Para USER_BOLT
-     * autorizado, materializamos o card operacional canônico antes de renderizar a
-     * Home; assim o handler normal [data-service-id] abre a shape existente, sem
-     * criar uma segunda rota/tela. */
-    if (
-        String(identity.active_license_module_code || "").trim() === "eletrica_tupy" &&
-        isCompanyOperationalUser() &&
-        canEnterEletricaTupyOperationalFlow() &&
-        !allProfileServices.some((service) => String(service && service.id || "") === "eletrica_tupy")
-    ) {
-        allProfileServices = allProfileServices.concat([{
-            id: "eletrica_tupy",
-            icon: "▣",
-            title: "ATIVIDADES ROTINEIRAS TUPY",
-            description: "Executar atividades rotineiras autorizadas pela empresa.",
-            operation_type: "inspection",
-            flow_template: "technical",
-            record_section_title: "Atividades Rotineiras"
-        }]);
-    }
-    const visibleProfileServices = allProfileServices.filter((service) =>
-        String(service && service.id || "") !== "eletrica_tupy" || canEnterEletricaTupyOperationalFlow()
-    );
-    /* R11.19 — autoridade empresarial validada: a Home monta somente os
-       serviços efetivamente habilitados. Não manter cards não autorizados no DOM. */
-    const services = selectedServiceIds.size
-        ? visibleProfileServices.filter((service) => selectedServiceIds.has(String(service.id)))
-        : visibleProfileServices;
+    const homeServicesAuthority = resolveHomeServicesAuthority(identity, selectedModule);
+    const selectedServiceIds = new Set(homeServicesAuthority.chosenIds);
+    const services = homeServicesAuthority.services;
+    try {
+        if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("HOME_SERVICE_AUTHORITY", {
+            module_code: homeServicesAuthority.moduleCode,
+            profile: homeServicesAuthority.profileCode,
+            selected_services: homeServicesAuthority.selectedServices,
+            operational_services: homeServicesAuthority.operationalServices,
+            profile_default_services: homeServicesAuthority.profileDefaultServices,
+            chosen_services: homeServicesAuthority.chosenIds,
+            chosen_authority: homeServicesAuthority.chosenAuthority,
+            reason: homeServicesAuthority.chosenAuthority === "explicit_operational_services"
+                ? "O módulo resolvido forneceu operational_services explícitos."
+                : (homeServicesAuthority.chosenAuthority === "selected_services"
+                    ? "A seleção persistida é válida no catálogo do profile."
+                    : "Não há seleção operacional explícita válida; usando defaults do profile.")
+        });
+    } catch (_) {}
     const availableServiceCount = services.length;
 
     const reports =
@@ -2007,7 +2079,9 @@ function renderHome(
                 "Concluído"
         ).length;
 
-    const isAetAdminHome = canManageEletricaTupyUi();
+    const isAetPrivateEnvironment = String(identity.active_license_module_code || "").trim() === "eletrica_tupy";
+    const isAetAdminHome = isAetPrivateEnvironment && canManageEletricaTupyUi();
+    const isAetAuthorizedHome = isAetPrivateEnvironment && (canEnterEletricaTupyOperationalFlow() || canExplicitlyOpenEletricaTupyOffline());
     const assetCatalog = auroraAssetCatalogForProfile(identity.profile, services);
     const isGenericCompanyAdminHome = !isAetAdminHome && Boolean(
         global.AuroraCompanyAccess
@@ -2060,22 +2134,22 @@ function renderHome(
         '<h2>Bem-vindo à Aurora</h2>',
         `<strong>${escapeHTML(identity.company)}</strong>`,
         '<button type="button" class="aurora-home-refresh" data-aurora-refresh aria-label="Atualizar dados" title="Atualizar dados">↻ <span>Atualizar</span></button>',
-        isAetAdminHome
-            ? '<p>Acesse a administração e as últimas atividades da equipe.</p>'
+        isAetPrivateEnvironment
+            ? (isAetAdminHome ? '<p>Acesse a administração e as últimas atividades da equipe.</p>' : '<p>Acesse suas atividades rotineiras autorizadas para a Tupy.</p>')
             : '<p>Escolha um dos serviços habilitados ou continue um atendimento recente.</p>',
-        isAetAdminHome
-            ? '<span class="aurora-home-hero__count">Administração</span>'
+        isAetPrivateEnvironment
+            ? `<span class="aurora-home-hero__count">Atividades Rotineiras Tupy · ${identity.active_module_access_status === "trial" ? "Demonstração" : "Ambiente autorizado"}</span>`
             : `<div class="aurora-home-hero__badges"><span class="aurora-home-hero__count">${escapeHTML(profilePresentation(identity.profile).module)} · ${identity.active_module_access_status === "trial" ? "Demonstração" : "Ambiente licenciado"}</span><span class="aurora-home-hero__count" data-home-service-count>${availableServiceCount} serviços disponíveis</span></div>`,
         '</section>',
         isAetAdminHome ? [
             '<section class="aurora-dashboard-metrics">',
             '<article><span>Em andamento</span>', `<strong>${openReports}</strong>`, '<small>atendimentos ativos</small></article>',
             '<article><span>Concluídos</span>', `<strong>${completedReports}</strong>`, '<small>relatórios disponíveis</small></article>',
-            '<article><span>Módulo</span>', `<strong>${escapeHTML(profilePresentation(identity.profile).module)}</strong>`, `<small>${identity.active_module_access_status === "trial" ? "demonstração" : "ambiente licenciado"}</small></article>`,
+            '<article><span>Ambiente</span>', `<strong>${isAetPrivateEnvironment ? "Atividades Rotineiras Tupy" : escapeHTML(profilePresentation(identity.profile).module)}</strong>`, `<small>${identity.active_module_access_status === "trial" ? "demonstração" : "ambiente autorizado"}</small></article>`,
             '</section>'
         ].join("") : "",
         /* ADMIN: não renderiza bloco operacional "Seu ambiente" / Elétrica Tupy. USER: preservado. */
-        isAetAdminHome
+        isAetPrivateEnvironment
             ? ""
             : [
                 `<section class="aurora-home-section${isGenericCompanyAdminHome ? ' aurora-home-section--company-admin-services' : ''}">`,
@@ -2127,7 +2201,7 @@ function renderHome(
          * e o handler canônico já usado pela Aurora. O fallback generic company admin é
          * necessário porque a Home atual pode classificar o ADMIN Bolt como administração
          * empresarial genérica mesmo dentro do módulo privado eletrica_tupy. */
-        (String(identity.active_license_module_code || "").trim() === "eletrica_tupy" && (isAetAdminHome || isGenericCompanyAdminHome))
+        (isAetPrivateEnvironment && isAetAuthorizedHome)
             ? [
                 '<section class="aurora-home-section" data-aet-gestao-home>',
                 '<div class="aurora-home-section__header">',
@@ -2802,7 +2876,9 @@ function renderHome(
        Atividades Rotineiras Tupy permanece ambiente privado independente. */
     const activeLicenseForSettings = String(identity.active_license_module_code || identity.profile || "").trim();
     const editSegmentServicesButton = settings.querySelector("[data-edit-segment-services]");
-    if (editSegmentServicesButton && (activeLicenseForSettings === "eletrica_tupy" || activeLicenseForSettings === "vehicle_inspection" || servicesForProfile(identity.profile).length <= 1)) {
+    /* R42 — manter paridade online/offline do editor da Home Elétrica. */
+    const hasExplicitOperationalServices = homeServicesAuthority.chosenAuthority === "explicit_operational_services";
+    if (editSegmentServicesButton && (hasExplicitOperationalServices || activeLicenseForSettings === "vehicle_inspection" || servicesForProfile(identity.profile).length <= 1)) {
         editSegmentServicesButton.remove();
     }
 
@@ -4550,7 +4626,8 @@ function renderHome(
 
                         if (
                             String(button.dataset.serviceId || "").toLowerCase() === "eletrica_tupy" &&
-                            !canEnterEletricaTupyOperationalFlow()
+                            !canEnterEletricaTupyOperationalFlow() &&
+                            !canExplicitlyOpenEletricaTupyOffline()
                         ) {
                             denyEletricaTupyOperationalAccess();
                             return;
@@ -5905,6 +5982,7 @@ function renderHome(
                         configuredModuleCodes
                     );
                     const currentLicense = String(identity.active_license_module_code || identity.profile || "").trim();
+                    try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("MODULE_CLICK", { source: "openSwitcher", module_before: currentLicense, requested: selected && selected.module_code, selected }); } catch (_) {}
                     if (!selected || String(selected.module_code || "").trim() === currentLicense) return;
                     const confirmed = await global.AuroraDialog.confirm(
                         `O segmento ${selected.title} será aberto. O atendimento atual será encerrado, mas os relatórios serão preservados.`, { title: "Trocar segmento?", confirmLabel: "Trocar" }
@@ -5947,6 +6025,8 @@ function renderHome(
                         showStatus("Este segmento ainda não possui serviços configurados.", 2800);
                         return;
                     }
+                    const selectedLicenseCode = String(selected.license_module_code || selected.module_code || "").trim();
+                    try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("BEFORE_PERSIST", { source: "openSwitcher", module_before: currentLicense, requested_module: selectedLicenseCode, profile_before: identity.profile, profile_next: operationalProfile, preferred_service_next: serviceIds[0] || "", selected_services_next: serviceIds }); } catch (_) {}
                     repository.clear();
                     saveIdentity({
                         ...identity,
@@ -5963,7 +6043,15 @@ function renderHome(
                             [operationalProfile]: serviceIds
                         }
                     });
-                    global.AuroraModuleAccess.activate(String(selected.license_module_code || selected.module_code || "").trim());
+                    if (typeof global.AuroraModuleAccess.activateForUser === "function") {
+                        global.AuroraModuleAccess.activateForUser(selectedLicenseCode, resolveLoggedInUserId());
+                    } else {
+                        global.AuroraModuleAccess.activate(selectedLicenseCode);
+                    }
+                    if (typeof global.AuroraModuleAccess.markExplicitSessionModuleForUser === "function") {
+                        global.AuroraModuleAccess.markExplicitSessionModuleForUser(selectedLicenseCode, resolveLoggedInUserId());
+                    }
+                    try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("BEFORE_RELOAD", { source: "openSwitcher", requested_module: selectedLicenseCode, authenticated_uid: resolveLoggedInUserId() }); } catch (_) {}
                     window.location.reload();
                 } catch (error) {
                     showStatus(error.message || "Não foi possível trocar o segmento.", 3200);
@@ -6017,6 +6105,7 @@ function renderHome(
             try {
                 const selected = await global.AuroraModuleAccess.openManager(identity.profile);
                 if (!selected) return;
+                try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("MODULE_CLICK", { source: "openManager", module_before: identity.active_license_module_code || identity.profile, requested: selected.module_code, selected }); } catch (_) {}
                 const moduleCode = selected.module_code;
                 const activation = await global.AuroraModuleAccess.resolveOperationalActivation(selected);
                 const profileCode = String(activation.profile || moduleCode);
@@ -6030,15 +6119,42 @@ function renderHome(
                 }
                 const selectionsByModule = {
                     ...(identity.selected_services_by_module || {}),
+                    [moduleCode]: serviceIds,
                     [profileCode]: serviceIds
                 };
+                const preferredMeta = servicesForProfile(profileCode).find(
+                    (service) => String(service && service.id || "") === String(serviceIds[0] || "")
+                ) || {};
+                try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("BEFORE_PERSIST", { source: "openManager", module_before: identity.active_license_module_code || identity.profile, requested_module: moduleCode, profile_before: identity.profile, profile_next: profileCode, preferred_service_next: serviceIds[0] || "", selected_services_next: serviceIds }); } catch (_) {}
+                /* R38 — Módulos Aurora precisa persistir a LICENÇA selecionada, não
+                 * apenas o profile operacional. Isso é indispensável para módulos
+                 * distintos que reutilizam o mesmo profile (electrical x eletrica_tupy),
+                 * sobretudo no reload offline, quando não existe cloud para reconciliar. */
                 saveIdentity({
                     ...identity,
                     profile: profileCode,
+                    active_license_module_code: moduleCode,
+                    preferred_service: serviceIds[0] || "",
+                    preferred_service_title: preferredMeta.title || "",
+                    active_module_title: selected.title || identity.active_module_title || "",
+                    active_module_access_status: selected.access_status || identity.active_module_access_status || "",
+                    active_module_ends_at: selected.ends_at || "",
                     selected_services: serviceIds,
                     selected_services_by_module: selectionsByModule
                 });
-                global.AuroraModuleAccess.activate(moduleCode);
+                /* R40 — Módulos Aurora usa a mesma autoridade canônica de Trocar segmento.
+                 * A seleção precisa sobreviver ao reload offline pela chave da UID autenticada
+                 * e pelo marcador explícito da mesma UID; activate() isolado podia gravar em
+                 * outra autoridade durante a transição e o bootstrap restaurava Elétrica. */
+                if (typeof global.AuroraModuleAccess.activateForUser === "function") {
+                    global.AuroraModuleAccess.activateForUser(moduleCode, resolveLoggedInUserId());
+                } else {
+                    global.AuroraModuleAccess.activate(moduleCode);
+                }
+                if (typeof global.AuroraModuleAccess.markExplicitSessionModuleForUser === "function") {
+                    global.AuroraModuleAccess.markExplicitSessionModuleForUser(moduleCode, resolveLoggedInUserId());
+                }
+                try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("BEFORE_RELOAD", { source: "openManager", requested_module: moduleCode, authenticated_uid: resolveLoggedInUserId() }); } catch (_) {}
                 global.location.reload();
             } catch (error) {
                 showStatus(error.message || String(error), 3200);
@@ -6340,17 +6456,73 @@ try {
 
     auroraBootMark("BOOT_AUTH_START");
     let authenticatedSession = null;
+    r46mark("AUTH_BEFORE_AWAIT", {
+        aurora_auth_ready_exists: Boolean(global.AuroraAuthReady),
+        aurora_auth_ready_type: typeof global.AuroraAuthReady,
+        aurora_auth_ready_thenable: Boolean(global.AuroraAuthReady && typeof global.AuroraAuthReady.then === "function"),
+        account_uid_before: String(global.AURORA_ACCOUNT_USER_ID || ""),
+        resolve_logged_in_user_id_present: typeof resolveLoggedInUserId === "function"
+    }, "auth-local");
     if (global.AuroraAuthReady) {
         v78mark("AUTH_WAIT", "aguardando AuroraAuthReady");
+            try {
+                Promise.resolve(global.AuroraAuthReady).then(
+                    (session) => r46mark("AUTH_PROMISE_RESOLVED", {
+                        session_present: Boolean(session),
+                        session_user_present: Boolean(session && session.user),
+                        session_user_id_present: Boolean(session && session.user && session.user.id),
+                        session_user_id: session && session.user && session.user.id || "",
+                        account_uid_at_resolution: String(global.AURORA_ACCOUNT_USER_ID || ""),
+                        offline_license_state: String(global.AURORA_OFFLINE_LICENSE_STATE || ""),
+                        offline_startup_context_present: Boolean(global.AURORA_OFFLINE_STARTUP_CTX)
+                    }, "auth-local"),
+                    (authError) => r46mark("AUTH_PROMISE_REJECTED", {
+                        error_name: authError && authError.name || "",
+                        error_message: authError && authError.message || String(authError || ""),
+                        stack: authError && authError.stack || "",
+                        account_uid_at_rejection: String(global.AURORA_ACCOUNT_USER_ID || "")
+                    }, "auth-local")
+                );
+            } catch (_) {}
             authenticatedSession = await global.AuroraAuthReady;
             v78mark("AUTH_OK", authenticatedSession && authenticatedSession.user ? authenticatedSession.user.id : "sem user");
     }
+    r46mark("AUTH_AFTER_AWAIT", {
+        session_present: Boolean(authenticatedSession),
+        session_user_present: Boolean(authenticatedSession && authenticatedSession.user),
+        session_user_id_present: Boolean(authenticatedSession && authenticatedSession.user && authenticatedSession.user.id),
+        session_user_id: authenticatedSession && authenticatedSession.user && authenticatedSession.user.id || "",
+        account_uid_after: String(global.AURORA_ACCOUNT_USER_ID || ""),
+        resolved_logged_in_uid: typeof resolveLoggedInUserId === "function" ? String(resolveLoggedInUserId() || "") : ""
+    }, "auth-local");
 
-    const authenticatedUserId = String(
+    const authenticatedUserIdFromSession = String(
         authenticatedSession && authenticatedSession.user
             ? authenticatedSession.user.id || ""
-            : global.AURORA_ACCOUNT_USER_ID || ""
+            : ""
     ).trim();
+    const authenticatedUserIdFromGlobal = String(global.AURORA_ACCOUNT_USER_ID || "").trim();
+    const authenticatedUserIdFromResolver = String(
+        typeof resolveLoggedInUserId === "function" ? resolveLoggedInUserId() || "" : ""
+    ).trim();
+    const authenticatedUserId =
+        authenticatedUserIdFromSession ||
+        authenticatedUserIdFromGlobal ||
+        authenticatedUserIdFromResolver;
+    r46mark("AUTH_UID_AUTHORITY_R46", {
+        session_uid_present: Boolean(authenticatedUserIdFromSession),
+        global_uid_present: Boolean(authenticatedUserIdFromGlobal),
+        resolver_uid_present: Boolean(authenticatedUserIdFromResolver),
+        chosen_authority: authenticatedUserIdFromSession
+            ? "authenticated_session"
+            : authenticatedUserIdFromGlobal
+                ? "account_global"
+                : authenticatedUserIdFromResolver
+                    ? "official_local_user_resolver"
+                    : "none",
+        chosen_uid: authenticatedUserId
+    }, "auth-local");
+    try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("AUTH_LOCAL_RESOLVED", { uid_global: global.AURORA_ACCOUNT_USER_ID || "", uid_authenticated: authenticatedUserId, session_user: authenticatedSession && authenticatedSession.user && authenticatedSession.user.id }); } catch (_) {}
     if (!authenticatedUserId) {
         throw new Error("A conta autenticada não foi identificada.");
     }
@@ -6402,6 +6574,28 @@ try {
     }
 
     auroraBootMark("BOOT_MODULES_START");
+
+    r46mark("ONBOARDING_ENGINE_SCRIPT_EXPECTED", {
+        asset: "./core/onboarding/onboarding_engine.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+        expected_build: "AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION"
+    }, "modules");
+    r46mark("ONBOARDING_ENGINE_BEFORE_BOOT", {
+        engine_present: Object.prototype.hasOwnProperty.call(global, "OnboardingEngine"),
+        controller_present: Object.prototype.hasOwnProperty.call(global, "OnboardingController")
+    }, "modules");
+    r46mark("ONBOARDING_ENGINE_TYPE", {
+        engine_type: typeof global.OnboardingEngine,
+        controller_type: typeof global.OnboardingController
+    }, "modules");
+    if (typeof global.OnboardingEngine !== "function") {
+        r46mark("ASSET_VERSION_MISMATCH", {
+            asset: "core/onboarding/onboarding_engine.js",
+            expected_build: "AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION",
+            loaded_build: String(global.__AURORA_BOOTSTRAP_BUILD__ || "[AUSENTE]"),
+            source_cache: "service-worker-or-network",
+            provider_type: typeof global.OnboardingEngine
+        }, "modules");
+    }
 
     const onboardingEngine =
         new global.OnboardingEngine({
@@ -6458,7 +6652,7 @@ try {
      * grava apenas um marcador de sessão e continua prevalecendo até logout. */
     const explicitSessionModule = global.AuroraModuleAccess &&
         typeof global.AuroraModuleAccess.readExplicitSessionModule === "function"
-        ? String(global.AuroraModuleAccess.readExplicitSessionModule() || "").trim()
+        ? String(global.AuroraModuleAccess.readExplicitSessionModule(authenticatedUserId) || "").trim()
         : "";
     const tupyLicensedAccess = accountModules.find((item) =>
         String(item && item.module_code || "").trim() === "eletrica_tupy" &&
@@ -6512,6 +6706,7 @@ try {
     } else if (activeCompanyMembership) {
         throw companyModuleUnavailableError();
     }
+    try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("COMPANY_RULE_EVALUATED", { active_company_membership: activeCompanyMembership, company_entitlement_access: companyEntitlementAccess, explicit_session_module: explicitSessionModule, tupy_licensed_access: tupyLicensedAccess, existing_access: existingAccess, awaiting_environment: global.AURORA_MEMBER_AWAITING_ENVIRONMENT === true }); } catch (_) {}
     const skipCloudProfileBootstrap = typeof navigator !== "undefined" &&
         navigator.onLine === false &&
         global.AURORA_LICENSE_CONFIG &&
@@ -6774,6 +6969,7 @@ try {
             selectedModule = await global.AuroraModuleAccess.resolve(identity);
         }
     }
+    try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("MODULE_RESOLUTION", { bootstrap_decision: "selectedModule", explicit_session_module: explicitSessionModule, existing_access: existingAccess, selected_module: selectedModule, identity_before_apply: { profile: identity.profile, active_license_module_code: identity.active_license_module_code, preferred_service: identity.preferred_service, selected_services: identity.selected_services } }); } catch (_) {}
 
     /* V44 — convite aceito sem ambiente ainda concedido.
      * Mantém a conta dentro da Home da empresa e remove serviços herdados do perfil
@@ -6800,12 +6996,14 @@ try {
     }
 
     if (selectedModule) {
+        const r44IdentityBeforeApply = { profile: identity.profile, active_license_module_code: identity.active_license_module_code, preferred_service: identity.preferred_service, selected_services: identity.selected_services };
         try { if (global.AuroraBoltTraceV132) global.AuroraBoltTraceV132.mark("04 ANTES APPLY SELECTED", { selectedModule: { module_code: selectedModule.module_code, license_module_code: selectedModule.license_module_code, operational_profile: selectedModule.operational_profile, operational_services: selectedModule.operational_services }, identity: { profile: identity.profile, active_license_module_code: identity.active_license_module_code, selected_services: identity.selected_services } }); } catch (_) {}
         if (global.AuroraTrialCounter) {
             global.AuroraTrialCounter.setActiveModuleAccess(selectedModule);
         }
         identity = await applySelectedModuleToIdentity(identity, selectedModule);
         saveIdentity(identity);
+        try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark((r44IdentityBeforeApply.active_license_module_code && r44IdentityBeforeApply.active_license_module_code !== identity.active_license_module_code) ? "MODULE_OVERRIDE" : "PROFILE_RESOLUTION", { authority: "applySelectedModuleToIdentity", previous: r44IdentityBeforeApply, next: { profile: identity.profile, active_license_module_code: identity.active_license_module_code, preferred_service: identity.preferred_service, selected_services: identity.selected_services }, selected_module: selectedModule }); } catch (_) {}
         try { if (global.AuroraBoltTraceV132) global.AuroraBoltTraceV132.mark("05 DEPOIS APPLY SELECTED", { profile: identity.profile, active_license_module_code: identity.active_license_module_code, preferred_service: identity.preferred_service, selected_services: identity.selected_services, selected_services_by_module: identity.selected_services_by_module }); } catch (_) {}
     }
 
@@ -6958,6 +7156,62 @@ try {
         return;
     }
 
+    /* R52 — observação somente diagnóstica. Não cria fallback, mock ou
+     * substituição: o constructor oficial continua sendo a autoridade. */
+    try {
+        const requiredRuntimeGlobals = [
+            "ThemeManager",
+            "SidebarComponent",
+            "TopBarComponent",
+            "FooterNavigation",
+            "AppShell",
+            "MobileShellAdapter",
+            "ModuleController",
+            "ViewManager",
+            "UISchemaEngine",
+            "LibraryEngine",
+            "FieldEngine",
+            "FormRenderer",
+            "BaseFormModule",
+            "CaseBinder",
+            "CustomerModuleController",
+            "AssetModuleController",
+            "IntakeModuleController",
+            "OccurrenceModuleController",
+            "EvidenceModuleController",
+            "DiagnosticModuleController",
+            "BudgetModuleController",
+            "ApprovalModuleController",
+            "AuroraRuntime"
+        ];
+        const dependencies = requiredRuntimeGlobals.map((name) => {
+            const value = global[name];
+            let constructible = false;
+            if (typeof value === "function") {
+                try {
+                    Reflect.construct(Object, [], value);
+                    constructible = true;
+                } catch (_) {}
+            }
+            return {
+                name,
+                present: typeof value !== "undefined" && value !== null,
+                type: typeof value,
+                constructible
+            };
+        });
+        const firstMissing = dependencies.find(
+            (entry) => !entry.present || entry.type !== "function" || !entry.constructible
+        ) || null;
+        r46mark("R52_RUNTIME_DEPENDENCY_CHAIN", {
+            dependencies,
+            first_missing: firstMissing && firstMissing.name || ""
+        }, "runtime_dependencies");
+        if (firstMissing) {
+            r46mark("R52_RUNTIME_DEPENDENCY_FIRST_MISSING", firstMissing, "runtime_dependencies");
+        }
+    } catch (_) {}
+
     const runtime =
         new global.AuroraRuntime({
             container:
@@ -7000,8 +7254,14 @@ try {
              * pelo relatório Concluído ao final, sem duplicação. */
             try {
                 const draft = persistUniversalDraft(caseData);
-                if (draft) {
+                const reportEngine = global.AuroraReportFeature && global.AuroraReportFeature.engine;
+                const durableDraft = draft && reportEngine && typeof reportEngine.getPersistent === "function"
+                    ? reportEngine.getPersistent(draft.id)
+                    : draft;
+                if (draft && durableDraft) {
                     try { global.dispatchEvent(new CustomEvent("aurora:draft-updated", { detail: { case_id: caseData.id } })); } catch (_) {}
+                } else if (draft) {
+                    console.warn("Aurora R27: rascunho atualizado apenas na sessão; persistência local durável indisponível.");
                 }
             } catch (error) {
                 console.warn("Aurora R26: rascunho local não pôde ser atualizado.", error);
@@ -7034,6 +7294,7 @@ try {
         repository;
 
     v78mark("RUNTIME_START");
+        auroraBootMark("BOOT_RUNTIME_START");
         await runtime.start();
         v78mark("RUNTIME_OK");
 
@@ -7070,10 +7331,13 @@ try {
     }
 
     try { if (global.AuroraBoltTraceV132) global.AuroraBoltTraceV132.mark("08B DEPOIS HIDRATACAO BOLT", { profile: identity.profile, active_license_module_code: identity.active_license_module_code, preferred_service: identity.preferred_service, selected_services: identity.selected_services, companyAccess: global.AuroraCompanyAccess && global.AuroraCompanyAccess.get ? global.AuroraCompanyAccess.get() : global.AURORA_COMPANY_ACCESS, canEnterTupy: canEnterEletricaTupyOperationalFlow(), canManageTupy: canManageEletricaTupyUi() }); } catch (_) {}
+    try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("BEFORE_HOME_RENDER", { module_final: identity.active_license_module_code, profile_final: identity.profile, preferred_service: identity.preferred_service, selected_services: identity.selected_services, edit_services_rule: { company_member: hasActiveCompanyMembership(), can_manage_company: global.AuroraCompanyAccess && typeof global.AuroraCompanyAccess.canManageUsers === "function" ? global.AuroraCompanyAccess.canManageUsers() : null } }); } catch (_) {}
     renderHome(
         identity,
-        runtime
+        runtime,
+        selectedModule
     );
+    try { if (global.AuroraR44ModuleTrace) global.AuroraR44ModuleTrace.mark("HOME_RENDERED", { module_final: identity.active_license_module_code, profile_final: identity.profile, home_services: Array.from(document.querySelectorAll("[data-service-id]")).map((el) => el.getAttribute("data-service-id")), edit_services_visible: Boolean(document.querySelector("[data-edit-segment-services]")) }); } catch (_) {}
 
     /* V136 — USER_BOLT autorizado deve entrar na HOME do ambiente Atividades
      * Rotineiras, e não iniciar automaticamente uma nova vistoria. O card privado
@@ -7188,6 +7452,12 @@ try {
         '</article>',
         '</main>'
     ].join("");
+
+    try {
+        if (global.AuroraR47ColdStartTrace && typeof global.AuroraR47ColdStartTrace.mountFallbackButton === "function") {
+            global.AuroraR47ColdStartTrace.mountFallbackButton();
+        }
+    } catch (_) {}
 
     console.error(error);
 }

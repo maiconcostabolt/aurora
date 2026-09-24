@@ -5,7 +5,7 @@ global.AURORA_RUNTIME_CONFIG = {
     app: {
         title: "AURORA",
         subtitle: "Inspeções inteligentes",
-        build_id: "AURORA V47 RECONCILIATION RC1 R26 UNIVERSAL DRAFT RECOVERY",
+        build_id: "AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION",
         user_name: "",
         profile: ""
     },

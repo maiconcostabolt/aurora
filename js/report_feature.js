@@ -669,6 +669,26 @@ function syncConclusionFieldsFromExistingReport(
     const srcDiagnostic =
         existingReport.diagnostic ||
         {};
+    const srcBudget =
+        existingReport.budget ||
+        {};
+
+    /* R56 — snapshot.budget não carrega mais a cópia base64 da assinatura.
+     * Ao reabrir a revisão, reidrata o budget a partir da autoridade
+     * canônica do relatório, preservando exatamente o fluxo visual anterior. */
+    next.budget = clone(
+        next.budget || {}
+    );
+    if (
+        !String(next.budget.signature_data || "").trim() &&
+        String(srcBudget.signature_data || "").trim()
+    ) {
+        next.budget.signature_data =
+            String(srcBudget.signature_data);
+        next.budget.collect_signature =
+            srcBudget.collect_signature !== false;
+    }
+
     const reportTitle = String(
         next.approval.report_title ||
         srcApproval.report_title ||
@@ -679,6 +699,20 @@ function syncConclusionFieldsFromExistingReport(
     if (reportTitle) {
         next.approval.report_title =
             reportTitle;
+    }
+
+    /* R55 — o snapshot persistente não duplica mais o PNG/base64 da
+     * assinatura. Ao reabrir uma revisão, restaura a assinatura a partir do
+     * approval canônico do próprio relatório para manter edição e prévia
+     * idênticas ao fluxo anterior. */
+    if (
+        !String(next.approval.signature_data || "").trim() &&
+        String(srcApproval.signature_data || "").trim()
+    ) {
+        next.approval.signature_data =
+            String(srcApproval.signature_data);
+        next.approval.collect_signature =
+            srcApproval.collect_signature !== false;
     }
 
     const reportTitleSize = String(
@@ -1091,6 +1125,20 @@ function ensureSerializableCase(
 
 function isUserVistoriaReportCase(caseData) {
     try {
+        /* R36 — a autoridade para decidir se o relatório permanece
+         * "Em andamento" é o fluxo operacional ATUAL da Elétrica Tupy,
+         * não o flag histórico vistoria_sent_for_review gravado no case.
+         *
+         * Esse flag pode sobreviver a retomadas/edições e fazia uma
+         * finalização executada pelo ADMIN gerar a prévia corretamente,
+         * porém persistir o relatório como "Em andamento"/Rascunho.
+         *
+         * Reutiliza a regra oficial já existente em flow.js:
+         * isUserBoltVistoriaFlow() exclui ADMIN e ADMIN review. */
+        if (global.AuroraEletricaTupy &&
+            typeof global.AuroraEletricaTupy.isUserBoltVistoriaFlow === "function") {
+            return global.AuroraEletricaTupy.isUserBoltVistoriaFlow(caseData) === true;
+        }
         var tupy = caseData && caseData.eletrica_tupy;
         return !!(tupy && tupy.vistoria_sent_for_review === true);
     } catch (error) {
@@ -1112,10 +1160,10 @@ function buildReportEngineOptions(
                 ? existingReport.public_id
                 : caseData.public_id ||
                   undefined,
-        status:
-            isUserVistoriaReportCase(caseData)
-                ? "Em andamento"
-                : "Concluído",
+        /* R37 — chegar à finalização efetiva e gerar uma revisão durável do
+         * relatório é a autoridade de conclusão. O workflow Tupy pode continuar
+         * AWAITING_REVIEW internamente, mas o atendimento/relatório já não é rascunho. */
+        status: "Concluído",
         createdAt:
             existingReport &&
             existingReport.created_at
@@ -1472,6 +1520,15 @@ async function finalizeInspection(
         const completedCase =
             currentRuntime.getCase();
 
+        /* R37 — prepare o snapshot de geração como concluído sem alterar ainda
+         * o runtime. A promoção canônica só será persistida depois que a mesma
+         * revisão do relatório for confirmada no armazenamento local. */
+        const completionTimestamp = new Date().toISOString();
+        const generationCase = clone(completedCase);
+        generationCase.status = "completed";
+        generationCase.updated_at = completionTimestamp;
+        generationCase.completed_at = generationCase.completed_at || completionTimestamp;
+
         logEditFinalize(
             "GENERATION_START",
             {
@@ -1486,7 +1543,7 @@ async function finalizeInspection(
             ensureSerializableCase(
                 await hydrateEvidenceGroups(
                     await hydrateCoverPhoto(
-                        completedCase
+                        generationCase
                     )
                 )
             );
@@ -1667,10 +1724,12 @@ async function finalizeInspection(
             }
         );
 
+        /* R27 — confirmação precisa vir do armazenamento persistente.
+         * engine.get() aceita runtimeReports e podia produzir falso sucesso. */
         const persistedReport =
-            engine.get(
-                generatedReport.id
-            );
+            typeof engine.getPersistent === "function"
+                ? engine.getPersistent(generatedReport.id)
+                : engine.get(generatedReport.id);
 
         logEditFinalize(
             "REPORT_RELOAD_RESULT",
@@ -1689,14 +1748,95 @@ async function finalizeInspection(
                 }
         );
 
-        if (!persistedReport) {
+        /* R28A — não basta existir o mesmo ID: o armazenamento persistente
+         * precisa conter exatamente a revisão que acabou de ser gerada. Um
+         * rascunho antigo usa o mesmo ID e fazia a R27 aceitar falso sucesso. */
+        const generatedUpdatedAt =
+            String(generatedReport && generatedReport.updated_at || "");
+        const persistedUpdatedAt =
+            String(persistedReport && persistedReport.updated_at || "");
+        const generatedSnapshotUpdatedAt =
+            String(generatedReport && generatedReport.snapshot && generatedReport.snapshot.updated_at || "");
+        const persistedSnapshotUpdatedAt =
+            String(persistedReport && persistedReport.snapshot && persistedReport.snapshot.updated_at || "");
+        const generatedStatus =
+            String(generatedReport && generatedReport.status || "");
+        const persistedStatus =
+            String(persistedReport && persistedReport.status || "");
+
+        const durableRevisionMatches = !!(
+            persistedReport &&
+            String(persistedReport.id) === String(generatedReport.id) &&
+            generatedUpdatedAt &&
+            persistedUpdatedAt === generatedUpdatedAt &&
+            generatedSnapshotUpdatedAt &&
+            persistedSnapshotUpdatedAt === generatedSnapshotUpdatedAt &&
+            persistedStatus === generatedStatus
+        );
+
+        logEditFinalize(
+            "REPORT_DURABLE_REVISION_CHECK",
+            {
+                ok: durableRevisionMatches,
+                reportId: generatedReport && generatedReport.id,
+                generatedUpdatedAt,
+                persistedUpdatedAt,
+                generatedSnapshotUpdatedAt,
+                persistedSnapshotUpdatedAt,
+                generatedStatus,
+                persistedStatus
+            }
+        );
+
+        try {
+            const traceApi = global.AuroraR47ColdStartTrace || global.AuroraR44ModuleTrace;
+            const storageRaw = global.localStorage ? String(global.localStorage.getItem("aurora_reports") || "") : "";
+            const saveState = engine && engine.lastSavePersistence ? engine.lastSavePersistence : null;
+            if (traceApi && typeof traceApi.mark === "function") {
+                traceApi.mark("R58_DURABLE_SAVE_FORENSIC", {
+                    ok: durableRevisionMatches,
+                    rid: generatedReport && generatedReport.id,
+                    generated_updated_at: generatedUpdatedAt,
+                    persisted_updated_at: persistedUpdatedAt,
+                    generated_snapshot_updated_at: generatedSnapshotUpdatedAt,
+                    persisted_snapshot_updated_at: persistedSnapshotUpdatedAt,
+                    generated_status: generatedStatus,
+                    persisted_status: persistedStatus,
+                    storage_chars: storageRaw.length,
+                    save_persistent: !!(saveState && saveState.persistent),
+                    save_error_name: saveState && saveState.error_name || "",
+                    save_error_message: saveState && saveState.error_message || "",
+                    budget_signature_chars: String(generatedReport && generatedReport.budget && generatedReport.budget.signature_data || "").length,
+                    approval_signature_chars: String(generatedReport && generatedReport.approval && generatedReport.approval.signature_data || "").length,
+                    persisted_budget_signature_chars: String(persistedReport && persistedReport.budget && persistedReport.budget.signature_data || "").length,
+                    persisted_approval_signature_chars: String(persistedReport && persistedReport.approval && persistedReport.approval.signature_data || "").length
+                }, "report-persistence");
+            }
+        } catch (_) {}
+
+        if (!durableRevisionMatches) {
             return buildGenerationFailureResult(
-                "report_reload_failed",
+                "report_persistent_revision_mismatch",
                 new Error(
-                    "O relatório não foi confirmado no armazenamento."
+                    "A versão mais recente deste atendimento não pôde ser confirmada no armazenamento local. O trabalho foi mantido aberto para evitar perda de dados. Libere espaço no dispositivo e tente novamente."
                 ),
-                "engine.get"
+                "engine.getPersistent"
             );
+        }
+
+        /* R37 — somente após a confirmação durável do relatório promovemos o
+         * MESMO atendimento para concluído na autoridade canônica do runtime.
+         * CaseBinder dispara o persist progressivo já usado pela Aurora; não há
+         * storage paralelo e a falha de rede não interfere nesta transição local. */
+        if (currentRuntime.caseBinder && typeof currentRuntime.caseBinder.merge === "function") {
+            currentRuntime.caseBinder.merge({
+                status: "completed",
+                updated_at: generatedReport.updated_at || completionTimestamp,
+                completed_at: generationCase.completed_at || completionTimestamp
+            }, {
+                source: "report_finalize_durable",
+                controller_id: "report"
+            });
         }
 
         /* R11.10 — lei Aurora para shapes genéricas: usa o mesmo motor canônico

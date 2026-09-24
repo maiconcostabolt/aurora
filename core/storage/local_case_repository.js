@@ -54,7 +54,10 @@ class LocalCaseRepository {
             });
         }
 
-        return this._clone(envelope);
+        const result = this._clone(envelope);
+        result.persistent = persistResult === "OK";
+        result.persistence = persistResult;
+        return result;
     }
 
     load() {
@@ -73,6 +76,18 @@ class LocalCaseRepository {
         } catch (error) {
             envelope =
                 this.memoryFallback;
+        }
+
+        /* R27 — se a gravação durável falhou nesta sessão, não permitir que
+         * uma cópia persistida mais antiga sobrescreva silenciosamente o
+         * trabalho mais recente que ainda está em memória. O fallback continua
+         * NÃO durável; ele apenas evita regressão dentro da sessão. */
+        if (this.memoryFallback && this.memoryFallback.case) {
+            const persistedAt = envelope && envelope.saved_at ? Date.parse(envelope.saved_at) : 0;
+            const fallbackAt = this.memoryFallback.saved_at ? Date.parse(this.memoryFallback.saved_at) : 0;
+            if (!envelope || !envelope.case || fallbackAt >= persistedAt) {
+                envelope = this.memoryFallback;
+            }
         }
 
         if (

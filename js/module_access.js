@@ -6,13 +6,15 @@ const ONBOARDING_CONFIG_URL = "./config/onboarding.json";
 const EXPLICIT_SESSION_KEY = "aurora_explicit_module_session_v1";
 let onboardingSegmentsPromise = null;
 let registeredOnboardingSegments = null;
+function r44trace(event,data,phase){try{if(global.AuroraR44ModuleTrace)global.AuroraR44ModuleTrace.mark(event,data,phase||"module_access")}catch(_){}}
 
 const STATUS_LABELS = {
     included: "Licença ativa",
     trial: "Demonstração",
     available: "Demonstração disponível · 7 dias",
     locked: "Bloqueado",
-    expired: "Demonstração encerrada"
+    expired: "Demonstração encerrada",
+    company_authorized: "Licença ativa"
 };
 
 function commercialApi() {
@@ -90,15 +92,19 @@ function readModuleUiSnapshot(userId) {
 
 function readActive() {
     try {
-        return sessionStorage.getItem(activeStorageKey()) ||
-            localStorage.getItem(activeStorageKey()) || "";
+        const key = activeStorageKey();
+        const value = sessionStorage.getItem(key) || localStorage.getItem(key) || "";
+        r44trace("LICENSE_MODULE_READ", { authority: "readActive", key, value });
+        return value;
     } catch (_) { return ""; }
 }
 
 function saveActive(code) {
     const value = String(code || "");
+    const before = readActive();
     try { sessionStorage.setItem(activeStorageKey(), value); } catch (_) {}
     try { localStorage.setItem(activeStorageKey(), value); } catch (_) {}
+    r44trace(before && before !== value ? "MODULE_OVERRIDE" : "AFTER_PERSIST",{authority:"saveActive",previous:before,next:value,key:activeStorageKey(),read_after:readActive()});
 }
 
 function clearActiveForCurrentUser() {
@@ -117,8 +123,11 @@ function activateForUser(code, userId) {
     const uid = String(userId || "").trim();
     if (!value || !uid) return false;
     const key = `${ACTIVE_KEY}:${uid}`;
+    let before="";try{before=sessionStorage.getItem(key)||localStorage.getItem(key)||""}catch(_){}
     try { sessionStorage.setItem(key, value); } catch (_) {}
     try { localStorage.setItem(key, value); } catch (_) {}
+    let after="";try{after=sessionStorage.getItem(key)||localStorage.getItem(key)||""}catch(_){}
+    r44trace(before && before !== value ? "MODULE_OVERRIDE" : "AFTER_PERSIST",{authority:"activateForUser",uid,key,previous:before,next:value,read_after:after});
     return true;
 }
 
@@ -128,16 +137,25 @@ function clearActive() {
     try { localStorage.removeItem(activeStorageKey()); } catch (_) {}
 }
 
-function explicitSessionKey() {
-    return `${EXPLICIT_SESSION_KEY}:${String(global.AURORA_ACCOUNT_USER_ID || "anonymous")}`;
+function explicitSessionKey(userId) {
+    return `${EXPLICIT_SESSION_KEY}:${String(userId || global.AURORA_ACCOUNT_USER_ID || "anonymous")}`;
 }
 
 function markExplicitSessionModule(code) {
     try { sessionStorage.setItem(explicitSessionKey(), String(code || "")); } catch (_) {}
 }
 
-function readExplicitSessionModule() {
-    try { return String(sessionStorage.getItem(explicitSessionKey()) || ""); } catch (_) { return ""; }
+/* R39 — a troca manual pode acontecer antes/depois de diferentes publicações do
+ * global AURORA_ACCOUNT_USER_ID. Para sobreviver ao reload offline, grave/leia o
+ * marcador de sessão pela UID autenticada que o bootstrap já conhece. */
+function markExplicitSessionModuleForUser(code, userId) {
+    const uid = String(userId || "").trim();
+    if (!uid) return false;
+    try {const key=explicitSessionKey(uid),previous=sessionStorage.getItem(key)||"",next=String(code||"");sessionStorage.setItem(key,next);r44trace(previous&&previous!==next?"MODULE_OVERRIDE":"AFTER_PERSIST",{authority:"markExplicitSessionModuleForUser",uid,key,previous,next,read_after:sessionStorage.getItem(key)||""});return true;} catch (_) { return false; }
+}
+
+function readExplicitSessionModule(userId) {
+    try {const key=explicitSessionKey(userId),value=String(sessionStorage.getItem(key)||"");r44trace("EXPLICIT_MODULE_READ",{userId:String(userId||""),key,value});return value;} catch (_) { return ""; }
 }
 
 function usable(module, offlineSnapshot) {
@@ -186,6 +204,7 @@ function loadOnboardingSegments() {
  */
 async function resolveOperationalActivation(licenseModule) {
     const code = String(licenseModule && licenseModule.module_code || "").trim();
+    r44trace("MODULE_RESOLUTION",{authority:"resolveOperationalActivation:start",requested_module:code,license_module:licenseModule});
     if (!code) {
         return { profile: "", serviceIds: [] };
     }
@@ -202,7 +221,7 @@ async function resolveOperationalActivation(licenseModule) {
      * existente e aprovado; não depende de onboarding.json para descobrir essa
      * entrada e não mistura os seis serviços da Elétrica com o bloco Tupy. */
     if (code === "eletrica_tupy") {
-        return { profile: "electrical", serviceIds: ["eletrica_tupy"] };
+        const result={ profile: "electrical", serviceIds: ["eletrica_tupy"] };r44trace("PROFILE_RESOLUTION",{authority:"resolveOperationalActivation:eletrica_tupy",requested_module:code,result});return result;
     }
 
     const segments = await loadOnboardingSegments();
@@ -413,7 +432,7 @@ function actionLabel(item, options) {
 function modulePresentation(item) {
     const code = String(item && item.module_code || "").trim().toLowerCase();
     if (code === "eletrica_tupy") {
-        return { title: "BOLT SOLUÇÕES ELÉTRICAS", icon: "🏭" };
+        return { title: "ATIVIDADES ROTINEIRAS TUPY", icon: "🏭" };
     }
     return { title: item && item.title || "", icon: item && item.icon || "✦" };
 }
@@ -855,7 +874,8 @@ global.AuroraModuleAccess = {
     pickPreferredAccessibleModule,
     moduleAccessPriority,
     registerOnboardingSegments,
-    readExplicitSessionModule
+    readExplicitSessionModule,
+    markExplicitSessionModuleForUser
 };
 
 })(window);

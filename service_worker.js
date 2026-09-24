@@ -5,7 +5,7 @@ const VERSION =
 
 /* Cache de produção MLC Aurora — Marco R9 validado em 03/09/2026.
  * VERSION (identidade do app) permanece vistoria-32. */
-const CACHE_BUST = 'AURORA V47 RECONCILIATION RC1 R26 UNIVERSAL DRAFT RECOVERY';
+const CACHE_BUST = 'AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION';
 
 const STATIC_CACHE =
     `${VERSION}-static-${CACHE_BUST}`;
@@ -74,6 +74,7 @@ const APP_SHELL = [
     "./css/aurora_dialog.css",
     "./js/aurora_dialog.js",
     "./config/build_profile.js",
+    "./js/aurora_r48_private_tupy_environment_trace.js",
     "./config/pdf_experimental_config.js",
     "./config/pdf_local_test_config.js",
     "./core/reporting/report_pdf_experimental.js",
@@ -119,27 +120,28 @@ const VERSIONED_APP_ALIASES = [
     "./css/aurora_dialog.css?v=AURORA-1.2.5",
     "./css/aurora_ai_customer.css?v=AURORA-AI-CONTEXT-V31-20260913",
     "./css/aurora_ai_asset.css?v=AURORA-ESCOPO-MODULO-14",
-    "./css/aurora_budget.css?v=AURORA-ASSINATURA-ORCAMENTO-1",
+    "./css/aurora_budget.css?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
     "./js/aurora_dialog.js?v=AURORA-FASE-2F",
-    "./config/runtime_config.js?v=38",
+    "./config/runtime_config.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./js/aurora_r48_private_tupy_environment_trace.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
     "./js/account_storage.js?v=MLCAURORA_R9_PROD",
     "./js/aurora_user_profile.js?v=AURORA-USER-IDENTITY-v56",
-    "./core/onboarding/onboarding_engine.js?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE",
-    "./modules/onboarding/onboarding_controller.js?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE",
+    "./core/onboarding/onboarding_engine.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./modules/onboarding/onboarding_controller.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
     "./core/ui/topbar_component.js?v=AURORA-1.1.8",
     "./core/ui/field_engine.js?v=AURORA-PRODUCAO-VISTORIA1.0.1",
     "./core/storage/local_case_repository.js?v=MLCAURORA_R9_PROD",
     "./core/storage/local_case_repository.js?v=AURORA-V166-CACHE-ATOMICO",
     "./modules/asset/asset_controller.js?v=AURORA-PRODUCAO-VISTORIA1.0.1",
-    "./modules/budget/budget_controller.js?v=AURORA-ASSINATURA-ORCAMENTO-1",
-    "./modules/approval/approval_controller.js?v=AURORA-ASSINATURA-ORCAMENTO-1",
+    "./modules/budget/budget_controller.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./modules/approval/approval_controller.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
     "./js/paged.min.js?v=0.4.3",
     "./config/pdf_experimental_config.js?v=RC8.18-PDF-EXP-0",
     "./config/pdf_local_test_config.js?v=RC8.18-PDF-LOCAL-0",
     "./config/report_technical_details.js?v=AURORA-TUPY1",
     "./core/reporting/premium/styles/premium_report.css?v=PREMIUM-TEST2",
     "./js/aurora_qrcode.js?v=AURORA-VALIDACAO-QR-1",
-    "./core/reporting/report_engine.js?v=AURORA-V166-CACHE-ATOMICO",
+    "./core/reporting/report_engine.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
     "./core/reporting/report_preview.js?v=AURORA-V36-HISTORICO-RELATORIO-20260913",
     "./core/reporting/premium/data/premium_utils.js?v=PREMIUM-TEST2",
     "./core/reporting/premium/data/vehicle_inspection_adapter.js?v=PREMIUM-TEST2",
@@ -156,7 +158,7 @@ const VERSIONED_APP_ALIASES = [
     "./core/reporting/report_pdf_local_test.js?v=RC8.18-PDF-LOCAL-0",
     "./core/reporting/report_pdf_from_layout.js?v=AURORA-PDF-LAYOUT-1",
     "./core/reporting/report_pdf_pwa.js?v=PANEL_KM_REPORT_CLASSIFICATION_1",
-    "./core/runtime/aurora_runtime.js?v=AURORA-R9-EMPRESARIAL-CORRECOES-FUNCIONAIS-R11-22-TESTE",
+    "./core/runtime/aurora_runtime.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
     "./js/vehicle_inspection_flow.js?v=AURORA-GUIDED-UI-CLEAN-v58",
     "./core/shapes/eletrica_tupy/domain.js?v=AURORA-TUPY10",
     "./core/shapes/eletrica_tupy/catalog_data.js?v=AURORA-FEEDBACK-CLIENTE-GESTAO-DENSITY-1",
@@ -205,12 +207,12 @@ const VERSIONED_APP_ALIASES = [
     "./js/aurora_ai_asset.js?v=AURORA-ESCOPO-MODULO-14",
     "./js/aurora_ai_panel_voice.js?v=AURORA-ESCOPO-MODULO-14",
     "./js/entitlement_engine.js?v=RC8.0",
-    "./js/bootstrap.js?v=AURORA-V51-20260914",
+    "./js/bootstrap.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
     "./js/aurora_ui_support_diagnostic.js?v=AURORA-SUPPORT-DIAG-v33-lite",
     "./config/report_title_suggestions.js?v=AURORA-TUPY1",
-    "./js/rc6_patch.js?v=AURORA-PREVIA-ASSINATURA-1",
+    "./js/rc6_patch.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
     "./js/rc7_commercial.js?v=RC8.1",
-    "./js/pwa_installer.js?v=AURORA-STARTUP-BOOT-UNICO-9"
+    "./js/pwa_installer.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION"
 ];
 
 async function completeAppShell() {
@@ -235,6 +237,89 @@ self.addEventListener(
                         "./app",
                         "./offline",
                         "./",
+                        /* R47 — o shell offline só pode ser ativado se a cadeia que
+                         * publica AuroraAuthReady e restaura a identidade local estiver
+                         * realmente armazenada. Na R46 estes arquivos eram complementares:
+                         * o SW podia instalar mesmo sem cloud_sync.js e o bootstrap então
+                         * iniciava offline com AuroraAuthReady === undefined. */
+                        "./config/cloud_config.js",
+                        "./config/license_config.js",
+                        "./js/supabase.min.js",
+                        "./js/account_storage.js",
+                        "./js/aurora_user_profile.js",
+                        "./js/offline_license.js",
+                        "./js/company_access.js",
+                        "./js/cloud_sync.js",
+                        "./js/module_access.js",
+                        /* R54 — estes dois scripts definem o mesmo shell visual em online/offline:
+                         * rc6_patch consolida Anterior/Início/Relatório/Próximo e pwa_installer
+                         * mantém o indicador oficial de conectividade. Se forem complementares,
+                         * o cold-start offline pode montar outra composição visual. */
+                        "./js/rc6_patch.js",
+                        "./js/pwa_installer.js",
+                        /* R54 — a mesma implementação Tupy deve existir no cold-start;
+                         * ela agora resolve cloud/cache/local sem criar fluxo visual paralelo. */
+                        "./core/shapes/eletrica_tupy/flow.js",
+                        "./core/onboarding/onboarding_engine.js",
+                        "./modules/onboarding/onboarding_controller.js",
+                        "./config/onboarding.json",
+                        /* R53 — shell visual canônico também é CORE.
+                         * A R52 tornou o runtime JS atômico, mas CSS complementar podia
+                         * falhar sem impedir a ativação do worker, fazendo telas oficiais
+                         * parecerem layouts novos/desformatados no cold-start offline.
+                         * Nenhum HTML/layout é criado aqui: apenas garantimos os mesmos
+                         * estilos já referenciados por app.html. */
+                        "./css/app_shell.css",
+                        "./css/aurora_runtime.css",
+                        "./css/mobile_shell.css",
+                        "./css/vehicle_inspection_flow.css",
+                        "./core/shapes/eletrica_tupy/ui.css",
+                        "./css/report_engine.css",
+                        "./css/evidence_engine.css",
+                        "./css/pwa_install.css",
+                        "./css/onboarding.css",
+                        "./css/mobile_premium_patch.css",
+                        "./css/aurora_motion.css",
+                        "./css/rc6_patch.css",
+                        "./css/rc7_2_print.css",
+                        "./css/rc8_10_report_premium.css",
+                        "./css/rc8_10_report_refinement.css",
+                        "./css/cover_photo_feature.css",
+                        "./css/cloud_sync.css",
+                        "./css/module_access.css",
+                        "./css/support_messages.css",
+                        "./css/aurora_dialog.css",
+                        "./css/aurora_ai_customer.css",
+                        "./css/aurora_ai_asset.css",
+                        "./css/aurora_budget.css",
+                        "./core/reporting/premium/styles/premium_report.css",
+                        "./core/shapes/grounding/ui.css",
+                        /* R52 — cadeia oficial e atômica necessária para construir
+                         * AppShell/AuroraRuntime, executar start() e chegar à Home. */
+                        "./core/ui/theme_manager.js",
+                        "./core/ui/sidebar_component.js",
+                        "./core/ui/topbar_component.js",
+                        "./core/ui/footer_navigation.js",
+                        "./core/ui/app_shell.js",
+                        "./core/ui/mobile_shell_adapter.js",
+                        "./core/navigation/module_controller.js",
+                        "./core/navigation/view_manager.js",
+                        "./core/ui/ui_schema_engine.js",
+                        "./core/ui/library_engine.js",
+                        "./core/ui/field_engine.js",
+                        "./core/ui/form_renderer.js",
+                        "./core/ui/base_form_module.js",
+                        "./core/binding/case_binder.js",
+                        "./modules/customer/customer_controller.js",
+                        "./modules/asset/asset_controller.js",
+                        "./modules/intake/intake_controller.js",
+                        "./modules/occurrence/occurrence_controller.js",
+                        "./modules/evidence/evidence_controller.js",
+                        "./modules/diagnostic/diagnostic_controller.js",
+                        "./modules/budget/budget_controller.js",
+                        "./modules/approval/approval_controller.js",
+                        "./core/runtime/aurora_runtime.js",
+                        "./js/bootstrap.js",
                         "./core/storage/local_case_repository.js",
                         "./core/evidence/evidence_store.js",
                         "./core/reporting/report_engine.js"
@@ -307,7 +392,11 @@ self.addEventListener(
                         }
                     }
                 })
-                // Em atualizações, deixa o novo worker em waiting.
+                // R31: candidata de diagnóstico deve assumir o controle assim que
+                // o pacote offline estiver integralmente armazenado. Não toca em
+                // localStorage/IndexedDB; apenas encerra o estado waiting do SW.
+                .then(() => self.skipWaiting())
+                // Histórico: versões anteriores deixavam o novo worker em waiting.
                 // A troca passa a ser explícita pelo botão "Atualizar", evitando
                 // controllerchange no meio da abertura/autenticação da Aurora.
         );
@@ -493,6 +582,12 @@ self.addEventListener(
         }
     }
 );
+self.addEventListener("message", (event) => {
+    if (event.data && event.data.type === "AURORA_TRACE_SW_IDENTITY") {
+        const reply = { type: "AURORA_TRACE_SW_IDENTITY_REPLY", build: "AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION", staticCache: STATIC_CACHE, runtimeCache: RUNTIME_CACHE };
+        if (event.source && event.source.postMessage) event.source.postMessage(reply);
+    }
+});
 self.addEventListener("push", (event) => {
     let payload = {};
     try { payload = event.data ? event.data.json() : {}; } catch (_) { payload = { body: event.data ? event.data.text() : "Nova mensagem" }; }

@@ -192,14 +192,20 @@ async function registerServiceWorker() {
     }
 
     try {
+        try { window.dispatchEvent(new CustomEvent("aurora:sw-trace", { detail: { phase: "REGISTER_START" } })); } catch (_) {}
         registration =
             await navigator.serviceWorker.register(
-                "./service_worker.js?v=AURORA_V133_DIAG_RECOLHIVEL_BOLT",
+            "./service_worker.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
                 {
                     scope: "./",
                     updateViaCache: "none"
                 }
             );
+        try { window.__AURORA_SW_REGISTRATION = registration; window.dispatchEvent(new CustomEvent("aurora:sw-trace", { detail: { phase: "REGISTER_OK" } })); } catch (_) {}
+
+        // R33 diagnóstico: força a verificação, mas expõe o resultado na própria tela.
+        try { await registration.update(); window.dispatchEvent(new CustomEvent("aurora:sw-trace", { detail: { phase: "UPDATE_OK" } })); }
+        catch (error) { try { window.__AURORA_SW_TRACE_ERROR = String(error && (error.stack || error.message) || error); window.dispatchEvent(new CustomEvent("aurora:sw-trace", { detail: { phase: "UPDATE_ERROR", error: window.__AURORA_SW_TRACE_ERROR } })); } catch (_) {} }
 
         // A atualização do Service Worker não é mais forçada durante o boot.
         // O próprio ciclo do navegador verifica novas versões sem reiniciar a Aurora.

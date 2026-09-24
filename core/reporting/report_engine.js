@@ -22,6 +22,10 @@ class ReportEngine {
          */
         this.runtimeReports =
             new Map();
+
+        /* R27 — estado da última tentativa de persistência. Não substitui o
+         * storage; apenas torna observável se save() ficou somente em sessão. */
+        this.lastSavePersistence = null;
     }
 
     list() {
@@ -42,6 +46,15 @@ class ReportEngine {
         } catch (error) {
             return [];
         }
+    }
+
+    getPersistent(reportId) {
+        const key = String(reportId);
+        return (
+            this.list().find(
+                (report) => String(report.id) === key
+            ) || null
+        );
     }
 
     get(reportId) {
@@ -371,8 +384,16 @@ class ReportEngine {
                 report
             );
 
+        /* R59 — a autoridade persistente inteira é normalizada pelo mesmo
+         * compactador canônico antes de substituir/inserir a revisão atual.
+         * Versões antigas podiam permanecer com snapshots legados pesados
+         * (inclusive assinaturas duplicadas), consumindo a cota e impedindo
+         * que a revisão nova substituísse a anterior. Não apagamos relatórios
+         * nem criamos storage paralelo: apenas recompactamos a coleção oficial. */
         const reports =
-            this.list();
+            this.list().map(
+                (item) => this._compactReport(item)
+            );
 
         const index =
             reports.findIndex(
@@ -390,12 +411,17 @@ class ReportEngine {
             );
         }
 
+        let persistent = false;
+        let persistenceError = null;
+
         try {
             localStorage.setItem(
                 this.storageKey,
                 JSON.stringify(reports)
             );
+            persistent = true;
         } catch (error) {
+            persistenceError = error;
             /*
              * Segunda tentativa removendo snapshots antigos, que podem
              * ter sido criados por versões anteriores com imagens.
@@ -403,55 +429,7 @@ class ReportEngine {
             try {
                 const extraCompact =
                     reports.map(
-                        (item) => ({
-                            ...item,
-                            evidences:
-                                [],
-                            snapshot:
-                                this._compactCase(
-                                    item.snapshot ||
-                                    {}
-                                ),
-                            occurrences:
-                                Array.isArray(
-                                    item.occurrences
-                                )
-                                    ? item.occurrences.map(
-                                        (occurrence) => ({
-                                            ...occurrence,
-                                            photos:
-                                                Array.isArray(
-                                                    occurrence.photos
-                                                )
-                                                    ? occurrence.photos.map(
-                                                        (photo) => ({
-                                                            id:
-                                                                photo.id ||
-                                                                null,
-                                                            title:
-                                                                photo.title ||
-                                                                "",
-                                                            description:
-                                                                photo.description ||
-                                                                "",
-                                                            category:
-                                                                photo.category ||
-                                                                "general",
-                                                            occurrence_id:
-                                                                photo.occurrence_id ||
-                                                                occurrence.id ||
-                                                                null,
-                                                            src:
-                                                                null,
-                                                            edited_src:
-                                                                null
-                                                        })
-                                                    )
-                                                    : []
-                                        })
-                                    )
-                                    : []
-                        })
+                        (item) => this._compactReport(item)
                     );
 
                 localStorage.setItem(
@@ -460,7 +438,10 @@ class ReportEngine {
                         extraCompact
                     )
                 );
+                persistent = true;
+                persistenceError = null;
             } catch (secondError) {
+                persistenceError = secondError;
                 console.warn(
                     "Aurora ReportEngine: persistência compacta falhou; relatório mantido apenas na sessão.",
                     secondError &&
@@ -470,6 +451,13 @@ class ReportEngine {
                 );
             }
         }
+
+        this.lastSavePersistence = {
+            report_id: key,
+            persistent,
+            error_name: persistenceError && persistenceError.name ? String(persistenceError.name) : null,
+            error_message: persistenceError && persistenceError.message ? String(persistenceError.message) : null
+        };
 
         return this._clone(report);
     }
@@ -960,6 +948,30 @@ class ReportEngine {
                 compact.snapshot ||
                 {}
             );
+
+        /* R55 — assinatura confirmada já possui autoridade persistente em
+         * report.approval.signature_data. Não duplicar o mesmo PNG/base64
+         * dentro de snapshot.approval: durante a finalização offline as duas
+         * cópias coexistiam com aurora_v2_current_case e podiam fazer a nova
+         * revisão ultrapassar a cota, deixando no storage a revisão anterior.
+         * O relatório mantém a assinatura no campo canônico de approval. */
+        if (compact.snapshot && compact.snapshot.approval) {
+            compact.snapshot.approval = {
+                ...compact.snapshot.approval,
+                signature_data: ""
+            };
+        }
+
+        /* R56 — a assinatura desta tela pertence ao módulo Budget e sua
+         * autoridade persistente é report.budget.signature_data. A R55
+         * compactava approval, mas não budget; por isso a mesma imagem PNG
+         * continuava duplicada em report.budget e snapshot.budget. */
+        if (compact.snapshot && compact.snapshot.budget) {
+            compact.snapshot.budget = {
+                ...compact.snapshot.budget,
+                signature_data: ""
+            };
+        }
 
         return compact;
     }

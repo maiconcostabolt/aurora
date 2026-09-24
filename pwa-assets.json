@@ -172,8 +172,10 @@
   "./offline.html",
   "./pwa-assets.json",
   "./service_worker.js",
+  "./js/aurora_r48_private_tupy_environment_trace.js",
   "./js/aurora_qrcode.js",
   "./modules/budget/budget_controller.js",
   "./css/aurora_budget.css",
-  "./js/aurora_i18n.js"
+  "./js/aurora_i18n.js",
+  "./js/aurora_offline_persistence_diag_r29.js"
 ]
