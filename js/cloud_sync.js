@@ -3334,13 +3334,34 @@ async function restoreSelectedProject(downloadButton) {
 async function deleteCloudProject(projectId) {
     const session = await requireSession();
     const userId = session.user.id;
-    const { error: recordsError } = await client.from("aurora_project_records")
-        .delete().eq("project_id", projectId).eq("created_by", userId);
-    if (recordsError) throw recordsError;
-    const { data, error: projectError } = await client.from("aurora_projects")
-        .delete().eq("id", projectId).eq("created_by", userId).select("id");
-    if (projectError) throw projectError;
-    if (!Array.isArray(data) || !data.length) throw new Error("O projeto não foi encontrado ou não pertence a esta conta.");
+    const { data, error } = await client.rpc("aurora_owner_soft_delete_projects", { p_project_ids: [projectId] });
+    if (error) throw error;
+    if (!data || data.ok !== true || Number(data.deleted || 0) < 1) {
+        throw new Error("O projeto não foi encontrado ou não pertence a esta conta.");
+    }
+}
+async function deleteCloudCaseByLegacyId(caseId) {
+    const cid = String(caseId || "").trim();
+    if (!cid) return false;
+    const session = await requireSession();
+    const userId = session.user.id;
+    const state = readState();
+    const linked = state[cid] && state[cid].project_id ? String(state[cid].project_id) : "";
+    let projectId = linked;
+    if (!projectId) {
+        const { data: row, error: lookupError } = await client.from("aurora_projects")
+            .select("id,created_by")
+            .eq("legacy_case_id", cid)
+            .eq("created_by", userId)
+            .is("deleted_at", null)
+            .maybeSingle();
+        if (lookupError) throw lookupError;
+        projectId = row && row.id ? String(row.id) : "";
+    }
+    if (!projectId) return false;
+    await deleteCloudProject(projectId);
+    if (state[cid]) { delete state[cid]; writeState(state); }
+    return true;
 }
 function removeLocalCaseByProjectId(projectId) {
     const pid = String(projectId || "").trim();
@@ -3936,6 +3957,7 @@ global.AuroraCloudSync = {
     signOutForMembershipGate
     ,
     deleteCloudProject,
+    deleteCloudCaseByLegacyId,
     removeLocalCaseByProjectId,
     confirmDeleteWithPassword
 };

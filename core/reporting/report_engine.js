@@ -452,6 +452,41 @@ class ReportEngine {
             }
         }
 
+        /* R62A — confirmação transacional da revisão recém-gravada. Em uma
+         * nova vistoria iniciada pela ficha do ativo, o autosave do atendimento
+         * pode terminar muito próximo da geração do relatório. Se a coleção
+         * oficial tiver sido regravada entre setItem() e a leitura do guard,
+         * reaplicamos UMA vez a revisão recém-gerada sobre a versão mais nova da
+         * própria coleção. O guard R28A continua fail-closed e nenhuma revisão é
+         * aceita sem estar realmente em aurora_reports. */
+        if (persistent) {
+            try {
+                const persistedNow = this.getPersistent(key);
+                const sameRevision = !!(
+                    persistedNow &&
+                    String(persistedNow.updated_at || "") === String(compactReport.updated_at || "") &&
+                    String(persistedNow.snapshot && persistedNow.snapshot.updated_at || "") === String(compactReport.snapshot && compactReport.snapshot.updated_at || "") &&
+                    String(persistedNow.status || "") === String(compactReport.status || "")
+                );
+                if (!sameRevision) {
+                    const latest = this.list().map((item) => this._compactReport(item));
+                    const latestIndex = latest.findIndex((item) => String(item.id) === key);
+                    if (latestIndex >= 0) latest[latestIndex] = compactReport;
+                    else latest.unshift(compactReport);
+                    localStorage.setItem(this.storageKey, JSON.stringify(latest));
+                    const confirmed = this.getPersistent(key);
+                    persistent = !!(confirmed &&
+                        String(confirmed.updated_at || "") === String(compactReport.updated_at || "") &&
+                        String(confirmed.snapshot && confirmed.snapshot.updated_at || "") === String(compactReport.snapshot && compactReport.snapshot.updated_at || "") &&
+                        String(confirmed.status || "") === String(compactReport.status || ""));
+                    if (!persistent) persistenceError = new Error("AURORA_REPORT_REVISION_NOT_COMMITTED");
+                }
+            } catch (verificationError) {
+                persistent = false;
+                persistenceError = verificationError;
+            }
+        }
+
         this.lastSavePersistence = {
             report_id: key,
             persistent,

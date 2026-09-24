@@ -1,7 +1,7 @@
 (function (global) {
 "use strict";
 
-const BUILD = "AURORA V47 RC1 R60 COMMERCIAL DIAG UI REMOVAL";
+const BUILD = "AURORA V47 RC1 R62G ASSET HISTORY REPORT TITLE";
 const KEY = "aurora_diag_r47_offline_auth_boot_core_cache_trace_v1";
 const MAX_EVENTS = 72;
 const MAX_BYTES = 48 * 1024;

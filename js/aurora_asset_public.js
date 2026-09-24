@@ -22,9 +22,9 @@ function lastInspection(a){
  ])}</section>`;
 }
 function inspectionSummary(a){
- const rows=[['Diagnóstico técnico',a.diagnostic_summary],['Recomendação',a.recommendation]];
+ const rows=[['Serviço executado',a.service_executed],['Trabalho realizado',a.work_performed],['Condição atual',a.current_condition],['Diagnóstico técnico',a.diagnostic_summary],['Recomendação',a.recommendation],['Próxima ação',a.next_action]];
  if(!rows.some(x=>String(x[1]||'').trim()))return '';
- return `<section class="apa-service"><h2>Resumo da última inspeção</h2>${infoRows(rows)}</section>`;
+ return `<section class="apa-service"><h2>Resumo técnico da última inspeção</h2>${infoRows(rows)}</section>`;
 }
 function historySummary(a){
  const count=Math.max(0,Number(a.inspection_count)||0),next=a.next_inspection_at?publicDate(a.next_inspection_at):'Não programada';

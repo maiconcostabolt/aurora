@@ -4,15 +4,15 @@ const STORAGE='aurora_assets_electrical_pilot_v1';
 const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let ui=null;
 const CATALOGS=Object.freeze({
- workshop:{profile:'workshop',title:'Veículos',section:'Oficina',singular:'veículo',plural:'veículos',codeLabel:'Placa / código',nameLabel:'Identificação do veículo',search:'Placa, veículo, cliente ou local',newLabel:'Cadastrar veículo',types:['Automóvel','Utilitário','Caminhão','Motocicleta','Outro veículo'],icon:'🚘'},
- electrical:{profile:'electrical',title:'Painéis e equipamentos',section:'Elétrica',singular:'equipamento',plural:'equipamentos',codeLabel:'Código do ativo',nameLabel:'Nome do ativo',search:'Código, nome, setor ou local',newLabel:'Cadastrar equipamento',types:['Painel elétrico','Quadro de distribuição','Centro de controle de motores','Motor elétrico','Transformador','Gerador','Outro equipamento elétrico'],icon:'⚡'},
- industrial:{profile:'industrial',title:'Máquinas e equipamentos',section:'Industrial',singular:'equipamento',plural:'equipamentos',codeLabel:'Código do ativo',nameLabel:'Nome do ativo',search:'Código, nome, setor ou local',newLabel:'Cadastrar equipamento',types:['Máquina','Tubulação','Estrutura','Tanque','Outro equipamento industrial'],icon:'🏭'},
- drone:{profile:'drone',title:'Estruturas inspecionadas',section:'Drone',singular:'estrutura',plural:'estruturas',codeLabel:'Código / identificação',nameLabel:'Nome da estrutura',search:'Código, estrutura, cliente ou local',newLabel:'Cadastrar estrutura',types:['Telhado','Fachada','Torre','Usina solar','Outra estrutura'],icon:'🚁'},
- car_wash:{profile:'car_wash',title:'Veículos',section:'Lavação automotiva',singular:'veículo',plural:'veículos',codeLabel:'Placa / código',nameLabel:'Identificação do veículo',search:'Placa, veículo ou cliente',newLabel:'Cadastrar veículo',types:['Automóvel','Utilitário','Caminhão','Motocicleta','Outro veículo'],icon:'🚘'},
- upholstery_cleaning:{profile:'upholstery_cleaning',title:'Estofados cadastrados',section:'Higienização de estofados',singular:'estofado',plural:'estofados',codeLabel:'Código do item',nameLabel:'Identificação do estofado',search:'Código, estofado, cliente ou local',newLabel:'Cadastrar estofado',types:['Sofá','Colchão','Poltrona','Cadeiras','Banco automotivo','Tapete e carpete','Outro estofado'],icon:'🛋'},
- curtains_blinds:{profile:'curtains_blinds',title:'Cortinas e persianas',section:'Cortinas e persianas',singular:'item',plural:'itens',codeLabel:'Código do item',nameLabel:'Identificação do item',search:'Código, item, cliente ou local',newLabel:'Cadastrar item',types:['Cortina','Persiana','Sistema motorizado','Trilho e varão','Outro item'],icon:'▤'},
- repairs_maintenance:{profile:'repairs_maintenance',title:'Locais e manutenções',section:'Reparos e manutenção',singular:'local',plural:'locais',codeLabel:'Código / referência',nameLabel:'Nome do local',search:'Código, local, cliente ou setor',newLabel:'Cadastrar local',types:['Local de pequenos reparos','Alvenaria','Pintura','Pisos e revestimentos','Pequena reforma','Manutenção geral','Outro local'],icon:'🛠'},
- condominiums:{profile:'condominiums',title:'Áreas e equipamentos',section:'Condomínios',singular:'área ou equipamento',plural:'áreas e equipamentos',codeLabel:'Código / identificação',nameLabel:'Nome da área ou equipamento',search:'Código, área, equipamento ou local',newLabel:'Cadastrar área/equipamento',types:['Área comum','Sistema elétrico','Sistema hidráulico','Bombas e casa de máquinas','Elevador','Sistema de incêndio','Fachada e cobertura','Garagem','Portões e acessos','Piscina e área de lazer','Outro'],icon:'🏢'}
+ workshop:{profile:'workshop',assetCardLabel:'Histórico do veículo',title:'Veículos',section:'Oficina',singular:'veículo',plural:'veículos',codeLabel:'Placa / código',nameLabel:'Identificação do veículo',search:'Placa, veículo, cliente ou local',newLabel:'Cadastrar veículo',types:['Automóvel','Utilitário','Caminhão','Motocicleta','Outro veículo'],icon:'🚘'},
+ electrical:{profile:'electrical',assetCardLabel:'Serviços do equipamento',title:'Painéis e equipamentos',section:'Elétrica',singular:'equipamento',plural:'equipamentos',codeLabel:'Código do ativo',nameLabel:'Nome do ativo',search:'Código, nome, setor ou local',newLabel:'Cadastrar equipamento',types:['Painel elétrico','Quadro de distribuição','Centro de controle de motores','Motor elétrico','Transformador','Gerador','Outro equipamento elétrico'],icon:'⚡'},
+ industrial:{profile:'industrial',assetCardLabel:'Serviços do equipamento',title:'Máquinas e equipamentos',section:'Industrial',singular:'equipamento',plural:'equipamentos',codeLabel:'Código do ativo',nameLabel:'Nome do ativo',search:'Código, nome, setor ou local',newLabel:'Cadastrar equipamento',types:['Máquina','Tubulação','Estrutura','Tanque','Outro equipamento industrial'],icon:'🏭'},
+ drone:{profile:'drone',assetCardLabel:'Inspeções da estrutura',title:'Estruturas inspecionadas',section:'Drone',singular:'estrutura',plural:'estruturas',codeLabel:'Código / identificação',nameLabel:'Nome da estrutura',search:'Código, estrutura, cliente ou local',newLabel:'Cadastrar estrutura',types:['Telhado','Fachada','Torre','Usina solar','Outra estrutura'],icon:'🚁'},
+ car_wash:{profile:'car_wash',assetCardLabel:'Serviços do veículo',title:'Veículos',section:'Lavação automotiva',singular:'veículo',plural:'veículos',codeLabel:'Placa / código',nameLabel:'Identificação do veículo',search:'Placa, veículo ou cliente',newLabel:'Cadastrar veículo',types:['Automóvel','Utilitário','Caminhão','Motocicleta','Outro veículo'],icon:'🚘'},
+ upholstery_cleaning:{profile:'upholstery_cleaning',assetCardLabel:'Serviços do estofado',title:'Estofados cadastrados',section:'Higienização de estofados',singular:'estofado',plural:'estofados',codeLabel:'Código do item',nameLabel:'Identificação do estofado',search:'Código, estofado, cliente ou local',newLabel:'Cadastrar estofado',types:['Sofá','Colchão','Poltrona','Cadeiras','Banco automotivo','Tapete e carpete','Outro estofado'],icon:'🛋'},
+ curtains_blinds:{profile:'curtains_blinds',assetCardLabel:'Serviços do item',title:'Cortinas e persianas',section:'Cortinas e persianas',singular:'item',plural:'itens',codeLabel:'Código do item',nameLabel:'Identificação do item',search:'Código, item, cliente ou local',newLabel:'Cadastrar item',types:['Cortina','Persiana','Sistema motorizado','Trilho e varão','Outro item'],icon:'▤'},
+ repairs_maintenance:{profile:'repairs_maintenance',assetCardLabel:'Trabalhos realizados',title:'Locais e manutenções',section:'Reparos e manutenção',singular:'local',plural:'locais',codeLabel:'Código / referência',nameLabel:'Nome do local',search:'Código, local, cliente ou setor',newLabel:'Cadastrar local',types:['Local de pequenos reparos','Alvenaria','Pintura','Pisos e revestimentos','Pequena reforma','Manutenção geral','Outro local'],icon:'🛠'},
+ condominiums:{profile:'condominiums',assetCardLabel:'Trabalhos realizados',title:'Áreas e equipamentos',section:'Condomínios',singular:'área ou equipamento',plural:'áreas e equipamentos',codeLabel:'Código / identificação',nameLabel:'Nome da área ou equipamento',search:'Código, área, equipamento ou local',newLabel:'Cadastrar área/equipamento',types:['Área comum','Sistema elétrico','Sistema hidráulico','Bombas e casa de máquinas','Elevador','Sistema de incêndio','Fachada e cobertura','Garagem','Portões e acessos','Piscina e área de lazer','Outro'],icon:'🏢'}
 });
 function catalogHome(){
  const h=document.querySelector('.aurora-home-layer');
@@ -76,6 +76,7 @@ async function loadPermissions(){
 function cloudRowToLocal(x){return {id:x.client_key||x.id,cloud_id:x.id,qr_token:x.public_token||'',code:x.code||'',name:x.name||'',type:x.asset_type||'',status:x.status||'active',unit:x.unit||'',sector:x.sector||'',location:x.internal_location||'',notes:x.notes||'',module_code:x.module_code||'electrical',service_code:x.service_code||'panel',created_at:x.created_at||'',updated_at:x.updated_at||'',cloud_synced_at:new Date().toISOString()}}
 async function cloudLoadAssets(){const c=cloud();if(!c)return load();try{const {data,error}=await c.rpc('aurora_assets_my_list');if(error)throw error;const remote=(Array.isArray(data)?data:[]).map(cloudRowToLocal),local=load(),by=new Map();local.forEach(r=>by.set(String(r.cloud_id||r.id),r));remote.forEach(r=>{const k=String(r.cloud_id||r.id),old=by.get(k)||{};by.set(k,{...old,...r})});const rows=[...by.values()];save(rows);return contextRows(rows)}catch(e){console.warn('Aurora Ativos: leitura da nuvem indisponível.',e);return load()}}
 async function cloudUpsert(r){const c=cloud();if(!c)return r;const {data,error}=await c.rpc('aurora_asset_upsert',{p_client_key:r.id,p_code:r.code,p_name:r.name,p_asset_type:r.type,p_status:r.status||'active',p_unit:r.unit||null,p_sector:r.sector||null,p_internal_location:r.location||null,p_notes:r.notes||null,p_module_code:r.module_code||currentContext().profile,p_service_code:r.service_code||''});if(error)throw error;const x=Array.isArray(data)?data[0]:data;if(x&&x.public_token){r.qr_token=x.public_token;r.cloud_id=x.id;r.cloud_synced_at=new Date().toISOString()}return r}
+async function cloudLinkReport(r,report){const c=cloud();if(!c||!r||!r.cloud_id||!report)return false;const legacyCaseId=String((report.snapshot&&report.snapshot.id)||report.case_id||report.id||'').trim();if(!legacyCaseId)return false;const {error}=await c.rpc('aurora_asset_link_project',{p_asset_id:r.cloud_id,p_legacy_case_id:legacyCaseId});if(error)throw error;return true}
 async function syncLocalToCloud(){const c=cloud();if(!c)return false;const rows=load();let changed=false;for(const r of rows){try{const before=r.qr_token;await cloudUpsert(r);if(r.qr_token!==before||!r.cloud_synced_at)changed=true}catch(e){console.warn('Aurora Ativos: sincronização pendente.',e)}}if(changed)save(rows);return true}
 function qrSvg(payload){if(!payload||!global.AuroraQRCode)return '';try{const q=new global.AuroraQRCode(-1,1);q.addData(payload);q.make();const n=q.getModuleCount(),z=4,size=n+z*2;let d='';for(let r=0;r<n;r++)for(let c=0;c<n;c++)if(q.isDark(r,c))d+=`M${c+z} ${r+z}h1v1h-1z`;return `<svg viewBox="0 0 ${size} ${size}" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#fff"/><path d="${d}" fill="#102d46"/></svg>`}catch(_){return ''}}
 async function shareQr(r){
@@ -193,7 +194,7 @@ function ensure(){
 <div class="aurora-assets-top"><button type="button" class="aurora-company-team-back" data-assets-detail-back>← ${esc(ctx.title)}</button><div><span>${esc(ctx.section)}</span><h3 data-assets-detail-title>${esc(ctx.singular)}</h3><small>Identificação permanente, etiqueta QR e histórico de atendimentos.</small></div></div>
 <div class="aurora-asset-detail-hero"><div><span data-assets-detail-type></span><h2 data-assets-detail-name></h2><small data-assets-detail-meta></small></div><span class="aurora-asset-detail-status" data-assets-detail-status></span></div>
 <div class="aurora-asset-detail-actions"><button type="button" class="aurora-assets-primary" data-assets-new-inspection>＋ Nova vistoria</button><button type="button" data-assets-detail-qr>Etiqueta QR</button><button type="button" data-assets-detail-public-preview>Visualizar informações do QR Code</button><button type="button" data-assets-detail-edit>Editar equipamento</button><button type="button" class="is-danger" data-assets-detail-delete>Excluir equipamento</button></div>
-<section class="aurora-asset-history"><div class="aurora-asset-history-head"><div><span>HISTÓRICO</span><h3>Atendimentos deste ${esc(ctx.singular)}</h3></div><strong data-assets-history-count>0 atendimentos</strong></div><div data-assets-history-list></div></section></section>
+<section class="aurora-asset-history"><div class="aurora-asset-history-head"><div><span>HISTÓRICO</span><h3>${ctx.profile==='condominiums'?'Atendimentos desta área ou equipamento':'Atendimentos deste '+esc(ctx.singular)}</h3></div><strong data-assets-history-count>0 atendimentos</strong></div><div data-assets-history-list></div></section></section>
 <section class="aurora-assets-editor" data-assets-editor hidden><form data-assets-form><div class="aurora-assets-top"><button type="button" class="aurora-company-team-back" data-assets-editor-back>← ${esc(ctx.title)}</button><div><span>Cadastro permanente</span><h3 data-assets-editor-title>Novo ${esc(ctx.singular)}</h3><small>Identificação permanente para serviços e histórico de ${esc(ctx.section)}.</small></div></div><div class="aurora-assets-form-grid"><label><span>${esc(ctx.codeLabel)} *</span><input name="code" maxlength="60" required></label><label><span>${esc(ctx.nameLabel)} *</span><input name="name" maxlength="100" required></label><label><span>Tipo *</span><select name="type" required><option value="">Selecione</option>${typeOptions}</select></label><label><span>Status</span><select name="status"><option value="active">Ativo</option><option value="maintenance">Em manutenção</option><option value="inactive">Desativado</option></select></label><label><span>Cliente / unidade</span><input name="unit" maxlength="100"></label><label><span>Setor</span><input name="sector" maxlength="100"></label><label class="is-wide"><span>Localização</span><input name="location" maxlength="140"></label><label class="is-wide"><span>Observações</span><textarea name="notes" maxlength="500" rows="3"></textarea></label></div><article class="aurora-assets-qr-placeholder" data-asset-qr><div class="aurora-assets-qr-icon" data-asset-qr-image>▦</div><div><span>Identificação permanente</span><strong>QR Code</strong><small data-asset-qr-help>O QR será gerado automaticamente após salvar.</small></div><button type="button" data-asset-print-qr hidden>Imprimir etiqueta</button></article><input type="hidden" name="id"><footer class="aurora-assets-actions"><button type="button" data-assets-cancel>Cancelar</button><button type="submit" class="aurora-assets-primary">Salvar</button></footer></form></section>
 <section class="aurora-assets-help-modal" data-assets-help-modal hidden><div class="aurora-assets-help-card"><span>${esc(ctx.title).toUpperCase()}</span><h3>O que é esta área?</h3><p>Aqui ficam ${esc(ctx.plural)} que podem receber mais de um atendimento. Cada cadastro reúne serviços, relatórios e o QR de identificação ao longo do tempo.</p><p>Você cadastra uma vez e mantém o histórico dos próximos atendimentos.</p><button type="button" data-assets-help-close>Entendi</button></div></section>
 <section class="aurora-asset-qr-modal" data-asset-qr-modal hidden><div class="aurora-asset-qr-modal__card"><small>IDENTIFICAÇÃO PERMANENTE</small><h3 data-qr-modal-title>QR Code</h3><p data-qr-modal-subtitle></p><div class="aurora-asset-qr-modal__qr" data-qr-modal-image></div><div class="aurora-asset-qr-modal__actions"><button type="button" data-qr-modal-close>Fechar</button><button type="button" data-qr-modal-share>Compartilhar QR</button><button type="button" class="is-primary" data-qr-modal-print>Imprimir etiqueta</button></div></div></section>`);
@@ -233,33 +234,28 @@ function ensure(){
    if(cloudSync&&typeof cloudSync.hydrateAuthorizedProjectEvidence==='function')return cloudSync.hydrateAuthorizedProjectEvidence(caseData,projectId);
    return caseData;
  }
+ async function restoreHistoryReport(id,editMode){
+   const f=global.AuroraReportFeature,c=cloud();
+   if(!f||!f.engine||!c||!detailCurrent||!detailCurrent.cloud_id)return null;
+   const {data,error}=await c.rpc('aurora_asset_history_project_get',{p_asset_id:detailCurrent.cloud_id,p_project_id:id});
+   if(error)throw error;
+   const payload=data&&typeof data==='object'?data:null,project=payload&&payload.project,records=payload&&Array.isArray(payload.records)?payload.records:[];
+   if(!project||!global.AuroraCloudSync||typeof global.AuroraCloudSync.caseFromCloud!=='function')throw new Error('AURORA_ASSET_REPORT_INVALID');
+   let caseData=global.AuroraCloudSync.caseFromCloud(project,records);
+   caseData.company_id=project.company_id||caseData.company_id||'';
+   if(f&&typeof f.hydrateEvidenceGroups==='function')caseData=await f.hydrateEvidenceGroups(caseData);
+   if(f&&typeof f.hydrateCoverPhoto==='function')caseData=await f.hydrateCoverPhoto(caseData);
+   caseData=await hydrateAssetHistoryEvidence(caseData,project.id,c);
+   const done=['completed','concluído','concluido'].includes(String(project.status||'').toLowerCase());
+   const report=f.engine.createFromCase(caseData,{id:caseData.id,createdAt:project.created_at,updatedAt:project.updated_at,status:done?'Concluído':'Rascunho'});
+   global.__auroraAssetHistoryOrigin={assetId:String(detailCurrent.id||''),cloudId:String(detailCurrent.cloud_id||''),at:Date.now()};
+   if(editMode||!done)window.dispatchEvent(new CustomEvent('aurora:edit-report',{detail:{report}}));
+   else f.preview.open(report.id);
+   return report;
+ }
  async function openHistoryReport(id){
-   const f=global.AuroraReportFeature;
-   const c=cloud();
-   if(c&&detailCurrent&&detailCurrent.cloud_id){
-     try{
-       const {data,error}=await c.rpc('aurora_asset_history_project_get',{p_asset_id:detailCurrent.cloud_id,p_project_id:id});
-       if(error)throw error;
-       const payload=data&&typeof data==='object'?data:null;
-       const project=payload&&payload.project;
-       const records=payload&&Array.isArray(payload.records)?payload.records:[];
-       if(!project||!global.AuroraCloudSync||typeof global.AuroraCloudSync.caseFromCloud!=='function')throw new Error('AURORA_ASSET_REPORT_INVALID');
-       let caseData=global.AuroraCloudSync.caseFromCloud(project,records);
-       caseData.company_id=project.company_id||caseData.company_id||'';
-       if(f&&typeof f.hydrateEvidenceGroups==='function')caseData=await f.hydrateEvidenceGroups(caseData);
-       if(f&&typeof f.hydrateCoverPhoto==='function')caseData=await f.hydrateCoverPhoto(caseData);
-       caseData=await hydrateAssetHistoryEvidence(caseData,project.id,c);
-       const report=f.engine.createFromCase(caseData,{id:'asset-history-'+project.id,createdAt:project.created_at,updatedAt:project.updated_at,status:'Concluído'});
-       f.preview.open(report.id);
-       return true;
-     }catch(error){
-       console.error('Aurora Ativos: relatório empresarial indisponível.',error);
-       alert('Não foi possível abrir este relatório agora. Atualize a Aurora e tente novamente.');
-       return false;
-     }
-   }
-   if(f&&f.preview&&typeof f.preview.open==='function'){f.preview.open(id);return true}
-   alert('Não foi possível abrir este relatório agora.');return false;
+   try{return !!(await restoreHistoryReport(id,false))}
+   catch(error){console.error('Aurora Ativos: atendimento do histórico indisponível.',error);alert('Não foi possível abrir este atendimento agora. Atualize a Aurora e tente novamente.');return false}
  }
  let detailCurrent=null;
  async function showDetail(r){
@@ -269,7 +265,8 @@ function ensure(){
    await loadPermissions();
    detailCurrent=r;panel.hidden=true;editor.hidden=true;normal().forEach(n=>n.hidden=true);detail.hidden=false;
    const d=assetDisplayParts(r),hist=await assetHistory(r);
-   detail.querySelector('[data-assets-detail-title]').textContent=d.code;
+   const detailPublicTitle=assetContextTitle(r,ctx);
+   detail.querySelector('[data-assets-detail-title]').textContent=detailPublicTitle;
    detail.querySelector('[data-assets-detail-name]').textContent=d.name||d.code;
    detail.querySelector('[data-assets-detail-type]').textContent=r.type||ctx.singular;
    detail.querySelector('[data-assets-detail-meta]').textContent=[r.unit,r.sector,r.location].filter(Boolean).join(' · ')||'Sem localização complementar';
@@ -277,26 +274,25 @@ function ensure(){
    detail.querySelector('[data-assets-history-count]').textContent=hist.length+' '+(hist.length===1?'atendimento':'atendimentos');
    const newBtn=detail.querySelector('[data-assets-new-inspection]'),qrBtn=detail.querySelector('[data-assets-detail-qr]'),previewBtn=detail.querySelector('[data-assets-detail-public-preview]'),editBtn=detail.querySelector('[data-assets-detail-edit]'),deleteBtn=detail.querySelector('[data-assets-detail-delete]');if(newBtn)newBtn.hidden=!assetPerms.can_inspect;if(qrBtn)qrBtn.hidden=!assetPerms.can_print_qr;if(previewBtn)previewBtn.hidden=!CATALOGS[String(ctx.profile||'').toLowerCase()]||!assetPerms.can_view;if(editBtn)editBtn.hidden=!assetPerms.can_edit;if(deleteBtn)deleteBtn.hidden=!assetPerms.can_deactivate;
    const list=detail.querySelector('[data-assets-history-list]');
-   const adminHistoryActions=isCompanyAdmin();
+   const canEditHistory=assetPerms.can_edit;
    list.innerHTML=!assetPerms.can_view_history?'<div class="aurora-assets-empty"><strong>Histórico restrito.</strong><span>O administrador não liberou a consulta do histórico para este usuário.</span></div>':hist.length?hist.map(rep=>{
-     const title=String(rep.title||rep.customer?.name||'Atendimento');
+     const title=String(rep.report_title||(rep.customer&&typeof rep.customer==='object'&&(rep.customer.name||rep.customer.company_name||rep.customer.company))||rep.customer||rep.title||'Atendimento');
      const date=formatHistoryDate(rep.updated_at||rep.created_at);
      const service=historyServiceLabel(rep.service_type||rep.service?.id||rep.service?.title);
      const creator=String(rep.creator_name||'Usuário');
      const done=String(rep.status||'').toLowerCase();
      const statusLabel=(done==='completed'||done==='concluído'||done==='concluido')?'Concluído':'Em andamento';
-     const actions=adminHistoryActions?`<div class="aurora-recent-card__actions"><button type="button" class="aurora-recent-action" data-asset-history-edit="${esc(rep.id)}" aria-label="Editar atendimento" title="Editar atendimento">${historyIcons.edit}</button><button type="button" class="aurora-recent-action is-danger" data-asset-history-delete="${esc(rep.id)}" aria-label="Excluir atendimento" title="Excluir atendimento">${historyIcons.trash}</button></div>`:'';
+     const actions=canEditHistory?`<div class="aurora-recent-card__actions"><button type="button" class="aurora-recent-action" data-asset-history-edit="${esc(rep.id)}" aria-label="Editar atendimento" title="Editar atendimento">${historyIcons.edit}</button>${isCompanyAdmin()?`<button type="button" class="aurora-recent-action is-danger" data-asset-history-delete="${esc(rep.id)}" aria-label="Excluir atendimento" title="Excluir atendimento">${historyIcons.trash}</button>`:''}</div>`:'';
      return `<article class="aurora-recent-card aurora-asset-history-recent"><button type="button" class="aurora-recent-card__main" data-asset-history-report="${esc(rep.id)}" aria-label="Abrir relatório"><span class="aurora-recent-card__icon">▤</span><span><strong>${esc(title)}</strong><small>${esc(service)} · Feito por ${esc(creator)} · ${esc(date)}</small></span><b class="${statusLabel==='Concluído'?'is-done':'is-open'}">${statusLabel}</b></button>${actions}</article>`;
    }).join(''):'<div class="aurora-assets-empty"><strong>Nenhum atendimento vinculado ainda.</strong><span>Os próximos atendimentos deste cadastro aparecerão aqui.</span></div>';
    list.querySelectorAll('[data-asset-history-report]').forEach(b=>b.onclick=()=>openHistoryReport(b.dataset.assetHistoryReport));
    list.querySelectorAll('[data-asset-history-edit]').forEach(b=>b.onclick=async()=>{
-     const id=b.dataset.assetHistoryEdit,cloudSync=global.AuroraCloudSync;
-     if(!adminHistoryActions||!cloudSync||typeof cloudSync.restoreCompanyProjectForAdmin!=='function')return;
-     try{const result=await cloudSync.restoreCompanyProjectForAdmin(id);const f=global.AuroraReportFeature;const rows=f&&f.engine&&typeof f.engine.list==='function'?f.engine.list():[];const local=rows.find(x=>String((x.snapshot&&x.snapshot.id)||x.case_id||x.id||'')===String(result.caseData.id));if(local)window.dispatchEvent(new CustomEvent('aurora:edit-report',{detail:{report:local}}));}
+     if(!canEditHistory)return;
+     try{await restoreHistoryReport(b.dataset.assetHistoryEdit,true)}
      catch(e){console.error('Aurora Ativos: edição do histórico indisponível.',e);alert('Não foi possível editar este atendimento agora.')}
    });
    list.querySelectorAll('[data-asset-history-delete]').forEach(b=>b.onclick=async()=>{
-     if(!adminHistoryActions)return;const id=b.dataset.assetHistoryDelete;if(!confirm('Excluir este atendimento do histórico?'))return;
+     if(!isCompanyAdmin())return;const id=b.dataset.assetHistoryDelete;if(!confirm('Excluir este atendimento do histórico?'))return;
      try{const c=cloud();const rep=hist.find(x=>String(x.id)===String(id));const owner=String(rep&&rep.created_by||''),me=String(global.AURORA_ACCOUNT_USER_ID||'');const rpc=owner&&me&&owner!==me?'aurora_company_hide_projects':'aurora_company_soft_delete_projects';const q=await c.rpc(rpc,{p_project_ids:[id]});if(q.error)throw q.error;await showDetail(detailCurrent)}catch(e){console.error('Aurora Ativos: exclusão indisponível.',e);alert('Não foi possível excluir este atendimento agora.')}
    });
    scrollTo(0,0);
@@ -307,7 +303,7 @@ function ensure(){
    panel.querySelector('[data-assets-summary]').innerHTML=`<span><strong>${rows.length}</strong><small>${esc(ctx.plural)}</small></span><span><strong>${rows.filter(r=>r.status==='active').length}</strong><small>Ativos</small></span><span><strong>${rows.filter(r=>r.status==='maintenance').length}</strong><small>Em manutenção</small></span>`;
    panel.querySelector('[data-assets-list]').innerHTML=f.length?f.map(r=>{
      const actions=`<div class="aurora-asset-card__actions">${assetPerms.can_edit?`<button type="button" class="aurora-recent-action" data-asset-registry-edit="${esc(r.id)}" aria-label="Editar ${esc(ctx.singular)}" title="Editar">${historyIcons.edit}</button>`:''}${assetPerms.can_deactivate?`<button type="button" class="aurora-recent-action is-danger" data-asset-registry-delete="${esc(r.id)}" aria-label="Excluir ${esc(ctx.singular)}" title="Excluir">${historyIcons.trash}</button>`:''}</div>`;
-     return `<article class="aurora-asset-card"><div class="aurora-asset-card__icon">${ctx.icon}</div><button type="button" class="aurora-asset-card__main" data-asset-open="${esc(r.id)}"><strong>${esc(r.code)} · ${esc(r.name)}</strong><small>${esc(r.type)}${r.sector?' · '+esc(r.sector):''}${r.location?' · '+esc(r.location):''}</small><span class="is-${esc(r.status)}">${status(r.status)}</span></button>${actions}<button type="button" class="aurora-asset-card__more" data-asset-open="${esc(r.id)}">›</button></article>`;
+     const publicTitle=assetContextTitle(r,ctx); return `<article class="aurora-asset-card"><div class="aurora-asset-card__icon">${ctx.icon}</div><button type="button" class="aurora-asset-card__main" data-asset-open="${esc(r.id)}"><strong>${esc(publicTitle)}</strong><small>${esc(r.type)}${r.sector?' · '+esc(r.sector):''}${r.location?' · '+esc(r.location):''}</small><span class="is-${esc(r.status)}">${status(r.status)}</span></button>${actions}<button type="button" class="aurora-asset-card__more" data-asset-open="${esc(r.id)}">›</button></article>`;
    }).join(''):`<div class="aurora-assets-empty"><strong>Nenhum ${esc(ctx.singular)} cadastrado.</strong><span>Cadastre o primeiro item deste ambiente.</span></div>`;
    panel.querySelectorAll('[data-asset-open]').forEach(b=>b.onclick=async()=>{const r=rows.find(x=>x.id===b.dataset.assetOpen);if(!r)return;try{await cloudUpsert(r);save(all)}catch(e){console.warn('Aurora Ativos: item ainda não sincronizado.',e)}showDetail(r)});
    panel.querySelectorAll('[data-asset-registry-edit]').forEach(b=>b.onclick=e=>{e.stopPropagation();const r=rows.find(x=>x.id===b.dataset.assetRegistryEdit);if(r)showEditor(r)});
@@ -383,8 +379,23 @@ function ensure(){
  };
 panel.querySelector('[data-assets-new]').onclick=()=>showEditor(null);panel.querySelector('[data-assets-search]').oninput=render;editor.querySelector('[data-assets-editor-back]').onclick=()=>{const id=editor.querySelector('form').id.value;if(id&&detailCurrent)showDetail(detailCurrent);else showPanel()};
  editor.querySelector('[data-assets-cancel]').onclick=()=>{const id=editor.querySelector('form').id.value;if(id&&detailCurrent)showDetail(detailCurrent);else showPanel()};modal.querySelector('[data-qr-modal-close]').onclick=closeQr;modal.querySelector('[data-qr-modal-print]').onclick=()=>current&&printLabel(current);modal.onclick=e=>{if(e.target===modal)closeQr()};
- editor.querySelector('[data-assets-form]').onsubmit=async e=>{e.preventDefault();const f=e.currentTarget,row=Object.fromEntries(new FormData(f).entries()),rows=load(),submit=f.querySelector('[type=submit]');if(submit)submit.disabled=true;row.module_code=ctx.profile;row.service_code=row.service_code||'registry';try{let saved;if(row.id){const old=rows.find(x=>x.id===row.id)||{};saved={...old,...row,updated_at:new Date().toISOString()};await cloudUpsert(saved);const next=rows.map(x=>x.id===row.id?saved:x);save(next)}else{row.id=uid();row.created_at=new Date().toISOString();saved=row;await cloudUpsert(saved);if(!saved.qr_token)saved.qr_token=token();rows.unshift(saved);save(rows)}if(row.id)showDetail(saved);else showEditor(saved)}catch(err){console.error(err);alert('Não foi possível registrar este ativo na nuvem. Confira a conexão e tente novamente.')}finally{if(submit)submit.disabled=false}};
- ui={home:h,profile:ctx.profile,panel,detail,editor,modal,helpModal,showPanel,showHome,showDetail,closeIfOpen(){if(!helpModal.hidden){closeHelp();return true}if(!modal.hidden){closeQr();return true}if(!editor.hidden){if(detailCurrent)showDetail(detailCurrent);else showPanel();return true}if(!detail.hidden){showPanel();return true}if(!panel.hidden){showHome();return true}return false}};return true;
+ editor.querySelector('[data-assets-form]').onsubmit=async e=>{e.preventDefault();const f=e.currentTarget,row=Object.fromEntries(new FormData(f).entries()),rows=load(),submit=f.querySelector('[type=submit]');if(submit)submit.disabled=true;row.module_code=ctx.profile;row.service_code=row.service_code||'registry';try{let saved;if(row.id){const old=rows.find(x=>x.id===row.id)||{};saved={...old,...row,updated_at:new Date().toISOString()};await cloudUpsert(saved);const next=rows.map(x=>x.id===row.id?saved:x);save(next)}else{row.id=uid();row.created_at=new Date().toISOString();saved=row;await cloudUpsert(saved);if(!saved.qr_token)saved.qr_token=token();rows.unshift(saved);save(rows);try{sessionStorage.removeItem('aurora_asset_registry_selected_v1');sessionStorage.removeItem('aurora_asset_workflow_origin_v1')}catch(_){}}if(row.id)showDetail(saved);else showEditor(saved)}catch(err){console.error(err);alert('Não foi possível registrar este ativo na nuvem. Confira a conexão e tente novamente.')}finally{if(submit)submit.disabled=false}};
+ async function returnToHistoryOrigin(){
+   const origin=global.__auroraAssetHistoryOrigin;
+   if(!origin||!origin.assetId)return false;
+   const rows=await cloudLoadAssets();
+   const target=(Array.isArray(rows)?rows:[]).find(x=>String(x.id)===String(origin.assetId)||String(x.cloud_id||'')===String(origin.cloudId||''))||detailCurrent;
+   if(!target)return false;
+   if(global.AuroraUi&&typeof global.AuroraUi.showHome==='function')await global.AuroraUi.showHome();
+   await showDetail(target);
+   global.__auroraAssetHistoryOrigin=null;
+   return true;
+ }
+ global.addEventListener('aurora:completed-report-refresh',()=>{
+   if(!detailCurrent||detail.hidden)return;
+   Promise.resolve(showDetail(detailCurrent)).then(()=>{global.__auroraAssetHistoryOrigin=null}).catch(e=>console.warn('Aurora Ativos: atualização pós-relatório pendente.',e));
+ });
+ ui={home:h,profile:ctx.profile,panel,detail,editor,modal,helpModal,showPanel,showHome,showDetail,returnToHistoryOrigin,closeIfOpen(){if(!helpModal.hidden){closeHelp();return true}if(!modal.hidden){closeQr();return true}if(!editor.hidden){if(detailCurrent)showDetail(detailCurrent);else showPanel();return true}if(!detail.hidden){showPanel();return true}if(!panel.hidden){showHome();return true}return false}};return true;
 }
 function openAsset(id){
  if(!ensure())return false;
@@ -395,6 +406,7 @@ function openAsset(id){
 }
 function open(){if(!ensure())return false;ui.showPanel();setTimeout(async()=>{await loadPermissions();if(!assetPerms.can_view){ui.showHome();alert(`O administrador não liberou o acesso a ${currentContext().title} para este usuário.`);return}await cloudLoadAssets();if(ui&&ui.panel&&!ui.panel.hidden)ui.showPanel()},0);return true}
 function closeIfOpen(){return ui&&ui.closeIfOpen?ui.closeIfOpen():false}
+async function returnToHistoryOrigin(){return ui&&ui.returnToHistoryOrigin?ui.returnToHistoryOrigin():false}
 function cleanAssetLabel(value){
  const raw=String(value??'').trim().replace(/\s+/g,' ');
  return raw
@@ -408,6 +420,13 @@ function assetDisplayParts(row){
  let name=cleanAssetLabel(rawName)||rawName||'';
  if(name && code && name.toLocaleLowerCase('pt-BR')===code.toLocaleLowerCase('pt-BR')) name='';
  return {code,name};
+}
+function assetContextTitle(row,ctx){
+ const d=assetDisplayParts(row);
+ if(String(ctx?.profile||'').toLowerCase()==='electrical'){
+   return [d.code,d.name].filter(Boolean).join(' · ')||d.code||d.name||'Equipamento';
+ }
+ return [String(row?.unit||'').trim(),String(ctx?.assetCardLabel||'').trim()].filter(Boolean).join(' · ')||d.name||d.code||'Trabalhos realizados';
 }
 async function openForReport(report){
  if(!report)return false;
@@ -453,6 +472,7 @@ async function openForReport(report){
    };
    try{
      await cloudUpsert(row);
+     await cloudLinkReport(row,report);
      if(!row.qr_token)row.qr_token=token();
      rows.unshift(row);save(rows);
    }catch(err){
@@ -464,7 +484,7 @@ async function openForReport(report){
      return false;
    }
  }else{
-   try{await cloudUpsert(row);save(rows)}catch(err){console.warn('Aurora Assets: sincronização pendente.',err)}
+   try{await cloudUpsert(row);await cloudLinkReport(row,report);save(rows)}catch(err){console.warn('Aurora Assets: sincronização pendente.',err)}
  }
  if(!row.qr_token){
    alert('Não foi possível preparar a etiqueta QR deste cadastro.');
@@ -493,7 +513,7 @@ async function openForReport(report){
  return true;
 }
 async function openByQrToken(qrToken){if(!qrToken||!ensure())return false;await loadPermissions();if(!assetPerms.can_view)return false;const rows=await cloudLoadAssets();const r=rows.find(x=>String(x.qr_token||'')===String(qrToken));if(!r)return false;/* V61 — após bootstrap e hidratação completos, abre o ativo pelo MESMO caminho público já usado pelo catálogo. openAsset() resolve o registro no contexto atual e delega à showDetail(), preservando histórico e permissões existentes. */return openAsset(r.id)}
-global.AuroraAssetsPilot={sync:function(){return true},open,openAsset,closeIfOpen,openForReport,printLabel,openByQrToken};
+global.AuroraAssetsPilot={sync:function(){return true},open,openAsset,closeIfOpen,returnToHistoryOrigin,openForReport,printLabel,openByQrToken};
 document.addEventListener('click',e=>{
  const homeBtn=e.target.closest&&e.target.closest('[data-footer-home]');
  if(!homeBtn||!ui)return;

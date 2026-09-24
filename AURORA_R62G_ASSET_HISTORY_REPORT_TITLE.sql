@@ -1,0 +1,4 @@
+-- AURORA R62G — histórico de ativo usa o título canônico do relatório.
+-- Aplicada no Supabase como migration aurora_r62g_asset_history_report_title.
+-- A função aurora_asset_history_list preserva autorização/vínculo R62F e acrescenta report_title
+-- extraído de workflow_state.full_case.approval.report_title.

@@ -768,6 +768,19 @@ class ReportPreview {
             if (section === "intake" && lowerKey === "priority") return null;
             let normalized = this._universalReportValue(value);
             if (!normalized) return null;
+            /* R62D: o motor de ativo mantém identificadores automáticos para QR/rastreabilidade,
+               mas eles não viram dado técnico do relatório. TAG real informada pelo usuário permanece. */
+            if (section === "asset" && lowerKey === "tag") {
+                const technicalCode = String(data.code || "").trim();
+                const automaticTag = /^EQ-[A-Z0-9]+$/i.test(normalized) && (!technicalCode || normalized.toLowerCase() === technicalCode.toLowerCase());
+                if (automaticTag) return null;
+            }
+            if (section === "asset" && lowerKey === "identification") {
+                const genericAssetNames = new Set([
+                    "ou equipamento","área ou equipamento","area ou equipamento","equipamento","item","estrutura","local","veículo","veiculo","estofado"
+                ]);
+                if (genericAssetNames.has(normalized.toLocaleLowerCase("pt-BR"))) return null;
+            }
             if (/^(deadline|date|due_date|scheduled_date|inspection_date)$/.test(lowerKey) && /^\d{4}-\d{2}-\d{2}$/.test(normalized)) {
                 const [year,month,day] = normalized.split("-");
                 normalized = `${day}/${month}/${year}`;

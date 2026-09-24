@@ -1,7 +1,7 @@
 try{window.AuroraBootDiagV78&&window.AuroraBootDiagV78.mark("ENTER_BOOTSTRAP","js/bootstrap.js iniciou")}catch(_){}
 (async function (global) {
 "use strict";
-    try { global.__AURORA_BOOTSTRAP_BUILD__ = "AURORA V47 RC1 R60 COMMERCIAL DIAG UI REMOVAL"; } catch (_) {}
+    try { global.__AURORA_BOOTSTRAP_BUILD__ = "AURORA V47 RC1 R62G ASSET HISTORY REPORT TITLE"; } catch (_) {}
     const v78mark = (stage, detail) => {
         try {
             if (global.AuroraBootDiagV78 && typeof global.AuroraBootDiagV78.mark === "function") {
@@ -3059,6 +3059,18 @@ function renderHome(
         }
         if (!passwordOk) return;
 
+        const reportCaseId = String((report.snapshot && report.snapshot.id) || report.case_id || "");
+        const cloudApi = global.AuroraCloudSync;
+        if (cloudApi && typeof cloudApi.deleteCloudCaseByLegacyId === "function" && reportCaseId) {
+            try {
+                await cloudApi.deleteCloudCaseByLegacyId(reportCaseId);
+            } catch (error) {
+                console.error("[AURORA R62E DELETE CANONICAL]", error);
+                showStatus("Não foi possível excluir este atendimento da nuvem. Nada foi removido.", 3600);
+                return;
+            }
+        }
+
         try {
             await removeReportEvidence(report);
         } catch (error) {
@@ -3074,7 +3086,6 @@ function renderHome(
         const savedCaseId = savedEnvelope && savedEnvelope.case
             ? String(savedEnvelope.case.id || "")
             : "";
-        const reportCaseId = String((report.snapshot && report.snapshot.id) || report.case_id || "");
         if (savedCaseId && (savedCaseId === reportCaseId || savedCaseId === String(id))) {
             repository.clear();
         }
@@ -4382,6 +4393,15 @@ function renderHome(
         if (nativeBackBusy) return true;
         nativeBackBusy = true;
         try {
+            if (activeAuroraView === "workflow" && global.__auroraAssetHistoryOrigin &&
+                global.AuroraAssetsPilot && typeof global.AuroraAssetsPilot.returnToHistoryOrigin === "function") {
+                try {
+                    const returned = await global.AuroraAssetsPilot.returnToHistoryOrigin();
+                    if (returned) return true;
+                } catch (error) {
+                    console.warn("Aurora Ativos: retorno nativo ao histórico ficou pendente.", error);
+                }
+            }
             if (await closeTopAuroraLayer()) return true;
             if (activeAuroraView === "workflow") {
                 if (runtime.currentIndex > 0) await runtime.previous();
@@ -6576,8 +6596,8 @@ try {
     auroraBootMark("BOOT_MODULES_START");
 
     r46mark("ONBOARDING_ENGINE_SCRIPT_EXPECTED", {
-        asset: "./core/onboarding/onboarding_engine.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
-        expected_build: "AURORA V47 RC1 R60 COMMERCIAL DIAG UI REMOVAL"
+        asset: "./core/onboarding/onboarding_engine.js?v=AURORA_V47_RC1_R62G_ASSET_HISTORY_REPORT_TITLE",
+        expected_build: "AURORA V47 RC1 R62G ASSET HISTORY REPORT TITLE"
     }, "modules");
     r46mark("ONBOARDING_ENGINE_BEFORE_BOOT", {
         engine_present: Object.prototype.hasOwnProperty.call(global, "OnboardingEngine"),
@@ -6590,7 +6610,7 @@ try {
     if (typeof global.OnboardingEngine !== "function") {
         r46mark("ASSET_VERSION_MISMATCH", {
             asset: "core/onboarding/onboarding_engine.js",
-            expected_build: "AURORA V47 RC1 R60 COMMERCIAL DIAG UI REMOVAL",
+            expected_build: "AURORA V47 RC1 R62G ASSET HISTORY REPORT TITLE",
             loaded_build: String(global.__AURORA_BOOTSTRAP_BUILD__ || "[AUSENTE]"),
             source_cache: "service-worker-or-network",
             provider_type: typeof global.OnboardingEngine
