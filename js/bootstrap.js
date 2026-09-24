@@ -1,7 +1,7 @@
 try{window.AuroraBootDiagV78&&window.AuroraBootDiagV78.mark("ENTER_BOOTSTRAP","js/bootstrap.js iniciou")}catch(_){}
 (async function (global) {
 "use strict";
-    try { global.__AURORA_BOOTSTRAP_BUILD__ = "AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION"; } catch (_) {}
+    try { global.__AURORA_BOOTSTRAP_BUILD__ = "AURORA V47 RC1 R60 COMMERCIAL DIAG UI REMOVAL"; } catch (_) {}
     const v78mark = (stage, detail) => {
         try {
             if (global.AuroraBootDiagV78 && typeof global.AuroraBootDiagV78.mark === "function") {
@@ -6576,8 +6576,8 @@ try {
     auroraBootMark("BOOT_MODULES_START");
 
     r46mark("ONBOARDING_ENGINE_SCRIPT_EXPECTED", {
-        asset: "./core/onboarding/onboarding_engine.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
-        expected_build: "AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION"
+        asset: "./core/onboarding/onboarding_engine.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
+        expected_build: "AURORA V47 RC1 R60 COMMERCIAL DIAG UI REMOVAL"
     }, "modules");
     r46mark("ONBOARDING_ENGINE_BEFORE_BOOT", {
         engine_present: Object.prototype.hasOwnProperty.call(global, "OnboardingEngine"),
@@ -6590,7 +6590,7 @@ try {
     if (typeof global.OnboardingEngine !== "function") {
         r46mark("ASSET_VERSION_MISMATCH", {
             asset: "core/onboarding/onboarding_engine.js",
-            expected_build: "AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION",
+            expected_build: "AURORA V47 RC1 R60 COMMERCIAL DIAG UI REMOVAL",
             loaded_build: String(global.__AURORA_BOOTSTRAP_BUILD__ || "[AUSENTE]"),
             source_cache: "service-worker-or-network",
             provider_type: typeof global.OnboardingEngine

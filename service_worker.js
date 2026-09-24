@@ -5,7 +5,7 @@ const VERSION =
 
 /* Cache de produção MLC Aurora — Marco R9 validado em 03/09/2026.
  * VERSION (identidade do app) permanece vistoria-32. */
-const CACHE_BUST = 'AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION';
+const CACHE_BUST = 'AURORA V47 RC1 R60 COMMERCIAL DIAG UI REMOVAL';
 
 const STATIC_CACHE =
     `${VERSION}-static-${CACHE_BUST}`;
@@ -120,28 +120,28 @@ const VERSIONED_APP_ALIASES = [
     "./css/aurora_dialog.css?v=AURORA-1.2.5",
     "./css/aurora_ai_customer.css?v=AURORA-AI-CONTEXT-V31-20260913",
     "./css/aurora_ai_asset.css?v=AURORA-ESCOPO-MODULO-14",
-    "./css/aurora_budget.css?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./css/aurora_budget.css?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
     "./js/aurora_dialog.js?v=AURORA-FASE-2F",
-    "./config/runtime_config.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
-    "./js/aurora_r48_private_tupy_environment_trace.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./config/runtime_config.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
+    "./js/aurora_r48_private_tupy_environment_trace.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
     "./js/account_storage.js?v=MLCAURORA_R9_PROD",
     "./js/aurora_user_profile.js?v=AURORA-USER-IDENTITY-v56",
-    "./core/onboarding/onboarding_engine.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
-    "./modules/onboarding/onboarding_controller.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./core/onboarding/onboarding_engine.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
+    "./modules/onboarding/onboarding_controller.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
     "./core/ui/topbar_component.js?v=AURORA-1.1.8",
     "./core/ui/field_engine.js?v=AURORA-PRODUCAO-VISTORIA1.0.1",
     "./core/storage/local_case_repository.js?v=MLCAURORA_R9_PROD",
     "./core/storage/local_case_repository.js?v=AURORA-V166-CACHE-ATOMICO",
     "./modules/asset/asset_controller.js?v=AURORA-PRODUCAO-VISTORIA1.0.1",
-    "./modules/budget/budget_controller.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
-    "./modules/approval/approval_controller.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./modules/budget/budget_controller.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
+    "./modules/approval/approval_controller.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
     "./js/paged.min.js?v=0.4.3",
     "./config/pdf_experimental_config.js?v=RC8.18-PDF-EXP-0",
     "./config/pdf_local_test_config.js?v=RC8.18-PDF-LOCAL-0",
     "./config/report_technical_details.js?v=AURORA-TUPY1",
     "./core/reporting/premium/styles/premium_report.css?v=PREMIUM-TEST2",
     "./js/aurora_qrcode.js?v=AURORA-VALIDACAO-QR-1",
-    "./core/reporting/report_engine.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./core/reporting/report_engine.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
     "./core/reporting/report_preview.js?v=AURORA-V36-HISTORICO-RELATORIO-20260913",
     "./core/reporting/premium/data/premium_utils.js?v=PREMIUM-TEST2",
     "./core/reporting/premium/data/vehicle_inspection_adapter.js?v=PREMIUM-TEST2",
@@ -158,7 +158,7 @@ const VERSIONED_APP_ALIASES = [
     "./core/reporting/report_pdf_local_test.js?v=RC8.18-PDF-LOCAL-0",
     "./core/reporting/report_pdf_from_layout.js?v=AURORA-PDF-LAYOUT-1",
     "./core/reporting/report_pdf_pwa.js?v=PANEL_KM_REPORT_CLASSIFICATION_1",
-    "./core/runtime/aurora_runtime.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./core/runtime/aurora_runtime.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
     "./js/vehicle_inspection_flow.js?v=AURORA-GUIDED-UI-CLEAN-v58",
     "./core/shapes/eletrica_tupy/domain.js?v=AURORA-TUPY10",
     "./core/shapes/eletrica_tupy/catalog_data.js?v=AURORA-FEEDBACK-CLIENTE-GESTAO-DENSITY-1",
@@ -207,12 +207,12 @@ const VERSIONED_APP_ALIASES = [
     "./js/aurora_ai_asset.js?v=AURORA-ESCOPO-MODULO-14",
     "./js/aurora_ai_panel_voice.js?v=AURORA-ESCOPO-MODULO-14",
     "./js/entitlement_engine.js?v=RC8.0",
-    "./js/bootstrap.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./js/bootstrap.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
     "./js/aurora_ui_support_diagnostic.js?v=AURORA-SUPPORT-DIAG-v33-lite",
     "./config/report_title_suggestions.js?v=AURORA-TUPY1",
-    "./js/rc6_patch.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+    "./js/rc6_patch.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
     "./js/rc7_commercial.js?v=RC8.1",
-    "./js/pwa_installer.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION"
+    "./js/pwa_installer.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL"
 ];
 
 async function completeAppShell() {
@@ -584,7 +584,7 @@ self.addEventListener(
 );
 self.addEventListener("message", (event) => {
     if (event.data && event.data.type === "AURORA_TRACE_SW_IDENTITY") {
-        const reply = { type: "AURORA_TRACE_SW_IDENTITY_REPLY", build: "AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION", staticCache: STATIC_CACHE, runtimeCache: RUNTIME_CACHE };
+        const reply = { type: "AURORA_TRACE_SW_IDENTITY_REPLY", build: "AURORA V47 RC1 R60 COMMERCIAL DIAG UI REMOVAL", staticCache: STATIC_CACHE, runtimeCache: RUNTIME_CACHE };
         if (event.source && event.source.postMessage) event.source.postMessage(reply);
     }
 });

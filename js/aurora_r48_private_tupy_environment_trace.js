@@ -1,7 +1,7 @@
 (function (global) {
 "use strict";
 
-const BUILD = "AURORA V47 RC1 R59 CANONICAL REPORT COMPACTION";
+const BUILD = "AURORA V47 RC1 R60 COMMERCIAL DIAG UI REMOVAL";
 const KEY = "aurora_diag_r47_offline_auth_boot_core_cache_trace_v1";
 const MAX_EVENTS = 72;
 const MAX_BYTES = 48 * 1024;
@@ -223,10 +223,12 @@ global.addEventListener("aurora:sw-trace", (event) => mark("SERVICE_WORKER_INSTA
 navigator.serviceWorker?.addEventListener("message", (event) => {
     if (event.data && event.data.type === "AURORA_TRACE_SW_IDENTITY_REPLY") mark("SERVICE_WORKER_IDENTITY", event.data, "service-worker");
 });
-if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { mountButton(); observeServiceWorker(); }, { once: true });
-else { mountButton(); observeServiceWorker(); }
+// R60 commercial cleanup: keep the R52 runtime/service-worker trace available internally,
+// but do not mount its temporary diagnostic button/panel in the product UI.
+if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { observeServiceWorker(); }, { once: true });
+else { observeServiceWorker(); }
 
-const api = { BUILD, mark, dump, copyAll, authSnapshot, observeServiceWorker, mountFallbackButton: () => mountButton({ fallback: true }) };
+const api = { BUILD, mark, dump, copyAll, authSnapshot, observeServiceWorker, mountFallbackButton: () => null };
 global.AuroraR47ColdStartTrace = api;
 global.AuroraR44ModuleTrace = api;
 })(typeof window !== "undefined" ? window : globalThis);

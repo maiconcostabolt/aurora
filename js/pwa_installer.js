@@ -195,7 +195,7 @@ async function registerServiceWorker() {
         try { window.dispatchEvent(new CustomEvent("aurora:sw-trace", { detail: { phase: "REGISTER_START" } })); } catch (_) {}
         registration =
             await navigator.serviceWorker.register(
-            "./service_worker.js?v=AURORA_V47_RC1_R59_CANONICAL_REPORT_COMPACTION",
+            "./service_worker.js?v=AURORA_V47_RC1_R60_COMMERCIAL_DIAG_UI_REMOVAL",
                 {
                     scope: "./",
                     updateViaCache: "none"
